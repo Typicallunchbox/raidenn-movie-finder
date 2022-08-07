@@ -1,0 +1,19 @@
+.item-catalogue-list-container {
+    .inner-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2%;
+      justify-content: center;
+    }
+    img {
+      width: 50px;
+      flex: 0 0 10%;
+      margin-bottom: 20px;
+      transition: all 400ms ease;
+    }
+
+    img:hover{
+        filter: sepia(0%) saturate(0%) brightness(70%) hue-rotate(50deg);
+    }
+  }
+  
