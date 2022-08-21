@@ -8,15 +8,21 @@ const User = require('../models/userModel')
 //@route    GET /api/comments
 //@access   Private
 const getComments = asyncHandler(async (req, res) => {
-    const comments = await Comment.find({user : req.user.id})
+    const comments = await Comment.find()
     res.status(200).json(comments) 
 })
 
 // @desc    Get comments for movie
 //@route    GET /api/commentsForMovie
 //@access   Private
-const getCommentsForMovie = asyncHandler(async (req, res) => {
-    const comments = await Comment.find({user : req.user.id})
+const getCommentsByMovieId = asyncHandler(async (req, res) => {
+    const comments = await Comment.find({movie_id : req.params.id})
+    
+    if(comments.length == 0){
+        res.status(400)
+        throw new Error('No comments found')
+    }
+
     res.status(200).json(comments) 
 })
 
@@ -28,10 +34,10 @@ const setComment = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Please add a comment field')
     }
-    // if(!req.body.rating){
-    //     res.status(400)
-    //     throw new Error('Please add a rating field')
-    // }
+    if(!req.body.rating){
+        res.status(400)
+        throw new Error('Please add a rating field')
+    }
 
     if(!req.body.movie_id){
         res.status(400)
@@ -39,9 +45,10 @@ const setComment = asyncHandler(async (req, res) => {
     }
 
     const comment = await Comment.create({
+        user: req.user.id,
         comment : req.body.comment,
         movie_id : req.body.movie_id,
-        user: req.user.id
+        rating : req.body.rating
     })
     res.status(200).json(comment) 
 })
@@ -81,7 +88,7 @@ const deleteComment = asyncHandler(async (req, res) => {
 
     if(!comment){
         res.status(400)
-        throw new Error('Goal not found')
+        throw new Error('Comment not found')
     }
 
     //Check for user
@@ -96,13 +103,13 @@ const deleteComment = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
-    await Goal.deleteOne(comment)
+    await Comment.deleteOne(comment)
     res.status(200).json({id : req.params.id}) 
 })
 
 module.exports = {
  getComments,
- getCommentsForMovie,
+ getCommentsByMovieId,
  setComment,
  updateComment,
  deleteComment  

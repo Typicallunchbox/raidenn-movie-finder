@@ -10,10 +10,10 @@ const commentSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add a movie reference']
     },
-    // rating:{
-    //     type: Number,
-    //     required: [true, 'Please rate the movie']
-    // },
+    rating:{
+        type: Number,
+        required: [true, 'Please rate the movie']
+    },
     comment: {
         type: String,
         required: [true, 'Please add a comment']
