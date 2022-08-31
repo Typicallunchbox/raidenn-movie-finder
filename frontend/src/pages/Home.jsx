@@ -1,10 +1,9 @@
 import { React, useEffect, useState } from "react";
-import "../index.scss";
 import axios from "axios";
 import HomeTopOption from "../components/HomeTopOption/HomeTopOption";
-import ItemCatalogueList from "../components/item-catalogue-list/ItemCatalogueList";
+import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
 
-export const Home = () => {
+const Home = () => {
   const [movies, setMovies] = useState([]);
 
   //get popular movies
@@ -39,3 +38,4 @@ export const Home = () => {
     </div>
   );
 };
+export default Home

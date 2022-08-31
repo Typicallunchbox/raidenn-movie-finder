@@ -23,9 +23,6 @@ const HomeTopOption = () => {
   return (
     <div className='home_window'>
         <img src="https://image.tmdb.org/t/p/original/v1QEIuBM1vvpvfqalahhIyXY0Cm.jpg"></img>
-        <div className="buttons">
-          <btn className="btn-secondary"> + Add to Watchlist</btn>
-        </div>
     </div>
   )
 }

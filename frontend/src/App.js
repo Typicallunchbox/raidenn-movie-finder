@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import ErrorPage  from "./pages/ErrorPage";
 import Header from "./components/Header";
 import Login2 from "./components/Login/Login"
+import Home from "./pages/Home"
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <div className="container">
           <Header />
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/register2" element={<Register />} />
             <Route path="/login" element={<Login />} />
