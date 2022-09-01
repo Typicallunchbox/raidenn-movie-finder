@@ -1,7 +1,5 @@
 import React from 'react'
 import './Login.scss'
-import FullscreenBackground from '../FullscreenBackground/FullscreenBackground'
-
 import { useState, useEffect } from "react";
 import { FaSignInAlt } from "react-icons/fa";
 import {useSelector, useDispatch} from 'react-redux'
@@ -69,7 +67,6 @@ const Login = () => {
         </div>
       </div> 
     </div>
-    <FullscreenBackground/>
     </div>
   )
 }

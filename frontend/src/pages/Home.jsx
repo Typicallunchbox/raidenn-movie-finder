@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from "react";
 import axios from "axios";
-import HomeTopOption from "../components/HomeTopOption/HomeTopOption";
 import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
 
 const Home = () => {
@@ -29,9 +28,6 @@ const Home = () => {
 
   return (
     <div className="home container">
-      <div className="showcase">
-        <HomeTopOption />
-      </div>
       <div className="catalogue">
         <ItemCatalogueList />
       </div>
