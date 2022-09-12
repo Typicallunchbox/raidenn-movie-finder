@@ -15,19 +15,19 @@ const Home = () => {
 
   //example : https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734
 
-  useEffect(() => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734"
-      )
-      .then((resp) => {
-        setMovies(resp.data.results);
-        console.log("response:", resp.data.results);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       "https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734"
+  //     )
+  //     .then((resp) => {
+  //       setMovies(resp.data.results);
+  //       console.log("response:", resp.data.results);
+  //     });
+  // }, []);
 
   return (
-    <div className="home container">
+    <div className="container">
       <div className="catalogue">
         <ItemCatalogueList />
       </div>
