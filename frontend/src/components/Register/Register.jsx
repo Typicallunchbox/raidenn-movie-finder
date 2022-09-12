@@ -1,20 +1,21 @@
 import React from 'react'
-import './Login.scss'
+import './Register.scss'
 import { useState, useEffect } from "react";
-// import { FaSignInAlt } from "react-icons/fa";
-import {useSelector, useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {toast} from 'react-toastify'
-import {login, reset} from '../../features/auth/authSlice'
+import {useSelector, useDispatch} from 'react-redux'
+import {register, reset} from '../../features/auth/authSlice'
 
 const Login = () => {
 
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
+    password2: ""
   });
 
-  const { email, password } = formData;
+  const { name, email, password, password2 } = formData;
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -46,25 +47,30 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    const userData = {
-      email,
-      password
-    }
+    if(password !== password2){
+      toast.error('Passwords do not match')
+    }else{
+      const userData = {
+        name,
+        email,
+        password,
+        password2
+      }
 
-    dispatch(login(userData))
+      dispatch(register(userData))
+    }
   };
 
   return (
     <div>
       <div className='login_container'>
       <div className='inner-container'>
-        <h1>Sign In</h1>
+        <h1>Register</h1>
+        <input onChange={onChange} id='name' name='name' value={name} type="text" placeholder='Email your name' />
         <input onChange={onChange} id='email' name='email' value={email} type="email" placeholder='Email your email' />
-        <input onChange={onChange} id='password' name='password' value={password} type="text" placeholder='Password' />
-        <button onClick={onSubmit} type='submit' className='btn-primary'>Sign In</button>
-        <div>
-          <p>New to Netflix? <a href='/register'> Sign Up Now</a></p>
-        </div>
+        <input onChange={onChange} id='password' name='password' value={password} type="password" placeholder='Password' />
+        <input onChange={onChange} id='password2' name='password2' value={password2} type="password" placeholder='Password' />
+        <button onClick={onSubmit} type='submit' className='btn-primary'>Register</button>
       </div> 
     </div>
     </div>
