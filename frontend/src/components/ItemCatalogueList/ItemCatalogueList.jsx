@@ -1,9 +1,18 @@
 import { React, useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import "../ItemCatalogueList/ItemCatalogueList.scss"
 import axios from "axios";
 
+
 const ItemCatalogueList = () => {
   const [movies, setMovies] = useState([]);
+  const navigate = useNavigate()
+
+  const viewMovie = (id) => {
+    if(id){
+      navigate('/movie/' + id)
+    }
+  }
 
   useEffect(() => {
     axios
@@ -12,14 +21,18 @@ const ItemCatalogueList = () => {
       )
       .then((resp) => {
         setMovies(resp.data.results);
-        console.log("response:", resp.data.results);
       });
   }, []);
-  let image_path = "https://image.tmdb.org/t/p/original";
 
+ 
+
+  let image_path = "https://image.tmdb.org/t/p/original";
+  console.log('movies:', movies)
   const popularMovies = movies.map((movie) => (
     <>
-      <img src={image_path + movie.poster_path}></img>
+    <div key={movie.id}>
+      <img onClick={() => viewMovie(movie.id)} src={image_path + movie.poster_path}></img>
+    </div>
     </>
   ));
   return (

@@ -8,6 +8,7 @@ import ErrorPage  from "./pages/ErrorPage";
 import Header from "./components/Header";
 import Login2 from "./components/Login/Login"
 import Home from "./pages/Home"
+import Movie from "./pages/Movie";
 
 function App() {
   return (
@@ -22,7 +23,10 @@ function App() {
             {/* <Route path="/login" element={<Login />} /> */}
             <Route path="/login" element={<Login2 />} />
 
+
             <Route path="*" element={<ErrorPage />} />
+            <Route path={`/movie/:id`} element={<Movie />} />
+
           </Routes>
         </div>
       </Router>
