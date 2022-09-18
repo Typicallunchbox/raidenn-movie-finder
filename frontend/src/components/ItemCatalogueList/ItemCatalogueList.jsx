@@ -27,11 +27,10 @@ const ItemCatalogueList = () => {
  
 
   let image_path = "https://image.tmdb.org/t/p/original";
-  console.log('movies:', movies)
   const popularMovies = movies.map((movie) => (
     <>
     <div key={movie.id}>
-      <img onClick={() => viewMovie(movie.id)} src={image_path + movie.poster_path}></img>
+      <img onClick={() => viewMovie(movie.id)} src={image_path + movie.poster_path} alt='movie-list'></img>
     </div>
     </>
   ));
