@@ -52,6 +52,7 @@ const Movie = () => {
             <p><b>Title</b> : {movie.title}</p>
             <p><b>Genres</b> : </p>
             <div className="genres">
+            {/* CREATE STANDARD REUSABLE BUTTONS, LINK W/ or W/ OUT borders etc. */}
             {movie.genres.map((genre)=>{
               return <a key={genre.id}>{genre.name}</a>
             })}</div>
