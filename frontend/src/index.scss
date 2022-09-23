@@ -200,6 +200,33 @@ h3 {
   justify-content: space-between;
   padding: 1rem;
 
+  
+
+  .movieInfo{
+    text-align: left;
+
+    p{
+      margin-top: 8px;
+    }
+
+    .genres{
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+
+      a{
+        flex: 0 0 48%;
+        gap: 4%;
+        font-weight: 200;
+        border: #000;
+        border-radius: 10px;
+        border-width: 1px;
+        border-style: solid;
+        text-align: center;
+      }
+    }
+  }
+
   img{
     max-width: 300px;
   }

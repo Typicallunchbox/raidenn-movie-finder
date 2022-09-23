@@ -47,15 +47,17 @@ const Movie = () => {
       {movie && (
         <div className='container movie-container'>
           {/* {movie && <p>{movie.original_title}</p>} */}
-          <div>
+          <div className="movieInfo">
             <img src={image_path + movie.poster_path} alt='movie'></img>
-            <h2>{movie.title}</h2>
+            <p><b>Title</b> : {movie.title}</p>
+            <p><b>Genres</b> : </p>
+            <div className="genres">
             {movie.genres.map((genre)=>{
-              return <p key={genre.id}>{genre.name}</p>
-            })}
-            <h2>{movie.status}</h2>
-            <h2>{movie.popularity}</h2>
-            <h2>{movie.budget}</h2>
+              return <a key={genre.id}>{genre.name}</a>
+            })}</div>
+            <p><b>Status</b> : {movie.status}</p>
+            <p><b>Popularity</b> : {movie.popularity}</p>
+            <p><b>Budget</b> : {movie.budget}</p>
           </div>
           <div>{/* comment section */}</div>
         </div>
