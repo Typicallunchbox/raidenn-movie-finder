@@ -16,8 +16,31 @@ const Movie = () => {
   const {user} = useSelector((state) => state.auth)
   const { isError, message} = useSelector((state) => state.goals) 
   const [movie, setMovie] = useState(null);
-    let image_path = "https://image.tmdb.org/t/p/original";
+  let image_path = "https://image.tmdb.org/t/p/original";
 
+  const [comments, setComments] = useState([
+    {
+      commentId: '0',
+      movieId:'532639',
+      userId:'user-1',
+      rating: 0,
+      message:'Cool movie'
+    },
+    {
+      commentId: '1',
+      movieId:'532639',
+      userId:'user-1',
+      rating: 0,
+      message:'Was alright'
+    },
+    {
+      commentId: '2',
+      movieId:'532639',
+      userId:'user-1',
+      rating: 0,
+      message:'Cool story'
+    }
+  ]);
 
 
   useEffect(() => {
@@ -60,7 +83,18 @@ const Movie = () => {
             <p><b>Popularity</b> : {movie.popularity}</p>
             <p><b>Budget</b> : {movie.budget}</p>
           </div>
-          <div>{/* comment section */}</div>
+          <div className="card fullWidth align-l">
+            {/* comment section */}
+            <h1>Comments</h1>
+            <div className="comments">
+              {comments && comments.map((comment) => (
+                <div className="card">
+                  <user>{comment.userId}</user>
+                  <p>{comment.message}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </>

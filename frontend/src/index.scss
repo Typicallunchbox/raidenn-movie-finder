@@ -194,10 +194,48 @@ h3 {
   animation: spin 1.2s linear infinite;
 }
 
+.card {
+  border-color: rgb(226, 226, 226);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
+  background-color: rgba(223, 223, 223, 0.649);
+
+
+  &.clear{
+    background-color: transparent;
+  }
+
+  // &.white{
+  //   background-color: rgb(241, 241, 241)
+  // }
+
+  &.align-l{
+    text-align: left;
+  }
+
+  &.align-c{
+    text-align: center;
+  }
+
+  &.align-r{
+    text-align: right;
+  }
+
+  &.fullWidth{
+    width: 100%;
+  }
+}
+
 /* ************MOVIE PAGE************ */
 .movie-container{
   display: flex;
-  justify-content: space-between;
+  gap: 40px;
+  // justify-content: space-between;
   padding: 1rem;
 
   
