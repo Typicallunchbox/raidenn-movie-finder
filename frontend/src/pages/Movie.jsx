@@ -83,12 +83,12 @@ const Movie = () => {
             <p><b>Popularity</b> : {movie.popularity}</p>
             <p><b>Budget</b> : {movie.budget}</p>
           </div>
-          <div className="card fullWidth align-l">
+          <div className="card w-full text-left">
             {/* comment section */}
             <h1>Comments</h1>
             <div className="comments">
               {comments && comments.map((comment) => (
-                <div className="card">
+                <div className="card border-default mb-2">
                   <user>{comment.userId}</user>
                   <p>{comment.message}</p>
                 </div>
