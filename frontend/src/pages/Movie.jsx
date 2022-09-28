@@ -3,12 +3,16 @@ import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import { FaStar,  } from "react-icons/fa";
+import { BiStar  } from "react-icons/bi";
+import Rating from "react-rating";
+import { createComment } from "../features/comments/commentSlice";
 
 
 // import axios from "axios";
 
 const Movie = () => {
-
+  const [text, setText] = useState("");
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { id } = useParams();
@@ -84,6 +88,10 @@ const Movie = () => {
     }
   ]);
 
+  const onSubmit = (e) => {
+    dispatch(createComment({"comment": "From app", "rating":"2", "movie_id":"579974"}))
+    setText('')
+  };
 
   useEffect(() => {
     if(!isError){
@@ -136,9 +144,13 @@ const Movie = () => {
                 </div>
               ))}
             </div>
-            <div className="controls flex my-5 gap-2">
-            <input type="text" id="comment" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="John" required></input>
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            </div>
+            <div class="my-2">
+             <p> Rate Movie : <Rating emptySymbol={<BiStar/>} fullSymbol={<FaStar/>}/></p>
+            </div>
+
+            <div className="controls flex my-2 gap-2">
+            <input onChange={(e) => setText(e.target.value)} value={text} type="text" id="comment" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
+            <button onClick={() => {onSubmit()}}  type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            </div>
           </div>
         </div>
       )}
