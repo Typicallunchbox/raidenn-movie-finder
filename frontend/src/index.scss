@@ -235,27 +235,25 @@ h3 {
 }
 
 /* ************MOVIE PAGE************ */
-.movie-container{
+.movie-container {
   display: flex;
   gap: 40px;
-  // justify-content: space-between;
   padding: 1rem;
 
-  
 
-  .movieInfo{
+  .movieInfo {
     text-align: left;
 
-    p{
+    p {
       margin-top: 8px;
     }
 
-    .genres{
+    .genres {
       display: flex;
       justify-content: space-evenly;
       flex-wrap: wrap;
 
-      a{
+      a {
         flex: 0 0 48%;
         gap: 4%;
         font-weight: 200;
@@ -268,9 +266,20 @@ h3 {
     }
   }
 
-  img{
+  .comment-section{
+    height: 600px;
+
+    .comments{
+      max-height: 80%;
+      overflow-y: scroll;
+      padding: 1rem;
+    }
+  }
+
+  img {
     max-width: 300px;
   }
+  
 }
 
 @keyframes spin {

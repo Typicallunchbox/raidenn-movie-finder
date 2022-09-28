@@ -39,6 +39,48 @@ const Movie = () => {
       userId:'user-1',
       rating: 0,
       message:'Cool story'
+    },
+    {
+      commentId: '1',
+      movieId:'532639',
+      userId:'user-1',
+      rating: 0,
+      message:'Was alright'
+    },
+    {
+      commentId: '2',
+      movieId:'532639',
+      userId:'user-1',
+      rating: 0,
+      message:'Cool story'
+    },
+    {
+      commentId: '1',
+      movieId:'532639',
+      userId:'user-1',
+      rating: 0,
+      message:'Was alright'
+    },
+    {
+      commentId: '2',
+      movieId:'532639',
+      userId:'user-1',
+      rating: 0,
+      message:'Cool story'
+    },
+    {
+      commentId: '1',
+      movieId:'532639',
+      userId:'user-1',
+      rating: 0,
+      message:'Was alright'
+    },
+    {
+      commentId: '2',
+      movieId:'532639',
+      userId:'user-1',
+      rating: 0,
+      message:'Cool story'
     }
   ]);
 
@@ -83,10 +125,10 @@ const Movie = () => {
             <p><b>Popularity</b> : {movie.popularity}</p>
             <p><b>Budget</b> : {movie.budget}</p>
           </div>
-          <div className="card w-full text-left">
+          <div className="card comment-section w-full text-left ">
             {/* comment section */}
             <h1>Comments</h1>
-            <div className="comments">
+            <div className="comments border-b-2 border-blue-200">
               {comments && comments.map((comment) => (
                 <div className="card border-default mb-2">
                   <user>{comment.userId}</user>
@@ -94,6 +136,9 @@ const Movie = () => {
                 </div>
               ))}
             </div>
+            <div className="controls flex my-5 gap-2">
+            <input type="text" id="comment" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="John" required></input>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            </div>
           </div>
         </div>
       )}
