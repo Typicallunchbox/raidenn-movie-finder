@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const API_URL = '/api/comments/'
 
-//Get Goals
+//Get Comments
 const getComments = async (token) => {
     const config = {
         headers: {
@@ -14,31 +14,43 @@ const getComments = async (token) => {
     return response.data
 }
 
-//Create Goal
-const createComment = async (goalData, token) => {
+//Get Comments by Movie ID
+const getCommentsByMovieId = async (movieId, token) => {
+    console.log('props:', movieId , token)
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
-    const response = await axios.post(API_URL, goalData, config)
+    const response = await axios.get(API_URL +'/movieId/'+ movieId, config)
+    console.log('response:',response)
+    return response.data
+}
+//Create Comment
+const createComment = async (commentData, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.post(API_URL, commentData, config)
     return response.data
 }
 
-//Update Goal
+//Update Comment
 const updateComment = async (userData) => {
     const response = await axios.put(API_URL, userData)
     return response.data
 }
 
-//Delete Goal
-const deleteComment = async (goalId, token) => {
+//Delete Comment
+const deleteComment = async (commentId, token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
-    const response = await axios.delete(API_URL + goalId, config)
+    const response = await axios.delete(API_URL + commentId, config)
     return response.data
 }
 
@@ -50,6 +62,7 @@ const deleteComment = async (goalId, token) => {
 
 const commentService = {
     getComments,
+    getCommentsByMovieId,
     createComment,
     deleteComment,
     updateComment

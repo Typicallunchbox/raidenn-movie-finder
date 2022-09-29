@@ -6,7 +6,9 @@ import { useParams } from 'react-router-dom';
 import { FaStar,  } from "react-icons/fa";
 import { BiStar  } from "react-icons/bi";
 import Rating from "react-rating";
-import { createComment } from "../features/comments/commentSlice";
+import { createComment, getCommentsByMovieId } from "../features/comments/commentSlice";
+import { reset } from '../features/auth/authSlice'
+
 
 
 // import axios from "axios";
@@ -18,80 +20,15 @@ const Movie = () => {
   const { id } = useParams();
 
   const {user} = useSelector((state) => state.auth)
-  const { isError, message} = useSelector((state) => state.goals) 
+  const {comments, isLoading, isError, message} = useSelector((state) => state.comments) 
   const [movie, setMovie] = useState(null);
   let image_path = "https://image.tmdb.org/t/p/original";
-
-  const [comments, setComments] = useState([
-    {
-      commentId: '0',
-      movieId:'532639',
-      userId:'user-1',
-      rating: 0,
-      message:'Cool movie'
-    },
-    {
-      commentId: '1',
-      movieId:'532639',
-      userId:'user-1',
-      rating: 0,
-      message:'Was alright'
-    },
-    {
-      commentId: '2',
-      movieId:'532639',
-      userId:'user-1',
-      rating: 0,
-      message:'Cool story'
-    },
-    {
-      commentId: '1',
-      movieId:'532639',
-      userId:'user-1',
-      rating: 0,
-      message:'Was alright'
-    },
-    {
-      commentId: '2',
-      movieId:'532639',
-      userId:'user-1',
-      rating: 0,
-      message:'Cool story'
-    },
-    {
-      commentId: '1',
-      movieId:'532639',
-      userId:'user-1',
-      rating: 0,
-      message:'Was alright'
-    },
-    {
-      commentId: '2',
-      movieId:'532639',
-      userId:'user-1',
-      rating: 0,
-      message:'Cool story'
-    },
-    {
-      commentId: '1',
-      movieId:'532639',
-      userId:'user-1',
-      rating: 0,
-      message:'Was alright'
-    },
-    {
-      commentId: '2',
-      movieId:'532639',
-      userId:'user-1',
-      rating: 0,
-      message:'Cool story'
-    }
-  ]);
 
   const onSubmit = (e) => {
     dispatch(createComment({"comment": "From app", "rating":"2", "movie_id":"579974"}))
     setText('')
   };
+
 
   useEffect(() => {
     if(!isError){
@@ -101,6 +38,11 @@ const Movie = () => {
     if(!user){
       navigate('/login')
     }
+
+    dispatch(getCommentsByMovieId("579974"))
+    return() => {
+      dispatch(reset())
+    }
   }, [user, navigate, dispatch, isError, message])
 
   useEffect(() => {
@@ -109,7 +51,6 @@ const Movie = () => {
         `https://api.themoviedb.org/3/movie/${id}?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
       )
       .then((resp) => {
-        console.log('Movie:',resp.data)
         setMovie(resp.data);
       });
   }, []);
