@@ -55,10 +55,7 @@ export const getCommentsByMovieId = createAsyncThunk(
   "comments/getCommentsByMovieId",
   async (id, thunkAPI) => {
     try {
-      console.log('id:', id)
       const token = user.token;
-      console.log('token', token)
-
         return await commentService.getCommentsByMovieId(id, token);
     } catch (error) {
       const message =
@@ -117,19 +114,33 @@ export const commentsSlice = createSlice({
             state.message = action.payload
         })
 
-        .addCase(getComments.pending, (state) => {
+        .addCase(getCommentsByMovieId.pending, (state) => {
             state.isLoading = true;
         })
-        .addCase(getComments.fulfilled, (state, action) => {
+        .addCase(getCommentsByMovieId.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isSuccess = true;
             state.comments = action.payload
         })
-        .addCase(getComments.rejected, (state, action) => {
+        .addCase(getCommentsByMovieId.rejected, (state, action) => {
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload
         })
+
+        .addCase(getComments.pending, (state) => {
+          state.isLoading = true;
+      })
+      .addCase(getComments.fulfilled, (state, action) => {
+          state.isLoading = false;
+          state.isSuccess = true;
+          state.comments = action.payload
+      })
+      .addCase(getComments.rejected, (state, action) => {
+          state.isLoading = false;
+          state.isError = true;
+          state.message = action.payload
+      })
 
         .addCase(deleteComment.pending, (state) => {
           state.isLoading = true;

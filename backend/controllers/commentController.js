@@ -16,7 +16,8 @@ const getComments = asyncHandler(async (req, res) => {
 //@route    GET /api/commentsForMovie
 //@access   Private
 const getCommentsByMovieId = asyncHandler(async (req, res) => {
-    const comments = await User.find({ movie_id: '579974' })
+    const movie_id = req.params.id
+    const comments = await Comment.find({ movie_id })
     if(comments.length == 0){
         res.status(400)
         throw new Error('No comments found')

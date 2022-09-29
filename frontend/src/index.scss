@@ -268,7 +268,8 @@ h3 {
 
   .comment-section{
     .comments{
-      max-height: 500px;      
+      max-height: 500px;  
+      height: 100%;    
       overflow-y: scroll;
       padding: 1rem;
       font-size: 14px;

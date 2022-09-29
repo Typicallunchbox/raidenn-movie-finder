@@ -15,6 +15,8 @@ import { reset } from '../features/auth/authSlice'
 
 const Movie = () => {
   const [text, setText] = useState("");
+  const [rating, setRating] = useState("");
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { id } = useParams();
@@ -25,8 +27,10 @@ const Movie = () => {
   let image_path = "https://image.tmdb.org/t/p/original";
 
   const onSubmit = (e) => {
-    dispatch(createComment({"comment": "From app", "rating":"2", "movie_id":"579974"}))
-    setText('')
+    if(text && rating && id){
+      dispatch(createComment({"comment": text, "rating":rating, "movie_id": `${id}`}))
+      setText('')
+    }
   };
 
 
@@ -39,11 +43,11 @@ const Movie = () => {
       navigate('/login')
     }
 
-    dispatch(getCommentsByMovieId("579974"))
+    dispatch(getCommentsByMovieId(id))
     return() => {
       dispatch(reset())
     }
-  }, [user, navigate, dispatch, isError, message])
+  }, [comments, user, navigate, dispatch, isError, message])
 
   useEffect(() => {
     axios
@@ -54,6 +58,10 @@ const Movie = () => {
         setMovie(resp.data);
       });
   }, []);
+
+  const setMovieRating = (val) => {
+    setRating(val);
+  }
   
 
   return (
@@ -80,18 +88,23 @@ const Movie = () => {
             <div className="comments border-b-2 border-blue-200">
               {comments && comments.map((comment) => (
                 <div className="card border-default mb-2">
-                  <user>{comment.userId}</user>
-                  <p>{comment.message}</p>
+                  <user>{comment.user}</user>
+                  <p>{comment.comment}</p>
                 </div>
               ))}
             </div>
-            <div class="my-2">
-             <p> Rate Movie : <Rating emptySymbol={<BiStar/>} fullSymbol={<FaStar/>}/></p>
+            <div>
+              <div class="my-2">
+                  <p> Rate Movie : <Rating onClick={(val)=>{setMovieRating(val)}} emptySymbol={<BiStar/>} fullSymbol={<FaStar/>}/></p>
+              </div>
+              <div className="controls flex my-2 gap-2">
+                  <input onChange={(e) => setText(e.target.value)} value={text} type="text" id="comment" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
+                  <button onClick={() => {onSubmit()}}  type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            
+             </div>
             </div>
+            
 
-            <div className="controls flex my-2 gap-2">
-            <input onChange={(e) => setText(e.target.value)} value={text} type="text" id="comment" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
-            <button onClick={() => {onSubmit()}}  type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            </div>
+  
           </div>
         </div>
       )}
