@@ -50,7 +50,7 @@ const Movie = () => {
     return() => {
       dispatch(reset())
     }
-  }, [user, navigate, dispatch, isError, message])
+  }, [id, user, navigate, dispatch, isError, message])
 
   useEffect(() => {
     axios
@@ -59,8 +59,9 @@ const Movie = () => {
       )
       .then((resp) => {
         setMovie(resp.data);
+        console.log('MOVIE:', resp.data)
       });
-  }, []);
+  }, [id]);
 
   const setMovieRating = (val) => {
     setRating(val);
@@ -82,7 +83,7 @@ const Movie = () => {
             <div className="genres">
             {/* CREATE STANDARD REUSABLE BUTTONS, LINK W/ or W/ OUT borders etc. */}
             {movie.genres.map((genre)=>{
-              return <a key={genre.id}>{genre.name}</a>
+              return <span key={genre.id}>{genre.name}</span>
             })}</div>
             <p><b>Status</b> : {movie.status}</p>
             <p><b>Popularity</b> : {movie.popularity}</p>
