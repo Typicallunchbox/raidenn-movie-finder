@@ -18,12 +18,8 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/register" element={<Register />} /> */}
             <Route path="/register" element={<Register />} />
-            {/* <Route path="/login" element={<Login />} /> */}
             <Route path="/login" element={<Login2 />} />
-
-
             <Route path="*" element={<ErrorPage />} />
             <Route path={`/movie/:id`} element={<Movie />} />
 

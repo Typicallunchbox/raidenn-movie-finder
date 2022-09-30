@@ -20,6 +20,14 @@ function Header() {
       <div className='logo'>
         <Link to='/'>Raidenn</Link>
       </div>
+      <div className="flex gap-12 justify-center ">
+              <a className="text-gray-500 hover:text-gray-700">
+                 My Watchlist
+              </a>
+              <a className="text-gray-500 hover:text-gray-700">
+                 Search
+              </a>
+            </div>
       <ul>
         {user ? (
           <>
