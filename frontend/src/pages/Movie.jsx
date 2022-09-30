@@ -78,6 +78,12 @@ const Movie = () => {
           {/* {movie && <p>{movie.original_title}</p>} */}
           <div className="movieInfo">
             <img src={image_path + movie.poster_path} alt='movie'></img>
+            <div className="buttons flex justify-evenly gap-1 mt-2">
+              <button className='w-full' >Watchlist</button>
+              <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full'>Site</button>
+            </div>
+            <button className='w-full mt-1'>Watch Now</button>
+
             <p><b>Title</b> : {movie.title}</p>
             <p><b>Genres</b> : </p>
             <div className="genres">
