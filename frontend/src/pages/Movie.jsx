@@ -7,7 +7,9 @@ import { FaStar,  } from "react-icons/fa";
 import { BiStar  } from "react-icons/bi";
 import Rating from "react-rating";
 import { createComment, getCommentsByMovieId } from "../features/comments/commentSlice";
-import { reset } from '../features/auth/authSlice'
+import { reset } from '../features/auth/authSlice';
+import Spinner from '../components/Spinner'
+
 
 
 
@@ -23,6 +25,7 @@ const Movie = () => {
 
   const {user} = useSelector((state) => state.auth)
   const {comments, isLoading, isError, message} = useSelector((state) => state.comments) 
+  console.log('loading:', isLoading)
   const [movie, setMovie] = useState(null);
   let image_path = "https://image.tmdb.org/t/p/original";
 
@@ -47,7 +50,7 @@ const Movie = () => {
     return() => {
       dispatch(reset())
     }
-  }, [comments, user, navigate, dispatch, isError, message])
+  }, [user, navigate, dispatch, isError, message])
 
   useEffect(() => {
     axios
@@ -63,6 +66,9 @@ const Movie = () => {
     setRating(val);
   }
   
+  if(isLoading){
+    return <Spinner/>
+  }
 
   return (
     <>
@@ -94,12 +100,12 @@ const Movie = () => {
               ))}
             </div>
             <div>
-              <div class="my-2">
+              <div className="my-2">
                   <p> Rate Movie : <Rating onClick={(val)=>{setMovieRating(val)}} emptySymbol={<BiStar/>} fullSymbol={<FaStar/>}/></p>
               </div>
               <div className="controls flex my-2 gap-2">
-                  <input onChange={(e) => setText(e.target.value)} value={text} type="text" id="comment" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
-                  <button onClick={() => {onSubmit()}}  type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            
+                  <input onChange={(e) => setText(e.target.value)} value={text} type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
+                  <button onClick={() => {onSubmit()}}  type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            
              </div>
             </div>
             

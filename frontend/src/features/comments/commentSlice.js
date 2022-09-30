@@ -115,7 +115,7 @@ export const commentsSlice = createSlice({
         })
 
         .addCase(getCommentsByMovieId.pending, (state) => {
-            state.isLoading = true;
+            state.isLoading = false;
         })
         .addCase(getCommentsByMovieId.fulfilled, (state, action) => {
             state.isLoading = false;
@@ -128,7 +128,7 @@ export const commentsSlice = createSlice({
             state.message = action.payload
         })
 
-        .addCase(getComments.pending, (state) => {
+      .addCase(getComments.pending, (state) => {
           state.isLoading = true;
       })
       .addCase(getComments.fulfilled, (state, action) => {
