@@ -8,7 +8,8 @@ import { BiStar  } from "react-icons/bi";
 import Rating from "react-rating";
 import { createComment, getCommentsByMovieId } from "../features/comments/commentSlice";
 import { reset } from '../features/auth/authSlice';
-import Spinner from '../components/Spinner'
+import Spinner from '../components/Spinner';
+import { ColourPalette } from "../components/ColourPalette/ColourPalette";
 
 
 
@@ -19,6 +20,7 @@ const Movie = () => {
   const [text, setText] = useState("");
   const [rating, setRating] = useState("");
 
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { id } = useParams();
@@ -28,6 +30,12 @@ const Movie = () => {
   console.log('loading:', isLoading)
   const [movie, setMovie] = useState(null);
   let image_path = "https://image.tmdb.org/t/p/original";
+  let colours = ColourPalette(movie ? (image_path + movie?.poster_path) : []);
+  // if(movie){
+  //   colours = ColourPalette((image_path + movie.poster_path));
+
+  // }
+
 
   const onSubmit = (e) => {
     if(text && rating && id){
@@ -71,11 +79,14 @@ const Movie = () => {
     return <Spinner/>
   }
 
+
+
+
   return (
     <>
+      <div className=" p-0.5"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, ${colours[3]}, ${colours[4]}, rgba(0,0,0,0))`} : {}}></div>
       {movie && (
         <div className='container movie-container'>
-          {/* {movie && <p>{movie.original_title}</p>} */}
           <div className="movieInfo">
             <img src={image_path + movie.poster_path} alt='movie'></img>
             <div className="buttons flex justify-evenly gap-1 mt-2">
@@ -90,22 +101,24 @@ const Movie = () => {
             {/* CREATE STANDARD REUSABLE BUTTONS, LINK W/ or W/ OUT borders etc. */}
             {movie.genres.map((genre)=>{
               return <span key={genre.id}>{genre.name}</span>
-            })}</div>
+            })}
+            </div>
             <p><b>Status</b> : {movie.status}</p>
             <p><b>Popularity</b> : {movie.popularity}</p>
             <p><b>Budget</b> : {movie.budget}</p>
           </div>
-          <div className="card comment-section w-full text-left ">
-            {/* comment section */}
+          <div className="card p-4 comment-section w-full text-left">
+
             <h1>Comments</h1>
-            <div className="comments border-b-2 border-blue-200">
+            <div className="comments">
               {comments && comments.map((comment) => (
-                <div className="card border-default mb-2">
-                  <user>{comment.user}</user>
+                <div className="card border-default mb-2 p-3">
+                  <span>{comment.user}</span>
                   <p>{comment.comment}</p>
                 </div>
               ))}
             </div>
+            <div className="p-px"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, rgba(0,0,0,0))`} : {}}></div>
             <div>
               <div className="my-2">
                   <p> Rate Movie : <Rating onClick={(val)=>{setMovieRating(val)}} emptySymbol={<BiStar/>} fullSymbol={<FaStar/>}/></p>
