@@ -14,8 +14,8 @@ function App() {
   return (
     <>
       <Router>
-        <div className="container">
-          <Header />
+      <Header />
+        <div className="container header-gap">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />

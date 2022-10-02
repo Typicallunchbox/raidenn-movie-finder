@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import SearchDropDown from "./SearchDropDown/SearchDropDown";
 
 function Header() {
   const navigate = useNavigate();
@@ -16,18 +17,21 @@ function Header() {
   }
 
   return (
+    <>
+
     <header className='header'>
       <div className='logo'>
         <Link to='/'>Raidenn</Link>
       </div>
+      {user && 
       <div className="flex gap-12 justify-center ">
-              <a className="text-gray-500 hover:text-gray-700">
+              <a href="/" className="text-gray-500 hover:text-gray-700">
                  My Watchlist
               </a>
-              <a className="text-gray-500 hover:text-gray-700">
+              <a href="/" className="text-gray-500 hover:text-gray-700">
                  Search
               </a>
-            </div>
+            </div>}
       <ul>
         {user ? (
           <>
@@ -55,6 +59,8 @@ function Header() {
         )}
       </ul>
     </header>
+    <SearchDropDown />
+    </>
   );
 }
 
