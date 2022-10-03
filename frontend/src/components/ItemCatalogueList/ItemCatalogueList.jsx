@@ -4,9 +4,11 @@ import "../ItemCatalogueList/ItemCatalogueList.scss"
 import axios from "axios";
 
 
-const ItemCatalogueList = () => {
+
+const ItemCatalogueList = (props) => {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate()
+  const {tag} = props;
 
   const viewMovie = (id) => {
     if(id){
@@ -15,13 +17,24 @@ const ItemCatalogueList = () => {
   }
 
   useEffect(() => {
-    axios
+    if(movies.length === 1){
+      axios
       .get(
         "https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734"
       )
       .then((resp) => {
         setMovies(resp.data.results);
       });
+    }else{
+      axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734`
+      )
+      .then((resp) => {
+        setMovies(resp.data.results);
+      });
+    }
+
   }, []);
 
  

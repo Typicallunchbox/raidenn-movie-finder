@@ -101,11 +101,9 @@ h3 {
 .search-dropdown{
   padding: 1rem;
   width: 500px;
-  height: 210px;
-  display: flex;
-  justify-content: space-around;
+  height: fit-content;
   background-color: rgb(230, 230, 230);
-  position: absolute;
+  position: fixed;
   left: 50%;
   z-index: 1;
   transform: translate(-50%);
@@ -113,6 +111,11 @@ h3 {
   border-style: solid;
   border-width: 1px;
   border-radius: 0px 0px 10px 10px;
+
+  .container{
+    display: flex;
+    justify-content: space-around;
+  }
 
   .filters{
     .general-tags{
