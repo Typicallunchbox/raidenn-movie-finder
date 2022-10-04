@@ -84,7 +84,7 @@ const Movie = () => {
 
   return (
     <>
-      <div className=" p-0.5"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, ${colours[3]}, ${colours[4]}, rgba(0,0,0,0))`} : {}}></div>
+      <div className="p-0.5"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, ${colours[3]}, ${colours[4]}, rgba(0,0,0,0))`} : {}}></div>
       {movie && (
         <div className='container movie-container'>
           <div className="movieInfo">

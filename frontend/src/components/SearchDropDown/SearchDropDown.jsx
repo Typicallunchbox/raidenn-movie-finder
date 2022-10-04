@@ -16,17 +16,22 @@ import './SearchDropDown.scss';
 
 
 const SearchDropDown = () => {
+const [hideFilters, setHideFilters] = useState(true);
 const dispatch = useDispatch()
 const {movies, tag} = useSelector((state) => state.movies) 
 
 const setTagState = (selectedTag) => {
   dispatch(addTag(selectedTag))
+}
 
+const collapse = () => {
+  setHideFilters(!hideFilters);
 }
   
   return (
     <>
-     <div className='search-dropdown'>
+     <div className={`search-dropdown ${hideFilters ? 'collapse' : ''}`}>
+      {!hideFilters &&
       <div className='container'>
       <div className='filters'>
           <div className='general-tags'>
@@ -85,8 +90,8 @@ const setTagState = (selectedTag) => {
           <button className='button bg-green-400 hover:bg-slate-500'>Search</button>
         </div>
         
-      </div>
-      <div className='collapse-button w-full mt-2 p-1 bg-stone-300 hover:bg-stone-400'>
+      </div>}
+      <div onClick={() => {collapse()}} className='collapse-button w-full mt-2 p-1 bg-stone-300 hover:bg-stone-400'>
           <FaAngleUp className='m-auto' />
         </div>
      </div>

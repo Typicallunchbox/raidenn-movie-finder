@@ -25,11 +25,16 @@ const Home = () => {
   }, [user, navigate, dispatch, isError, message])
 
   return (
-    <div className="container">
-      {user &&<div className="catalogue">
-        <ItemCatalogueList />
-      </div>}
+    <> 
+    <div className="recommendations">
+      
     </div>
+    <div className="container">
+    {user &&<div className="catalogue">
+      <ItemCatalogueList />
+    </div>}
+  </div>
+  </>
   );
 };
 export default Home
