@@ -84,11 +84,12 @@ const collapse = () => {
             </FormControl>
           </div>
           </div>
-          <input type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Search for a movie..." required></input>
+          <div className='flex'>
+            <input type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Search for a movie..." required></input>
+            <button className='button bg-green-400 hover:bg-slate-500'>Search</button>
+          </div>
         </div>
-        <div className='buttons'>
-          <button className='button bg-green-400 hover:bg-slate-500'>Search</button>
-        </div>
+
         
       </div>}
       <div onClick={() => {collapse()}} className='collapse-button w-full mt-2 p-1 bg-stone-300 hover:bg-stone-400'>
