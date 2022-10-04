@@ -92,8 +92,8 @@ const collapse = () => {
 
         
       </div>}
-      <div onClick={() => {collapse()}} className='collapse-button w-full mt-2 p-1 bg-stone-300 hover:bg-stone-400'>
-          <FaAngleUp className='m-auto' />
+      <div onClick={() => {collapse()}} className='collapse-button w-full mt-2 p-1 bg-stone-300 hover:bg-stone-400 rounded'>
+          <div><FaAngleUp className='m-auto' /></div>
         </div>
      </div>
     </>

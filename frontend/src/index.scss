@@ -112,6 +112,10 @@ h3 {
 
   &.collapse{
     padding: .5rem;
+
+    svg{
+      transform : rotate(180deg);
+    }
   }
 
   .container{
