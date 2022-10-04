@@ -12,7 +12,6 @@ const Home = () => {
   const dispatch = useDispatch()
   const {user} = useSelector((state) => state.auth)
   const { isError, message} = useSelector((state) => state.goals) 
-  const { movies , tag} = useSelector((state) => state.movies) 
   
   useEffect(() => {
 
@@ -28,7 +27,7 @@ const Home = () => {
   return (
     <div className="container">
       {user &&<div className="catalogue">
-        <ItemCatalogueList tag={tag} />
+        <ItemCatalogueList />
       </div>}
     </div>
   );

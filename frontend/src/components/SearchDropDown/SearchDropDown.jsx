@@ -20,7 +20,7 @@ const dispatch = useDispatch()
 const {movies, tag} = useSelector((state) => state.movies) 
 
 const setTagState = (selectedTag) => {
-  dispatch(addTag('popular'))
+  dispatch(addTag(selectedTag))
 
 }
   
@@ -30,12 +30,9 @@ const setTagState = (selectedTag) => {
       <div className='container'>
       <div className='filters'>
           <div className='general-tags'>
-            {/* Most Popular */}
-            {/* Most Recent */}
-            {/* Best Rating */}
-            <button onClick={setTagState('popular')}>Most Popular</button>
-            <button>Most Recent</button>
-            <button>Best Rating</button>
+            <button onClick={() => {setTagState('popular')}}>Most Popular</button>
+            <button onClick={() => {setTagState('upcoming')}}>Upcoming</button>
+            <button onClick={() => {setTagState('top_rated')}}>Best Rating</button>
           </div>
           <div className='flex'>
           <div className='date-range'>

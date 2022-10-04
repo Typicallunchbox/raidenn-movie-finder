@@ -8,27 +8,6 @@ const initialState = {
   tag: ''
 };
 
-// export const addTag = createAsyncThunk(
-//   "movies/addTag",
-//   async (commentData, thunkAPI) => {
-//     try {
-//       const token = thunkAPI.getState().auth.user.token;
-//       return await commentService.createComment(commentData, token);
-//     } catch (error) {
-//       const message =
-//         (error.response &&
-//           error.response.data &&
-//           error.response.data.message) ||
-//         error.message ||
-//         error.toString();
-//       return thunkAPI.rejectWithValue(message);
-//     }
-//   }
-// );
-
-// export const addTag = async(selectedTag) =>{
-//   return selectedTag;
-// }
 
 export const movieSlice = createSlice({
   name: "movies",
@@ -38,8 +17,8 @@ export const movieSlice = createSlice({
       state.movies = [];
       state.tag = '';
     },
-    addTag:(state) =>{
-      state.tag = 'upcoming'
+    addTag:(state, action) =>{
+      state.tag = action.payload;
     }
   },
   // extraReducers: (builder) => {

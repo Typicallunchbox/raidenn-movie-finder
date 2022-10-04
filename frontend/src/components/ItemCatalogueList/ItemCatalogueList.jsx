@@ -1,14 +1,16 @@
 import { React, useEffect, useState } from "react";
 import {useNavigate} from 'react-router-dom'
 import "../ItemCatalogueList/ItemCatalogueList.scss"
+import {useSelector, useDispatch} from 'react-redux'
 import axios from "axios";
 
 
 
 const ItemCatalogueList = (props) => {
   const [movies, setMovies] = useState([]);
+  const {tag} = useSelector((state) => state.movies) 
+  console.log('tag:', tag)
   const navigate = useNavigate()
-  const {tag} = props;
 
   const viewMovie = (id) => {
     if(id){
@@ -17,7 +19,7 @@ const ItemCatalogueList = (props) => {
   }
 
   useEffect(() => {
-    if(movies.length === 1){
+    if(tag === ''){
       axios
       .get(
         "https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734"
@@ -35,7 +37,7 @@ const ItemCatalogueList = (props) => {
       });
     }
 
-  }, []);
+  }, [tag]);
 
  
 
