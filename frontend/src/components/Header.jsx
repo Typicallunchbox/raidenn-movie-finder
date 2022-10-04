@@ -59,7 +59,8 @@ function Header() {
         )}
       </ul>
     </header>
-    <SearchDropDown />
+    {user &&
+    <SearchDropDown />}
     </>
   );
 }
