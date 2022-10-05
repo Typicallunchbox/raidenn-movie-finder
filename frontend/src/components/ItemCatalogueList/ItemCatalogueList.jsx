@@ -9,7 +9,6 @@ import axios from "axios";
 const ItemCatalogueList = (props) => {
   const [movies, setMovies] = useState([]);
   const {tag} = useSelector((state) => state.movies) 
-  console.log('tag:', tag)
   const navigate = useNavigate()
 
   const viewMovie = (id) => {

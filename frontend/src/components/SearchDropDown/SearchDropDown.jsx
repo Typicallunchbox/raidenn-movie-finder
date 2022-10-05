@@ -54,7 +54,7 @@ const collapse = () => {
               <InputLabel>Released Year</InputLabel>
                 <Select
 
-                  // value={age}
+                  value={''}
                   label="Released Year"
                   // onChange={handleChange}
                 >
@@ -72,7 +72,7 @@ const collapse = () => {
             <InputLabel>Genre</InputLabel>
               <Select
 
-                // value={age}
+                value={''}
                 label="Genre"
                 // onChange={handleChange}
               >
