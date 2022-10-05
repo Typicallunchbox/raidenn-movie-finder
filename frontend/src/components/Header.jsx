@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,6 +10,7 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const [openSearchTab, setOpenSearchTab] = useState(false);
 
   const onLogout = () =>{
     dispatch(logout())
@@ -28,7 +30,7 @@ function Header() {
               <a href="/" className="text-gray-500 hover:text-gray-700">
                  My Watchlist
               </a>
-              <a href="/" className="text-gray-500 hover:text-gray-700">
+              <a className="text-gray-500 hover:text-gray-700" onClick={() => {setOpenSearchTab(true)}}>
                  Search
               </a>
             </div>}
@@ -60,7 +62,7 @@ function Header() {
       </ul>
     </header>
     {user &&
-    <SearchDropDown />}
+    <SearchDropDown openSearch={openSearchTab} />}
     </>
   );
 }

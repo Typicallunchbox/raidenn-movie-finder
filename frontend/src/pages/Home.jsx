@@ -1,6 +1,7 @@
 import { React, useEffect } from "react";
 import {useNavigate} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux';
+import ThreeJsFiberScreen from "../components/ThreeJsFiberScreen/ThreeJsFiberScreen";
 
 
 // import axios from "axios";
@@ -27,7 +28,7 @@ const Home = () => {
   return (
     <> 
     <div className="recommendations">
-      
+      <ThreeJsFiberScreen />
     </div>
     <div className="container">
     {user &&<div className="catalogue">

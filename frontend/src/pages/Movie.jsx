@@ -27,7 +27,6 @@ const Movie = () => {
 
   const {user} = useSelector((state) => state.auth)
   const {comments, isLoading, isError, message} = useSelector((state) => state.comments) 
-  console.log('loading:', isLoading)
   const [movie, setMovie] = useState(null);
   let image_path = "https://image.tmdb.org/t/p/original";
   let colours = ColourPalette(movie ? (image_path + movie?.poster_path) : []);
@@ -67,7 +66,6 @@ const Movie = () => {
       )
       .then((resp) => {
         setMovie(resp.data);
-        console.log('MOVIE:', resp.data)
       });
   }, [id]);
 
