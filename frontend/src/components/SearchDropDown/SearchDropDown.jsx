@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -15,23 +15,32 @@ import './SearchDropDown.scss';
 
 
 
-const SearchDropDown = () => {
-const [hideFilters, setHideFilters] = useState(true);
+const SearchDropDown = (props) => {
+const [showFilters, setshowFilters] = useState(false);
 const dispatch = useDispatch()
 const {movies, tag} = useSelector((state) => state.movies) 
+console.log(props)
 
 const setTagState = (selectedTag) => {
   dispatch(addTag(selectedTag))
 }
 
+useEffect(() => {
+  if(props.openSearch){
+    setshowFilters(true);
+  }
+
+}, [props.openSearch])
+
+
 const collapse = () => {
-  setHideFilters(!hideFilters);
+  setshowFilters(!showFilters);
 }
   
   return (
     <>
-     <div className={`search-dropdown ${hideFilters ? 'collapse' : ''}`}>
-      {!hideFilters &&
+     <div className={`search-dropdown ${!showFilters ? 'collapse' : ''}`}>
+      {showFilters &&
       <div className='container'>
       <div className='filters'>
           <div className='general-tags'>
