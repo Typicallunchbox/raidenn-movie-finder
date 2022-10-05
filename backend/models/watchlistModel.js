@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const commentSchema = mongoose.Schema({
+const watchlistSchema = mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -14,7 +14,7 @@ const commentSchema = mongoose.Schema({
         type: Boolean,
         required: [true, 'Please add a watched bool']
     },
-    to_watch: {
+    wantToWatch: {
         type: Boolean,
         required: [true, 'Please add a to_watch bool']
     }
@@ -22,4 +22,4 @@ const commentSchema = mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model('Comment', commentSchema)
+module.exports = mongoose.model('Watchlist', watchlistSchema)
