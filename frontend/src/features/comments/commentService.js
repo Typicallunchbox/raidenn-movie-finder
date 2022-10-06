@@ -20,7 +20,7 @@ const getCommentsByMovieId = async (movieId, token) => {
             Authorization: `Bearer ${token}`
         }
     }
-    const response = await axios.get(API_URL +'/movieId/'+ movieId, config)
+    const response = await axios.get(API_URL +'movieId/'+ movieId, config)
     return response.data
 }
 //Create Comment

@@ -34,7 +34,7 @@ const getWatchlistByUserId = asyncHandler(async (req, res) => {
 // @desc    Set Watched
 //@route    POST /api/watchlist
 //@access   Private
-const setWatchProps = asyncHandler(async (req, res) => {
+const createWatchlistRecord = asyncHandler(async (req, res) => {
     const watchListRecord = await Watchlist.findOne({user_id: req.user.id, movie_id: req.body.movie_id});
 
     if (watchListRecord) {
@@ -70,7 +70,7 @@ const setWatchProps = asyncHandler(async (req, res) => {
 // @desc    Update goal
 //@route    PUT /api/watchlist
 //@access   Private
-const updateWatchProps = asyncHandler(async (req, res) => {
+const updateWatchlistRecord = asyncHandler(async (req, res) => {
     const watchListRecord = await Watchlist.findById(req.body._id);
 
     if (!watchListRecord) {
@@ -103,7 +103,7 @@ const updateWatchProps = asyncHandler(async (req, res) => {
 // @desc    Delete goal
 //@route    DELETE /api/watchlist
 //@access   Private
-const deleteWatchProps = asyncHandler(async (req, res) => {
+const deleteWatchlistRecord = asyncHandler(async (req, res) => {
     const watchListRecord = await Watchlist.findById(req.body._id);
     console.log('watchListRecord:', watchListRecord)
 
@@ -133,7 +133,7 @@ module.exports = {
  getWatched,
  getWantToWatch,
  getWatchlistByUserId,
- setWatchProps,
- updateWatchProps,
- deleteWatchProps
+ createWatchlistRecord,
+ updateWatchlistRecord,
+ deleteWatchlistRecord
 }
