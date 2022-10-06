@@ -8,7 +8,7 @@ function CarShow(){
     return (
         <>
             <OrbitControls target={[0, 0.85, 0]} maxPolarAngle={1.45} enableZoom={false} enablePan={false}/>
-            <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
+            <PerspectiveCamera makeDefault fov={70} position={[3, 2, 5]} />
 
             {/* let color = new Color(0, 0, 0) */}
             <color args={[0, 0, 0]} attach="background" />
@@ -17,7 +17,7 @@ function CarShow(){
             spotlight.intensity = 1.5;
             spotlight.position.set(...) */}
             <spotLight 
-             color={[1, 0.25, 0.7]}
+             color={[0.3, 0.25, 0.7]}
              intensity={1.5}
              angle={0.6}
              penumbra={0.5}

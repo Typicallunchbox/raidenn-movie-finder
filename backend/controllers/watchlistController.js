@@ -12,46 +12,52 @@ const Watchlist = require('../models/watchlistModel')
 
 
 
-// @desc    Get comments
-//@route    GET /api/comments
+// @desc    Get watched
+//@route    GET /api/watchlist/watched
 //@access   Private
 const getWatched = asyncHandler(async (req, res) => {
-    const comments = await Watchlist.find()
-    res.status(200).json(comments) 
+    const watchlist = await Watchlist.find({user_id: req.user.id, watched: true})
+    res.status(200).json(watchlist) 
 })
 
-// @desc    Get comments
-//@route    GET /api/comments
+// @desc    Get wantToWatch
+//@route    GET /api/watchlist/wantToWatch
 //@access   Private
 const getWantToWatch = asyncHandler(async (req, res) => {
-    const comments = await Watchlist.find()
-    res.status(200).json(comments) 
+    const watchlist = await Watchlist.find({user_id: req.user.id, wantToWatch: true})
+    res.status(200).json(watchlist) 
 })
 
 // @desc    Get comments for movie
 //@route    GET /api/commentsForMovie
 //@access   Private
 const getWatchlistByUserId = asyncHandler(async (req, res) => {
-    const movie_id = req.params.id
-    const comments = await Watchlist.find({ movie_id })
-    if(comments.length == 0){
+    const watchlist = await Watchlist.find({ user_id: req.user.id })
+    if(watchlist.length == 0){
         res.status(400)
-        throw new Error('No comments found')
+        throw new Error('No watchlist found')
     }
 
-    res.status(200).json(comments) 
+    res.status(200).json(watchlist) 
 })
 
-// @desc    Set goal
-//@route    POST /api/comments
+// @desc    Set Watched
+//@route    POST /api/watchlist/watched
 //@access   Private
 const setWatched = asyncHandler(async (req, res) => {
+    const watchedExists = await Watchlist.findOne({user_id: req.user.id, movie_id: req.body.movie_id});
+
+    if (watchedExists) {
+        res.status(400);
+        throw new Error("Movie already exists on watched list.");
+    }
+    
     if(!req.body.watched){
         res.status(400)
-        throw new Error('Please add a comment field')
+        throw new Error('Please add a watched field')
     }
 
-    if(!req.body.movie_id){
+    if(!req.user.id){
         res.status(400)
         throw new Error('Invalid User field')
     }
@@ -63,9 +69,9 @@ const setWatched = asyncHandler(async (req, res) => {
 
     const comment = await Watchlist.create({
         user: req.user.id,
-        comment : req.body.comment,
         movie_id : req.body.movie_id,
-        rating : req.body.rating
+        watched : req.body.watched,
+        wantToWatch : req.body.wantToWatch
     })
     res.status(200).json(comment) 
 })
