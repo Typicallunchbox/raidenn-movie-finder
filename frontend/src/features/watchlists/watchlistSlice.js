@@ -14,7 +14,7 @@ const initialState = {
 
 //Create watchlist record
 export const createWatchlistRecord = createAsyncThunk(
-  "watchlist",
+  "watchlist/create",
   async (watchListData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -33,7 +33,7 @@ export const createWatchlistRecord = createAsyncThunk(
 
 //Update watchlist record
 export const updateWatchlistRecord = createAsyncThunk(
-  "watchlist",
+  "watchlist/update",
   async (watchlistData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -52,7 +52,7 @@ export const updateWatchlistRecord = createAsyncThunk(
 
 //Delete watchlist record
 export const deleteWatchlistRecord = createAsyncThunk(
-  "watchlist",
+  "watchlist/delete",
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -71,7 +71,7 @@ export const deleteWatchlistRecord = createAsyncThunk(
 
 //Get watchlist by user id
 export const getWatchlistByUserId = createAsyncThunk(
-  "watchlist",
+  "watchlist/getWatchlist",
   async (thunkAPI) => {
     try {
       const token = user.token;

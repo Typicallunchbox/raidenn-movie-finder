@@ -11,7 +11,7 @@ const watchlistSchema = mongoose.Schema({
         required: [true, 'Please add a movie reference']
     },
     movie_genre:{
-        type: String,
+        type: Array,
         required: [true, 'Please add atleast one genre']
     },
     movie_image:{

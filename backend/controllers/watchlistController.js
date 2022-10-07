@@ -57,7 +57,7 @@ const createWatchlistRecord = asyncHandler(async (req, res) => {
         throw new Error('Please provide movie_id field')
     }
 
-    if(!req.body.movie_genre){
+    if(!req.body.movie_genre || req.body.movie_genre.length == 0){
         res.status(400)
         throw new Error('Please provide atleast one genre for the movie_genre field')
     }

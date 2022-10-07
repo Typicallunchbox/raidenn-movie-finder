@@ -8,6 +8,7 @@ import axios from "axios";
 
 const ItemCatalogueList = (props) => {
   const { movies } = props;
+  console.log('movies:', movies)
   const navigate = useNavigate()
 
   const viewMovie = (id) => {
