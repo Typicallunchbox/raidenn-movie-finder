@@ -48,18 +48,24 @@ const createWatchlistRecord = async (watchListData, token) => {
 
 //Update Watchlist Record
 const updateWatchlistRecord = async (watchlistData) => {
-    const response = await axios.put(API_URL, watchlistData)
-    return response.data
-}
-
-//Delete Comment
-const deleteComment = async (commentId, token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
-    const response = await axios.delete(API_URL + commentId, config)
+
+    const response = await axios.put(API_URL, watchlistData, config)
+    return response.data
+}
+
+//Delete Watchlist Record
+const deleteWatchlistRecord = async (Id, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.delete(API_URL, Id, config)
     return response.data
 }
 
@@ -74,8 +80,8 @@ const commentService = {
     getWantToWant,
     getWatchlistByUserId,
     createWatchlistRecord,
-    deleteComment,
-    updateComment
+    deleteWatchlistRecord,
+    updateWatchlistRecord
 }
 
 export default commentService
