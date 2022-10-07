@@ -194,7 +194,7 @@ export const watchlistSlice = createSlice({
       .addCase(getWantToWatch.fulfilled, (state, action) => {
           state.isLoading = false;
           state.isSuccess = true;
-          state.watchlist = action.payload
+          state.wantToWatch = action.payload
       })
       .addCase(getWantToWatch.rejected, (state, action) => {
           state.isLoading = false;

@@ -24,6 +24,7 @@ const Watchlist = () => {
     }
 
     dispatch(getWatched())
+    dispatch(getWantToWatch())
 
   }, [ user, navigate, dispatch, isError, message])
   
@@ -37,6 +38,13 @@ const Watchlist = () => {
   return (
     <div className="mt-52">
       <div className="wantToWatch">
+      <h1>Want to Watch</h1>
+      {wantToWatch && <div className="catalogue">
+      <ItemCatalogueList movies={wantToWatch} />
+    </div>}
+      </div>
+      <div className="watched">
+      <h1>Watched</h1>
       {watched && <div className="catalogue">
       <ItemCatalogueList movies={watched} />
     </div>}
