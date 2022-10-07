@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import watchlistService from "../watchlists/watchlistService";
+import watchlistService from "./watchlistService";
 
 // Get user from local storage
 const user = JSON.parse(localStorage.getItem("user"));
@@ -131,12 +131,12 @@ export const watchlistSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      state.watchlist = [],
+      state.watchlist = [];
       state.isLoading = false;
       state.isError = false;
       state.isSuccess = false;
       state.message = "";
-    },
+    }
   },
   extraReducers: (builder) => {
     builder

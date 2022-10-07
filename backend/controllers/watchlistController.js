@@ -57,9 +57,21 @@ const createWatchlistRecord = asyncHandler(async (req, res) => {
         throw new Error('Please provide movie_id field')
     }
 
+    if(!req.body.movie_genre){
+        res.status(400)
+        throw new Error('Please provide atleast one genre for the movie_genre field')
+    }
+
+    if(!req.body.movie_image){
+        res.status(400)
+        throw new Error('Please provide movie_image field')
+    }
+
     const comment = await Watchlist.create({
         user: req.user.id,
         movie_id : req.body.movie_id,
+        movie_genre : req.body.movie_genre,
+        movie_image: req.body.movie_image,
         watched : req.body.watched ? req.body.watched : false,
         wantToWatch : req.body.wantToWatch ? req.body.wantToWatch : false
     })

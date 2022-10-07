@@ -27,7 +27,7 @@ function Header() {
       </div>
       {user && 
       <div className="flex gap-12 justify-center ">
-              <a href="/" className="text-gray-500 hover:text-gray-700">
+              <a href="/watchlist" className="text-gray-500 hover:text-gray-700">
                  My Watchlist
               </a>
               <a className="text-gray-500 hover:text-gray-700" onClick={() => {setOpenSearchTab(true)}}>

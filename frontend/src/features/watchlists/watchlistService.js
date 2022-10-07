@@ -47,7 +47,7 @@ const createWatchlistRecord = async (watchListData, token) => {
 }
 
 //Update Watchlist Record
-const updateWatchlistRecord = async (watchlistData) => {
+const updateWatchlistRecord = async (watchlistData, token) => {
     const config = {
         headers: {
             Authorization: `Bearer ${token}`

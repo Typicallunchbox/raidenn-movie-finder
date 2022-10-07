@@ -10,6 +10,14 @@ const watchlistSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add a movie reference']
     },
+    movie_genre:{
+        type: String,
+        required: [true, 'Please add atleast one genre']
+    },
+    movie_image:{
+        type: String,
+        required: [true, 'Please add a movie image link']
+    },
     watched:{
         type: Boolean,
         required: [true, 'Please add a watched bool']
