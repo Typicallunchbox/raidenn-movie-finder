@@ -12,9 +12,7 @@ const Watchlist = () => {
   const dispatch = useDispatch()
 
   const {user} = useSelector((state) => state.auth)
-  const {watchlist, isLoading, isError, message} = useSelector((state) => state.watchlist) 
-  const [watched, setWatched] = useState([]);
-  const [wantToWatch, setWantToWatch] = useState([]);
+  const {watched, wantToWatch, isLoading, isError, message} = useSelector((state) => state.watchlist) 
 
   useEffect(() => {
     if(!isError){
@@ -25,7 +23,7 @@ const Watchlist = () => {
       navigate('/login')
     }
 
-    setWatched(dispatch(getWatched()))
+    dispatch(getWatched())
 
   }, [ user, navigate, dispatch, isError, message])
   
@@ -37,13 +35,13 @@ const Watchlist = () => {
 
 
   return (
-    <>
+    <div className="mt-52">
       <div className="wantToWatch">
-      {user && watched && <div className="catalogue">
+      {watched && <div className="catalogue">
       <ItemCatalogueList movies={watched} />
     </div>}
       </div>
-    </>
+    </div>
   );
 };
 export default Watchlist

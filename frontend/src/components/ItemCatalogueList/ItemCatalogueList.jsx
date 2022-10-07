@@ -8,7 +8,6 @@ import axios from "axios";
 
 const ItemCatalogueList = (props) => {
   const { movies } = props;
-  console.log('movies:', movies)
   const navigate = useNavigate()
 
   const viewMovie = (id) => {
@@ -22,17 +21,16 @@ const ItemCatalogueList = (props) => {
  
 
   let image_path = "https://image.tmdb.org/t/p/original";
-  const renderMovies = movies && movies.map((movie) => (
-    <>
-    <div key={movie.id}>
-      <img onClick={() => viewMovie(movie.id)} src={image_path + movie.poster_path} alt='movie-list'></img>
-    </div>
-    </>
-  ));
   return (
     <div className="item-catalogue-list-container">
       <div className="inner-container">
-        {renderMovies}
+        {movies && movies.map((movie) => (
+          <>
+            <div key={movie.id}>
+              <img onClick={() => viewMovie(movie.id ? movie.id : movie.movie_id)} src={movie.poster_path ? image_path + movie.poster_path : image_path + movie.movie_image} alt='movie-list'></img>
+            </div>
+          </>
+        ))}
       </div>
     </div>
   );

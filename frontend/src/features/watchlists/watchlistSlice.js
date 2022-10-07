@@ -5,7 +5,8 @@ import watchlistService from "./watchlistService";
 const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
-  watchlist: [],
+  watched: [],
+  wantToWatch: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -131,7 +132,8 @@ export const watchlistSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      state.watchlist = [];
+      state.watched = [];
+      state.wantToWatch = [];
       state.isLoading = false;
       state.isError = false;
       state.isSuccess = false;
@@ -177,7 +179,7 @@ export const watchlistSlice = createSlice({
       .addCase(getWatched.fulfilled, (state, action) => {
           state.isLoading = false;
           state.isSuccess = true;
-          state.watchlist = action.payload
+          state.watched = action.payload
       })
       .addCase(getWatched.rejected, (state, action) => {
           state.isLoading = false;
