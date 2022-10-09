@@ -7,6 +7,8 @@ import { FaStar,  } from "react-icons/fa";
 import { BiStar  } from "react-icons/bi";
 import Rating from "react-rating";
 import { createComment, getCommentsByMovieId } from "../features/comments/commentSlice";
+import { createWatchlistRecord } from "../features/watchlists/watchlistSlice";
+
 import { reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
@@ -77,7 +79,24 @@ const Movie = () => {
     return <Spinner/>
   }
 
+  const addToWatchlist = (val) => {
+    if(movie){
+      console.log('movie:', movie)
+      let genres = []
+      for (let index = 0; index < movie.genres.length; index++) {
+        const element = movie.genres[index]; 
+        genres.push(element.name);
+      }
+      console.log('genres:', genres)
 
+      dispatch(createWatchlistRecord({
+        movie_id : id,
+        movie_genre : genres,
+        movie_image : image_path + movie.poster_path,
+        wantToWatch : true
+      }))
+    }
+  }
 
 
   return (
@@ -88,7 +107,7 @@ const Movie = () => {
           <div className="movieInfo">
             <img src={image_path + movie.poster_path} alt='movie'></img>
             <div className="buttons flex justify-evenly gap-1 mt-2">
-              <button className='w-full' >Watchlist</button>
+              <button className='w-full' onClick={() => {addToWatchlist()}} >Watchlist</button>
               <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full'>Site</button>
             </div>
             <button className='w-full mt-1'>Watch Now</button>
