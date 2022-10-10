@@ -31,6 +31,32 @@ const getWatchlistByUserId = asyncHandler(async (req, res) => {
     res.status(200).json(watchlist) 
 })
 
+// @desc    Update goal
+//@route    PUT /api/watchlist
+//@access   Private
+const getWantToWatchRecord = asyncHandler(async (req, res) => {
+    const watchListRecord = await Watchlist.findOne({user_id: req.user.id, movie_id: req.body.movie_id});
+
+    if (!watchListRecord) {
+        res.status(400);
+        throw new Error("Movie does not exist on list.");
+    }
+
+    //Check for user
+    if(!req.user){
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    //Make sure the logged in user matches the goal user
+    if(watchListRecord.user.toString() !== req.user.id){
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+    
+    res.status(200).json(watchListRecord) 
+})
+
 // @desc    Set Watched
 //@route    POST /api/watchlist
 //@access   Private
@@ -117,7 +143,6 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
 //@access   Private
 const deleteWatchlistRecord = asyncHandler(async (req, res) => {
     const watchListRecord = await Watchlist.findById(req.body._id);
-    console.log('watchListRecord:', watchListRecord)
 
     if (!watchListRecord) {
         res.status(400);
@@ -144,6 +169,7 @@ const deleteWatchlistRecord = asyncHandler(async (req, res) => {
 module.exports = {
  getWatched,
  getWantToWatch,
+ getWantToWatchRecord,
  getWatchlistByUserId,
  createWatchlistRecord,
  updateWatchlistRecord,

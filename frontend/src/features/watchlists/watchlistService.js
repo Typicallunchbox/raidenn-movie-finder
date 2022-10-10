@@ -24,6 +24,17 @@ const getWantToWant = async (token) => {
     return response.data
 }
 
+//Get want to watch movie record
+const getWantToWatchRecord = async (watchListData, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    console.log(config)
+    const response = await axios.get(API_URL + 'wantToWatchRecord', watchListData, config)
+    return response.data
+}
 //Get watchlist for user
 const getWatchlistByUserId = async (token) => {
     const config = {
@@ -78,6 +89,7 @@ const deleteWatchlistRecord = async (Id, token) => {
 const commentService = {
     getWatched,
     getWantToWant,
+    getWantToWatchRecord,
     getWatchlistByUserId,
     createWatchlistRecord,
     deleteWatchlistRecord,

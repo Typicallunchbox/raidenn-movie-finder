@@ -19,7 +19,6 @@ const SearchDropDown = (props) => {
 const [showFilters, setshowFilters] = useState(false);
 const dispatch = useDispatch()
 const {movies, tag} = useSelector((state) => state.movies) 
-console.log(props)
 
 const setTagState = (selectedTag) => {
   dispatch(addTag(selectedTag))

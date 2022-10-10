@@ -127,6 +127,23 @@ export const getWantToWatch = createAsyncThunk(
   }
 );
 
+//Get want to watch record
+export const getWantToWatchRecord = (async (watchlistData) => {
+    try {
+        const token = user.token;
+        return await watchlistService.getWantToWatchRecord(watchlistData, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return message;
+    }
+  }
+);
+
 export const watchlistSlice = createSlice({
   name: "watchlist",
   initialState,

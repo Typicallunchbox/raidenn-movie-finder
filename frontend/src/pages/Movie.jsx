@@ -7,7 +7,7 @@ import { FaStar,  } from "react-icons/fa";
 import { BiStar  } from "react-icons/bi";
 import Rating from "react-rating";
 import { createComment, getCommentsByMovieId } from "../features/comments/commentSlice";
-import { createWatchlistRecord } from "../features/watchlists/watchlistSlice";
+import { createWatchlistRecord, getWantToWatchRecord } from "../features/watchlists/watchlistSlice";
 
 import { reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
@@ -55,6 +55,9 @@ const Movie = () => {
       navigate('/login')
     }
 
+    let temp = getWantToWatchRecord({movie_id : id})
+    console.log('temp:', temp)
+
     dispatch(getCommentsByMovieId(id))
     return() => {
       dispatch(reset())
@@ -81,13 +84,11 @@ const Movie = () => {
 
   const addToWatchlist = (val) => {
     if(movie){
-      console.log('movie:', movie)
       let genres = []
       for (let index = 0; index < movie.genres.length; index++) {
         const element = movie.genres[index]; 
         genres.push(element.name);
       }
-      console.log('genres:', genres)
 
       dispatch(createWatchlistRecord({
         movie_id : id,
