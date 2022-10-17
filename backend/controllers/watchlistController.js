@@ -132,6 +132,12 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
         res.status(401)
         throw new Error('User not authorized')
     }
+
+    if(!req.body.watched && !watchListRecord.wantToWatch || !req.body.wantToWatch && !watchListRecord.watched){
+        await Watchlist.deleteOne(watchListRecord)
+        res.status(200).json({id : req.body._id})
+        return;
+    }
     
     const updateWatchlist = await Watchlist.findByIdAndUpdate(req.body._id, req.body.watched ? {watched : req.body.watched} : {wantToWatch : req.body.wantToWatch}, {new : true})
     res.status(200).json(updateWatchlist) 
