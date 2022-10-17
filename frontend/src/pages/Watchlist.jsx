@@ -3,7 +3,6 @@ import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
 import { getWatched, getWantToWatch, updateWatchlistRecord } from "../features/watchlists/watchlistSlice";
 import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
-
 import Spinner from '../components/Spinner';
 
 

@@ -1,14 +1,15 @@
 import { React, useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom'
-import "../ItemCatalogueList/ItemCatalogueList.scss"
+import {useNavigate} from 'react-router-dom';
+import "../ItemCatalogueList/ItemCatalogueList.scss";
+import { updateWatchlistRecord } from "../../features/watchlists/watchlistSlice";
 import {useSelector, useDispatch} from 'react-redux'
 import axios from "axios";
-
 
 
 const ItemCatalogueList = (props) => {
   const { movies, deleteWantToWatch, deleteWatched } = props;
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const viewMovie = (id) => {
     if(id){
@@ -17,9 +18,13 @@ const ItemCatalogueList = (props) => {
   }
 
   const removeFromList = (id) => {
-
+    if(deleteWatched){
+      dispatch(updateWatchlistRecord({_id: id, watched : false}))
+    }
+    else if(deleteWantToWatch){
+      dispatch(updateWatchlistRecord({_id: id, wantToWatch : false}))
+    }
   }
-
 
   let image_path = "https://image.tmdb.org/t/p/original";
   return (
