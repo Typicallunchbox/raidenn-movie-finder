@@ -32,9 +32,6 @@ const Watchlist = () => {
     return <Spinner/>
   }
 
-
-
-
   return (
     <div className='container'>
       <div className='mt-52 '>
@@ -42,7 +39,7 @@ const Watchlist = () => {
           <h1>Want to Watch</h1>
           {wantToWatch && (
             <div className='catalogue'>
-              <ItemCatalogueList movies={wantToWatch} />
+              <ItemCatalogueList deleteWantToWatch={true} deleteWatched={false} movies={wantToWatch} />
             </div>
           )}
         </div>
@@ -50,7 +47,7 @@ const Watchlist = () => {
           <h1>Watched</h1>
           {watched && (
             <div className='catalogue'>
-              <ItemCatalogueList movies={watched} />
+              <ItemCatalogueList deleteWatched={true} deleteWantToWatch={false} movies={watched} />
             </div>
           )}
         </div>
