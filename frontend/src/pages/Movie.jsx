@@ -30,6 +30,8 @@ const Movie = () => {
   const {user} = useSelector((state) => state.auth)
   const {comments, isLoading, isError, message} = useSelector((state) => state.comments) 
   const [movie, setMovie] = useState(null);
+  const [movieVideos, setMovieVideos] = useState(null);
+
   let image_path = "https://image.tmdb.org/t/p/original";
   let colours = ColourPalette(movie ? (image_path + movie?.poster_path) : []);
   // if(movie){
@@ -63,7 +65,6 @@ const Movie = () => {
       dispatch(reset())
     }
   }, [id, user, navigate, dispatch, isError, message])
-
   useEffect(() => {
     axios
       .get(
@@ -71,6 +72,14 @@ const Movie = () => {
       )
       .then((resp) => {
         setMovie(resp.data);
+      });
+
+      axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
+      )
+      .then((resp) => {
+        setMovieVideos(resp.data);
       });
   }, [id]);
 
