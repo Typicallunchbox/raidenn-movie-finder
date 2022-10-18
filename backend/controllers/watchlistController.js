@@ -116,7 +116,7 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
         throw new Error("Movie does not exist on list.");
     }
 
-    if(!req.body.watched && !req.body.wantToWatch){
+    if(req.body.watched != undefined && req.body.wantToWatch != undefined){
         res.status(400)
         throw new Error('Please add either a watched or wantToWatch field to update')
     }
