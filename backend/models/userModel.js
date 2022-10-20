@@ -13,6 +13,10 @@ const userSchema = mongoose.Schema({
     password:{
         type: String,
         requierd: [true, 'Please add a password']
+    },
+    genrePreferences:{
+        type: Array,
+        requierd: [true, 'Please add atleast one genre preference']
     }
 },{
     timestamps: true
