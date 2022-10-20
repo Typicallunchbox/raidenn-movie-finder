@@ -8,10 +8,11 @@ import { BiStar  } from "react-icons/bi";
 import Rating from "react-rating";
 import { createComment, getCommentsByMovieId } from "../features/comments/commentSlice";
 import { createWatchlistRecord, getWantToWatchRecord } from "../features/watchlists/watchlistSlice";
-
 import { reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
+import Filter from 'bad-words';
+
 
 
 
@@ -34,19 +35,14 @@ const Movie = () => {
 
   let image_path = "https://image.tmdb.org/t/p/original";
   let colours = ColourPalette(movie ? (image_path + movie?.poster_path) : []);
-  // if(movie){
-  //   colours = ColourPalette((image_path + movie.poster_path));
-
-  // }
-
-
+ 
   const onSubmit = (e) => {
+    let filter = new Filter();
     if(text && rating && id){
-      dispatch(createComment({"comment": text, "rating":rating, "movie_id": `${id}`}))
+      dispatch(createComment({"comment": filter.clean(text), "rating":rating, "movie_id": `${id}`}))
       setText('')
     }
   };
-
 
   useEffect(() => {
     if(!isError){
@@ -126,6 +122,7 @@ const Movie = () => {
             <p><b>Genres</b> : </p>
             <div className="genres">
             {/* CREATE STANDARD REUSABLE BUTTONS, LINK W/ or W/ OUT borders etc. */}
+            {/* SANITIZE EVERYTHING */}
             {movie.genres.map((genre)=>{
               return <span key={genre.id}>{genre.name}</span>
             })}
@@ -137,6 +134,7 @@ const Movie = () => {
           <div className="card p-4 comment-section w-full text-left">
 
             <h1>Comments</h1>
+            {/* NPM INSTALL BAD-WORDS LIBRARY TO PREVENT BAD WORDS IN COMMENT SECTION */}
             <div className="comments">
               {comments && comments.map((comment) => (
                 <div className="card border-default mb-2 p-3">
