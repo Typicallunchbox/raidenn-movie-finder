@@ -8,6 +8,7 @@ import Login2 from "./components/Login/Login"
 import Home from "./pages/Home"
 import Movie from "./pages/Movie";
 import Watchlist from "./pages/Watchlist";
+import Settings from "./pages/UserProfileSettings";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="*" element={<ErrorPage />} />
             <Route path={`/movie/:id`} element={<Movie />} />
             <Route path={`/watchlist`} element={<Watchlist />} />
+            <Route path={`/settings`} element={<Settings />} />
           </Routes>
         </div>
       </Router>
