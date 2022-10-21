@@ -8,8 +8,10 @@ const UserProfileSettings = () => {
     return (
       <> 
         <div className="container">
-            <h2>Profile Settings</h2>
-            <div className="profile-settings w-2/6 text-left mx-auto mt-32">
+        <h1 className="mt-52">Profile Settings</h1>
+
+            <div className="profile-settings w-2/6 text-left mx-auto mt-10">
+
                 <div className="Input mb-5">
                     <p>Fullname</p>
                     <input type="text" id="fullName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Fullname" required></input>
