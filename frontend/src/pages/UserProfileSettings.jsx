@@ -33,11 +33,11 @@ const UserProfileSettings = () => {
             <div className="profile-settings w-2/6 text-left mx-auto mt-32">
                 <div className="Input mb-5">
                     <p>Fullname</p>
-                    <input onBlur={(e) => onBlur(e)} value={formData.name} type="text" name="name" id="name" className={inputStyling} placeholder="Fullname" required></input>
+                    <input onBlur={(e) => onBlur(e)} defaultValue={formData.name} type="text" name="name" id="name" className={inputStyling} placeholder="Fullname" required></input>
                 </div>
                 <div className="Input mb-5">
                     <p>Email</p>
-                    <input onBlur={(e) => onBlur(e)} value={formData.email} type="text" name="email" id="email" className={inputStyling} placeholder="Email" required></input>
+                    <input onBlur={(e) => onBlur(e)} defaultValue={formData.email} type="text" name="email" id="email" className={inputStyling} placeholder="Email" required></input>
                 </div>
                 <div className="Input mb-5">
                     <p>Password</p>
