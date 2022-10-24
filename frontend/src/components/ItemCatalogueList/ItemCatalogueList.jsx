@@ -32,12 +32,12 @@ const ItemCatalogueList = (props) => {
     <div className="item-catalogue-list-container">
       <div className="inner-container">
         {movies && movies.map((movie) => (
-          <>
-            <div className="relative" key={movie.id}>
+          <div key={movie.id ? movie.id : movie.movie_id}>
+            <div className="relative">
               {movie.movie_id && <button onClick={() => {removeFromList(movie._id)}}  type="button" className="absolute top-0 right-0 z-10 border-0 text-white bg-red-700 hover:bg-red-800 text-center p-3 rounded-l-lg"><AiFillDelete/></button>}       
               <img onClick={() => viewMovie(movie.id ? movie.id : movie.movie_id)} src={movie.poster_path ? image_path + movie.poster_path : image_path + movie.movie_image} alt='movie-list'></img>
             </div>
-          </>
+          </div>
         ))}
       </div>
     </div>
