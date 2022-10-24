@@ -3,6 +3,7 @@ import axios from "axios";
 import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux';
 import ThreeJsFiberScreen from "../components/ThreeJsFiberScreen/ThreeJsFiberScreen";
+import { addMovies } from '../features/movies/movieSlice';
 
 
 // import axios from "axios";
@@ -14,8 +15,8 @@ const Home = () => {
   const dispatch = useDispatch()
   const {user} = useSelector((state) => state.auth)
   const { isError, message} = useSelector((state) => state.goals) 
-  const {tag} = useSelector((state) => state.movies) 
-  const [movies, setMovies] = useState([]);
+  const {tag, movies} = useSelector((state) => state.movies) 
+  // const [movies, setMovies] = useState([]);
 
   useEffect(() => {
 
@@ -32,25 +33,25 @@ const Home = () => {
     if(tag === ''){
       axios.get("https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734")
       .then((resp) => {
-        setMovies(resp.data.results);
+        dispatch(addMovies(resp.data.results))
       });
     }else{
       axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734`)
       .then((resp) => {
-        setMovies(resp.data.results);
+        dispatch(addMovies(resp.data.results))
       });
     }
   }, [tag]);
 
   return (
     <> 
-    <div className="recommendations">
-      <ThreeJsFiberScreen />
-    </div>
     <div className="container">
-    {user && <div className="catalogue">
+    {user && <div className="catalogue mt-52">
       <ItemCatalogueList movies={movies} />
     </div>}
+  </div>
+  <div className="recommendations">
+      <ThreeJsFiberScreen />
   </div>
   </>
   );

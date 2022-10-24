@@ -19,6 +19,9 @@ export const movieSlice = createSlice({
     },
     addTag:(state, action) =>{
       state.tag = action.payload;
+    },
+    addMovies:(state, action) => {
+      state.movies = action.payload;
     }
   },
   // extraReducers: (builder) => {
@@ -36,5 +39,5 @@ export const movieSlice = createSlice({
   // }
 });
 
-export const { reset, addTag } = movieSlice.actions;
+export const { reset, addTag , addMovies} = movieSlice.actions;
 export default movieSlice.reducer;

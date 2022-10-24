@@ -6,7 +6,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { FaAngleUp } from "react-icons/fa";
-import { addTag } from '../../features/movies/movieSlice';
+import { addTag, addMovies } from '../../features/movies/movieSlice';
+import axios from "axios";
 
 
 
@@ -17,6 +18,7 @@ import './SearchDropDown.scss';
 
 const SearchDropDown = (props) => {
 const [showFilters, setshowFilters] = useState(false);
+const [searchText, setSearchText] = useState('');
 const dispatch = useDispatch()
 const {movies, tag} = useSelector((state) => state.movies) 
 
@@ -34,6 +36,15 @@ useEffect(() => {
 
 const collapse = () => {
   setshowFilters(!showFilters);
+}
+
+const search = () => {
+  if(searchText.trim() != ''){
+    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&query=${searchText}&language=en-US&page=1`)
+    .then((resp) => {
+      dispatch(addMovies(resp.data.results))
+    });
+  }
 }
   
   return (
@@ -93,8 +104,8 @@ const collapse = () => {
           </div>
           </div>
           <div className='flex'>
-            <input type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Search for a movie..." required></input>
-            <button className='button bg-green-400 hover:bg-slate-500'>Search</button>
+            <input onBlur={(e) => {setSearchText(e.target.value)}} type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Search for a movie..." required></input>
+            <button onClick={() => {search()}} type='button' className='button bg-green-400 hover:bg-slate-500'>Search</button>
           </div>
         </div>
 
