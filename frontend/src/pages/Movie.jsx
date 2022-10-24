@@ -5,6 +5,8 @@ import axios from "axios";
 import { useParams } from 'react-router-dom';
 import { FaStar,  } from "react-icons/fa";
 import { BiStar  } from "react-icons/bi";
+import { AiFillEye, AiFillPlusCircle } from "react-icons/ai";
+
 import Rating from "react-rating";
 import { createComment, getCommentsByMovieId } from "../features/comments/commentSlice";
 import { createWatchlistRecord, getWantToWatchRecord } from "../features/watchlists/watchlistSlice";
@@ -87,7 +89,7 @@ const Movie = () => {
     return <Spinner/>
   }
 
-  const addToWatchlist = (val) => {
+  const addToWantToWatchList = (val) => {
     if(movie){
       let genres = []
       for (let index = 0; index < movie.genres.length; index++) {
@@ -104,6 +106,23 @@ const Movie = () => {
     }
   }
 
+  const addToWatchedList = (val) => {
+    if(movie){
+      let genres = []
+      for (let index = 0; index < movie.genres.length; index++) {
+        const element = movie.genres[index]; 
+        genres.push(element.name);
+      }
+
+      dispatch(createWatchlistRecord({
+        movie_id : id,
+        movie_genre : genres,
+        movie_image : image_path + movie.poster_path,
+        watched : true
+      }))
+    }
+  }
+
 
   return (
     <>
@@ -113,8 +132,9 @@ const Movie = () => {
           <div className="movieInfo">
             <img src={image_path + movie.poster_path} alt='movie'></img>
             <div className="buttons flex justify-evenly gap-1 mt-2">
-              <button className='w-full' onClick={() => {addToWatchlist()}} >Watchlist</button>
-              <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full'>Site</button>
+              <button className='w-full flex gap-3 p-3' onClick={() => {addToWantToWatchList()}} > <AiFillPlusCircle/>Watchlist</button>
+              <button className='w-full flex gap-3 p-3' onClick={() => {addToWatchedList()}} > <AiFillEye/> Watched</button>
+              {/* <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full'>Site</button> */}
             </div>
             <button className='w-full mt-1'>Watch Now</button>
 
