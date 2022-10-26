@@ -142,7 +142,7 @@ const Movie = () => {
       <div className="p-0.5"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, ${colours[3]}, ${colours[4]}, rgba(0,0,0,0))`} : {}}></div>
       {movie && (
         <div className="container">
-          <div className='movie-container mb-20'>
+          <div className='movie-container mb-20 mt-5'>
             <div className="movieInfo">
               <img src={image_path + movie.poster_path} alt='movie'></img>
               <div className="buttons flex justify-evenly gap-1 mt-2">
@@ -165,7 +165,7 @@ const Movie = () => {
               <p><b>Popularity</b> : {movie.popularity}</p>
               <p><b>Budget</b> : {movie.budget}</p>
             </div>
-            <div className="card p-4 w-full text-left">
+            <div className="card border-0 w-full text-left overflow-hidden">
               {movieVideos && 
               <div className="trailer w-full h-full">
                 <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${movieVideos[0].key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
