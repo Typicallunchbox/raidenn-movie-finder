@@ -165,7 +165,7 @@ const Movie = () => {
               <p><b>Popularity</b> : {movie.popularity}</p>
               <p><b>Budget</b> : {movie.budget}</p>
             </div>
-            <div className="card border-0 w-full text-left overflow-hidden">
+            <div className="plain-card border-0 w-full text-left overflow-hidden">
               {movieVideos && 
               <div className="trailer w-full h-full">
                 <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${movieVideos[0].key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>

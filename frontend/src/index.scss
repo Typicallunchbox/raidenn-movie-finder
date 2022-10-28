@@ -261,6 +261,14 @@ button{
 button:hover{
 background-color: rgb(234, 234, 234);
 }
+.plain-card {
+  border-color: rgb(226, 226, 226);
+  border-style: solid;
+  box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
+  -moz-box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
+  background-color: #ededed;
+}
 
 .card {
   border-color: rgb(226, 226, 226);
