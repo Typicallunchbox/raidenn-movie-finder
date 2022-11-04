@@ -56,13 +56,13 @@
   background :var(--raidenn-black)
 }
 .secondary-bg-colour{
-  background :bg(--raidenn-blue)
+  background :var(--raidenn-blue);
 }
 .tertiary-bg-colour{
-  background :bg(--raidenn-white)
+  background :var(--raidenn-white)
 }
 .lightgrey-bg-colour{
-  background :bg(--raidenn-white)
+  background :var(--raidenn-white)
 }
 * {
   margin: 0;
@@ -196,7 +196,9 @@ h3 {
         border-style: solid;
         border-width: 1px;
         border-radius: 10px;
-        background-color: white;
+        border-color: var(--raidenn-blue);
+        color: var(--raidenn-white);
+        // background-color: white;
       }
     }
   }
