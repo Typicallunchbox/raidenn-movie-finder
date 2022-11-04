@@ -54,9 +54,9 @@ const search = () => {
       <div className='container'>
       <div className='filters'>
           <div className='general-tags'>
-            <button onClick={() => {setTagState('popular')}}>Most Popular</button>
-            <button onClick={() => {setTagState('upcoming')}}>Upcoming</button>
-            <button onClick={() => {setTagState('top_rated')}}>Best Rating</button>
+            <button className='secondary-bg-colour' onClick={() => {setTagState('popular')}}>Most Popular</button>
+            <button className='secondary-bg-colour' onClick={() => {setTagState('upcoming')}}>Upcoming</button>
+            <button className='secondary-bg-colour' onClick={() => {setTagState('top_rated')}}>Best Rating</button>
           </div>
           <div className='flex'>
           <div className='date-range'>

@@ -23,14 +23,14 @@ function Header() {
 
     <header className='header'>
       <div className='logo'>
-        <Link to='/'>Raidenn</Link>
+        <Link className="tertiary-text-colour" style={{fontFamily: 'ThunderBoldLC', fontSize: '35px'}}  to='/'>Raidenn</Link>
       </div>
       {user && 
       <div className="flex gap-12 justify-center ">
-              <a href="/watchlist" className="text-gray-500 hover:text-gray-700">
+              <a href="/watchlist" className="tertiary-text-colour hover:text-gray-700">
                  My Watchlist
               </a>
-              <a className="text-gray-500 hover:text-gray-700" onClick={() => {setOpenSearchTab(true)}}>
+              <a className="tertiary-text-colour hover:text-gray-700" onClick={() => {setOpenSearchTab(true)}}>
                  Search
               </a>
             </div>}
@@ -38,9 +38,9 @@ function Header() {
         {user ? (
           <>
             <li>
-              <button className="btn" onClick={onLogout}>
+              <a className="tertiary-text-colour hover:text-gray-700" onClick={onLogout}>
               <FaSignOutAlt /> Logout
-              </button>
+              </a>
             </li>
           </>
         ) : (

@@ -5,6 +5,10 @@
   src: url(../public/fonts/Thunder-BlackLC.otf);
 }
 @font-face {
+  font-family: 'ThunderBoldLC';
+  src: url(../public/fonts/Thunder-BoldLC.otf);
+}
+@font-face {
   font-family: 'ThunderBoldHCItalic';
   src: url(../public/fonts/Thunder-BoldHCItalic.otf);
 }
@@ -22,6 +26,11 @@
   src: url(../public/fonts/Sk-Modernist-Regular.otf);
 }
 
+@font-face {
+  font-family: 'raidenn-white';
+  src: var(--raidenn-white);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,6 +42,28 @@
   --raidenn-white: #F4FEFF;
 }
 
+.primary-text-colour{
+  color :var(--raidenn-black)
+}
+.secondary-text-colour{
+  color :var(--raidenn-blue)
+}
+.tertiary-text-colour{
+  color :var(--raidenn-white)
+}
+
+.primary-bg-colour{
+  background :var(--raidenn-black)
+}
+.secondary-bg-colour{
+  background :bg(--raidenn-blue)
+}
+.tertiary-bg-colour{
+  background :bg(--raidenn-white)
+}
+.lightgrey-bg-colour{
+  background :bg(--raidenn-white)
+}
 * {
   margin: 0;
   padding: 0;
@@ -90,7 +121,7 @@ h3 {
   width: 100%;
   top: 0;
   z-index: 20;
-  background: #eee;
+  background: var(--raidenn-black)
 }
 
 .header ul {
@@ -132,7 +163,7 @@ h3 {
   padding: 1rem;
   width: 500px;
   height: fit-content;
-  background-color: #eee;
+  background: linear-gradient(0deg,#434343,#434343, rgba(0,0,0,0));
   position: fixed;
   left: 50%;
   z-index: 20;
