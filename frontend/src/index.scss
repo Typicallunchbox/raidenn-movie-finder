@@ -26,6 +26,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /*Colours */
+  --raidenn-black: #222222;
+  --raidenn-blue: #1B8AD3;
+  --raidenn-white: #F4FEFF;
+}
+
 * {
   margin: 0;
   padding: 0;
