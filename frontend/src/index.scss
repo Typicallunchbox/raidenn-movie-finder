@@ -227,6 +227,57 @@ h3 {
   }
 }
 
+// .search-dropdown-full{
+//   background: linear-gradient(0deg,#434343,#434343, #434343) !important;
+//   animation: fadeIn 5s;
+// }
+
+.search-dropdown-full{
+  padding: 1rem;
+  width: 500px;
+  height: fit-content;
+  background: linear-gradient(0deg,#434343,#434343, #434343) !important;
+  // animation: fadeIn 5s;
+  position: fixed;
+  left: 50%;
+  z-index: 20;
+  transform: translate(-50%);
+  border-radius: 0px 0px 10px 10px;
+  top: 97px;
+
+  &.collapse{
+    padding: .5rem;
+
+    svg{
+      transform : rotate(180deg);
+    }
+  }
+
+  .container{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .filters{
+    .general-tags{
+      display: flex;
+      gap: 5px;
+      margin-top: 1rem;
+      font-size: 12px;
+
+      button{
+        padding: 5px 15px;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        border-color: var(--raidenn-blue);
+        color: var(--raidenn-white);
+        // background-color: white;
+      }
+    }
+  }
+}
+
 .recommendations{
   background-color: rgb(27, 27, 53);
   width: 100%;

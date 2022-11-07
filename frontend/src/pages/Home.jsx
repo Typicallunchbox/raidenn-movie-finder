@@ -11,6 +11,8 @@ import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList
 
 const Home = () => {
 
+ 
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {user} = useSelector((state) => state.auth)
@@ -30,6 +32,20 @@ const Home = () => {
   }, [user, navigate, dispatch, isError, message])
 
   useEffect(() => {
+    function scrollPlay() {
+      // var scrollTop = document.querySelector("root").scrollTop;
+      // console.log('val:', scrollTop)
+      // var frameNumber = scrollTop/playbackConst;
+      // vid.currentTime = frameNumber;
+      // window.requestAnimationFrame(scrollPlay);
+    }
+    if(window != undefined){
+        window.addEventListener("scroll", (event) => {
+          let scroll = Math.round(window.scrollY * 100) / 100
+          console.log(scroll)
+      });
+    }
+
     if(tag === ''){
       axios.get("https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734")
       .then((resp) => {
@@ -43,12 +59,7 @@ const Home = () => {
     }
   }, [tag]);
 
-  function scrollPlay() {
-    // var scrollTop = document.querySelector(".container").scrollTop;
-    // var frameNumber = scrollTop/playbackConst;
-    // vid.currentTime = frameNumber;
-    // window.requestAnimationFrame(scrollPlay);
-  }
+  
 
   return (
     <> 

@@ -25,8 +25,19 @@ const {movies, tag} = useSelector((state) => state.movies)
 const setTagState = (selectedTag) => {
   dispatch(addTag(selectedTag))
 }
-
+let scrollLocation = null;
 useEffect(() => {
+  if(window != undefined){
+    window.addEventListener("scroll", (event) => {
+      scrollLocation = Math.round(window.scrollY * 100) / 100
+      console.log(scrollLocation)
+
+      if(scrollLocation > 90){
+        console.log('HIT!')
+      }
+  });
+}
+
   if(props.openSearch){
     setshowFilters(true);
   }else{
@@ -48,10 +59,10 @@ const search = () => {
     });
   }
 }
-  
+
   return (
     <>
-     {showFilters && window.location.origin+'/' == window.location.href && <div className={`search-dropdown ${!showFilters ? 'collapse' : ''}`}>
+     {showFilters && window.location.origin+'/' == window.location.href && <div className={scrollLocation > 90 ? `search-dropdown-full ${!showFilters ? 'collapse' : ''}` : `search-dropdown ${!showFilters ? 'collapse' : ''}`}>
       {showFilters &&
       <div className='container'>
       <div className='filters'>
