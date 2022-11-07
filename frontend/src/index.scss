@@ -42,14 +42,14 @@
   --raidenn-white: #F4FEFF;
 }
 
-.primary-text-colour{
+.w-text-colour{
+  color :var(--raidenn-white)
+}
+.bk-text-colour{
   color :var(--raidenn-black)
 }
-.secondary-text-colour{
+.b-text-colour{
   color :var(--raidenn-blue)
-}
-.tertiary-text-colour{
-  color :var(--raidenn-white)
 }
 
 .primary-bg-colour{
@@ -79,6 +79,10 @@ a {
   text-decoration: none;
   color: var(--raidenn-white);
   cursor: pointer;
+}
+
+a:hover {
+  color: var(--raidenn-blue);
 }
 
 p {
