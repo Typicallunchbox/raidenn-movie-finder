@@ -65,12 +65,17 @@ const Login = () => {
     <div>
       <div className='login_container'>
       <div className='inner-container'>
-        <h1>Register</h1>
+      <div className='px-12 pt-6'>
+        <h1 className='bk-text-colour' style={{fontFamily: 'ThunderBoldLC', fontSize: '35px', letterSpacing:'3px'}} >Register</h1>
         <input onChange={onChange} id='name' name='name' value={name} type="text" placeholder='Email your name' />
         <input onChange={onChange} id='email' name='email' value={email} type="email" placeholder='Email your email' />
         <input onChange={onChange} id='password' name='password' value={password} type="password" placeholder='Password' />
         <input onChange={onChange} id='password2' name='password2' value={password2} type="password" placeholder='Password' />
+      </div>
         <button onClick={onSubmit} type='submit' className='btn-primary'>Register</button>
+        <div>
+          <p className='my-12'></p>
+        </div>
       </div> 
     </div>
     </div>

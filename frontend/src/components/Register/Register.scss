@@ -1,13 +1,11 @@
 .register_container{
     width: 400px;
-    height:  30rem;
+    height:  fit-content;
     background: rgba(34, 34, 34, .4);
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
 
     h1{
         padding-bottom: 20px;
@@ -32,8 +30,8 @@
     }
 
     div {
-        position: absolute;
-        bottom: 0;
+        width: 100%;
+        text-align: center;
     }
 }
 

@@ -58,14 +58,14 @@ const Login = () => {
     <div>
       <div className='login_container'>
       <div className='inner-container'>
-        <div className='px-12'>
-          <h1 className='bk-text-colour' >Sign In</h1>
+        <div className='px-12 pt-6'>
+          <h1 className='bk-text-colour' style={{fontFamily: 'ThunderBoldLC', fontSize: '35px', letterSpacing:'3px'}} >Sign In</h1>
           <input onChange={onChange} id='email' name='email' value={email} type="email" placeholder='Email your email' />
-          <input onChange={onChange} id='password' name='password' value={password} type="text" placeholder='Password' />
+          <input onChange={onChange} id='password' name='password' value={password} type="password" placeholder='Password' />
         </div>
         <button onClick={onSubmit} type='submit' className='btn-primary'>Sign In</button>
         <div>
-          <p className='bk-text-colour mt-4'>New to Raidenn? <a className='bk-text-colour' href='/register'> Sign Up Now</a></p>
+          <p className='bk-text-colour my-4 text-xs'>New to Raidenn? <a className='bk-text-colour' href='/register'> Sign Up Now</a></p>
         </div>
       </div> 
     </div>
