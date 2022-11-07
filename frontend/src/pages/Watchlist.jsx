@@ -32,26 +32,32 @@ const Watchlist = () => {
   }
 
   return (
-    <div className='container'>
-      <div className='mt-52 '>
-        <div className='wantToWatch'>
-          <h1>Want to Watch</h1>
-          {wantToWatch && (
-            <div className='catalogue'>
-              <ItemCatalogueList deleteWantToWatch={true} deleteWatched={false} movies={wantToWatch} />
-            </div>
-          )}
-        </div>
-        <div className='watched'>
-          <h1>Watched</h1>
-          {watched && (
-            <div className='catalogue'>
-              <ItemCatalogueList deleteWatched={true} deleteWantToWatch={false} movies={watched} />
-            </div>
-          )}
+    <>
+      <div className="selectWatchlistOptions">
+          <p>Want to watch movies</p>
+          <p>Previously watched movies</p>
+      </div>
+      <div className='container'>
+        <div className='mt-52 '>
+          <div className='wantToWatch'>
+            <h1>Want to Watch</h1>
+            {wantToWatch && (
+              <div className='catalogue'>
+                <ItemCatalogueList deleteWantToWatch={true} deleteWatched={false} movies={wantToWatch} />
+              </div>
+            )}
+          </div>
+          <div className='watched'>
+            <h1>Watched</h1>
+            {watched && (
+              <div className='catalogue'>
+                <ItemCatalogueList deleteWatched={true} deleteWantToWatch={false} movies={watched} />
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Watchlist

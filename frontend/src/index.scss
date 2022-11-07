@@ -164,6 +164,23 @@ h3 {
   color: #828282;
 }
 
+.selectWatchlistOptions{
+  width: 500px;
+  height: fit-content;
+  padding: 16px;
+  background: linear-gradient(90deg,#434343,#434343, rgba(0,0,0,0));
+
+  p{
+    color: var(--raidenn-white);
+    font-size: 22px;
+    padding: 8px;
+  }
+
+  p:hover{
+    color: var(--raidenn-blue);
+  }
+}
+
 // SearchDropDown
 .search-dropdown{
   padding: 1rem;
