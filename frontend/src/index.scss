@@ -77,12 +77,13 @@ body {
 
 a {
   text-decoration: none;
-  color: #000;
+  color: var(--raidenn-white);
   cursor: pointer;
 }
 
 p {
   line-height: 1.7;
+  color: var(--raidenn-white);
 }
 
 ul {
@@ -139,8 +140,8 @@ h3 {
   align-items: center;
 }
 
-.header ul li a:hover {
-  color: #777;
+.header a:hover {
+  color: var(--raidenn-blue);
 }
 
 .header ul li a svg {
@@ -319,18 +320,20 @@ button{
   border-width: 1px;
   border-radius: 10px;
   padding: 5px;
+  color: var(--raidenn-white);
 }
 
 button:hover{
-background-color: rgb(234, 234, 234);
+background-color: var(--raidenn-blue)
 }
+
 .plain-card {
   border-color: rgb(226, 226, 226);
   border-style: solid;
   box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
   -webkit-box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
   -moz-box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
-  background-color: #ededed;
+  background-color: var(--raidenn-white);
 }
 
 .card {
@@ -341,7 +344,7 @@ background-color: rgb(234, 234, 234);
   box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
   -webkit-box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
   -moz-box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
-  background-color: #ededed;
+  background-color: var(--raidenn-white);
 
   &.border-default{
     border-color: #afcbd9;
@@ -394,7 +397,8 @@ background-color: rgb(234, 234, 234);
         flex: 0 0 48%;
         gap: 4%;
         font-weight: 200;
-        border: #000;
+        color: var(--raidenn-white);
+        border: var(--raidenn-white);
         border-radius: 10px;
         border-width: 1px;
         border-style: solid;
@@ -410,6 +414,10 @@ background-color: rgb(234, 234, 234);
 }
 
 .comment-section{
+  p{
+    color: var(--raidenn-black);
+  }
+
   .comments{
     max-height: 500px;  
     min-height: 120px;

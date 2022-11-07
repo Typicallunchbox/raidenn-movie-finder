@@ -27,10 +27,10 @@ function Header() {
       </div>
       {user && 
       <div className="flex gap-12 justify-center ">
-              <a href="/watchlist" className="tertiary-text-colour hover:text-gray-700">
+              <a href="/watchlist" className="tertiary-text-colour">
                  My Watchlist
               </a>
-              <a className="tertiary-text-colour hover:text-gray-700" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
+              <a className="tertiary-text-colour" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
                  Search
               </a>
             </div>}
