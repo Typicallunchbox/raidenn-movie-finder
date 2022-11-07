@@ -62,7 +62,7 @@ const search = () => {
 
   return (
     <>
-     {showFilters && window.location.origin+'/' == window.location.href && <div className={scrollLocation > 90 ? `search-dropdown-full ${!showFilters ? 'collapse' : ''}` : `search-dropdown ${!showFilters ? 'collapse' : ''}`}>
+     {showFilters && window.location.origin+'/' == window.location.href && <div className={`${scrollLocation >= 90 ? 'search-dropdown-full' : 'search-dropdown'} ${!showFilters ? 'collapse' : ''}`}>
       {showFilters &&
       <div className='container'>
       <div className='filters'>
