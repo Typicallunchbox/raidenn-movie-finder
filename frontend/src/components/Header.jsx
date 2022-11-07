@@ -39,7 +39,7 @@ function Header() {
           <>
             <li>
               <a className="tertiary-text-colour hover:text-gray-700" onClick={onLogout}>
-              <FaSignOutAlt /> Logout
+               Logout &nbsp; <FaSignOutAlt />
               </a>
             </li>
           </>
@@ -47,14 +47,12 @@ function Header() {
           <>
             <li>
               <Link to='/login'>
-                Login
-                <FaSignInAlt />
+                Login &nbsp; <FaSignInAlt />
               </Link>
             </li>
             <li>
               <Link to='/register'>
-                Register
-                <FaUser />
+                Register &nbsp; <FaUser />
               </Link>
             </li>
           </>
