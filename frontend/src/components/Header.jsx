@@ -30,7 +30,7 @@ function Header() {
               <a href="/watchlist" className="tertiary-text-colour hover:text-gray-700">
                  My Watchlist
               </a>
-              <a className="tertiary-text-colour hover:text-gray-700" onClick={() => {setOpenSearchTab(true)}}>
+              <a className="tertiary-text-colour hover:text-gray-700" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
                  Search
               </a>
             </div>}

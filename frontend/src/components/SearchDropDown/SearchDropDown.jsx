@@ -29,6 +29,8 @@ const setTagState = (selectedTag) => {
 useEffect(() => {
   if(props.openSearch){
     setshowFilters(true);
+  }else{
+    setshowFilters(false);
   }
 
 }, [props.openSearch])
@@ -49,7 +51,7 @@ const search = () => {
   
   return (
     <>
-     {window.location.origin+'/' == window.location.href && <div className={`search-dropdown ${!showFilters ? 'collapse' : ''}`}>
+     {showFilters && window.location.origin+'/' == window.location.href && <div className={`search-dropdown ${!showFilters ? 'collapse' : ''}`}>
       {showFilters &&
       <div className='container'>
       <div className='filters'>
@@ -111,9 +113,9 @@ const search = () => {
 
         
       </div>}
-      <div onClick={() => {collapse()}} className='collapse-button w-full mt-2 p-1 bg-stone-300 hover:bg-stone-400 rounded'>
+      {/* <div onClick={() => {collapse()}} className='collapse-button w-full mt-2 p-1 bg-stone-300 hover:bg-stone-400 rounded'>
           <div><FaAngleUp className='m-auto' /></div>
-        </div>
+        </div> */}
      </div>}
     </>
   )
