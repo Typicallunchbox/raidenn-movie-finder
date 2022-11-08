@@ -44,7 +44,7 @@ useEffect(() => {
       }
   });
 }
-
+  setDropDownClass('search-dropdown')
   if(props.openSearch){
     setshowFilters(true);
   }else{
