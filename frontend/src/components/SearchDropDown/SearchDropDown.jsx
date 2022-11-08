@@ -37,10 +37,15 @@ useEffect(() => {
         if(dropDownClass !== 'search-dropdown-full'){
           setDropDownClass('search-dropdown-full')
         }
-        return;
       }
-      if(dropDownClass !== 'search-dropdown'){
+      if(dropDownClass < 50){
         setDropDownClass('search-dropdown')
+      }
+      if(scrollLocation > 1420){
+        setshowFilters(false);
+      }
+      if(!showFilters && scrollLocation < 1420){
+        setshowFilters(true);
       }
   });
 }
