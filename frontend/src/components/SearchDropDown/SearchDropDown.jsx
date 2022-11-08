@@ -19,6 +19,7 @@ import './SearchDropDown.scss';
 const SearchDropDown = (props) => {
 const [showFilters, setshowFilters] = useState(false);
 const [searchText, setSearchText] = useState('');
+const [dropDownClass, setDropDownClass] = useState('');
 const dispatch = useDispatch()
 const {movies, tag} = useSelector((state) => state.movies) 
 
@@ -30,10 +31,16 @@ useEffect(() => {
   if(window != undefined){
     window.addEventListener("scroll", (event) => {
       scrollLocation = Math.round(window.scrollY * 100) / 100
-      console.log(scrollLocation)
+      // console.log(scrollLocation)
 
-      if(scrollLocation > 90){
-        console.log('HIT!')
+      if(scrollLocation > 50){
+        if(dropDownClass !== 'search-dropdown-full'){
+          setDropDownClass('search-dropdown-full')
+        }
+        return;
+      }
+      if(dropDownClass !== 'search-dropdown'){
+        setDropDownClass('search-dropdown')
       }
   });
 }
@@ -62,7 +69,7 @@ const search = () => {
 
   return (
     <>
-     {showFilters && window.location.origin+'/' == window.location.href && <div className={`${scrollLocation >= 90 ? 'search-dropdown-full' : 'search-dropdown'} ${!showFilters ? 'collapse' : ''}`}>
+     {showFilters && window.location.origin+'/' == window.location.href && <div className={dropDownClass}>
       {showFilters &&
       <div className='container'>
       <div className='filters'>
