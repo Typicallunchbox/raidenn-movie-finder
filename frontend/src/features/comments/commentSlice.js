@@ -100,11 +100,11 @@ export const commentsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-        .addCase(createComment.pending, (state) => {
-            state.isLoading = true;
-        })
+        // .addCase(createComment.pending, (state) => {
+        //     state.isLoading = true;
+        // })
         .addCase(createComment.fulfilled, (state, action) => {
-            state.isLoading = false;
+            // state.isLoading = false;
             state.isSuccess = true;
             state.comments.push(action.payload)
         })

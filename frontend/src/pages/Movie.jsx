@@ -64,35 +64,37 @@ const Movie = () => {
     }
   }, [id, user, navigate, dispatch, isError, message])
   useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
-      )
-      .then((resp) => {
-        console.log('MOVIE:', resp)
-        setMovie(resp.data);
-      });
-
+    if(!movie){
       axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${id}/videos?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
-      )
-      .then((resp) => {
-        let res = resp.data.results;
-        let temp = [];
+        .get(
+          `https://api.themoviedb.org/3/movie/${id}?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
+        )
+        .then((resp) => {
+          console.log('MOVIE:', resp)
+          setMovie(resp.data);
+        });
 
-        if(res.length > 0){
-          for (let index = 0; index < res.length; index++) {
-            const element = res[index];
+        axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${id}/videos?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
+        )
+        .then((resp) => {
+          let res = resp.data.results;
+          let temp = [];
 
-            if(element.type == 'Trailer'){
-              temp.push(element)
+          if(res.length > 0){
+            for (let index = 0; index < res.length; index++) {
+              const element = res[index];
+
+              if(element.type == 'Trailer'){
+                temp.push(element)
+              }
             }
+            console.log('Videos:', temp)
+            setMovieVideos(temp);
           }
-          console.log('Videos:', temp)
-          setMovieVideos(temp);
-        }
-      });
+        });
+    }
   }, [id]);
 
   const setMovieRating = (val) => {
@@ -191,7 +193,7 @@ const Movie = () => {
                       </div>
                       <div className="controls flex my-2 gap-2">
                           <input onChange={(e) => setText(e.target.value)} value={text} type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
-                          <button onClick={() => {onSubmit()}}  type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            
+                          <button onClick={() => {onSubmit()}}  type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            
                     </div>
                     </div>
                     
