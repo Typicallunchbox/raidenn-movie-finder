@@ -8,10 +8,6 @@ import Select from '@mui/material/Select';
 import { FaAngleUp } from "react-icons/fa";
 import { addTag, addMovies } from '../../features/movies/movieSlice';
 import axios from "axios";
-
-
-
-
 import './SearchDropDown.scss';
 
 
@@ -30,24 +26,25 @@ let scrollLocation = null;
 useEffect(() => {
   if(window != undefined){
     window.addEventListener("scroll", (event) => {
-      scrollLocation = Math.round(window.scrollY * 100) / 100
-      // console.log(scrollLocation)
+        scrollLocation = Math.round(window.scrollY * 100) / 100
 
-      if(scrollLocation > 50){
-        if(dropDownClass !== 'search-dropdown-full'){
-          setDropDownClass('search-dropdown-full')
+        if(scrollLocation > 50){
+          if(dropDownClass !== 'search-dropdown-full'){
+            setDropDownClass('search-dropdown-full')
+          }
         }
-      }
-      if(dropDownClass < 50){
-        setDropDownClass('search-dropdown')
-      }
-      if(scrollLocation > 1420){
-        setshowFilters(false);
-      }
-      if(!showFilters && scrollLocation < 1420){
-        setshowFilters(true);
-      }
-      return () => window.removeEventListener('scroll');
+        if(dropDownClass < 50){
+          setDropDownClass('search-dropdown')
+        }
+        if(scrollLocation > 1420){
+          setshowFilters(false);
+          props.openSearch = false;
+        }
+        if(showFilters && (scrollLocation > 1350 && scrollLocation < 1420)){
+          setshowFilters(true);
+          props.openSearch = true;
+        }
+        return () => window.removeEventListener('scroll');
   });
 }
   setDropDownClass('search-dropdown')
