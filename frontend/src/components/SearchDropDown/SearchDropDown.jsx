@@ -47,6 +47,7 @@ useEffect(() => {
       if(!showFilters && scrollLocation < 1420){
         setshowFilters(true);
       }
+      return () => window.removeEventListener('scroll');
   });
 }
   setDropDownClass('search-dropdown')
