@@ -53,7 +53,7 @@ const Movie = () => {
       dispatch(reset())
     }
   }, [id, user, navigate, dispatch, isError, message])
-  
+
   useEffect(() => {
     if(!movie){
       axios
@@ -77,7 +77,7 @@ const Movie = () => {
             for (let index = 0; index < res.length; index++) {
               const element = res[index];
 
-              if(element.type == 'Trailer'){
+              if(element.type === 'Trailer'){
                 temp.push(element)
               }
             }
@@ -86,7 +86,7 @@ const Movie = () => {
           }
         });
     }
-  }, [id]);
+  }, [id, movie]);
 
   const setMovieRating = (val) => {
     setRating(val);

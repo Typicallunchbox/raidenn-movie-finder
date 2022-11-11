@@ -23,17 +23,25 @@ const Home = () => {
 
   useEffect(() => {
     async function setPopularMovies(){
+      setIsLoading(true);
       const movies =  await GetPopularMovies();
       dispatch(addMovies(movies))
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500); 
     }
 
     async function setMoviesByTag(){
+      setIsLoading(true);
       const movies =  await GetMoviesByTag(tag);
       dispatch(addMovies(movies))
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500); 
     }
 
     tag === '' ? setPopularMovies() : setMoviesByTag();
-  }, [tag]);
+  }, [tag, dispatch]);
 
   if(isLoading){
     return <Spinner/>
