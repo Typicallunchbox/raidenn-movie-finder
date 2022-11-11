@@ -40,11 +40,9 @@ useEffect(() => {
         
         if(scrollLocation > 1420){
           setshowFilters(false);
-          props.openSearch = false;
         }
         if(showFilters && (scrollLocation > 1350 && scrollLocation < 1420)){
           setshowFilters(true);
-          props.openSearch = true;
         }
         return () => window.removeEventListener('scroll');
   });

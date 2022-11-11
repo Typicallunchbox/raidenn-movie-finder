@@ -520,6 +520,20 @@ background-color: var(--raidenn-blue)
 }
 
 @media (max-width: 600px) {
+
+  .container {
+    padding: 0 10px;
+  }
+
+  .movie-container {
+    flex-direction: column;
+
+    img{
+      max-width: 200px;
+      margin: 0 auto;
+    }
+  }
+
   .form {
     width: 90%;
   }

@@ -159,7 +159,7 @@ const Movie = () => {
               <p><b>Popularity</b> : {movie.popularity}</p>
               <p><b>Budget</b> : {movie.budget}</p>
             </div>
-            <div className="plain-card border-0 w-full text-left overflow-hidden">
+            <div className="plain-card border-0 w-full sm:h-128 text-left overflow-hidden">
               {movieVideos && 
               <div className="trailer w-full h-full">
                 <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${movieVideos[0].key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
@@ -182,7 +182,7 @@ const Movie = () => {
                       <div className="my-2">
                           <p> Rate Movie : <Rating onClick={(val)=>{setMovieRating(val)}} emptySymbol={<BiStar/>} fullSymbol={<FaStar/>}/></p>
                       </div>
-                      <div className="controls flex my-2 gap-2">
+                      <div className="controls flex my-2 gap-2 flex-col md:flex-row ">
                           <input onChange={(e) => setText(e.target.value)} value={text} type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
                           <button onClick={() => {onSubmit()}}  type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            
                     </div>

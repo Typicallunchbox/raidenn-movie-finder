@@ -17,3 +17,14 @@
     }
   }
   
+  @media (max-width: 600px) {
+    .item-catalogue-list-container{
+      .inner-container {
+        gap: 6% !important;
+      }
+      img {
+        width: 150px !important;
+      }
+    }
+  }
+  
