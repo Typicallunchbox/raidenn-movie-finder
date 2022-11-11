@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import { FaStar,  } from "react-icons/fa";
 import { BiStar  } from "react-icons/bi";
 import { AiFillEye, AiFillPlusCircle } from "react-icons/ai";
-
 import Rating from "react-rating";
 import { createComment, getCommentsByMovieId } from "../features/comments/commentSlice";
 import { createWatchlistRecord, getWantToWatchRecord } from "../features/watchlists/watchlistSlice";
@@ -15,21 +14,12 @@ import Spinner from '../components/Spinner';
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
 import Filter from 'bad-words';
 
-
-
-
-
-// import axios from "axios";
-
 const Movie = () => {
   const [text, setText] = useState("");
   const [rating, setRating] = useState("");
-
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { id } = useParams();
-
   const {user} = useSelector((state) => state.auth)
   const {comments, isLoading, isError, message} = useSelector((state) => state.comments) 
   const [movie, setMovie] = useState(null);
@@ -63,6 +53,7 @@ const Movie = () => {
       dispatch(reset())
     }
   }, [id, user, navigate, dispatch, isError, message])
+  
   useEffect(() => {
     if(!movie){
       axios

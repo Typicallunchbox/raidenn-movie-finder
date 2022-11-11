@@ -1,33 +1,25 @@
 import { React, useEffect, useState } from "react";
-import axios from "axios";
 import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux';
 import ThreeJsFiberScreen from "../components/ThreeJsFiberScreen/ThreeJsFiberScreen";
 import { addMovies } from '../features/movies/movieSlice';
 import {GetPopularMovies, GetMoviesByTag} from "../providers/moviesProvider";
-
-
-// import axios from "axios";
 import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
+import Spinner from '../components/Spinner';
+
 
 const Home = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {user} = useSelector((state) => state.auth)
-  const { isError,isLoading, message} = useSelector((state) => state.goals) 
   const {tag, movies} = useSelector((state) => state.movies) 
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-
-    if(!isError){
-      console.log(message)
-    }
-
     if(!user){
       navigate('/login')
     }
-  }, [user, navigate, dispatch, isError, message])
+  }, [user, navigate, dispatch])
 
   useEffect(() => {
     async function setPopularMovies(){
@@ -42,6 +34,10 @@ const Home = () => {
 
     tag === '' ? setPopularMovies() : setMoviesByTag();
   }, [tag]);
+
+  if(isLoading){
+    return <Spinner/>
+  }
 
   return (
     <> 
