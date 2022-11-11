@@ -1,11 +1,10 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { FaAngleUp } from "react-icons/fa";
 import { addTag, addMovies } from '../../features/movies/movieSlice';
 import axios from "axios";
 import './SearchDropDown.scss';
@@ -17,14 +16,15 @@ const [showFilters, setshowFilters] = useState(false);
 const [searchText, setSearchText] = useState('');
 const [dropDownClass, setDropDownClass] = useState('');
 const dispatch = useDispatch()
-const {movies, tag} = useSelector((state) => state.movies) 
+// const {movies, tag} = useSelector((state) => state.movies) 
 
 const setTagState = (selectedTag) => {
   dispatch(addTag(selectedTag))
 }
-let scrollLocation = null;
 useEffect(() => {
-  if(window != undefined){
+  let scrollLocation = null;
+
+  if(window !== undefined){
     window.addEventListener("scroll", (event) => {
         scrollLocation = Math.round(window.scrollY * 100) / 100
 
@@ -33,9 +33,11 @@ useEffect(() => {
             setDropDownClass('search-dropdown-full')
           }
         }
+
         if(dropDownClass < 50){
           setDropDownClass('search-dropdown')
         }
+        
         if(scrollLocation > 1420){
           setshowFilters(false);
           props.openSearch = false;
@@ -54,15 +56,15 @@ useEffect(() => {
     setshowFilters(false);
   }
 
-}, [props.openSearch])
+}, [props.openSearch, dropDownClass, showFilters, props])
 
 
-const collapse = () => {
-  setshowFilters(!showFilters);
-}
+// const collapse = () => {
+//   setshowFilters(!showFilters);
+// }
 
 const search = () => {
-  if(searchText.trim() != ''){
+  if(searchText.trim() !== ''){
     axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&query=${searchText}&language=en-US&page=1`)
     .then((resp) => {
       dispatch(addMovies(resp.data.results))
@@ -72,7 +74,7 @@ const search = () => {
 
   return (
     <>
-     {showFilters && window.location.origin+'/' == window.location.href && <div className={dropDownClass}>
+     {showFilters && window.location.origin+'/' === window.location.href && <div className={dropDownClass}>
       {showFilters &&
       <div className='container'>
       <div className='filters'>
