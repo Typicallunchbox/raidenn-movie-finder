@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Register from "./components/Register/Register";
 import ErrorPage  from "./pages/ErrorPage";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Login2 from "./components/Login/Login"
 import Home from "./pages/Home"
 import Movie from "./pages/Movie";
@@ -26,6 +27,7 @@ function App() {
             <Route path={`/settings`} element={<Settings />} />
           </Routes>
         </div>
+        <Footer/>
       </Router>
       <ToastContainer />
     </>
