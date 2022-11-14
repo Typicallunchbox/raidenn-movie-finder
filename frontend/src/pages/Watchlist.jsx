@@ -7,6 +7,7 @@ import Spinner from '../components/Spinner';
 
 
 const Watchlist = () => {
+  const [listType, setListType] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -21,11 +22,15 @@ const Watchlist = () => {
     if(!user){
       navigate('/login')
     }
-
+    
+    if(listType === ''){
+      setListType('wantToWatch')
+    }
     dispatch(getWatched())
     dispatch(getWantToWatch())
 
   }, [ user, navigate, dispatch, isError, message])
+  
   
   if(isLoading){
     return <Spinner/>
@@ -34,11 +39,12 @@ const Watchlist = () => {
   return (
     <>
       <div className="selectWatchlistOptions">
-          <p>Want to watch movies</p>
-          <p>Previously watched movies</p>
+          <p className={listType === 'wantToWatch' ? 'optionSelected' : ''} onClick={() => setListType('wantToWatch')}>Want to watch movies</p>
+          <p className={listType === 'watched' ? 'optionSelected' : ''} onClick={() => setListType('watched')}>Previously watched movies</p>
       </div>
       <div className='container'>
-        <div className='mt-52 '>
+        <div className='mt-20 '>
+          {listType === 'wantToWatch' &&
           <div className='wantToWatch'>
             <h1>Want to Watch</h1>
             {wantToWatch && (
@@ -46,7 +52,8 @@ const Watchlist = () => {
                 <ItemCatalogueList deleteWantToWatch={true} deleteWatched={false} movies={wantToWatch} />
               </div>
             )}
-          </div>
+          </div>}
+          {listType === 'watched' &&
           <div className='watched'>
             <h1>Watched</h1>
             {watched && (
@@ -54,7 +61,7 @@ const Watchlist = () => {
                 <ItemCatalogueList deleteWatched={true} deleteWantToWatch={false} movies={watched} />
               </div>
             )}
-          </div>
+          </div>}
         </div>
       </div>
     </>
