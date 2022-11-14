@@ -26,28 +26,30 @@ useEffect(() => {
 
   if(window !== undefined){
     window.addEventListener("scroll", (event) => {
-        scrollLocation = Math.round(window.scrollY * 100) / 100
+        scrollLocation =  Math.round(window.scrollY * 100) / 100
 
         if(scrollLocation > 50){
           if(dropDownClass !== 'search-dropdown-full'){
             setDropDownClass('search-dropdown-full')
           }
-        }
-
-        if(dropDownClass < 50){
+        }else{
           setDropDownClass('search-dropdown')
         }
         
-        if(scrollLocation > 1420){
-          setshowFilters(false);
-        }
-        if(showFilters && (scrollLocation > 1350 && scrollLocation < 1420)){
-          setshowFilters(true);
-        }
+        // if(scrollLocation > 1420){
+        //   setshowFilters(false);
+        //   console.log('hit3')
+        // }
+        // else if(scrollLocation > 1200 && scrollLocation < 1420){
+        //   setshowFilters(true);
+        //   console.log('hit4')
+        // }
         return () => window.removeEventListener('scroll');
   });
 }
-  setDropDownClass('search-dropdown')
+  if(dropDownClass === ''){
+    setDropDownClass('search-dropdown')
+  }
   if(props.openSearch){
     setshowFilters(true);
   }else{
