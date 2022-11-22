@@ -35,7 +35,7 @@ const getWatchlistByUserId = asyncHandler(async (req, res) => {
 //@route    PUT /api/watchlist
 //@access   Private
 const getWantToWatchRecord = asyncHandler(async (req, res) => {
-    const watchListRecord = await Watchlist.findOne({user_id: req.user.id, movie_id: req.body.movie_id});
+    const watchListRecord = await Watchlist.findOne({user_id: req.body.id, movie_id: req.body.movie_id});
 
     if (!watchListRecord) {
         res.status(400);

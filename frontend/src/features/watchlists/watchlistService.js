@@ -31,7 +31,7 @@ const getWantToWatchRecord = async (watchListData, token) => {
             Authorization: `Bearer ${token}`
         }
     }
-    console.log(config)
+    console.log('config:', config)
     const response = await axios.get(API_URL + 'wantToWatchRecord', watchListData, config)
     return response.data
 }
