@@ -109,16 +109,14 @@ const createWatchlistRecord = asyncHandler(async (req, res) => {
 //@route    PUT /api/watchlist
 //@access   Private
 const updateWatchlistRecord = asyncHandler(async (req, res) => {
-    delete req.body.movie.createdAt
-    delete req.body.movie.updatedAt
-    delete req.body.movie.__v
+    if(req.body.movie.createdAt) delete req.body.movie.createdAt
+    if(req.body.movie.updatedAt) delete delete req.body.movie.updatedAt
+    if(req.body.movie.__v) delete delete req.body.movie.__v
 
-
-    console.log('REQUEST:', req.body)
     const {movie} = req.body
-    const watchListRecord = await Watchlist.findById(movie._id);
-
-    if(movie.watched != undefined && movie.wantToWatch != undefined){
+    const watchListRecord = await Watchlist.findOne({movie_id : movie.movie_id, user_id : req.user.id});
+    // const watchListRecord = await Watchlist.findById(movie._id);
+    if(movie.watched === undefined && movie.wantToWatch === undefined){
         res.status(400)
         throw new Error('Please add either a watched or wantToWatch field to update')
     }
@@ -129,31 +127,38 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
 
-    //Make sure the logged in user matches the goal user
-    if(watchListRecord.user.toString() !== req.user.id){
-        res.status(401)
-        throw new Error('User not authorized')
-    }
-
-    if(!movie.watched && !watchListRecord.wantToWatch || !movie.wantToWatch && !watchListRecord.watched){
-        await Watchlist.deleteOne(watchListRecord)
-        res.status(200).json({id : req.body._id})
-        return;
-    }
-    
+    console.log('watchListRecord:', watchListRecord)
     if(watchListRecord){
-        const updateWatchlist = await Watchlist.findByIdAndUpdate(movie._id, {watched : movie.watched, wantToWatch : movie.wantToWatch}, {new : true})
+        if(!movie.watched && !watchListRecord.wantToWatch || !movie.wantToWatch && !watchListRecord.watched){
+
+            //Make sure the logged in user matches the goal user
+            if(watchListRecord.user.toString() !== req.user.id){
+                res.status(401)
+                throw new Error('User not authorized')
+            }
+    
+            await Watchlist.deleteOne(watchListRecord)
+            res.status(200).json({id : movie._id})
+            return;
+        }
+
+        //Make sure the logged in user matches the goal user
+        if(watchListRecord.user.toString() !== req.user.id){
+            res.status(401)
+            throw new Error('User not authorized')
+        }
+
+        const updateWatchlist = await Watchlist.findByIdAndUpdate(movie._id, {watched : movie.watched ? movie.watched : false, wantToWatch : movie.wantToWatch ? movie.wantToWatch : false}, {new : true})
         res.status(200).json(updateWatchlist)
         return;
     }
-
     const record = await Watchlist.create({
         user: req.user.id,
         movie_id : movie.movie_id,
         movie_genre : movie.movie_genre,
         movie_image: movie.movie_image,
-        watched : movie.watched,
-        wantToWatch : movie.wantToWatch
+        watched : movie.watched ? movie.watched : false,
+        wantToWatch : movie.wantToWatch ? movie.wantToWatch : false
     })
     res.status(200).json(record) 
 })

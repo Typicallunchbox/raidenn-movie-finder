@@ -8,7 +8,7 @@ import { BiStar  } from "react-icons/bi";
 import { AiFillEye, AiFillPlusCircle } from "react-icons/ai";
 import Rating from "react-rating";
 import { createComment, getCommentsByMovieId } from "../features/comments/commentSlice";
-import { createWatchlistRecord, getWantToWatchRecord } from "../features/watchlists/watchlistSlice";
+import { createWatchlistRecord, getWantToWatchRecord, updateWatchlistRecord } from "../features/watchlists/watchlistSlice";
 import { reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
@@ -104,12 +104,12 @@ const Movie = () => {
         genres.push(element.name);
       }
 
-      dispatch(createWatchlistRecord({
+      dispatch(updateWatchlistRecord({movie:{
         movie_id : id,
         movie_genre : genres,
         movie_image : image_path + movie.poster_path,
         wantToWatch : true
-      }))
+      }}))
     }
   }
 
@@ -121,12 +121,12 @@ const Movie = () => {
         genres.push(element.name);
       }
 
-      dispatch(createWatchlistRecord({
+      dispatch(updateWatchlistRecord({movie:{
         movie_id : id,
         movie_genre : genres,
         movie_image : image_path + movie.poster_path,
         watched : true
-      }))
+      }}))
     }
   }
 

@@ -18,15 +18,16 @@ const ItemCatalogueList = (props) => {
     }
   }
 
-  const removeFromList = (movie) => {
-
+  const removeFromList = (data) => {
+    let m = {...data};
     if(deleteWatched){
-      movie.watched = false;
-      dispatch(updateWatchlistRecord({movie: movie}))
+      m.watched = false;
+      dispatch(updateWatchlistRecord({movie: m}))
     }
     else if(deleteWantToWatch){
-      movie.wantToWatch = false;
-      dispatch(updateWatchlistRecord({movie: movie}))
+      console.log('Movie:', m)
+      m.wantToWatch = false;
+      dispatch(updateWatchlistRecord({movie: m}))
     }
   }
 
