@@ -18,12 +18,15 @@ const ItemCatalogueList = (props) => {
     }
   }
 
-  const removeFromList = (id) => {
+  const removeFromList = (movie) => {
+
     if(deleteWatched){
-      dispatch(updateWatchlistRecord({_id: id, watched : false}))
+      movie.watched = false;
+      dispatch(updateWatchlistRecord({movie: movie}))
     }
     else if(deleteWantToWatch){
-      dispatch(updateWatchlistRecord({_id: id, wantToWatch : false}))
+      movie.wantToWatch = false;
+      dispatch(updateWatchlistRecord({movie: movie}))
     }
   }
 
@@ -34,7 +37,7 @@ const ItemCatalogueList = (props) => {
         {movies && movies.map((movie) => (
           <div key={movie.id ? movie.id : movie.movie_id}>
             <div className="relative">
-              {movie.movie_id && <button onClick={() => {removeFromList(movie._id)}}  type="button" className="absolute top-0 right-0 z-10 border-0 text-white bg-red-700 hover:bg-red-800 text-center p-3 rounded-l-lg"><AiFillDelete/></button>}       
+              {movie.movie_id && <button onClick={() => {removeFromList(movie)}}  type="button" className="absolute top-0 right-0 z-10 border-0 text-white bg-red-700 hover:bg-red-800 text-center p-3 rounded-l-lg"><AiFillDelete/></button>}       
               <img onClick={() => viewMovie(movie.id ? movie.id : movie.movie_id)} src={movie.poster_path ? image_path + movie.poster_path : image_path + movie.movie_image} alt='movie-list'></img>
             </div>
           </div>

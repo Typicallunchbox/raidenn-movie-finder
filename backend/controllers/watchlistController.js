@@ -109,14 +109,16 @@ const createWatchlistRecord = asyncHandler(async (req, res) => {
 //@route    PUT /api/watchlist
 //@access   Private
 const updateWatchlistRecord = asyncHandler(async (req, res) => {
-    const watchListRecord = await Watchlist.findById(req.body._id);
+    delete req.body.movie.createdAt
+    delete req.body.movie.updatedAt
+    delete req.body.movie.__v
 
-    if (!watchListRecord) {
-        res.status(400);
-        throw new Error("Movie does not exist on list.");
-    }
 
-    if(req.body.watched != undefined && req.body.wantToWatch != undefined){
+    console.log('REQUEST:', req.body)
+    const {movie} = req.body
+    const watchListRecord = await Watchlist.findById(movie._id);
+
+    if(movie.watched != undefined && movie.wantToWatch != undefined){
         res.status(400)
         throw new Error('Please add either a watched or wantToWatch field to update')
     }
@@ -133,14 +135,27 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
-    if(!req.body.watched && !watchListRecord.wantToWatch || !req.body.wantToWatch && !watchListRecord.watched){
+    if(!movie.watched && !watchListRecord.wantToWatch || !movie.wantToWatch && !watchListRecord.watched){
         await Watchlist.deleteOne(watchListRecord)
         res.status(200).json({id : req.body._id})
         return;
     }
     
-    const updateWatchlist = await Watchlist.findByIdAndUpdate(req.body._id, req.body.watched ? {watched : req.body.watched} : {wantToWatch : req.body.wantToWatch}, {new : true})
-    res.status(200).json(updateWatchlist) 
+    if(watchListRecord){
+        const updateWatchlist = await Watchlist.findByIdAndUpdate(movie._id, {watched : movie.watched, wantToWatch : movie.wantToWatch}, {new : true})
+        res.status(200).json(updateWatchlist)
+        return;
+    }
+
+    const record = await Watchlist.create({
+        user: req.user.id,
+        movie_id : movie.movie_id,
+        movie_genre : movie.movie_genre,
+        movie_image: movie.movie_image,
+        watched : movie.watched,
+        wantToWatch : movie.wantToWatch
+    })
+    res.status(200).json(record) 
 })
 
 
