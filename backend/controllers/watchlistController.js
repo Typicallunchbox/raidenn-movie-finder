@@ -127,10 +127,9 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
 
-    console.log('watchListRecord:', watchListRecord)
+    // console.log('watchListRecord:', watchListRecord)
     if(watchListRecord){
-        if(!movie.watched && !watchListRecord.wantToWatch || !movie.wantToWatch && !watchListRecord.watched){
-
+        if(!movie.watched && !movie.wantToWatch){
             //Make sure the logged in user matches the goal user
             if(watchListRecord.user.toString() !== req.user.id){
                 res.status(401)
@@ -147,8 +146,8 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
             res.status(401)
             throw new Error('User not authorized')
         }
-
-        const updateWatchlist = await Watchlist.findByIdAndUpdate(movie._id, {watched : movie.watched ? movie.watched : false, wantToWatch : movie.wantToWatch ? movie.wantToWatch : false}, {new : true})
+        
+        const updateWatchlist = await Watchlist.findByIdAndUpdate(watchListRecord._id, movie.watched ? {watched : movie.watched} : {wantToWatch : movie.wantToWatch} , {new : true})
         res.status(200).json(updateWatchlist)
         return;
     }
