@@ -147,7 +147,7 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
             throw new Error('User not authorized')
         }
         
-        const updateWatchlist = await Watchlist.findByIdAndUpdate(watchListRecord._id, movie.watched ? {watched : movie.watched} : {wantToWatch : movie.wantToWatch} , {new : true})
+        const updateWatchlist = await Watchlist.findByIdAndUpdate(watchListRecord._id, {watched : movie.watched, wantToWatch : movie.wantToWatch} , {new : true})
         res.status(200).json(updateWatchlist)
         return;
     }
