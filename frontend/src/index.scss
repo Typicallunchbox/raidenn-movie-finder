@@ -525,7 +525,27 @@ background-color: var(--raidenn-blue)
   }
   
 }
+.images-section{
 
+    .content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2%;
+      width: 80%;
+
+    }
+    img {
+      max-width: 350px;
+      // flex: 0 0 1%;
+      margin-bottom: 20px;
+      transition: all 400ms ease;
+    }
+
+    img:hover{
+        filter: sepia(100%) saturate(95%) brightness(90%) hue-rotate(10deg);
+    }
+  }
 .comment-section{
   p{
     color: var(--raidenn-black);

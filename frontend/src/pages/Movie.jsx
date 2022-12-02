@@ -24,6 +24,7 @@ const Movie = () => {
   const {comments, isLoading, isError, message} = useSelector((state) => state.comments) 
   const [movie, setMovie] = useState(null);
   const [movieVideos, setMovieVideos] = useState(null);
+  const [movieImages, setMovieImages] = useState(null);
 
   let image_path = "https://image.tmdb.org/t/p/original";
   let colours = ColourPalette(movie ? (image_path + movie?.poster_path) : []);
@@ -85,6 +86,28 @@ const Movie = () => {
             setMovieVideos(temp);
           }
         });
+
+        axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${id}/images?api_key=120fe4d587d5f86c44f0a6e599f01734`
+        )
+        .then((resp) => {
+          let res = resp.data;
+          let temp = [];
+          
+          if(res.backdrops.length > 0 ){
+            for (let index = 0; index < res.backdrops.length; index++) {
+              const element = res.backdrops[index];
+
+              if(temp.length === 6){
+                break;
+              }
+                temp.push(element)
+            }
+            console.log('Images:', temp)
+            setMovieImages(temp);
+          }
+        });
     }
   }, [id, movie]);
 
@@ -130,6 +153,21 @@ const Movie = () => {
     }
   }
 
+  const imagesSection = (
+    <div>
+      <div className="section-title">
+        <h2>Images</h2>
+        {/* background Svg */}
+      </div>
+      <div className="content" >
+        {movieImages && movieImages.map((image) => (
+          <img src={image_path + image.file_path} alt='movie'></img>
+        ) )}
+      </div>
+
+    </div>
+  )
+
 
   return (
     <>
@@ -166,6 +204,9 @@ const Movie = () => {
                 </iframe>
               </div>}
             </div>
+          </div>
+          <div className="images-section">
+            {movieImages && imagesSection}
           </div>
           <div className="card p-4 comment-section w-full text-left">
                     <h1>Comments</h1>
