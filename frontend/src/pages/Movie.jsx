@@ -25,6 +25,8 @@ const Movie = () => {
   const [movie, setMovie] = useState(null);
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
+  const [movieCast, setMovieCast] = useState(null);
+  const [movieProdCompanies, setMovieProdCompanie] = useState(null);
 
   let image_path = "https://image.tmdb.org/t/p/original";
   let colours = ColourPalette(movie ? (image_path + movie?.poster_path) : []);
@@ -62,6 +64,8 @@ const Movie = () => {
           `https://api.themoviedb.org/3/movie/${id}?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
         )
         .then((resp) => {
+          console.log('resp:', resp)
+
           // console.log('MOVIE:', resp)
           setMovie(resp.data);
         });
@@ -108,6 +112,29 @@ const Movie = () => {
             setMovieImages(temp);
           }
         });
+
+        axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=120fe4d587d5f86c44f0a6e599f01734`
+        )
+        .then((resp) => {
+          let res = resp.data;
+          let temp = [];
+          
+          if(res.cast.length > 0 ){
+            for (let index = 0; index < res.cast.length; index++) {
+              const element = res.cast[index];
+
+              if(temp.length === 6){
+                break;
+              }
+                temp.push(element)
+            }
+            console.log('Cast:', temp)
+            setMovieCast(temp);
+          }
+        });
+        
     }
   }, [id, movie]);
 
@@ -168,6 +195,40 @@ const Movie = () => {
     </div>
   )
 
+  const castSection = (
+    <div>
+      <div className="section-title">
+        <h2>Cast</h2>
+        {/* background Svg */}
+      </div>
+      <div className="content" >
+        {movieCast && movieCast.map((member) => (
+          <img src={image_path + member.profile_path} alt='cast_memebr'></img>
+        ) )}
+      </div>
+
+    </div>
+  )
+
+  const productionCompanies = (
+    <div>
+      <div className="section-title">
+        <h2>Production companies</h2>
+        {/* background Svg */}
+      </div>
+      <div className="content" >
+        {movie && movie.production_companies.map((company) => (
+          <>
+            <p>{company.name}</p>
+            {company.logo_path ? <img src={image_path + company.logo_path} alt='company'></img> : ''}
+            
+          </>
+        ) )}
+      </div>
+
+    </div>
+  )
+
 
   return (
     <>
@@ -207,6 +268,12 @@ const Movie = () => {
           </div>
           <div className="images-section">
             {movieImages && imagesSection}
+          </div>
+          <div className="cast-section">
+            {movieCast && castSection}
+          </div>
+          <div className="production-section">
+            {movie && productionCompanies}
           </div>
           <div className="card p-4 comment-section w-full text-left">
                     <h1>Comments</h1>
