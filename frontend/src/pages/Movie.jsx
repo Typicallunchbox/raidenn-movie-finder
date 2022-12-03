@@ -219,7 +219,7 @@ const Movie = () => {
       <div className="content" >
         {movie && movie.production_companies.map((company) => (
           <>
-            <p>{company.name}</p>
+            {/* <p>{company.name}</p> */}
             {company.logo_path ? <img src={image_path + company.logo_path} alt='company'></img> : ''}
             
           </>
