@@ -35,3 +35,38 @@ export const GetMoviesByPhrase = async(phrase) => {
     });
 }
 
+/**
+ * Get Popular Movies
+ * @param {string} phrase
+ * @returns {array}
+ */
+ export const GetMovieById = async(phrase) => {
+    return await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&query=${phrase}&language=en-US&page=1`)
+    .then((resp) => {
+        return resp.data.results.length > 0 ? resp.data.results : []
+    });
+}
+
+/**
+ * Get Popular Movies
+ * @param {string} phrase
+ * @returns {array}
+ */
+ export const GetMovieImagesById = async(phrase) => {
+    return await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&query=${phrase}&language=en-US&page=1`)
+    .then((resp) => {
+        return resp.data.results.length > 0 ? resp.data.results : []
+    });
+}
+
+/**
+ * Get Popular Movies
+ * @param {string} phrase
+ * @returns {array}
+ */
+ export const GetMovieVideosById = async(phrase) => {
+    return await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&query=${phrase}&language=en-US&page=1`)
+    .then((resp) => {
+        return resp.data.results.length > 0 ? resp.data.results : []
+    });
+}

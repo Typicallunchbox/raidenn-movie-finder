@@ -203,7 +203,10 @@ const Movie = () => {
       </div>
       <div className="content" >
         {movieCast && movieCast.map((member) => (
-          <img src={image_path + member.profile_path} alt='cast_memebr'></img>
+          <div className="castMember">
+            <img onClick={() => window.open('http://google.com/search?q=' + member.name, '_blank').focus()} src={image_path + member.profile_path} alt='cast_memebr'></img>
+            <h4>{member.name}</h4>
+          </div>
         ) )}
       </div>
 

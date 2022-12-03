@@ -533,7 +533,7 @@ background-color: var(--raidenn-blue)
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 2%;
-      width: 80%;
+      width: 62%;
 
     }
     img {
@@ -554,19 +554,28 @@ background-color: var(--raidenn-blue)
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    gap: 2%;
-    width: 80%;
+    gap: 1%;
+    width: 70%;
+
+    h4 {
+      background-color: var(--raidenn-blue);
+      color: var(--raidenn-white);
+    }
+
+    h4:hover{
+      cursor: default;
+  }
 
   }
   img {
     max-width: 150px;
     // flex: 0 0 2%;
-    margin-bottom: 20px;
     transition: all 400ms ease;
   }
 
   img:hover{
-      filter: sepia(100%) saturate(95%) brightness(90%) hue-rotate(10deg);
+      filter: sepia(60%) saturate(100%) brightness(100%) ;
+      cursor: pointer;
   }
 }
 .production-section{
