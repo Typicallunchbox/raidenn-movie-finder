@@ -26,6 +26,13 @@ const Movie = () => {
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
+
+  //display variables
+  const [showImages, setShowImages] = useState(false);
+  const [showCast, setShowCast] = useState(false);
+  const [showCompanies, setShowCompanies] = useState(false);
+
+
   const [movieProdCompanies, setMovieProdCompanie] = useState(null);
 
   let image_path = "https://image.tmdb.org/t/p/original";
@@ -183,14 +190,14 @@ const Movie = () => {
   const imagesSection = (
     <div>
       <div className="section-title">
-        <h2>Images</h2>
+        <h2 onClick={() => setShowImages(!showImages)}>Images</h2>
         {/* background Svg */}
       </div>
-      <div className="content" >
+      {showImages &&<div className="movie-content" >
         {movieImages && movieImages.map((image) => (
           <img src={image_path + image.file_path} alt='movie'></img>
         ) )}
-      </div>
+      </div>}
 
     </div>
   )
@@ -198,17 +205,17 @@ const Movie = () => {
   const castSection = (
     <div>
       <div className="section-title">
-        <h2>Cast</h2>
+        <h2 onClick={() => setShowCast(!showCast)}>Cast</h2>
         {/* background Svg */}
       </div>
-      <div className="content" >
+      {showCast && <div className="movie-content" >
         {movieCast && movieCast.map((member) => (
           <div className="castMember">
             <img onClick={() => window.open('http://google.com/search?q=' + member.name, '_blank').focus()} src={image_path + member.profile_path} alt='cast_memebr'></img>
-            <h4>{member.name}</h4>
+            <p>{member.name}</p>
           </div>
         ) )}
-      </div>
+      </div>}
 
     </div>
   )
@@ -216,10 +223,10 @@ const Movie = () => {
   const productionCompanies = (
     <div>
       <div className="section-title">
-        <h2>Production companies</h2>
+        <h2 onClick={() => setShowCompanies(!showCompanies)}>Production companies</h2>
         {/* background Svg */}
       </div>
-      <div className="content" >
+      {showCompanies && <div className="movie-content" >
         {movie && movie.production_companies.map((company) => (
           <>
             {/* <p>{company.name}</p> */}
@@ -227,7 +234,7 @@ const Movie = () => {
             
           </>
         ) )}
-      </div>
+      </div>}
 
     </div>
   )
@@ -268,6 +275,9 @@ const Movie = () => {
                 </iframe>
               </div>}
             </div>
+          </div>
+          <div className="view-more-header">
+            <h2>View More</h2>
           </div>
           <div className="images-section">
             {movieImages && imagesSection}
