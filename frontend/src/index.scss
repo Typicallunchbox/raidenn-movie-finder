@@ -546,13 +546,14 @@ background-color: var(--raidenn-blue)
         width: 80%;
         background:linear-gradient(90deg, var(--raidenn-blue), var(--raidenn-blue), rgba(0, 0, 0, 0));
         padding: 12px 50px;
-        margin-bottom: 40px;
+        margin-bottom: 20px;
       }
     }
 
     
 
     .movie-content {
+      margin-bottom: 150px !important;
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
@@ -573,7 +574,6 @@ background-color: var(--raidenn-blue)
     }
   }
 .cast-section{
-  margin-top: 150px !important;
  
 
   .section-title{
@@ -584,12 +584,14 @@ background-color: var(--raidenn-blue)
     width: 80%;
     background:linear-gradient(90deg, var(--raidenn-blue), var(--raidenn-blue), rgba(0, 0, 0, 0));
     padding: 12px 50px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 }
 
 
   .movie-content {
+    margin-bottom: 150px !important;
+
     text-align: center;
     display: flex;
     justify-content: space-around;
@@ -620,7 +622,6 @@ background-color: var(--raidenn-blue)
   }
 }
 .production-section{
-  margin-top: 150px !important;
  
   .section-title{
     width: 50%;
@@ -630,11 +631,12 @@ background-color: var(--raidenn-blue)
     width: 80%;
     background:linear-gradient(90deg, var(--raidenn-blue), var(--raidenn-blue), rgba(0, 0, 0, 0));
     padding: 12px 50px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 }
 
   .movie-content {
+    margin-bottom: 150px !important;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -654,6 +656,7 @@ background-color: var(--raidenn-blue)
   }
 }
 .comment-section{
+  background-color: #464646;
   p{
     color: var(--raidenn-black);
   }
