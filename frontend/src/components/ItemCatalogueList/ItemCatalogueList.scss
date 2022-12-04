@@ -6,7 +6,7 @@
       justify-content: center;
     }
     img {
-      width: 50px;
+      width: 200px;
       flex: 0 0 10%;
       margin-bottom: 20px;
       transition: all 400ms ease;
@@ -14,6 +14,17 @@
 
     img:hover{
         filter: sepia(0%) saturate(0%) brightness(70%) hue-rotate(50deg);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .item-catalogue-list-container{
+      .inner-container {
+        gap: 6% !important;
+      }
+      img {
+        width: 150px !important;
+      }
     }
   }
   

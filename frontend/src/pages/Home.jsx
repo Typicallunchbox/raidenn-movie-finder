@@ -1,41 +1,64 @@
 import { React, useEffect, useState } from "react";
-import "../index.scss";
-import axios from "axios";
-import HomeTopOption from "../components/HomeTopOption/HomeTopOption";
-import ItemCatalogueList from "../components/item-catalogue-list/ItemCatalogueList";
+import {useNavigate} from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux';
+import ThreeJsFiberScreen from "../components/ThreeJsFiberScreen/ThreeJsFiberScreen";
+import { addMovies } from '../features/movies/movieSlice';
+import {GetPopularMovies, GetMoviesByTag} from "../providers/moviesProvider";
+import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
+import Spinner from '../components/Spinner';
 
-export const Home = () => {
-  const [movies, setMovies] = useState([]);
 
-  //get popular movies
-  //get popular series
-  // get genres
-  // get upcoming
-  //get similiar movies
-  // api rate endpoint available
-  //discover movies endpoint available
+const Home = () => {
 
-  //example : https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const {user} = useSelector((state) => state.auth)
+  const {tag, movies} = useSelector((state) => state.movies) 
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    if(!user){
+      navigate('/login')
+    }
+  }, [user, navigate, dispatch])
 
   useEffect(() => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734"
-      )
-      .then((resp) => {
-        setMovies(resp.data.results);
-        console.log("response:", resp.data.results);
-      });
-  }, []);
+    async function setPopularMovies(){
+      setIsLoading(true);
+      const movies =  await GetPopularMovies();
+      dispatch(addMovies(movies))
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500); 
+    }
+
+    async function setMoviesByTag(){
+      setIsLoading(true);
+      const movies =  await GetMoviesByTag(tag);
+      dispatch(addMovies(movies))
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500); 
+    }
+
+    tag === '' ? setPopularMovies() : setMoviesByTag();
+  }, [tag, dispatch]);
+
+  if(isLoading){
+    return <Spinner/>
+  }
 
   return (
-    <div className="home container">
-      <div className="showcase">
-        <HomeTopOption />
-      </div>
-      <div className="catalogue">
-        <ItemCatalogueList />
-      </div>
+    <> 
+    <div className="container">
+      {user && <div className="catalogue mt-52">
+        <ItemCatalogueList movies={movies} />
+      </div>}
     </div>
+    <div className="recommendations">
+        <ThreeJsFiberScreen />
+    </div>
+    </>
   );
 };
+
+export default Home

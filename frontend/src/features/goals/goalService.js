@@ -10,7 +10,6 @@ const getGoals = async (token) => {
         }
     }
     const response = await axios.get(API_URL, config)
-    console.log('response:',response)
     return response.data
 }
 

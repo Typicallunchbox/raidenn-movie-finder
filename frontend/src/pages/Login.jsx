@@ -67,27 +67,29 @@ function Login() {
 
       <section className='form'>
         <form onSubmit={onSubmit}>
-          <div className="form-group">
-          <input
-            id='email'
-            name='email'
-            value={email}
-            placeholder='Enter your email'
-            className='form-control'
-            type='email'
-            onChange={onChange}
-          />
-          </div>
-          <div className="form-group">
-          <input
-            id='password'
-            name='password'
-            value={password}
-            placeholder='Enter password'
-            className='form-control'
-            type='password'
-            onChange={onChange}
-          />
+          <div className="p-2">
+            <div className="form-group">
+            <input
+              id='email'
+              name='email'
+              value={email}
+              placeholder='Enter your email'
+              className='form-control'
+              type='email'
+              onChange={onChange}
+            />
+            </div>
+            <div className="form-group">
+            <input
+              id='password'
+              name='password'
+              value={password}
+              placeholder='Enter password'
+              className='form-control'
+              type='password'
+              onChange={onChange}
+            />
+            </div>
           </div>
           <div className="form-group">
             <button type="submit" className="btn btn-block">Submit</button>
