@@ -6,6 +6,10 @@ const commentSchema = mongoose.Schema({
         required: true,
         ref: 'User'
     },
+    email:{
+        type: String,
+        required: [true, 'Please add an email reference']
+    },
     movie_id:{
         type: String,
         required: [true, 'Please add a movie reference']

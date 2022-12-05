@@ -16,7 +16,7 @@ import Filter from 'bad-words';
 
 const Movie = () => {
   const [text, setText] = useState("");
-  const [rating, setRating] = useState("");
+  let rating = "";
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { id } = useParams();
@@ -146,7 +146,7 @@ const Movie = () => {
   }, [id, movie]);
 
   const setMovieRating = (val) => {
-    setRating(val);
+    rating = val
   }
   
   if(isLoading){
@@ -293,7 +293,10 @@ const Movie = () => {
                     <div className="comments">
                       {comments && comments.map((comment) => (
                         <div className="card border-default mb-2 p-3">
-                          <span>{comment.user}</span>
+                          <div className="flex justify-between">
+                            <span>{comment.email}</span>
+                            <p>{comment.rating}</p>
+                          </div>
                           <p>{comment.comment}</p>
                         </div>
                       ))}
@@ -301,7 +304,13 @@ const Movie = () => {
                     <div className="p-px"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, rgba(0,0,0,0))`} : {}}></div>
                     <div>
                       <div className="my-2">
-                          <p> Rate Movie : <Rating onClick={(val)=>{setMovieRating(val)}} emptySymbol={<BiStar/>} fullSymbol={<FaStar/>}/></p>
+                          <p> Rate Movie : 
+                            <Rating  
+                            onClick={val=>setMovieRating(val)} 
+                            emptySymbol={<BiStar/>} 
+                            fullSymbol={<FaStar/>}
+                          />
+                          </p>
                       </div>
                       <div className="controls flex my-2 gap-2 flex-col md:flex-row ">
                           <input onChange={(e) => setText(e.target.value)} value={text} type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
