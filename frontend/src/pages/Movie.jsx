@@ -12,6 +12,8 @@ import { createWatchlistRecord, getWantToWatchRecord, updateWatchlistRecord } fr
 import { reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
+import {GetMovieById, GetMovieImagesById, GetMovieVideosById,} from "../providers/moviesProvider";
+
 import Filter from 'bad-words';
 
 const Movie = () => {
