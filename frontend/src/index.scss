@@ -147,6 +147,7 @@ h3 {
 
 .header a:hover {
   color: var(--raidenn-blue);
+  transition: color 0.5s ease;
 }
 
 .header ul li a svg {
@@ -191,6 +192,7 @@ footer {
     a{
       font-weight: 100;
       margin-left: 20px;
+      transition: color 0.5s ease;
     }
   }
 }
@@ -200,15 +202,20 @@ footer {
   height: fit-content;
   padding: 16px;
   background: linear-gradient(90deg,#434343,#434343, rgba(0,0,0,0));
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   p{
     color: var(--raidenn-white);
     font-size: 22px;
     padding: 8px;
+    transition: color 0.5s ease;
   }
 
   p:hover{
     color: var(--raidenn-blue);
+    cursor: default;
   }
 
   .optionSelected{
