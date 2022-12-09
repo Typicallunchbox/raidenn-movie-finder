@@ -67,6 +67,25 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Authenticate a user
+//@route    POST /api/login
+//@access   Public
+const setGenrePreferences = asyncHandler(async (req, res) => {
+  const { email, _id } = req.user;
+
+  //check for user email
+  const user = await User.findOne({ email });
+
+  if(user){
+    const updateGenrePreferences = await User.findByIdAndUpdate(_id, {watched : movie.watched, wantToWatch : movie.wantToWatch} , {new : true})
+
+  }
+  else {
+    res.status(400);
+    throw new Error("Invalid Credentials");
+  }
+});
+
 // @desc    Get user data
 //@route    GET /api/users/me
 //@access   Private

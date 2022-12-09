@@ -3,6 +3,7 @@ import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
+import {reset as resetWatchlist} from "../features/watchlists/watchlistSlice"
 import { useNavigate } from "react-router-dom";
 import SearchDropDown from "./SearchDropDown/SearchDropDown";
 
@@ -15,6 +16,8 @@ function Header() {
   const onLogout = () =>{
     dispatch(logout())
     dispatch(reset())
+    dispatch(resetWatchlist())
+    
     navigate('/')
   }
 
