@@ -27,13 +27,15 @@ const Landing = () => {
             <h2>Entertainment</h2>
           </div>
         </div> */}
-        <div className="inner-container">
+        <div className="inner-container flex">
           <div>
-          <video width="1280" height="960" autoplay="autoplay" loop="true">
+          <video width="920" autoplay="autoplay">
             <source src={process.env.PUBLIC_URL + "animations/landingAnimation.webm"} type="video/webm" />
           </video> 
           </div>
-          <button type="button" className="prim-button">Get Started</button>
+          <div className="relative">
+          <button type="button" className="prim-button absolute bottom-0 left-0">Get Started</button>
+          </div>
         </div>
       </div>
       <div className="instructions"></div>

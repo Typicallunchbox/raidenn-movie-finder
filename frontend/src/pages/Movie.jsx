@@ -255,7 +255,7 @@ const Movie = () => {
                 <button className='w-full flex gap-3 p-3' onClick={() => {addToWatchedList()}} > <AiFillEye/> Watched</button>
                 {/* <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full'>Site</button> */}
               </div>
-              <button className='w-full mt-1'>Watch Now</button>
+              <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>
 
               <p><b>Title</b> : {movie.title}</p>
               <p><b>Genres</b> : </p>
