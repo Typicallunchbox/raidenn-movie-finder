@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import {reset as resetWatchlist} from "../features/watchlists/watchlistSlice"
+import {reset as resetMovies} from "../features/movies/movieSlice"
 import { useNavigate } from "react-router-dom";
 import SearchDropDown from "./SearchDropDown/SearchDropDown";
 
@@ -17,6 +18,7 @@ function Header() {
     dispatch(logout())
     dispatch(reset())
     dispatch(resetWatchlist())
+    dispatch(resetMovies())
     
     navigate('/')
   }

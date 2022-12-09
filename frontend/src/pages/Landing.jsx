@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from "react";
 
-
 const Landing = () => {
   function scrollPlay() {
     // var scrollTop = document.querySelector(".container").scrollTop;
@@ -30,7 +29,9 @@ const Landing = () => {
         </div> */}
         <div className="inner-container">
           <div>
-            {/* Animation */}
+          <video width="1280" height="960" autoplay="autoplay" loop="true">
+            <source src={process.env.PUBLIC_URL + "animations/landingAnimation.webm"} type="video/webm" />
+          </video> 
           </div>
           <button type="button" className="prim-button">Get Started</button>
         </div>
