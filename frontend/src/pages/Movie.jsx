@@ -241,6 +241,15 @@ const Movie = () => {
     </div>
   )
 
+  function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 
   return (
     <>
@@ -296,7 +305,7 @@ const Movie = () => {
                       {comments && comments.map((comment) => (
                         <div className="card border-default mb-2 p-3">
                           <div className="flex justify-between">
-                            <span>{comment.email}</span>
+                            <span>{makeid(12)}</span>
                             <p>{comment.rating}</p>
                           </div>
                           <p>{comment.comment}</p>

@@ -86,6 +86,29 @@ const setGenrePreferences = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Authenticate a user
+//@route    POST /api/login
+//@access   Public
+const updateProfile = asyncHandler(async (req, res) => {
+  const { email, _id } = req.user;
+  const {profile} = req.body
+  console.log('profile:', profile)
+  if(profile.name === '' || profile.name === undefined){
+    res.status(400);
+    throw new Error("Profile name is required");
+  }
+
+  const user = await User.findOne({ email: email });
+  if(user){
+    const updateGenrePreferences = await User.findByIdAndUpdate(user._id, {name: profile.name })
+    res.status(200).json({status: 'OK'}) 
+  }
+  else {
+    res.status(400);
+    throw new Error("Invalid Credentials");
+  }
+});
+
 // @desc    Get user data
 //@route    GET /api/users/me
 //@access   Private
@@ -103,5 +126,6 @@ const generateToken = (id) => {
 module.exports = {
   registerUser,
   loginUser,
+  updateProfile,
   getMe,
 };

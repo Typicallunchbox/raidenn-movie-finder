@@ -14,6 +14,7 @@ const UserProfileSettings = () => {
         navigate('/login')
     }
 
+    // DO API CALL HERE AS IT SHOWS LOCALSTORAGE INSTEAD OF NEW NAME
     useEffect(() => {
         setFormData({name : user.name, email: user.email, genrePreferences : ['action', 'comedy']})
     }, [user])
