@@ -91,8 +91,8 @@ const setGenrePreferences = asyncHandler(async (req, res) => {
 //@access   Public
 const updateProfile = asyncHandler(async (req, res) => {
   const { email, _id } = req.user;
-  const {profile} = req.body
-  console.log('profile:', profile)
+  const {profile} = req.body;
+  
   if(profile.name === '' || profile.name === undefined){
     res.status(400);
     throw new Error("Profile name is required");
