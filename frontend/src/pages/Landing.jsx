@@ -12,21 +12,6 @@ const Landing = () => {
     <> 
     <div className="container">
       <div className="landing-page">
-        {/* <div className="promo-text">
-          <div className="left-text">
-            <h2></h2>
-            <h2>Save</h2>
-            <h2></h2>
-          </div>
-          <div className="right-text">
-            <h2>Time</h2>
-            <div>
-              <h2>Raidenn</h2>
-              <h4>To Your Bookmarks</h4>
-            </div>
-            <h2>Entertainment</h2>
-          </div>
-        </div> */}
         <div className="inner-container flex">
           <div>
           <video width="920" autoplay="autoplay">
@@ -38,7 +23,27 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <div className="instructions"></div>
+      <div className="instructions">
+        <div>
+          {/* video animation */}
+        </div>
+        <div className="content">
+          <h3>Steps to get started:</h3>
+          <div className="flex">
+            <span>1</span>
+            <p>Create your Raidenn profile</p>
+          </div>
+          <div className="flex">
+            <span>2</span>
+            <p>Start finding and watchlisting movies</p>
+          </div>
+          <div className="flex">
+            <span>3</span>
+            <p>Well...that's pretty much it</p>
+          </div>
+          <button className="prim-button">Lets Goooooo!</button>
+        </div>
+      </div>
     </div>
     </>
   );
