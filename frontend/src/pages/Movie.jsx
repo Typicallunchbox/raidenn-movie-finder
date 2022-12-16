@@ -8,12 +8,12 @@ import { BiStar  } from "react-icons/bi";
 import { AiFillEye, AiFillPlusCircle } from "react-icons/ai";
 import Rating from "react-rating";
 import { createComment, getCommentsByMovieId } from "../features/comments/commentSlice";
-import { createWatchlistRecord, getWantToWatchRecord, updateWatchlistRecord } from "../features/watchlists/watchlistSlice";
+import { getWantToWatchRecord, updateWatchlistRecord } from "../features/watchlists/watchlistSlice";
 import { reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
 import noCastImg from '../static/svgs/user.svg'
-import {GetMovieById, GetMovieImagesById, GetMovieVideosById,} from "../providers/moviesProvider";
+// import {GetMovieById, GetMovieImagesById, GetMovieVideosById,} from "../providers/moviesProvider";
 
 import Filter from 'bad-words';
 
@@ -34,9 +34,6 @@ const Movie = () => {
   const [showImages, setShowImages] = useState(false);
   const [showCast, setShowCast] = useState(false);
   const [showCompanies, setShowCompanies] = useState(false);
-
-
-  const [movieProdCompanies, setMovieProdCompanie] = useState(null);
 
   let image_path = "https://image.tmdb.org/t/p/original";
   let colours = ColourPalette(movie ? (image_path + movie?.poster_path) : []);
