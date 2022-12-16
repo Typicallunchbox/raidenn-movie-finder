@@ -12,6 +12,7 @@ import { createWatchlistRecord, getWantToWatchRecord, updateWatchlistRecord } fr
 import { reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
+import noCastImg from '../static/svgs/user.svg'
 import {GetMovieById, GetMovieImagesById, GetMovieVideosById,} from "../providers/moviesProvider";
 
 import Filter from 'bad-words';
@@ -213,7 +214,18 @@ const Movie = () => {
       {showCast && <div className="movie-content" >
         {movieCast && movieCast.map((member) => (
           <div className="castMember">
-            <img onClick={() => window.open('http://google.com/search?q=' + member.name, '_blank').focus()} src={image_path + member.profile_path} alt='cast_memebr'></img>
+            {member.profile_path ? 
+            <img 
+              onClick={() => window.open('http://google.com/search?q=' + member.name, '_blank').focus()} 
+              src={image_path + member.profile_path} 
+              alt='cast_memebr'/> 
+            : 
+            <div onClick={() => window.open('http://google.com/search?q=' + member.name, '_blank').focus()}>
+              <img 
+                onClick={() => window.open('http://google.com/search?q=' + member.name, '_blank').focus()} 
+                src={noCastImg} 
+                alt='no_cast_img'/> 
+            </div>}
             <p>{member.name}</p>
           </div>
         ) )}

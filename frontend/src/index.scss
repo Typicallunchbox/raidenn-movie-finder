@@ -610,7 +610,6 @@ background-color: var(--raidenn-blue)
 
   .movie-content {
     margin-bottom: 150px !important;
-
     text-align: center;
     display: flex;
     justify-content: space-around;
@@ -618,6 +617,26 @@ background-color: var(--raidenn-blue)
     gap: 1%;
     width: 70%;
     margin: 0 auto;
+
+    .castMember{
+      max-height: 225px;
+
+      div{
+        height: 100%;
+        width: 150px;
+        background: #f9f9f9;
+        max-width: 250px;
+        position: relative;
+
+        img{
+          width: 50%;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
 
     p {
       background-color: rgba(27, 138, 211, 0.3);
