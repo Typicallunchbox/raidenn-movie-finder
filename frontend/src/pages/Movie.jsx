@@ -308,7 +308,7 @@ const Movie = () => {
                       {comments && comments.map((comment) => (
                         <div className="card border-default mb-2 p-3">
                           <div className="flex justify-between">
-                            <span>{makeid(12)}</span>
+                            <span>{comment.username}</span>
                             <p>{comment.rating}</p>
                           </div>
                           <p>{comment.comment}</p>
