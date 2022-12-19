@@ -20,12 +20,10 @@ const UserProfileSettings = () => {
     }, [user])
 
     const onBlur = (e) => {
-        console.log(e.target.value)
         setFormData((prevState)=> ({
             ...prevState,
             [e.target.name]: e.target.value
         }))
-        // console.log(formData)
     }
     return (
       <> 

@@ -56,7 +56,6 @@ const Movie = () => {
     }
 
     let temp = getWantToWatchRecord({movie_id : id})
-    console.log('temp:', temp)
 
     dispatch(getCommentsByMovieId(id))
     return() => {
@@ -71,9 +70,7 @@ const Movie = () => {
           `https://api.themoviedb.org/3/movie/${id}?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
         )
         .then((resp) => {
-          console.log('resp:', resp)
 
-          // console.log('MOVIE:', resp)
           setMovie(resp.data);
         });
 
@@ -93,7 +90,6 @@ const Movie = () => {
                 temp.push(element)
               }
             }
-            // console.log('Videos:', temp)
             setMovieVideos(temp);
           }
         });
@@ -115,7 +111,6 @@ const Movie = () => {
               }
                 temp.push(element)
             }
-            console.log('Images:', temp)
             setMovieImages(temp);
           }
         });
@@ -137,7 +132,6 @@ const Movie = () => {
               }
                 temp.push(element)
             }
-            console.log('Cast:', temp)
             setMovieCast(temp);
           }
         });
