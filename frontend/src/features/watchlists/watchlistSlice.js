@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import watchlistService from "./watchlistService";
 
 // Get user from local storage
-const user = JSON.parse(localStorage.getItem("user"));
+let user = null;
 
 const initialState = {
   watched: [],
@@ -94,6 +94,8 @@ export const getWatched = createAsyncThunk(
   "watchlist/watched",
   async (thunkAPI) => {
     try {
+      console.log('user:', user)
+      user = JSON.parse(localStorage.getItem("user"));
       const token = user.token;
         return await watchlistService.getWatched(token);
     } catch (error) {
@@ -113,6 +115,8 @@ export const getWantToWatch = createAsyncThunk(
   "watchlist/wantToWatch",
   async (thunkAPI) => {
     try {
+      user = JSON.parse(localStorage.getItem("user"));
+
       const token = user.token;
         return await watchlistService.getWantToWant(token);
     } catch (error) {

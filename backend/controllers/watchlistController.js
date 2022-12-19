@@ -16,7 +16,9 @@ const getWatched = asyncHandler(async (req, res) => {
 const getWantToWatch = asyncHandler(async (req, res) => {
     const watchlist = await Watchlist.find({user: req.user._id, wantToWatch: true})
     res.status(200).json(watchlist) 
-})// @desc    Get entire watchlist for user
+})
+
+// @desc    Get entire watchlist for user
 //@route    GET /api/watchlist
 //@access   Private
 const getWatchlistByUserId = asyncHandler(async (req, res) => {
