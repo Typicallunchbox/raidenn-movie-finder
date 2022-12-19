@@ -13,6 +13,10 @@
   src: url(../public/fonts/Thunder-BoldHCItalic.otf);
 }
 @font-face {
+  font-family: 'ThunderBoldLCItalic';
+  src: url(../public/fonts/Thunder-BoldLCItalic.otf);
+}
+@font-face {
   font-family: 'BoldLC';
   src: url(../public/fonts/Thunder-BoldLC.otf);
 }
@@ -726,6 +730,28 @@ background-color: var(--raidenn-blue)
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+  }
+}
+
+.instructions{
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+
+  .setup-content{
+    width: 100%;
+    padding: 0 200px;
+
+    span{
+      padding: 20px 40px;
+      background:linear-gradient(90deg, var(--raidenn-blue), var(--raidenn-blue), rgba(0, 0, 0, 0));
+    }
+
+    h3{
+      font-family: 'ThunderBoldLCItalic';
+      font-size: 30px;
+      letter-spacing: 1px;
+    }
   }
 }
 

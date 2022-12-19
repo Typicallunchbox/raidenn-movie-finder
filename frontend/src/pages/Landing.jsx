@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from "react";
+import placeholder from '../static/images/wire.png'
 
 const Landing = () => {
   function scrollPlay() {
@@ -25,21 +26,21 @@ const Landing = () => {
       </div>
       <div className="instructions">
         <div>
-          {/* video animation */}
+          <img src={placeholder} alt='placeholder'></img>
         </div>
-        <div className="content">
-          <h3>Steps to get started:</h3>
-          <div className="flex">
+        <div className="setup-content">
+          <h3 className="text-left ml-14">Steps to get started:</h3>
+          <div className="flex mb-5">
             <span>1</span>
-            <p>Create your Raidenn profile</p>
+            <p className="ml-8 my-auto">Create your Raidenn profile</p>
           </div>
-          <div className="flex">
+          <div className="flex mb-5">
             <span>2</span>
-            <p>Start finding and watchlisting movies</p>
+            <p className="ml-8 my-auto">Start finding and watchlisting movies</p>
           </div>
-          <div className="flex">
+          <div className="flex mb-5">
             <span>3</span>
-            <p>Well...that's pretty much it</p>
+            <p className="ml-8 my-auto">Well...that's pretty much it</p>
           </div>
           <button className="prim-button">Lets Goooooo!</button>
         </div>
