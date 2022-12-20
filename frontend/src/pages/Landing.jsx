@@ -29,7 +29,8 @@ const Landing = () => {
           <img src={placeholder} alt='placeholder'></img>
         </div>
         <div className="setup-content">
-          <h3 className="text-left ml-14">Steps to get started:</h3>
+          <div>
+          <h3 className="text-left ml-14 mb-14">Steps to get started:</h3>
           <div className="flex mb-5">
             <span>1</span>
             <p className="ml-8 my-auto">Create your Raidenn profile</p>
@@ -42,7 +43,8 @@ const Landing = () => {
             <span>3</span>
             <p className="ml-8 my-auto">Well...that's pretty much it</p>
           </div>
-          <button className="prim-button">Lets Goooooo!</button>
+          <button className="prim-button mt-14">Lets Goooooo!</button>
+        </div>
         </div>
       </div>
     </div>

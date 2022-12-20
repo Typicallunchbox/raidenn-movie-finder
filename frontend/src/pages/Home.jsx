@@ -48,7 +48,7 @@ const Home = () => {
   }
 
   return (
-    <> 
+    <div className="home-page"> 
     <div className="container">
       {user && <div className="catalogue mt-52">
         <ItemCatalogueList movies={movies} />
@@ -64,7 +64,7 @@ const Home = () => {
       </div>}
       <p className="pt-16">Search maybe for what you are looking for* Add Background lightning animation*</p>
     </div>
-    </>
+    </div>
   );
 };
 
