@@ -8,15 +8,18 @@ import { BiStar  } from "react-icons/bi";
 import { AiFillEye, AiFillPlusCircle } from "react-icons/ai";
 import Rating from "react-rating";
 import { createComment, getCommentsByMovieId } from "../features/comments/commentSlice";
-import { createWatchlistRecord, getWantToWatchRecord, updateWatchlistRecord } from "../features/watchlists/watchlistSlice";
+import { getWantToWatchRecord, updateWatchlistRecord } from "../features/watchlists/watchlistSlice";
 import { reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
+import noCastImg from '../static/svgs/user.svg'
+// import {GetMovieById, GetMovieImagesById, GetMovieVideosById,} from "../providers/moviesProvider";
+
 import Filter from 'bad-words';
 
 const Movie = () => {
   const [text, setText] = useState("");
-  const [rating, setRating] = useState("");
+  let rating = "";
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { id } = useParams();
@@ -31,9 +34,6 @@ const Movie = () => {
   const [showImages, setShowImages] = useState(false);
   const [showCast, setShowCast] = useState(false);
   const [showCompanies, setShowCompanies] = useState(false);
-
-
-  const [movieProdCompanies, setMovieProdCompanie] = useState(null);
 
   let image_path = "https://image.tmdb.org/t/p/original";
   let colours = ColourPalette(movie ? (image_path + movie?.poster_path) : []);
@@ -56,7 +56,6 @@ const Movie = () => {
     }
 
     let temp = getWantToWatchRecord({movie_id : id})
-    console.log('temp:', temp)
 
     dispatch(getCommentsByMovieId(id))
     return() => {
@@ -71,9 +70,7 @@ const Movie = () => {
           `https://api.themoviedb.org/3/movie/${id}?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
         )
         .then((resp) => {
-          console.log('resp:', resp)
 
-          // console.log('MOVIE:', resp)
           setMovie(resp.data);
         });
 
@@ -93,7 +90,6 @@ const Movie = () => {
                 temp.push(element)
               }
             }
-            // console.log('Videos:', temp)
             setMovieVideos(temp);
           }
         });
@@ -115,7 +111,6 @@ const Movie = () => {
               }
                 temp.push(element)
             }
-            console.log('Images:', temp)
             setMovieImages(temp);
           }
         });
@@ -137,7 +132,6 @@ const Movie = () => {
               }
                 temp.push(element)
             }
-            console.log('Cast:', temp)
             setMovieCast(temp);
           }
         });
@@ -146,7 +140,7 @@ const Movie = () => {
   }, [id, movie]);
 
   const setMovieRating = (val) => {
-    setRating(val);
+    rating = val
   }
   
   if(isLoading){
@@ -211,7 +205,18 @@ const Movie = () => {
       {showCast && <div className="movie-content" >
         {movieCast && movieCast.map((member) => (
           <div className="castMember">
-            <img onClick={() => window.open('http://google.com/search?q=' + member.name, '_blank').focus()} src={image_path + member.profile_path} alt='cast_memebr'></img>
+            {member.profile_path ? 
+            <img 
+              onClick={() => window.open('http://google.com/search?q=' + member.name, '_blank').focus()} 
+              src={image_path + member.profile_path} 
+              alt='cast_memebr'/> 
+            : 
+            <div onClick={() => window.open('http://google.com/search?q=' + member.name, '_blank').focus()}>
+              <img 
+                onClick={() => window.open('http://google.com/search?q=' + member.name, '_blank').focus()} 
+                src={noCastImg} 
+                alt='no_cast_img'/> 
+            </div>}
             <p>{member.name}</p>
           </div>
         ) )}
@@ -239,6 +244,15 @@ const Movie = () => {
     </div>
   )
 
+  function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
 
   return (
     <>
@@ -253,7 +267,7 @@ const Movie = () => {
                 <button className='w-full flex gap-3 p-3' onClick={() => {addToWatchedList()}} > <AiFillEye/> Watched</button>
                 {/* <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full'>Site</button> */}
               </div>
-              <button className='w-full mt-1'>Watch Now</button>
+              <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>
 
               <p><b>Title</b> : {movie.title}</p>
               <p><b>Genres</b> : </p>
@@ -293,7 +307,10 @@ const Movie = () => {
                     <div className="comments">
                       {comments && comments.map((comment) => (
                         <div className="card border-default mb-2 p-3">
-                          <span>{comment.user}</span>
+                          <div className="flex justify-between">
+                            <span>{comment.username}</span>
+                            <p>{comment.rating}</p>
+                          </div>
                           <p>{comment.comment}</p>
                         </div>
                       ))}
@@ -301,7 +318,13 @@ const Movie = () => {
                     <div className="p-px"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, rgba(0,0,0,0))`} : {}}></div>
                     <div>
                       <div className="my-2">
-                          <p> Rate Movie : <Rating onClick={(val)=>{setMovieRating(val)}} emptySymbol={<BiStar/>} fullSymbol={<FaStar/>}/></p>
+                          <p> Rate Movie : 
+                            <Rating  
+                            onClick={val=>setMovieRating(val)} 
+                            emptySymbol={<BiStar/>} 
+                            fullSymbol={<FaStar/>}
+                          />
+                          </p>
                       </div>
                       <div className="controls flex my-2 gap-2 flex-col md:flex-row ">
                           <input onChange={(e) => setText(e.target.value)} value={text} type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>

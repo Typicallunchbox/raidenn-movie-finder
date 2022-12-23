@@ -19,8 +19,8 @@ const getCommentsByMovieId = asyncHandler(async (req, res) => {
     const movie_id = req.params.id
     const comments = await Comment.find({ movie_id })
     if(comments.length == 0){
-        res.status(400)
-        throw new Error('No comments found')
+        res.status(200).json([])
+        return;
     }
 
     res.status(200).json(comments) 
@@ -46,6 +46,7 @@ const setComment = asyncHandler(async (req, res) => {
 
     const comment = await Comment.create({
         user: req.user.id,
+        username: req.user.name,
         comment : req.body.comment,
         movie_id : req.body.movie_id,
         rating : req.body.rating

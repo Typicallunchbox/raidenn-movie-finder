@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import commentService from "../comments/commentService";
 
 // Get user from local storage
-const user = JSON.parse(localStorage.getItem("user"));
+let user = null
 
 const initialState = {
   comments: [],
@@ -55,6 +55,7 @@ export const getCommentsByMovieId = createAsyncThunk(
   "comments/getCommentsByMovieId",
   async (id, thunkAPI) => {
     try {
+      user = JSON.parse(localStorage.getItem("user"));
       const token = user.token;
         return await commentService.getCommentsByMovieId(id, token);
     } catch (error) {
@@ -73,6 +74,7 @@ export const getComments = createAsyncThunk(
   "comments/getComments",
   async (thunkAPI) => {
     try {
+      user = JSON.parse(localStorage.getItem("user"));
       const token = user.token;
         return await commentService.getComments(token);
     } catch (error) {

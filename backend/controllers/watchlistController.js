@@ -6,7 +6,7 @@ const Watchlist = require('../models/watchlistModel')
 //@route    GET /api/watchlist/watched
 //@access   Private
 const getWatched = asyncHandler(async (req, res) => {
-    const watchlist = await Watchlist.find({user_id: req.user.id, watched: true})
+    const watchlist = await Watchlist.find({user: req.user._id, watched: true})
     res.status(200).json(watchlist) 
 })
 
@@ -14,7 +14,7 @@ const getWatched = asyncHandler(async (req, res) => {
 //@route    GET /api/watchlist/wantToWatch
 //@access   Private
 const getWantToWatch = asyncHandler(async (req, res) => {
-    const watchlist = await Watchlist.find({user_id: req.user.id, wantToWatch: true})
+    const watchlist = await Watchlist.find({user: req.user._id, wantToWatch: true})
     res.status(200).json(watchlist) 
 })
 

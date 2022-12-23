@@ -18,15 +18,19 @@ function Footer() {
     <footer className='footer'>
         <div className="links">
             <h3>Links</h3>
-            <a href="/">Home</a>
-            <a href="/settings">Profile Settings</a>
-            <a href="/watchlist">My Watchlist</a>
+            <Link to='/'>
+                <a>Home</a>
+            </Link>
+            <Link to='/settings'>
+                <a>Profile Settings</a>
+            </Link>
+            <Link to='/watchlist'>
+                <a>My Watchlist</a>
+            </Link>
         </div>
         <div className="links">
             <h3>Creator</h3>
             <a href="https://github.com/Typicallunchbox/Typicallunchbox" target="_blank">Github</a>
-            {/* <a href="/">Profile Settings</a>
-            <a href="/">My Watchlist</a> */}
         </div>
     </footer>}
     </>
