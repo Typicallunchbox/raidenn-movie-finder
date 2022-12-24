@@ -42,7 +42,9 @@ Raidenn is a portfolio project which was built to further improve the author's s
     * React
     * React Router Dom
     * Axios
+    * Redux Toolkit
     * Node-sass
+    * Tailwind
 
 <br />
 <br />
@@ -55,17 +57,33 @@ Watchlist consists of the 3 files all in specific folders. These files are `watc
 
 1. watchlistModel
    - The purpose of this file is define a set schema for a watchlist instance. Below you can see a schema is created from the mongoose(Related to MongoDB)        library. Each new variable type must contain a `type` and is recommended to have a `required` in order to manage validation later on when adding a new        watchlist instance.
-   - *Add screenshot*
+   
+   ![watchlistModel](https://user-images.githubusercontent.com/41709116/209451451-12cb6262-7e67-4736-be4c-3408b5d12616.PNG)
+
     <br />
     
 2. watchlistController
    - This controller file holds the functionality we want the `watchlistModel` to be able to. It holds the general CRUD functions for the watchlist instance.
+
+![watchlistController](https://user-images.githubusercontent.com/41709116/209451467-ab9e6852-b810-451e-8f3b-165ecf300f1e.PNG)
+
    <br />
+   
 3. watchlistRoutes
    - The routes is the final piece that binds each CRUD function to a specific route. As below you can see getWatched function which is imported from the          controllers file is being binded with the route `/watched`. Additionally you can see that same line containts a `protect` function, which is imported        from an addidional folder called middelware. This protect function contains the logic to only allow an authorized user to hit our api endpoint, which        is done with a JWT token.
-   - *Add screenshot*
+   
+   ![watchlistRoutes](https://user-images.githubusercontent.com/41709116/209451469-c79eb23e-0e88-4518-bb67-04aeb041cc96.PNG)
+
     <br />
-    <br />
+Now for the <b>Frontend<b/> side of the project with the example still being the watchlist.
+   The important files will be located in the src folder. Every Schema from the backend will be referenced in a folder called `features`. In features there      is a `watchlists` folder containing two files, `watchlistService`(Makes use of Axios) and `watchlistSlice`(Makes use of Redux Toolkit).
+   
+1. 
+   
+   
+   
 ## Getting Started
+If you are interested in getting started on your own personal project structured like this one I would recommend the Youtube channel [Traversy Media](https://www.youtube.com/@TraversyMedia), he has a 5 part series on the MERN Stack which was used as guidance on this project.
+
 ## Thoughts, Challenges and Future improvements
 ## Links to NPM Packages used
