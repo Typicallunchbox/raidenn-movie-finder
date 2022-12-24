@@ -51,12 +51,14 @@ Watchlist consists of the 3 files all in specific folders. These files are `watc
 
 1. watchlistModel
    - The purpose of this file is define a set schema for a watchlist instance. Below you can see a schema is created from the mongoose(Related to MongoDB)        library. Each new variable type must contain a `type` and is recommended to have a `required` in order to manage validation later on when adding a new        watchlist instance.
+   - *Add screenshot*
    - 
 2. watchlistController
    - This controller file holds the functionality we want the `watchlistModel` to be able to. It holds the general CRUD functions for the watchlist instance.
 
 3. watchlistRoutes
    - The routes is the final piece that binds each CRUD function to a specific route. As below you can see getWatched function which is imported from the          controllers file is being binded with the route `/watched`. Additionally you can see that same line containts a `protect` function, which is imported        from an addidional folder called middelware. This protect function contains the logic to only allow an authorized user to hit our api endpoint, which        is done with a JWT token.
+   - *Add screenshot*
    
 
 ## Getting Started
