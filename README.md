@@ -75,7 +75,8 @@ Watchlist consists of the 3 files all in specific folders. These files are `watc
    ![watchlistRoutes](https://user-images.githubusercontent.com/41709116/209451469-c79eb23e-0e88-4518-bb67-04aeb041cc96.PNG)
 
     <br />
-Now for the <b>Frontend<b/> side of the project with the example still being the watchlist.
+   Now for the <b>Frontend</b> side of the project with the example still being the watchlist.
+   
    The important files will be located in the src folder. Every Schema from the backend will be referenced in a folder called `features`. In features there      is a `watchlists` folder containing two files, `watchlistService`(Makes use of Axios) and `watchlistSlice`(Makes use of Redux Toolkit).
    
 1. 
