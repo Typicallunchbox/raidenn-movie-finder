@@ -56,7 +56,7 @@ Raidenn is a portfolio project which was built to further improve the author's s
    
    
 ## Getting Started
-If you are interested in getting started on your own personal project structured like this one I would recommend the Youtube channel [Traversy Media](https://www.youtube.com/@TraversyMedia), he has a 5 part series on the MERN Stack which was used as guidance on this project. Also below I have done a breakdown of explaining the project journey from backend to frontend.
+If you are interested in getting started on your own personal project structured like this one I would recommend the Youtube channel [Traversy Media](https://www.youtube.com/@TraversyMedia), he has a 5 part series on the MERN Stack which was used as guidance on this project. Also below I have done a breakdown of explaining the [project journey](#project-journey-explained) from backend to frontend.
 
 
 ## Thoughts, Challenges and Future improvements
@@ -106,6 +106,14 @@ Watchlist consists of the 3 files all in specific folders. These files are `watc
    <br />
    
    ![watchlistSlice](https://user-images.githubusercontent.com/41709116/209457511-078d0f90-2097-488d-909f-50134d190416.PNG)
+   
+Finally in the Watchlist.js file under the pages folder we make a reference call to that redux variable in order to get the data it is holding. Below you can see an example of how that reference is done. `useSelector` is a function from the react-redux package.
+
+<br />
+
+![watchlistReact](https://user-images.githubusercontent.com/41709116/209481840-e57ef0c6-88ca-4d5e-ab57-834a94869bfb.PNG)
+
+
 
    
 ## Links to NPM Packages used
