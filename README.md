@@ -1,5 +1,5 @@
 # Raidenn : Movie Finder
-## A fully functional movie finder written in React with a Node JS Express backend connecting to MongoDB
+ A fully functional movie finder written in React with a Node JS Express backend connecting to MongoDB
 #### Put Website hosted link here
 
 
@@ -13,7 +13,7 @@
 1. [Features](#features)
 2. [Summary](#summary)
 3. [Getting Started](#getting-started)
-4. [Thoughts, Challenegs and Future improvements](#thoughts-challenegs-and-future-improvements)
+4. [Thoughts, Challenges and Future improvements](#thoughts-challenges-and-future-improvements)
 5. [Links to NPM Packages used](#links-to-npm-packages-used)
 
 ## Features
@@ -50,6 +50,16 @@ Raidenn is a portfolio project which was built to further improve the author's s
 <br />
 
 
+
+   
+   
+   
+## Getting Started
+If you are interested in getting started on your own personal project structured like this one I would recommend the Youtube channel [Traversy Media](https://www.youtube.com/@TraversyMedia), he has a 5 part series on the MERN Stack which was used as guidance on this project. Also below I have done a breakdown of explaining the project journey from backend to frontend.
+
+
+## Thoughts, Challenges and Future improvements
+
 ## Project Journey Explained
 Lets first cover the backend and then explain how that connects with the frontend of the project as well as the MovieDB database api service. For the backend everything has been implemented with NodeJs and Express, with the file structure been created for MondoDB in mind. We will use the Watchlist as an example to get an understanding of the flow, as all other concepts follow a fairly similiar direction.
 
@@ -75,16 +85,25 @@ Watchlist consists of the 3 files all in specific folders. These files are `watc
    ![watchlistRoutes](https://user-images.githubusercontent.com/41709116/209451469-c79eb23e-0e88-4518-bb67-04aeb041cc96.PNG)
 
     <br />
+    <br />
    Now for the <b>Frontend</b> side of the project with the example still being the watchlist.
    
-   The important files will be located in the src folder. Every Schema from the backend will be referenced in a folder called `features`. In features there      is a `watchlists` folder containing two files, `watchlistService`(Makes use of Axios) and `watchlistSlice`(Makes use of Redux Toolkit).
+   The important files will be located in the src folder. Every Schema from the backend will be referenced in a frontend folder called `features`. In            features there is a `watchlists` folder containing two files, `watchlistService`(Makes use of Axios) and `watchlistSlice`(Makes use of Redux Toolkit).
    
-1. 
+   <br />
    
+1. watchlistService
+   - This service bridges the gap between the backend and frontend. This file contains all API calls that can be made for the watchlist schema. Axios was          used in making the api requests and attached to each request is the user's [Bearer Token](https://www.devopsschool.com/blog/what-is-bearer-token-and-how-it-works/). Below is an example of the structure of `getWatched` api call:
    
-   
-## Getting Started
-If you are interested in getting started on your own personal project structured like this one I would recommend the Youtube channel [Traversy Media](https://www.youtube.com/@TraversyMedia), he has a 5 part series on the MERN Stack which was used as guidance on this project.
+   ![watchlistService](https://user-images.githubusercontent.com/41709116/209457516-32f73784-fdf3-4a06-8399-96b2ba79247e.PNG)
 
-## Thoughts, Challenges and Future improvements
+<br />
+2. watchlistSlice
+   - This file hands the redux side of the project. Here an exported function is created for each imported api call from the watchlistService. If an api call     is fulfilled the response is then saved to a Redux state variable. This will allow the project to access these variables from any frontend file for           display purposes. Below is an example of a that function mentioned:
+   
+   <br />
+   
+   ![watchlistSlice](https://user-images.githubusercontent.com/41709116/209457511-078d0f90-2097-488d-909f-50134d190416.PNG)
+
+   
 ## Links to NPM Packages used
