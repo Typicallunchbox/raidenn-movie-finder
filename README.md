@@ -14,7 +14,8 @@
 2. [Summary](#summary)
 3. [Getting Started](#getting-started)
 4. [Thoughts, Challenges and Future improvements](#thoughts-challenges-and-future-improvements)
-5. [Links to NPM Packages used](#links-to-npm-packages-used)
+5. [Project Journey Explained](#project-journey-explained)
+6. [Links to NPM Packages used](#links-to-npm-packages-used)
 
 ## Features
 
@@ -91,14 +92,15 @@ Watchlist consists of the 3 files all in specific folders. These files are `watc
    The important files will be located in the src folder. Every Schema from the backend will be referenced in a frontend folder called `features`. In            features there is a `watchlists` folder containing two files, `watchlistService`(Makes use of Axios) and `watchlistSlice`(Makes use of Redux Toolkit).
    
    <br />
+   <br />
    
-1. watchlistService
+1.watchlistService
    - This service bridges the gap between the backend and frontend. This file contains all API calls that can be made for the watchlist schema. Axios was          used in making the api requests and attached to each request is the user's [Bearer Token](https://www.devopsschool.com/blog/what-is-bearer-token-and-how-it-works/). Below is an example of the structure of `getWatched` api call:
    
    ![watchlistService](https://user-images.githubusercontent.com/41709116/209457516-32f73784-fdf3-4a06-8399-96b2ba79247e.PNG)
 
-<br />
-2. watchlistSlice
+  
+2.watchlistSlice
    - This file hands the redux side of the project. Here an exported function is created for each imported api call from the watchlistService. If an api call     is fulfilled the response is then saved to a Redux state variable. This will allow the project to access these variables from any frontend file for           display purposes. Below is an example of a that function mentioned:
    
    <br />
