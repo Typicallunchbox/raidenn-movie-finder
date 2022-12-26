@@ -58,6 +58,18 @@ Raidenn is a portfolio project which was built to further improve the author's s
 ## Getting Started
 If you are interested in getting started on your own personal project structured like this one I would recommend the Youtube channel [Traversy Media](https://www.youtube.com/@TraversyMedia), he has a 5 part series on the MERN Stack which was used as guidance on this project. Also below I have done a breakdown of explaining the [project journey](#project-journey-explained) from backend to frontend.
 
+### Requirments
+ * [Github Account](https://github.com/)
+ * [MongoDB Account](https://www.mongodb.com/home)
+ * [NodeJS](https://nodejs.org/en/download/)
+ * [VSCode Editor](https://code.visualstudio.com/) (Recommended)
+
+Setting up <b>MongoDb Account</b> has a few extra steps and I recommend watching this time tagged [Youtube video from Traversy Media](https://youtu.be/-0exw-9YJBo?t=2205) to get correctly setup.
+
+Once setup with all the necessary accounts, now we can clone the repoistory. 
+<br />
+[How to Clone a Github Repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+
 
 ## Thoughts, Challenges and Future improvements
 
