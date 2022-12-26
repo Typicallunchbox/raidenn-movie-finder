@@ -49,11 +49,6 @@ Raidenn is a portfolio project which was built to further improve the author's s
 
 <br />
 <br />
-
-
-
-   
-   
    
 ## Getting Started
 If you are interested in getting started on your own personal project structured like this one I would recommend the Youtube channel [Traversy Media](https://www.youtube.com/@TraversyMedia), he has a 5 part series on the MERN Stack which was used as guidance on this project. Also below I have done a breakdown of explaining the [project journey](#project-journey-explained) from backend to frontend.
@@ -64,14 +59,23 @@ If you are interested in getting started on your own personal project structured
  * [NodeJS](https://nodejs.org/en/download/)
  * [VSCode Editor](https://code.visualstudio.com/) (Recommended)
 
-Setting up <b>MongoDb Account</b> has a few extra steps and I recommend watching this time tagged [Youtube video from Traversy Media](https://youtu.be/-0exw-9YJBo?t=2205) to get correctly setup.
+Setting up <b>MongoDb Account</b> has a few extra steps and I recommend watching this time tagged [Youtube video from Traversy Media](https://youtu.be/-0exw-9YJBo?t=2205) to get correctly setup. A reminder to also create your own .env file in your project in order to connect to mongoDB. Below is an example of the .env file structure needed for this project :
+
+![envExample23](https://user-images.githubusercontent.com/41709116/209536062-314f2ee6-c457-4fe0-a59a-babddf1fe670.png)
+
 
 Once setup with all the necessary accounts, now we can clone the repository. 
 <br />
 [How to Clone a Github Repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
+Once cloned you will need to run `npm install` command in your terminal in both the root project folder and the frontend folder as there are two seperate node modules on this project.
+Finally, your last step is to run `npm run dev` from the root of the project. This will run both the backend api service as well as the frontend at the same time. Enjoy :)
 
-## Thoughts, Challenges and Future improvements
+<br/>
+
+
+
+<!-- ## Thoughts, Challenges and Future improvements -->
 
 ## Project Journey Explained
 Lets first cover the backend and then explain how that connects with the frontend of the project as well as the MovieDB database api service. For the backend everything has been implemented with NodeJs and Express, with the file structure been created for MondoDB in mind. We will use the Watchlist as an example to get an understanding of the flow, as all other concepts follow a fairly similiar direction.
@@ -99,6 +103,7 @@ Watchlist consists of the 3 files all in specific folders. These files are `watc
 
     <br />
     <br />
+    
    Now for the <b>Frontend</b> side of the project with the example still being the watchlist.
    
    The important files will be located in the src folder. Every Schema from the backend will be referenced in a frontend folder called `features`. In            features there is a `watchlists` folder containing two files, `watchlistService`(Makes use of Axios) and `watchlistSlice`(Makes use of Redux Toolkit).
@@ -126,6 +131,5 @@ Finally in the Watchlist.js file under the pages folder we make a reference call
 ![watchlistReact](https://user-images.githubusercontent.com/41709116/209481840-e57ef0c6-88ca-4d5e-ab57-834a94869bfb.PNG)
 
 
-
-   
 ## Links to NPM Packages used
+
