@@ -66,7 +66,7 @@ If you are interested in getting started on your own personal project structured
 
 Setting up <b>MongoDb Account</b> has a few extra steps and I recommend watching this time tagged [Youtube video from Traversy Media](https://youtu.be/-0exw-9YJBo?t=2205) to get correctly setup.
 
-Once setup with all the necessary accounts, now we can clone the repoistory. 
+Once setup with all the necessary accounts, now we can clone the repository. 
 <br />
 [How to Clone a Github Repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
 
