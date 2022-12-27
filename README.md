@@ -13,9 +13,7 @@
 1. [Features](#features)
 2. [Summary](#summary)
 3. [Getting Started](#getting-started)
-4. [Thoughts, Challenges and Future improvements](#thoughts-challenges-and-future-improvements)
-5. [Project Journey Explained](#project-journey-explained)
-6. [Links to NPM Packages used](#links-to-npm-packages-used)
+4. [Project Journey Explained](#project-journey-explained)
 
 ## Features
 
@@ -33,19 +31,19 @@
 Raidenn is a portfolio project which was built to further improve the author's skills. This project can be thought of as a guide to a developer interested in building a React site built around redux that makes use of MondoDB as their cloud database solution. This project also implements a good standard practice for web security, [JWT](https://jwt.io/). Raidenn also makes use of a free database api service known as [MovieDB](https://developers.themoviedb.org/3) in order to get the movies shown in the project. This project can be broken up into two parts which consist of the main packages used:
 
 * Backend
-    * Node JS
-    * Express
-    * Bcrypt
-    * Jsonwebtoken
-    * Mongoose
+    * [Node JS](https://nodejs.org/en/download/)
+    * [Express](https://www.npmjs.com/package/express)
+    * [Bcrypt](https://www.npmjs.com/package/bcrypt)
+    * [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+    * [Mongoose](https://www.npmjs.com/package/mongoose)
 
 * Frontend
-    * React
-    * React Router Dom
-    * Axios
-    * Redux Toolkit
-    * Node-sass
-    * Tailwind
+    * [React](https://www.npmjs.com/package/react)
+    * [React Router Dom](https://www.npmjs.com/package/react-router-dom)
+    * [Axios](https://www.npmjs.com/package/axios)
+    * [Redux Toolkit](https://www.npmjs.com/package/@reduxjs/toolkit)
+    * [Node-sass](https://www.npmjs.com/package/node-sass)
+    * [Tailwind](https://tailwindcss.com/docs/installation)
 
 <br />
 <br />
@@ -130,6 +128,4 @@ Finally in the Watchlist.js file under the pages folder we make a reference call
 
 ![watchlistReact](https://user-images.githubusercontent.com/41709116/209481840-e57ef0c6-88ca-4d5e-ab57-834a94869bfb.PNG)
 
-
-## Links to NPM Packages used
 
