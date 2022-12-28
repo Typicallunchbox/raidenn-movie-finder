@@ -70,10 +70,21 @@ Once cloned you will need to run `npm install` command in your terminal in both 
 Finally, your last step is to run `npm run dev` from the root of the project. This will run both the backend api service as well as the frontend at the same time. Enjoy :)
 
 <br/>
+<br />
 
 
+## Future improvements
+This marks the end of the first version of the project, I am doing this as I would love to make improvements in the future for a v2 which would be a much better user experience and as well up the quality of the site in my opinion. Below are a little of a few additional ideas/features I am planning to integrate into Raidenn v2 sometime in the future:
+ - A section to get recommended movies to the user based on their genre preferences.
+ - Allow the user to update movies genre preferences.
+ - Share a movie link to a friend.
+ - Restrictions to only allow a user to have 1 comment per movie.
+ - Smoother animations when navigating through pages.
+ - Smoother load of Images on the site.
 
-<!-- ## Thoughts, Challenges and Future improvements -->
+<br />
+<br />
+<br />
 
 ## Project Journey Explained
 Lets first cover the backend and then explain how that connects with the frontend of the project as well as the MovieDB database api service. For the backend everything has been implemented with NodeJs and Express, with the file structure been created for MondoDB in mind. We will use the Watchlist as an example to get an understanding of the flow, as all other concepts follow a fairly similiar direction.
