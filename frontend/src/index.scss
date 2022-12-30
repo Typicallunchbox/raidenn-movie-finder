@@ -759,6 +759,17 @@ background-color: var(--raidenn-blue)
 }
 
 /* ************LANDING PAGE************ */
+#set-height {
+  display: block;
+}
+#v0 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -10;
+}
+
 .landing-page{
   height: 100vh;
   overflow-x: hidden;
