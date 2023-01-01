@@ -35,14 +35,14 @@ const getWatchlistByUserId = asyncHandler(async (req, res) => {
 //@route    PUT /api/watchlist
 //@access   Private
 const getWantToWatchRecord = asyncHandler(async (req, res) => {
-    console.log('req movie:', req.body)
+
     let movie_id = null;
     movie_id = req.body.movie_id;
+
     const watchListRecord = await Watchlist.findOne({user_id: req.user.id, movie_id: movie_id});
 
     if (!watchListRecord) {
-        res.status(400);
-        throw new Error("Movie does not exist on list.");
+        return res.status(200).json()
     }
 
     //Check for user
