@@ -5,7 +5,7 @@ const {protect} = require('../middleware/authMiddleware')
 
 router.route('/watched').get(protect, getWatched)
 router.route('/wantToWatch').get(protect, getWantToWatch)
-router.route('/wantToWatchRecord').get(protect, getWantToWatchRecord)
+router.route('/wantToWatchRecord').post(protect, getWantToWatchRecord)
 router.route('/').get(protect, getWatchlistByUserId).post(protect, createWatchlistRecord).put(protect, updateWatchlistRecord).delete(protect, deleteWatchlistRecord)
 
 

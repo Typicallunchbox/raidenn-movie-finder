@@ -134,6 +134,7 @@ export const getWantToWatch = createAsyncThunk(
 //Get want to watch record
 export const getWantToWatchRecord = async (watchlistData) => {
     try {
+        user = JSON.parse(localStorage.getItem("user"));
         const token = user.token;
         return await watchlistService.getWantToWatchRecord(watchlistData, token);
     } catch (error) {
