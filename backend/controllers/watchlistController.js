@@ -42,7 +42,7 @@ const getWantToWatchRecord = asyncHandler(async (req, res) => {
     const watchListRecord = await Watchlist.findOne({user_id: req.user.id, movie_id: movie_id});
 
     if (!watchListRecord) {
-        return res.status(200).json()
+        return res.status(200).json(null)
     }
 
     //Check for user

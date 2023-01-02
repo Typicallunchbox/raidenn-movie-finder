@@ -30,6 +30,9 @@ const Movie = () => {
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
 
+  const [userWatchlistRecord, setUserWatchlistRecord] = useState(null);
+
+
   //display variables
   const [showImages, setShowImages] = useState(false);
   const [showCast, setShowCast] = useState(false);
@@ -55,7 +58,14 @@ const Movie = () => {
       navigate('/login')
     }
 
-    let temp = getWantToWatchRecord({movie_id : id})
+    // let temp = getWantToWatchRecord({movie_id : id})
+
+    const getRecord = async () => {
+      const record = await getWantToWatchRecord({movie_id : id});
+      setUserWatchlistRecord(record)
+    };
+
+    getRecord();
 
     dispatch(getCommentsByMovieId(id))
     return() => {
@@ -244,16 +254,6 @@ const Movie = () => {
     </div>
   )
 
-  function makeid(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-}
-
   return (
     <>
       <div className="p-0.5"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, ${colours[3]}, ${colours[4]}, rgba(0,0,0,0))`} : {}}></div>
@@ -263,11 +263,11 @@ const Movie = () => {
             <div className="movieInfo">
               <img src={image_path + movie.poster_path} alt='movie'></img>
               <div className="buttons flex justify-evenly gap-1 mt-2">
-                <button className='w-full flex gap-3 p-3' onClick={() => {addToWantToWatchList()}} > <AiFillPlusCircle/>Watchlist</button>
-                <button className='w-full flex gap-3 p-3' onClick={() => {addToWatchedList()}} > <AiFillEye/> Watched</button>
+                <button className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.wantToWatch ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWantToWatchList()}} > <AiFillPlusCircle/>Watchlist</button>
+                <button className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.watched ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWatchedList()}} > <AiFillEye/> Watched</button>
                 {/* <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full'>Site</button> */}
               </div>
-              <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>
+              {movie.homepage && <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>}
 
               <p><b>Title</b> : {movie.title}</p>
               <p><b>Genres</b> : </p>

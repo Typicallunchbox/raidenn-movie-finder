@@ -53,17 +53,19 @@ const Home = () => {
       {user && <div className="catalogue mt-52">
         <ItemCatalogueList movies={movies} />
       </div>}
+      <p className="pt-16">Search maybe for what you are looking for* Add Background lightning animation*</p>
+
     </div>
-    <div className="recommendations">
+    {/* <div className="recommendations">
       <h2>Feeling Lucky?</h2>
         <ThreeJsFiberScreen />
-    </div>
-    <div className="container">
+    </div> */}
+    {/* <div className="container">
       {user && <div className="catalogue mt-52">
         <ItemCatalogueList movies={movies} />
       </div>}
       <p className="pt-16">Search maybe for what you are looking for* Add Background lightning animation*</p>
-    </div>
+    </div> */}
     </div>
   );
 };
