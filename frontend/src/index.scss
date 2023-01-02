@@ -154,7 +154,7 @@ h3 {
   width: 100%;
   top: 0;
   z-index: 20;
-  background: var(--raidenn-black)
+  // background-color: var(--raidenn-black)
 }
 
 .header ul {
@@ -777,10 +777,10 @@ background-color: var(--raidenn-blue)
 
   .inner-container{
     position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    top: 30%;
+    -webkit-transform: translateY(-30%);
+    -ms-transform: translateY(-30%);
+    transform: translateY(-30%);
     left: 100px;
   }
 }

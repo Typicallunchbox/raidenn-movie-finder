@@ -12,7 +12,7 @@ const Landing = () => {
 
   useEffect(() => {
     var frameNumber = 0,
-    playbackConst = 140, 
+    playbackConst = 80, 
     setHeight = document.getElementById("set-height"), 
     vid = document.getElementById('v0'); 
 
@@ -36,7 +36,7 @@ const Landing = () => {
     <> 
     <div id="set-height"></div>
     <p id="time"></p>
-    <video style={{opacity:'20%'}} id="v0" tabindex="0" autobuffer="autobuffer" preload="preload">
+    <video style={{opacity: '5%'}} id="v0" tabindex="0" autobuffer="autobuffer" preload="preload">
       <source type="video/webm" src={landingAnimation}></source>
     </video>
     <div className="container">

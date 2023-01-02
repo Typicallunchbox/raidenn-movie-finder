@@ -26,7 +26,7 @@ function Header() {
   return (
     <>
 
-    <header className='header'>
+    <header className={`header ${window.location.origin + "/" === window.location.href && !user ? 'bg-transparent' : 'primary-bg-colour'}`}>
       <div className='logo'>
         <Link className="tertiary-text-colour" style={{fontFamily: 'ThunderBoldLC', fontSize: '35px'}}  to='/'>Raidenn</Link>
       </div>
