@@ -785,12 +785,31 @@ background-color: var(--raidenn-blue)
   }
 }
 
+
+
 .instructions{
   display: flex;
   width: 80%;
   margin: 0 auto;
   height: 80vh;
   margin-top: 150px;
+
+  .setup-content {
+    opacity: 0;
+    transform: translateY(2vh);
+    visibility: hidden;
+  
+    transition: opacity 500ms ease-out, transform 600ms ease-out,
+      visibility 1200ms ease-out;
+    will-change: opacity, transform, visibility;
+    transition-delay: 500ms;
+    transition-property: opacity, transform, visibility;
+  }
+  .setup-content.is-visible {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+  }
 
   .setup-content{
     padding: 0 200px;
