@@ -42,13 +42,6 @@ export const GetPopularMovies = async() => {
         }
     });
 
-
-    await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=1`)
-    .then((resp) => {
-        if(resp.data.results.length > 0){
-            movies.push(...resp.data.results); 
-        }
-    });
     return movies.length > 0 ? movies : []
 }
 
