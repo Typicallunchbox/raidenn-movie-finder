@@ -7,8 +7,7 @@ const Landing = () => {
   const myRef = useRef();
   const [myElementIsVisible, updateMyElementIsVisible] = useState(false);
   useEffect(() => {
-    var frameNumber = 0,
-    playbackConst = 80, 
+    var playbackConst = 80, 
     vid = document.getElementById('v0'); 
 
     function scrollPlay(){  
@@ -25,7 +24,6 @@ const Landing = () => {
     updateMyElementIsVisible(entry.isIntersecting);
 
   });
-  console.log('myRef', myRef.current);
     observer.observe(myRef.current);
   }, [])
   
@@ -72,7 +70,6 @@ const Landing = () => {
             <p className="ml-8 my-auto">Well...that's pretty much it</p>
           </div>
           <button className={`prim-button mt-14 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-3s' : ''}`}>Lets Goooooo!</button>
-        
         </div>
       </div>
     </div>

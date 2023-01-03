@@ -23,6 +23,7 @@ const getCommentsByMovieId = async (movieId, token) => {
     const response = await axios.get(API_URL +'movieId/'+ movieId, config)
     return response.data
 }
+
 //Create Comment
 const createComment = async (commentData, token) => {
     const config = {
@@ -50,12 +51,6 @@ const deleteComment = async (commentId, token) => {
     const response = await axios.delete(API_URL + commentId, config)
     return response.data
 }
-
-
-
-// const logout = () => {
-//     localStorage.removeItem('user')
-// }
 
 const commentService = {
     getComments,

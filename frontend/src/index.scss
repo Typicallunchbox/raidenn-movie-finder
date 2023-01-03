@@ -177,6 +177,11 @@ h3 {
   transition: color 0.5s ease;
 }
 
+.header p:hover {
+  color: var(--raidenn-blue);
+  transition: color 0.5s ease;
+}
+
 .header ul li a svg {
   margin-right: 5px;
 }

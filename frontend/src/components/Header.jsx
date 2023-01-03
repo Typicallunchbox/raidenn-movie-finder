@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
-import {reset as resetWatchlist} from "../features/watchlists/watchlistSlice"
-import {reset as resetMovies} from "../features/movies/movieSlice"
-import { useNavigate } from "react-router-dom";
 import SearchDropDown from "./SearchDropDown/SearchDropDown";
+import {reset as resetMovies} from "../features/movies/movieSlice"
+import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import {reset as resetWatchlist} from "../features/watchlists/watchlistSlice"
 
 function Header() {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ function Header() {
       {user && 
       <div className="flex gap-12 justify-center ">
               <Link to='/watchlist' className="tertiary-text-colour">
-                <a>My Watchlist</a>
+                My Watchlist
               </Link>
               <a className="tertiary-text-colour" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
                  Search

@@ -58,8 +58,6 @@ const Movie = () => {
       navigate('/login')
     }
 
-    // let temp = getWantToWatchRecord({movie_id : id})
-
     const getRecord = async () => {
       const record = await getWantToWatchRecord({movie_id : id});
       setUserWatchlistRecord(record)
@@ -265,18 +263,16 @@ const Movie = () => {
               <div className="buttons flex justify-evenly gap-1 mt-2">
                 <button className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.wantToWatch ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWantToWatchList()}} > <AiFillPlusCircle/>Watchlist</button>
                 <button className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.watched ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWatchedList()}} > <AiFillEye/> Watched</button>
-                {/* <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full'>Site</button> */}
               </div>
-              {movie.homepage && <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>}
-
+              {movie.homepage && 
+                <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>
+                }
               <p><b>Title</b> : {movie.title}</p>
               <p><b>Genres</b> : </p>
               <div className="genres">
-              {/* CREATE STANDARD REUSABLE BUTTONS, LINK W/ or W/ OUT borders etc. */}
-              {/* SANITIZE EVERYTHING */}
-              {movie.genres.map((genre)=>{
-                return <span key={genre.id}>{genre.name}</span>
-              })}
+                {movie.genres.map((genre)=>{
+                  return <span key={genre.id}>{genre.name}</span>
+                })}
               </div>
               <p><b>Status</b> : {movie.status}</p>
               <p><b>Popularity</b> : {movie.popularity}</p>
@@ -331,9 +327,6 @@ const Movie = () => {
                           <button onClick={() => {onSubmit()}}  type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            
                     </div>
                     </div>
-                    
-        
-          
           </div>
         </div>
         

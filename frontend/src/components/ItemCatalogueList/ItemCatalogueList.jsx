@@ -1,17 +1,16 @@
-import { React, useEffect, useState } from "react";
+import { React} from "react";
+import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom';
+import { AiFillDelete } from "react-icons/ai";
 import "../ItemCatalogueList/ItemCatalogueList.scss";
 import { updateWatchlistRecord } from "../../features/watchlists/watchlistSlice";
-import {useSelector, useDispatch} from 'react-redux'
-import axios from "axios";
-import { AiFillDelete } from "react-icons/ai";
-
 
 const ItemCatalogueList = (props) => {
-  const { movies, deleteWantToWatch, deleteWatched } = props;
+  const image_path = "https://image.tmdb.org/t/p/original";
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
+  const { movies, deleteWantToWatch, deleteWatched } = props;
+  
   const viewMovie = (id) => {
     if(id){
       navigate('/movie/' + id)
@@ -31,7 +30,6 @@ const ItemCatalogueList = (props) => {
     }
   }
 
-  let image_path = "https://image.tmdb.org/t/p/original";
   return (
     <div className="item-catalogue-list-container">
       <div className="inner-container">
