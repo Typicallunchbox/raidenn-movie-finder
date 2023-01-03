@@ -794,22 +794,22 @@ background-color: var(--raidenn-blue)
   height: 80vh;
   margin-top: 150px;
 
-  .setup-content {
-    opacity: 0;
-    transform: translateY(2vh);
-    visibility: hidden;
+  // .setup-content div{
+  //   opacity: 0;
+  //   transform: translateY(2vh);
+  //   visibility: hidden;
   
-    transition: opacity 500ms ease-out, transform 600ms ease-out,
-      visibility 1200ms ease-out;
-    will-change: opacity, transform, visibility;
-    transition-delay: 500ms;
-    transition-property: opacity, transform, visibility;
-  }
-  .setup-content.is-visible {
-    opacity: 1;
-    transform: none;
-    visibility: visible;
-  }
+  //   transition: opacity 500ms ease-out, transform 600ms ease-out,
+  //     visibility 1200ms ease-out;
+  //   will-change: opacity, transform, visibility;
+  //   transition-delay: 500ms;
+  //   transition-property: opacity, transform, visibility;
+  // }
+  // .setup-content div.is-visible{
+  //   opacity: 1;
+  //   transform: none;
+  //   visibility: visible;
+  // }
 
   .setup-content{
     padding: 0 200px;

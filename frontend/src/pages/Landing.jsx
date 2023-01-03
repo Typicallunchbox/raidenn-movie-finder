@@ -1,6 +1,7 @@
 import { React, useEffect, useState, useRef } from "react";
-import placeholder from '../static/images/wire.png'
-import landingAnimation from '../static/animations/webRgb.webm'
+import placeholder from '../static/images/wire.png';
+import 'animate.css';
+import landingAnimation from '../static/animations/webRgb.webm';
 
 const Landing = () => {
   const myRef = useRef();
@@ -46,7 +47,7 @@ const Landing = () => {
           </video> 
           </div>
           <div className="relative">
-          <button type="button" className="prim-button w-max absolute bottom-16 left-24">Get Started</button>
+          <button type="button" className={`prim-button w-max absolute bottom-16 left-24 animate__animated animate__fadeInUp animate__delay-2s`}>Get Started</button>
           </div>
         </div>
       </div>
@@ -55,23 +56,23 @@ const Landing = () => {
         <p>{ myElementIsVisible ? 'Yes! ????' : 'No ????' }</p>
           <img onScr src={placeholder} alt='placeholder'></img>
         </div>
-        <div className={`setup-content  ${myElementIsVisible ? 'is-visible' : ''}`}>
-          <div>
+        <div className={`setup-content`}>
+         
           <h3 className="text-left ml-14 mb-14">Steps to get started:</h3>
-          <div className="flex mb-5">
+          <div className={`flex mb-5 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-1s' : ''}`}>
             <span>1</span>
             <p className="ml-8 my-auto">Create your Raidenn profile</p>
           </div>
-          <div className="flex mb-5">
+          <div className={`flex mb-5 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-2s' : ''}`}>
             <span>2</span>
             <p className="ml-8 my-auto">Start finding and watchlisting movies</p>
           </div>
-          <div className="flex mb-5">
+          <div className={`flex mb-5 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-3s' : ''}`}>
             <span>3</span>
             <p className="ml-8 my-auto">Well...that's pretty much it</p>
           </div>
-          <button className="prim-button mt-14">Lets Goooooo!</button>
-        </div>
+          <button className={`prim-button mt-14 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-3s' : ''}`}>Lets Goooooo!</button>
+        
         </div>
       </div>
     </div>
