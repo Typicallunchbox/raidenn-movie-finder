@@ -267,16 +267,25 @@ const Movie = () => {
               {movie.homepage && 
                 <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>
                 }
-              <p><b>Title</b> : {movie.title}</p>
-              <p><b>Genres</b> : </p>
-              <div className="genres">
+              <div className="flex gap-5">
+              <p><b>Title</b> : </p> 
+                <p>{movie.title}</p>
+              </div>
+              
+              <span><b>Genres</b> : </span>
+              <div className="genres mt-4">
                 {movie.genres.map((genre)=>{
                   return <span key={genre.id}>{genre.name}</span>
                 })}
               </div>
-              <p><b>Status</b> : {movie.status}</p>
-              <p><b>Popularity</b> : {movie.popularity}</p>
-              <p><b>Budget</b> : {movie.budget}</p>
+              <div className="flex gap-5">
+                <p><b>Status</b> : </p> 
+                <p>{movie.status}</p>
+              </div>
+              <div className="flex gap-5">
+                <p><b>Budget</b> : </p> 
+                <p>{movie.budget}</p>
+              </div>
             </div>
             <div className="plain-card border-0 w-full sm:h-128 text-left overflow-hidden">
               {movieVideos && 

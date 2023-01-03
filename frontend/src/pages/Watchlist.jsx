@@ -29,7 +29,7 @@ const Watchlist = () => {
     dispatch(getWatched())
     dispatch(getWantToWatch())
 
-  }, [ user, navigate, dispatch, isError, message])
+  }, [ user, listType, navigate, dispatch, isError, message])
   
   
   if(isLoading){

@@ -108,6 +108,10 @@ a {
   cursor: pointer;
 }
 
+span {
+  color: var(--raidenn-white);
+}
+
 a:hover {
   color: var(--raidenn-blue);
 }
@@ -574,11 +578,12 @@ background-color: var(--raidenn-blue)
         gap: 4%;
         font-weight: 200;
         color: var(--raidenn-white);
-        border: var(--raidenn-white);
         border-radius: 10px;
-        border-width: 1px;
         border-style: solid;
         text-align: center;
+        background: #1b8ad3d6;
+        margin-bottom: 10px;
+        padding: 5px;
       }
     }
   }
