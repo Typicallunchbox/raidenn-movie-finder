@@ -1,0 +1,1 @@
+export const validYear = /^(19|20)\d{2}$/

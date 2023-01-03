@@ -9,6 +9,7 @@ import Select from '@mui/material/Select';
 import { addTag, addMovies } from '../../features/movies/movieSlice';
 import axios from "axios";
 import './SearchDropDown.scss';
+import { validYear } from '../../static/regex'
 
 
 
@@ -55,6 +56,16 @@ useEffect(() => {
 
 
 const search = () => {
+
+  if(releasedYear !== ''){
+    let date =  new Date().getFullYear();
+
+    if(!(validYear.test(releasedYear) && parseInt(releasedYear) <= parseInt(date))){
+      //Return error msg
+      return;
+    }
+  }
+
   if(searchText.trim() !== ''){
     axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&query=${searchText}&primary_release_year=${releasedYear}&with_genres=${genre}&language=en-US&page=1`)
     .then((resp) => {
