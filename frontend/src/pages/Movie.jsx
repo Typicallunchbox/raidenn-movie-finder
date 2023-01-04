@@ -261,8 +261,8 @@ const Movie = () => {
             <div className="movieInfo">
               <img src={image_path + movie.poster_path} alt='movie'></img>
               <div className="buttons flex justify-evenly gap-1 mt-2">
-                <button className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.wantToWatch ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWantToWatchList()}} > <AiFillPlusCircle/>Watchlist</button>
-                <button className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.watched ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWatchedList()}} > <AiFillEye/> Watched</button>
+                <button className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.wantToWatch ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWantToWatchList()}} > <div className="my-auto"><AiFillPlusCircle/></div>Watchlist</button>
+                <button className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.watched ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWatchedList()}} > <div className="my-auto"><AiFillEye/></div> Watched</button>
               </div>
               {movie.homepage && 
                 <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>

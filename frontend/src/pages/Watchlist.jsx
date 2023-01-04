@@ -46,7 +46,6 @@ const Watchlist = () => {
         <div className='mt-20 '>
           {listType === 'wantToWatch' &&
           <div className='wantToWatch'>
-            <h1>Want to Watch</h1>
             {wantToWatch && (
               <div className='catalogue'>
                 <ItemCatalogueList deleteWantToWatch={true} deleteWatched={false} movies={wantToWatch} />
@@ -55,7 +54,6 @@ const Watchlist = () => {
           </div>}
           {listType === 'watched' &&
           <div className='watched'>
-            <h1>Watched</h1>
             {watched && (
               <div className='catalogue'>
                 <ItemCatalogueList deleteWatched={true} deleteWantToWatch={false} movies={watched} />
