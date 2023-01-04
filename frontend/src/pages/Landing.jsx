@@ -50,8 +50,7 @@ const Landing = () => {
         </div>
       </div>
       <div ref={myRef}  className={`instructions`}>
-        <div>
-        <p>{ myElementIsVisible ? 'Yes! ????' : 'No ????' }</p>
+        <div className="animation-container">
           <img onScr src={placeholder} alt='placeholder'></img>
         </div>
         <div className={`setup-content`}>

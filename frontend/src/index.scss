@@ -806,25 +806,14 @@ background-color: var(--raidenn-blue)
   height: 80vh;
   margin-top: 150px;
 
-  // .setup-content div{
-  //   opacity: 0;
-  //   transform: translateY(2vh);
-  //   visibility: hidden;
+  .animation-container{
+    min-width: 300px;
+    max-width: 400px;
+  }
   
-  //   transition: opacity 500ms ease-out, transform 600ms ease-out,
-  //     visibility 1200ms ease-out;
-  //   will-change: opacity, transform, visibility;
-  //   transition-delay: 500ms;
-  //   transition-property: opacity, transform, visibility;
-  // }
-  // .setup-content div.is-visible{
-  //   opacity: 1;
-  //   transform: none;
-  //   visibility: visible;
-  // }
-
   .setup-content{
     padding: 0 200px;
+    min-width: fit-content;
 
     span{
       padding: 20px 40px;
@@ -850,6 +839,27 @@ background-color: var(--raidenn-blue)
     }
   }
 }
+
+@media (max-width: 1600px) {
+  .instructions{
+    .setup-content{
+      padding: 0 100px !important;
+
+      span{
+        font-size: 22px;
+      }
+
+      h3{
+        font-size: 35px;
+      }
+
+      p{
+        font-size: 24px;
+      }
+    }
+  }
+}
+
 @media (max-width: 1000px) {
   .movie-container {
     flex-direction: column;
