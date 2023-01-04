@@ -19,7 +19,8 @@ function Header() {
     dispatch(reset())
     dispatch(resetWatchlist())
     dispatch(resetMovies())
-    
+
+    window.scrollTo(0, 0);
     navigate('/')
   }
 
