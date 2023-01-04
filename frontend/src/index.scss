@@ -209,7 +209,7 @@ footer {
   position: relative;
   height: 200px;
   width: 100%;
-  z-index: 20;
+  z-index: 18;
   background: #1D1D1D;
   margin-top: 120px;
 
@@ -458,10 +458,11 @@ footer {
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 5000;
+  z-index: 19;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: var(--raidenn-black);
 }
 
 .loadingSpinner {
@@ -841,6 +842,10 @@ background-color: var(--raidenn-blue)
 }
 
 @media (max-width: 1600px) {
+  .movie-container {
+    gap: 40px;
+  }
+
   .instructions{
     .setup-content{
       padding: 0 100px !important;

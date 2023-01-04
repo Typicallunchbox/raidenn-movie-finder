@@ -268,7 +268,7 @@ const Movie = () => {
                 <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>
                 }
               <div className="flex gap-5">
-              <p><b>Title</b> : </p> 
+              <p><b>Title</b>:</p> 
                 <p>{movie.title}</p>
               </div>
               
@@ -307,7 +307,7 @@ const Movie = () => {
           <div className="production-section">
             {movie && productionCompanies}
           </div>
-          <div className="card p-4 comment-section w-full text-left">
+          <div className="card p-4 comment-section w-full text-left mt-36">
                     <h1>Comments</h1>
                     <div className="comments">
                       {comments && comments.map((comment) => (
