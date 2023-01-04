@@ -13,23 +13,24 @@ import { reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
 import noCastImg from '../static/svgs/user.svg'
-// import {GetMovieById, GetMovieImagesById, GetMovieVideosById,} from "../providers/moviesProvider";
 
 import Filter from 'bad-words';
 
 const Movie = () => {
   const [text, setText] = useState("");
-  let rating = "";
+  const [rating, setRating] = useState("");
+
+  // let rating = "";
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { id } = useParams();
   const {user} = useSelector((state) => state.auth)
   const {comments, isLoading, isError, message} = useSelector((state) => state.comments) 
+  const [commentErr, setCommentErr] = useState('');
   const [movie, setMovie] = useState(null);
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
-
   const [userWatchlistRecord, setUserWatchlistRecord] = useState(null);
 
 
@@ -42,10 +43,17 @@ const Movie = () => {
   let colours = ColourPalette(movie ? (image_path + movie?.poster_path) : []);
  
   const onSubmit = (e) => {
+
+    if(text.length > 600){
+      setCommentErr('Max character length is 600 characters.')
+      return;
+    }
+
     let filter = new Filter();
     if(text && rating && id){
       dispatch(createComment({"comment": filter.clean(text), "rating":rating, "movie_id": `${id}`}))
       setText('')
+      setRating('')
     }
   };
 
@@ -148,7 +156,7 @@ const Movie = () => {
   }, [id, movie]);
 
   const setMovieRating = (val) => {
-    rating = val
+    setRating(val)
   }
   
   if(isLoading){
@@ -307,32 +315,34 @@ const Movie = () => {
           <div className="production-section">
             {movie && productionCompanies}
           </div>
-          <div className="card p-4 comment-section w-full text-left mt-36">
+          <div className="card p-4 comment-section w-full text-left mt-36 mx-auto w-4/5">
                     <h1>Comments</h1>
                     <div className="comments">
                       {comments && comments.map((comment) => (
                         <div className="card border-default mb-2 p-3">
-                          <div className="flex justify-between">
+                          <div style={{background: '#1b8ad3'}} className="flex gap-6 border-none px-6 py-2 w-fit rounded-md">
                             <span>{comment.username}</span>
-                            <p>{comment.rating}</p>
+                            <p className="px-2 w-fit border-none rounded bg-white">{comment.rating} / 5</p>
                           </div>
-                          <p>{comment.comment}</p>
+                          <p className="leading-7">{comment.comment}</p>
                         </div>
                       ))}
                     </div>
                     <div className="p-px"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, rgba(0,0,0,0))`} : {}}></div>
                     <div>
                       <div className="my-2">
-                          <p> Rate Movie : 
+                          <div> 
+                            <span className="mr-2">Rate Movie :</span>
                             <Rating  
-                            onClick={val=>setMovieRating(val)} 
+                            initialRating={rating}
+                            onClick={(val)=>{setMovieRating(val)}} 
                             emptySymbol={<BiStar/>} 
                             fullSymbol={<FaStar/>}
                           />
-                          </p>
+                          </div>
                       </div>
                       <div className="controls flex my-2 gap-2 flex-col md:flex-row ">
-                          <input onChange={(e) => setText(e.target.value)} value={text} type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
+                          <input onChange={(e) => {setText(e.target.value); console.log()}} value={text} type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
                           <button onClick={() => {onSubmit()}}  type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            
                     </div>
                     </div>
