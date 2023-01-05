@@ -213,7 +213,7 @@ h3 {
       text-align: right;
       padding: 20px;
       font-size: 18px;
-      
+
       a{
         display: none;
       }
@@ -695,6 +695,10 @@ background-color: var(--raidenn-blue)
   text-align: left;
   animation: fadeInAnimation ease 3s;
 
+}
+
+.section-title:hover{
+  cursor: pointer;
 }
 
 .images-section{
