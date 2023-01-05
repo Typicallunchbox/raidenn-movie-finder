@@ -60,7 +60,17 @@ function Header() {
                   <p>Menu</p>
                 </div>
               </div>
-              <div className={`options-menu ${openMenu ? 'is-open' : ''}`}></div>
+              <div className={`options-menu flex relative ${openMenu ? 'is-open' : ''}`}>
+                <Link className="bk-text-colour mb-2 p-1 shader" to='/settings'>
+                  Profile 
+                </Link>
+                <Link className="bk-text-colour shader p-1" to='/about'>
+                  About 
+                </Link>
+                <Link className="bk-text-colour absolute bottom-5 right-5" onClick={onLogout} to='/'>
+                  Logout 
+                </Link>
+              </div>
             </div>
           </>
         ) : (

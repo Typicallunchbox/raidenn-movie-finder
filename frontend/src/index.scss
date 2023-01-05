@@ -209,6 +209,10 @@ h3 {
       margin: 0 0 0 auto;
       background-color: var(--raidenn-white);
       opacity: 0;
+      flex-direction: column;
+      text-align: right;
+      padding: 20px;
+      font-size: 18px;
     }
 
     .options-menu.is-open{
@@ -216,6 +220,11 @@ h3 {
       opacity: 1;
       width: 400px;
       height:200px;
+
+      .shader:hover{
+        color: white;
+        background:linear-gradient(-90deg, var(--raidenn-blue), var(--raidenn-blue), rgba(0, 0, 0, 0));
+      }
     }
   }
  
