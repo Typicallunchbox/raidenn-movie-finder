@@ -6,7 +6,9 @@ import { logout, reset } from "../features/auth/authSlice";
 import SearchDropDown from "./SearchDropDown/SearchDropDown";
 import {reset as resetMovies} from "../features/movies/movieSlice"
 import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
-import {reset as resetWatchlist} from "../features/watchlists/watchlistSlice"
+import {reset as resetWatchlist} from "../features/watchlists/watchlistSlice";
+import btnAnimation from '../static/animations/menuBtnAnimation.webm';
+
 
 function Header() {
   const navigate = useNavigate();
@@ -51,9 +53,13 @@ function Header() {
           <>
             <div className="options-block">
               <div onClick={clickedMenu} className="options-container-btn">
+             
                 <div className={`inner-container ${openMenu ? 'is-open' : ''}`}>
                   <p>Menu</p>
                 </div>
+                <video  className={`absolute top-0 left-0 ${openMenu ? 'is-open' : ''}`} autoPlay loop muted>
+                <source type="video/webm" src={btnAnimation}></source>
+              </video>
               </div>
               <div className={`options-menu flex relative ${openMenu ? 'is-open' : ''}`}>
                 <Link className="bk-text-colour mb-2 p-1 shader" to='/settings'>

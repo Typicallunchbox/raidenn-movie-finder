@@ -172,11 +172,13 @@ h3 {
       top: 1.5em;
 
     .options-container-btn{
+      overflow: hidden;
       width: 100px;
       height: 35px;
       padding: 5px;
       background-color: var(--raidenn-white);
       margin: 0 0 0 auto;
+      position: relative;
   
       .inner-container{
         height: 100%;
@@ -199,6 +201,15 @@ h3 {
         p{
           opacity: 1;
         }
+      }
+
+      video{
+        transition: opacity 1s;
+        opacity: 1;
+      }
+
+      video.is-open{
+        opacity: 0;
       }
     }
 
