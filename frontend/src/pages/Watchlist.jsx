@@ -1,11 +1,9 @@
 import Spinner from '../components/Spinner';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
 import { React, useEffect, useState } from "react";
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux';
 import { getWatched, getWantToWatch } from "../features/watchlists/watchlistSlice";
 import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
-import { banishWatched, banishWantToWatch } from "../features/watchlists/watchlistSlice";
-
 
 const Watchlist = () => {
   const [listType, setListType] = useState('')
@@ -32,15 +30,6 @@ const Watchlist = () => {
 
   }, [ user, listType, navigate, dispatch, isError, message])
   
-  const banishRecord = (record, listType) => {
-    
-    if(listType === 'watched'){
-      banishWatched(record);
-    }else if(listType === 'wantToWatch'){
-      banishWantToWatch(record);
-    }
-
-  }
   
   if(isLoading){
     return <Spinner/>
@@ -58,7 +47,7 @@ const Watchlist = () => {
           <div className='wantToWatch'>
             {wantToWatch && (
               <div className='catalogue'>
-                <ItemCatalogueList allowDeleteWantToWatch={true} allowDeleteWatched={false} movies={wantToWatch} banishRecord={banishRecord} />
+                <ItemCatalogueList allowDeleteWantToWatch={true} allowDeleteWatched={false} movies={wantToWatch} />
               </div>
             )}
           </div>}
@@ -66,7 +55,7 @@ const Watchlist = () => {
           <div className='watched'>
             {watched && (
               <div className='catalogue'>
-                <ItemCatalogueList allowDeleteWatched={true} allowDeleteWantToWatch={false} movies={watched} banishRecord={banishRecord} />
+                <ItemCatalogueList allowDeleteWatched={true} allowDeleteWantToWatch={false} movies={watched} />
               </div>
             )}
           </div>}

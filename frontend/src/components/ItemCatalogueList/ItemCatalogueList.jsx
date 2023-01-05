@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom';
 import { AiFillDelete } from "react-icons/ai";
 import "../ItemCatalogueList/ItemCatalogueList.scss";
-import { updateWatchlistRecord } from "../../features/watchlists/watchlistSlice";
+import { updateWatchlistRecord, banishWatched, banishWantToWatch } from "../../features/watchlists/watchlistSlice";
 
 const ItemCatalogueList = (props) => {
   const image_path = "https://image.tmdb.org/t/p/original";
@@ -21,14 +21,15 @@ const ItemCatalogueList = (props) => {
     let m = {...data};
     if(allowDeleteWatched){
       m.watched = false;
+      dispatch(banishWatched(m));
       dispatch(updateWatchlistRecord({movie: m}))
       banishRecord(m, 'watched')
     }
     
     else if(allowDeleteWantToWatch){
       m.wantToWatch = false;
+      dispatch(banishWantToWatch(m));
       dispatch(updateWatchlistRecord({movie: m}))
-      banishRecord(m, 'watchToWatch')
     }
   }
 
