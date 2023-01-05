@@ -13,6 +13,8 @@ function Header() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [openSearchTab, setOpenSearchTab] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+
 
   const onLogout = () =>{
     dispatch(logout())
@@ -22,6 +24,10 @@ function Header() {
 
     window.scrollTo(0, 0);
     navigate('/')
+  }
+
+  const clickedMenu = () =>{
+    setOpenMenu(!openMenu)
   }
 
   return (
@@ -48,10 +54,13 @@ function Header() {
                Logout &nbsp; <FaSignOutAlt />
               </a>
             </li> */}
-            <div onClick={onLogout} className="options-container-btn">
-              <div className="inner-container">
-                <p>Menu</p>
+            <div className="options-block">
+              <div onClick={clickedMenu} className="options-container-btn">
+                <div className={`inner-container ${openMenu ? 'is-open' : ''}`}>
+                  <p>Menu</p>
+                </div>
               </div>
+              <div className={`options-menu ${openMenu ? 'is-open' : ''}`}></div>
             </div>
           </>
         ) : (

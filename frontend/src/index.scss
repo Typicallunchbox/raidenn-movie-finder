@@ -164,43 +164,76 @@ h3 {
   z-index: 20;
   // background-color: var(--raidenn-black)
 
-  .options-container-btn{
-    width: 100px;
-    height: 35px;
+
+  .options-block{
+
     position: absolute;
-    right: 1.5em;
-    padding: 5px;
-    top: 1.5em;
-    background-color: var(--raidenn-white);
+      right: 1.5em;
+      top: 1.5em;
 
-    .inner-container{
-      height: 100%;
-      width: 10px;
-      border-radius: 2px;
-      background: var(--raidenn-black);
+    .options-container-btn{
+      width: 100px;
+      height: 35px;
+      padding: 5px;
+      background-color: var(--raidenn-white);
       margin: 0 0 0 auto;
-      transition: width 1s;
-      overflow: hidden;
-      text-align: center;
+  
+      .inner-container{
+        height: 100%;
+        width: 10px;
+        border-radius: 2px;
+        background: var(--raidenn-black);
+        margin: 0 0 0 auto;
+        transition: width 1s;
+        overflow: hidden;
+        text-align: center;
+  
+        p{
+          opacity: 0;
+          transition: opacity 1s ease-in;
+        }
+      }
 
-      p{
-        opacity: 0;
-        transition: opacity 1s ease-in;
+      .inner-container.is-open{
+        width: 100%;
+        p{
+          opacity: 1;
+        }
       }
     }
-  }
 
-  .options-container-btn:hover{
-    cursor: pointer;
+    .options-menu{
+      height:0px;
+      width: 400px;
+      transition: height 1s, opacity 1s;
+      margin: 0 0 0 auto;
+      background-color: var(--raidenn-white);
+      opacity: 0;
+    }
 
-    .inner-container{
-      width: 100%;
-
-      p{
-        opacity: 1;
-      }
+    .options-menu.is-open{
+      transition: height 0.5s;
+      opacity: 1;
+      width: 400px;
+      height:200px;
     }
   }
+ 
+
+
+  .options-block:hover{
+    .options-container-btn{
+      cursor: pointer;
+
+      .inner-container{
+        width: 100%;
+
+        p{
+          opacity: 1;
+        }
+      }
+    }
+}
 }
 
 .header ul {
