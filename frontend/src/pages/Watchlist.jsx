@@ -43,7 +43,7 @@ const Watchlist = () => {
           <p className={listType === 'watched' ? 'optionSelected' : ''} onClick={() => setListType('watched')}>Previously watched movies</p>
       </div>
       <div className='container'>
-        <div className='mt-20 '>
+        <div className='mt-20 mb-40'>
           {listType === 'wantToWatch' &&
           <div className='wantToWatch'>
             {wantToWatch && (

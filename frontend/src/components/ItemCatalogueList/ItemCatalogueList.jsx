@@ -24,7 +24,6 @@ const ItemCatalogueList = (props) => {
       dispatch(updateWatchlistRecord({movie: m}))
     }
     else if(deleteWantToWatch){
-      console.log('Movie:', m)
       m.wantToWatch = false;
       dispatch(updateWatchlistRecord({movie: m}))
     }

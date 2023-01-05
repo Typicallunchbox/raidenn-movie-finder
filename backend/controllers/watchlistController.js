@@ -22,7 +22,7 @@ const getWantToWatch = asyncHandler(async (req, res) => {
 //@route    GET /api/watchlist
 //@access   Private
 const getWatchlistByUserId = asyncHandler(async (req, res) => {
-    const watchlist = await Watchlist.find({ user_id: req.user.id })
+    const watchlist = await Watchlist.find({ user: req.user.id })
     if(watchlist.length == 0){
         res.status(400)
         throw new Error('No watchlist found')
@@ -39,7 +39,7 @@ const getWantToWatchRecord = asyncHandler(async (req, res) => {
     let movie_id = null;
     movie_id = req.body.movie_id;
 
-    const watchListRecord = await Watchlist.findOne({user_id: req.user.id, movie_id: movie_id});
+    const watchListRecord = await Watchlist.findOne({user: req.user.id, movie_id: movie_id});
 
     if (!watchListRecord) {
         return res.status(200).json(null)
@@ -64,7 +64,7 @@ const getWantToWatchRecord = asyncHandler(async (req, res) => {
 //@route    POST /api/watchlist
 //@access   Private
 const createWatchlistRecord = asyncHandler(async (req, res) => {
-    const watchListRecord = await Watchlist.findOne({user_id: req.user.id, movie_id: req.body.movie_id});
+    const watchListRecord = await Watchlist.findOne({user: req.user.id, movie_id: req.body.movie_id});
 
     if (watchListRecord) {
         res.status(400);
@@ -117,7 +117,8 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
     if(req.body.movie.__v) delete delete req.body.movie.__v
 
     const {movie} = req.body
-    const watchListRecord = await Watchlist.findOne({movie_id : movie.movie_id, user_id : req.user.id});
+
+    const watchListRecord = await Watchlist.findOne({user : req.user.id, movie_id : movie.movie_id });
     // const watchListRecord = await Watchlist.findById(movie._id);
     if(movie.watched === undefined && movie.wantToWatch === undefined){
         res.status(400)
@@ -130,10 +131,11 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
 
-    // console.log('watchListRecord:', watchListRecord)
     if(watchListRecord){
         if(!movie.watched && !movie.wantToWatch){
             //Make sure the logged in user matches the goal user
+
+
             if(watchListRecord.user.toString() !== req.user.id){
                 res.status(401)
                 throw new Error('User not authorized')

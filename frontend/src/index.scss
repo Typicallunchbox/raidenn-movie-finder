@@ -87,6 +87,11 @@
 //   font-family: 'SKModernist', sans-serif;
 //   // height: 100vh;
 // }
+
+html{
+  scroll-behavior: smooth
+}
+
 body {
     font-family: 'SKModernist', sans-serif;
   }
@@ -161,7 +166,7 @@ h3 {
 
   .options-container-btn{
     width: 100px;
-    height: 30px;
+    height: 35px;
     position: absolute;
     right: 1.5em;
     padding: 5px;
@@ -174,6 +179,26 @@ h3 {
       border-radius: 2px;
       background: var(--raidenn-black);
       margin: 0 0 0 auto;
+      transition: width 1s;
+      overflow: hidden;
+      text-align: center;
+
+      p{
+        opacity: 0;
+        transition: opacity 1s ease-in;
+      }
+    }
+  }
+
+  .options-container-btn:hover{
+    cursor: pointer;
+
+    .inner-container{
+      width: 100%;
+
+      p{
+        opacity: 1;
+      }
     }
   }
 }
@@ -261,7 +286,7 @@ footer {
 
   p{
     color: var(--raidenn-white);
-    font-size: 22px;
+    font-size: 20px;
     padding: 8px;
     transition: color 0.5s ease;
   }

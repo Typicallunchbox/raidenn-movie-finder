@@ -94,7 +94,6 @@ export const getWatched = createAsyncThunk(
   "watchlist/watched",
   async (thunkAPI) => {
     try {
-      console.log('user:', user)
       user = JSON.parse(localStorage.getItem("user"));
       const token = user.token;
         return await watchlistService.getWatched(token);

@@ -48,8 +48,10 @@ function Header() {
                Logout &nbsp; <FaSignOutAlt />
               </a>
             </li> */}
-            <div className="options-container-btn">
-              <div className="inner-container"></div>
+            <div onClick={onLogout} className="options-container-btn">
+              <div className="inner-container">
+                <p>Menu</p>
+              </div>
             </div>
           </>
         ) : (
