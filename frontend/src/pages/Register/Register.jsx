@@ -1,6 +1,7 @@
 import './Register.scss'
 import React from 'react'
 import {toast} from 'react-toastify'
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
@@ -74,7 +75,9 @@ const Login = () => {
       </div>
         <button onClick={onSubmit} type='submit' className='btn-primary'>Register</button>
         <div>
-          <p className='my-12'></p>
+        <Link to='/register'>
+          <p className='bk-text-colour my-4 text-sm'>Already have an account? <a className='bk-text-colour underline' href='/register'>Sign In</a></p>
+        </Link>
         </div>
       </div> 
     </div>

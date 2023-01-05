@@ -66,7 +66,7 @@ const Login = () => {
         <button onClick={onSubmit} type='submit' className='btn-primary'>Sign In</button>
         <div>
         <Link to='/register'>
-          <p className='bk-text-colour my-4 text-xs'>New to Raidenn? <a className='bk-text-colour' href='/register'>Sign Up Now</a></p>
+          <p className='bk-text-colour my-4 text-sm underline'><a className='bk-text-colour' href='/register'>Create an Account</a></p>
         </Link>
         </div>
       </div> 
