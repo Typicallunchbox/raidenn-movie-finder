@@ -49,11 +49,6 @@ function Header() {
       <ul>
         {user ? (
           <>
-            {/* <li>
-              <a className="tertiary-text-colour hover:text-gray-700" onClick={onLogout}>
-               Logout &nbsp; <FaSignOutAlt />
-              </a>
-            </li> */}
             <div className="options-block">
               <div onClick={clickedMenu} className="options-container-btn">
                 <div className={`inner-container ${openMenu ? 'is-open' : ''}`}>

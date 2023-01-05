@@ -213,6 +213,10 @@ h3 {
       text-align: right;
       padding: 20px;
       font-size: 18px;
+      
+      a{
+        display: none;
+      }
     }
 
     .options-menu.is-open{
@@ -220,6 +224,10 @@ h3 {
       opacity: 1;
       width: 400px;
       height:200px;
+
+      a{
+        display: block;
+      }
 
       .shader:hover{
         color: white;
