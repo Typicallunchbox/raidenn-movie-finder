@@ -158,7 +158,15 @@ export const watchlistSlice = createSlice({
       state.isError = false;
       state.isSuccess = false;
       state.message = "";
-    }
+    },
+    banishWatched: (state, action) => ({
+      ...state,
+      watched: state.watched.filter(item => item !== action.payload),
+    }),
+    banishWantToWatch: (state, action) => ({
+      ...state,
+      wantToWatch: state.wantToWatch.filter(item => item !== action.payload),
+    })
   },
   extraReducers: (builder) => {
     builder
@@ -239,5 +247,5 @@ export const watchlistSlice = createSlice({
   },
 });
 
-export const { reset } = watchlistSlice.actions;
+export const { reset, banishWatched, banishWantToWatch } = watchlistSlice.actions;
 export default watchlistSlice.reducer;
