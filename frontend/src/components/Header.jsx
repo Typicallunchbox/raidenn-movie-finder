@@ -43,11 +43,14 @@ function Header() {
       <ul>
         {user ? (
           <>
-            <li>
+            {/* <li>
               <a className="tertiary-text-colour hover:text-gray-700" onClick={onLogout}>
                Logout &nbsp; <FaSignOutAlt />
               </a>
-            </li>
+            </li> */}
+            <div className="options-container-btn">
+              <div className="inner-container"></div>
+            </div>
           </>
         ) : (
           <>
