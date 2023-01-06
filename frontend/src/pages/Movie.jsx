@@ -318,17 +318,6 @@ const Movie = () => {
           <div className="card p-4 comment-section w-full text-left mt-36 mx-auto md:w-4/5 sm:w-full">
                     <h1>Comments</h1>
                     <div className="comments">
-                      {/* {comments && comments.length > 0 && comments.map((comment) => (
-                        <div className="card border-default mb-2 p-3">
-                          <div style={{background: '#1b8ad3'}} className="flex gap-6 border-none px-6 py-2 w-full justify-between md:w-fit md:justify-start rounded-md ">
-                            <span>{comment.username}</span>
-                            <p className="px-2 w-fit border-none rounded bg-white">{comment.rating} / 5</p>
-                          </div>
-                          <p className="leading-7">{comment.comment}</p>
-                        </div>
-                      ))} */}
-
-
                       {comments && comments.length > 0 ? comments.map((comment) => 
                         <div className="card border-default mb-2 p-3">
                           <div style={{background: '#1b8ad3'}} className="flex gap-6 border-none px-6 py-2 w-full justify-between md:w-fit md:justify-start rounded-md ">
@@ -337,9 +326,7 @@ const Movie = () => {
                           </div>
                           <p className="leading-7">{comment.comment}</p>
                         </div>
-                      ): <div className="text-slate-500">No comments yet for this movie...</div>}
-
-
+                      ) : <div className="text-slate-500">No comments yet for this movie...</div>}
 
                     </div>
                     <div className="p-px"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, rgba(0,0,0,0))`} : {}}></div>
