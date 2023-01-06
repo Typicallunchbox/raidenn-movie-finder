@@ -558,11 +558,11 @@ footer {
   bottom: 0;
   left: 0;
   // background-color: rgba(0, 0, 0, 0.5);
-  z-index: 19;
+  z-index: 500;
   display: flex;
   justify-content: center;
   align-items: center;
-  // background: var(--raidenn-black);
+  background: var(--raidenn-black);
 }
 
 .loadingSpinner {
