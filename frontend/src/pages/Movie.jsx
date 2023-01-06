@@ -31,7 +31,10 @@ const Movie = () => {
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
+  const [disableWantToWatch, setDisableWantToWatch] = useState(false);
+  const [disableWatched, setDisableWatched] = useState(false);
   const [userWatchlistRecord, setUserWatchlistRecord] = useState(null);
+
 
 
   //display variables
@@ -269,8 +272,8 @@ const Movie = () => {
             <div className="movieInfo">
               <img src={image_path + movie.poster_path} alt='movie'></img>
               <div className="buttons flex justify-evenly gap-1 mt-2">
-                <button className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.wantToWatch ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWantToWatchList()}} > <div className="my-auto"><AiFillPlusCircle/></div>Watchlist</button>
-                <button className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.watched ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWatchedList()}} > <div className="my-auto"><AiFillEye/></div> Watched</button>
+                <button disabled={disableWantToWatch} className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.wantToWatch || disableWantToWatch ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWantToWatchList(); setDisableWantToWatch(true)}} > <div className="my-auto"><AiFillPlusCircle/></div>Watchlist</button>
+                <button disabled={disableWatched} className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.watched || disableWatched  ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWatchedList(); setDisableWatched(true)}} > <div className="my-auto"><AiFillEye/></div> Watched</button>
               </div>
               {movie.homepage && 
                 <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>
