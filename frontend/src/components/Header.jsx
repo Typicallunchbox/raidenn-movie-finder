@@ -40,18 +40,19 @@ function Header() {
         <Link className="tertiary-text-colour" style={{fontFamily: 'ThunderBoldLC', fontSize: '35px'}}  to='/'>Raidenn</Link>
       </div>
       {user && 
-      <div className="flex gap-12 justify-center ">
-              <Link to='/watchlist' className="tertiary-text-colour">
+      <div className="flex gap-12 justify-center">
+              <Link to='/watchlist' className="tertiary-text-colour hidden sm:block">
                 My Watchlist
               </Link>
-              <a className="tertiary-text-colour" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
+              <Link to={'#'} className="tertiary-text-colour hidden sm:block" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
                  Search
-              </a>
+              </Link>
             </div>}
       <ul>
         {user ? (
           <>
-            <div className="options-block">
+            <div className="w-24"></div>
+            <div className={`options-block ${openMenu ? 'is-open' : ''}`}>
               <div onClick={clickedMenu} className="options-container-btn">
              
                 <div className={`inner-container ${openMenu ? 'is-open' : ''}`}>
@@ -61,7 +62,15 @@ function Header() {
                 <source type="video/webm" src={btnAnimation}></source>
               </video>
               </div>
-              <div className={`options-menu flex relative ${openMenu ? 'is-open' : ''}`}>
+              <div className={`options-menu flex relative ${openMenu ? 'is-open' : 'hidden'}`}>
+                <div className="md:hidden sm:block">
+                  <Link className="bk-text-colour mb-2 p-1 shader" to='/watchlist'>
+                    My Watchlist 
+                  </Link>
+                  {/* <Link to={'#'} className="tertiary-text-colour md:block sm:hidden" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
+                    Search
+                  </Link> */}
+                </div>
                 <Link className="bk-text-colour mb-2 p-1 shader" to='/settings'>
                   Profile 
                 </Link>

@@ -166,7 +166,6 @@ h3 {
 
 
   .options-block{
-
     position: absolute;
       right: 1.5em;
       top: 1.5em;
@@ -702,7 +701,6 @@ background-color: var(--raidenn-blue)
   letter-spacing: 2px;
   font-size: 30px;
   width: 50%;
-  margin: 0 auto;
   text-align: left;
   animation: fadeInAnimation ease 3s;
 
@@ -1010,6 +1008,48 @@ background-color: var(--raidenn-blue)
 }
 
 @media (max-width: 600px) {
+
+  .header {
+    .options-block{
+      .options-menu{ 
+        .is-mobile{
+          display: block;
+        }
+      }
+  
+      .options-menu.is-open{
+        transition: height 0.5s;
+        opacity: 1;
+        width: 400px;
+        height:200px;
+  
+        a{
+          display: block;
+        }
+  
+        .shader:hover{
+          color: white;
+          background:linear-gradient(-90deg, var(--raidenn-blue), var(--raidenn-blue), rgba(0, 0, 0, 0));
+        }
+      }
+    }
+   
+  
+  
+    .options-block:hover{
+      .options-container-btn{
+        cursor: pointer;
+  
+        .inner-container{
+          width: 100%;
+  
+          p{
+            opacity: 1;
+          }
+        }
+      }
+  }
+  }
 
   .container {
     padding: 0 10px;
