@@ -213,7 +213,6 @@ h3 {
     }
 
     .options-menu{
-      height:0px;
       width: 400px;
       transition: height 1s, opacity 1s;
       margin: 0 0 0 auto;
@@ -233,7 +232,6 @@ h3 {
       transition: height 0.5s;
       opacity: 1;
       width: 400px;
-      height:200px;
 
       a{
         display: block;
@@ -1014,22 +1012,6 @@ background-color: var(--raidenn-blue)
       .options-menu{ 
         .is-mobile{
           display: block;
-        }
-      }
-  
-      .options-menu.is-open{
-        transition: height 0.5s;
-        opacity: 1;
-        width: 400px;
-        height:200px;
-  
-        a{
-          display: block;
-        }
-  
-        .shader:hover{
-          color: white;
-          background:linear-gradient(-90deg, var(--raidenn-blue), var(--raidenn-blue), rgba(0, 0, 0, 0));
         }
       }
     }

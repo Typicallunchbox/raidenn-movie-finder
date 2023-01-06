@@ -17,6 +17,12 @@ function Header() {
   const [openSearchTab, setOpenSearchTab] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
+  const openSearchMobile = () => {
+    setOpenSearchTab(!openSearchTab);
+    setOpenMenu(false);
+
+  }
+
 
   const onLogout = () =>{
     dispatch(logout())
@@ -41,10 +47,10 @@ function Header() {
       </div>
       {user && 
       <div className="flex gap-12 justify-center">
-              <Link to='/watchlist' className="tertiary-text-colour hidden sm:block">
+              <Link to='/watchlist' className="tertiary-text-colour hidden md:block">
                 My Watchlist
               </Link>
-              <Link to={'#'} className="tertiary-text-colour hidden sm:block" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
+              <Link to={'#'} className="tertiary-text-colour hidden md:block" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
                  Search
               </Link>
             </div>}
@@ -62,14 +68,14 @@ function Header() {
                 <source type="video/webm" src={btnAnimation}></source>
               </video>
               </div>
-              <div className={`options-menu flex relative ${openMenu ? 'is-open' : 'hidden'}`}>
-                <div className="md:hidden sm:block">
+              <div className={`options-menu flex relative h-80 md:h-52 ${openMenu ? 'is-open' : 'hidden'}`}>
+                <div className="block md:hidden">
                   <Link className="bk-text-colour mb-2 p-1 shader" to='/watchlist'>
                     My Watchlist 
                   </Link>
-                  {/* <Link to={'#'} className="tertiary-text-colour md:block sm:hidden" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
+                  <Link to={'#'} className="bk-text-colour mb-2 p-1 shader" onClick={() => {openSearchMobile()}}>
                     Search
-                  </Link> */}
+                  </Link>
                 </div>
                 <Link className="bk-text-colour mb-2 p-1 shader" to='/settings'>
                   Profile 
