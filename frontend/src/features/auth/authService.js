@@ -29,6 +29,23 @@ const logout = () => {
     localStorage.removeItem('user')
 }
 
+//Reset Password
+const updatePassword = async (userData, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.put(API_URL + 'updatePassword', userData, config)
+    console.log('Response:', response.data)
+    // if(response.data){
+    //     localStorage.removeItem('user')
+    // }
+
+    return response.data
+}
+
 //getMe User
 const getMe = async () => {
     const response = await axios.get(API_URL + 'me')
@@ -39,7 +56,8 @@ const authService = {
     register,
     login,
     getMe,
-    logout
+    logout,
+    updatePassword
 }
 
 export default authService
