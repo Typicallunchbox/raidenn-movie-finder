@@ -4,7 +4,8 @@ const About = () => {
 
   return (
     <> 
-    <div className="textSection">
+    <h2 className="text-center">Under Construction...</h2>
+    {/* <div className="textSection">
         <h2>Raidenn</h2>
         <p>
            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
@@ -17,7 +18,7 @@ const About = () => {
         </p>
     </div>
     <div className="bgVideo"></div>
-    <div className="contactMeSection"></div>
+    <div className="contactMeSection"></div> */}
     </>
   );
 };

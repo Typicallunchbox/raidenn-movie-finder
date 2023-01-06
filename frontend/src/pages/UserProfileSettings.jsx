@@ -30,7 +30,7 @@ const UserProfileSettings = () => {
         <div className="container">
         <h1 className="mt-52">Profile Settings</h1>
 
-            <div className="profile-settings w-2/6 text-left mx-auto mt-10">
+            <div className="profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10">
 
                 <div className="Input mb-5">
                     <p>Fullname</p>

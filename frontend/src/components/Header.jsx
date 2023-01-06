@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -36,7 +36,16 @@ function Header() {
 
   const clickedMenu = () =>{
     setOpenMenu(!openMenu)
+
+    if(window){
+      return window.innerWidth < 600 ?   setOpenSearchTab(false) : ''
+    }
   }
+
+  useEffect(() => {
+    setOpenSearchTab(false)
+  }, [])
+  
 
   return (
     <>
@@ -70,20 +79,20 @@ function Header() {
               </div>
               <div className={`options-menu flex relative h-80 md:h-52 ${openMenu ? 'is-open' : 'hidden'}`}>
                 <div className="block md:hidden">
-                  <Link className="bk-text-colour mb-2 p-1 shader" to='/watchlist'>
+                  <Link onClick={() => {setOpenMenu(false)}} className="bk-text-colour mb-2 p-1 shader" to='/watchlist'>
                     My Watchlist 
                   </Link>
                   <Link to={'#'} className="bk-text-colour mb-2 p-1 shader" onClick={() => {openSearchMobile()}}>
                     Search
                   </Link>
                 </div>
-                <Link className="bk-text-colour mb-2 p-1 shader" to='/settings'>
+                <Link onClick={() => {setOpenMenu(false)}} className="bk-text-colour mb-2 p-1 shader" to='/settings'>
                   Profile 
                 </Link>
-                <Link className="bk-text-colour shader p-1" to='/about'>
+                <Link onClick={() => {setOpenMenu(false)}} className="bk-text-colour shader p-1" to='/about'>
                   About 
                 </Link>
-                <Link className="bk-text-colour absolute bottom-5 right-5" onClick={onLogout} to='/'>
+                <Link onClick={() => {onLogout(); setOpenMenu(false)}} className="bk-text-colour absolute bottom-5 right-5" to='/'>
                   Logout 
                 </Link>
               </div>

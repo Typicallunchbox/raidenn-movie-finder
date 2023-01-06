@@ -6,8 +6,9 @@ import Register from "./pages/Register/Register";
 import ErrorPage  from "./pages/ErrorPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Login from "./pages/Login/Login"
-import Home from "./pages/Home"
+import Login from "./pages/Login/Login";
+import Home from "./pages/Home";
+import About from "./pages/About";
 import Movie from "./pages/Movie";
 import Watchlist from "./pages/Watchlist";
 import Settings from "./pages/UserProfileSettings";
@@ -25,6 +26,7 @@ function App() {
             {user ? <><Route path="/" element={<Home />} /></> : <><Route path="/" element={<Landing />} /></>}
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/about" element={<About />} />
             <Route path="*" element={<ErrorPage />} />
             <Route path={`/movie/:id`} element={<Movie />} />
             <Route path={`/watchlist`} element={<Watchlist />} />
