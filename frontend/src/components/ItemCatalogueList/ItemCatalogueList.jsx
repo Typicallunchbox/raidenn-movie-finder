@@ -1,17 +1,16 @@
-import { React, useEffect, useState } from "react";
+import { React} from "react";
+import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom';
-import "../ItemCatalogueList/ItemCatalogueList.scss";
-import { updateWatchlistRecord } from "../../features/watchlists/watchlistSlice";
-import {useSelector, useDispatch} from 'react-redux'
-import axios from "axios";
 import { AiFillDelete } from "react-icons/ai";
-
+import "../ItemCatalogueList/ItemCatalogueList.scss";
+import { updateWatchlistRecord, banishWatched, banishWantToWatch } from "../../features/watchlists/watchlistSlice";
 
 const ItemCatalogueList = (props) => {
-  const { movies, deleteWantToWatch, deleteWatched } = props;
+  const image_path = "https://image.tmdb.org/t/p/original";
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
+  const { movies, allowDeleteWantToWatch, allowDeleteWatched, banishRecord } = props;
+  
   const viewMovie = (id) => {
     if(id){
       navigate('/movie/' + id)
@@ -20,25 +19,27 @@ const ItemCatalogueList = (props) => {
 
   const removeFromList = (data) => {
     let m = {...data};
-    if(deleteWatched){
+    if(allowDeleteWatched){
       m.watched = false;
+      dispatch(banishWatched(m));
       dispatch(updateWatchlistRecord({movie: m}))
+      banishRecord(m, 'watched')
     }
-    else if(deleteWantToWatch){
-      console.log('Movie:', m)
+    
+    else if(allowDeleteWantToWatch){
       m.wantToWatch = false;
+      dispatch(banishWantToWatch(m));
       dispatch(updateWatchlistRecord({movie: m}))
     }
   }
 
-  let image_path = "https://image.tmdb.org/t/p/original";
   return (
     <div className="item-catalogue-list-container">
       <div className="inner-container">
         {movies && movies.map((movie) => (
           <div key={movie.id ? movie.id : movie.movie_id}>
             <div className="relative">
-              {movie.movie_id && <button onClick={() => {removeFromList(movie)}}  type="button" className="absolute top-0 right-0 z-10 border-0 text-white bg-red-700 hover:bg-red-800 text-center p-3 rounded-l-lg"><AiFillDelete/></button>}       
+              {movie.movie_id && <button onClick={() => {removeFromList(movie)}}  type="button" className="absolute top-0 right-0 z-10 border-0 text-white bg-red-700 hover:bg-red-800 text-center p-3 rounded-tr-none rounded-br-none"><AiFillDelete/></button>}       
               <img onClick={() => viewMovie(movie.id ? movie.id : movie.movie_id)} src={movie.poster_path ? image_path + movie.poster_path : image_path + movie.movie_image} alt='movie-list'></img>
             </div>
           </div>

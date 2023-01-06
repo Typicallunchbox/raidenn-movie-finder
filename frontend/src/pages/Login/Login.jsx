@@ -1,11 +1,10 @@
-import React from 'react'
 import './Login.scss'
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-// import { FaSignInAlt } from "react-icons/fa";
-import {useSelector, useDispatch} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+import React from 'react'
 import {toast} from 'react-toastify'
+import { Link } from "react-router-dom";
+import {useNavigate} from 'react-router-dom'
+import { useState, useEffect } from "react";
+import {useSelector, useDispatch} from 'react-redux'
 import {login, reset} from '../../features/auth/authSlice'
 
 const Login = () => {
@@ -67,7 +66,7 @@ const Login = () => {
         <button onClick={onSubmit} type='submit' className='btn-primary'>Sign In</button>
         <div>
         <Link to='/register'>
-          <p className='bk-text-colour my-4 text-xs'>New to Raidenn? <a className='bk-text-colour' href='/register'>Sign Up Now</a></p>
+          <p className='bk-text-colour my-4 text-sm underline'><a className='bk-text-colour' href='/register'>Create an Account</a></p>
         </Link>
         </div>
       </div> 

@@ -5,10 +5,44 @@ import axios from "axios";
  *  @returns {array}
  */
 export const GetPopularMovies = async() => {
-    return await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734`)
+    let movies = [];
+    await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=1`)
     .then((resp) => {
-        return resp.data.results.length > 0 ? resp.data.results : []
+        if(resp.data.results.length > 0){
+            movies.push(...resp.data.results); 
+        }
     });
+
+    await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=2`)
+    .then((resp) => {
+        if(resp.data.results.length > 0){
+            movies.push(...resp.data.results); 
+        }
+    });
+
+    await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=3`)
+    .then((resp) => {
+        if(resp.data.results.length > 0){
+            movies.push(...resp.data.results); 
+        }
+    });
+
+    await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=4`)
+    .then((resp) => {
+        if(resp.data.results.length > 0){
+            movies.push(...resp.data.results); 
+        }
+    });
+
+
+    await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=5`)
+    .then((resp) => {
+        if(resp.data.results.length > 0){
+            movies.push(...resp.data.results); 
+        }
+    });
+
+    return movies.length > 0 ? movies : []
 }
 
 /**
@@ -17,10 +51,50 @@ export const GetPopularMovies = async() => {
  *  @returns {array}
  */
 export const GetMoviesByTag = async(tag) => {
-    return await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734`)
+    let movies = [];
+
+    await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=1`)
     .then((resp) => {
-        return resp.data.results.length > 0 ? resp.data.results : []
+        if(resp.data.results.length > 0){
+            movies.push(...resp.data.results); 
+        }
     });
+
+    await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=2`)
+    .then((resp) => {
+        if(resp.data.results.length > 0){
+            movies.push(...resp.data.results); 
+        }
+    });
+
+    await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=3`)
+    .then((resp) => {
+        if(resp.data.results.length > 0){
+            movies.push(...resp.data.results); 
+        }
+    });
+
+    await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=4`)
+    .then((resp) => {
+        if(resp.data.results.length > 0){
+            movies.push(...resp.data.results); 
+        }
+    });
+
+    await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=5`)
+    .then((resp) => {
+        if(resp.data.results.length > 0){
+            movies.push(...resp.data.results); 
+        }
+    });
+    return movies.length > 0 ? movies : []
+
+    // await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=1`)
+    // .then((resp) => {
+    //     if(resp.data.results.length > 0){
+    //         movies.push(...resp.data.results); 
+    //     }
+    // });
 }
 
 /**

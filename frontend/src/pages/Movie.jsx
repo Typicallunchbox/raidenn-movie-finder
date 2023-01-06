@@ -13,22 +13,29 @@ import { reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
 import noCastImg from '../static/svgs/user.svg'
-// import {GetMovieById, GetMovieImagesById, GetMovieVideosById,} from "../providers/moviesProvider";
 
 import Filter from 'bad-words';
 
 const Movie = () => {
   const [text, setText] = useState("");
-  let rating = "";
+  const [rating, setRating] = useState("");
+
+  // let rating = "";
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { id } = useParams();
   const {user} = useSelector((state) => state.auth)
   const {comments, isLoading, isError, message} = useSelector((state) => state.comments) 
+  const [commentErr, setCommentErr] = useState('');
   const [movie, setMovie] = useState(null);
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
+  const [disableWantToWatch, setDisableWantToWatch] = useState(false);
+  const [disableWatched, setDisableWatched] = useState(false);
+  const [userWatchlistRecord, setUserWatchlistRecord] = useState(null);
+
+
 
   //display variables
   const [showImages, setShowImages] = useState(false);
@@ -39,10 +46,17 @@ const Movie = () => {
   let colours = ColourPalette(movie ? (image_path + movie?.poster_path) : []);
  
   const onSubmit = (e) => {
+
+    if(text.length > 600){
+      setCommentErr('Max character length is 600 characters.')
+      return;
+    }
+
     let filter = new Filter();
     if(text && rating && id){
       dispatch(createComment({"comment": filter.clean(text), "rating":rating, "movie_id": `${id}`}))
       setText('')
+      setRating('')
     }
   };
 
@@ -55,7 +69,12 @@ const Movie = () => {
       navigate('/login')
     }
 
-    let temp = getWantToWatchRecord({movie_id : id})
+    const getRecord = async () => {
+      const record = await getWantToWatchRecord({movie_id : id});
+      setUserWatchlistRecord(record)
+    };
+
+    getRecord();
 
     dispatch(getCommentsByMovieId(id))
     return() => {
@@ -140,7 +159,7 @@ const Movie = () => {
   }, [id, movie]);
 
   const setMovieRating = (val) => {
-    rating = val
+    setRating(val)
   }
   
   if(isLoading){
@@ -244,16 +263,6 @@ const Movie = () => {
     </div>
   )
 
-  function makeid(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-}
-
   return (
     <>
       <div className="p-0.5"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, ${colours[3]}, ${colours[4]}, rgba(0,0,0,0))`} : {}}></div>
@@ -263,34 +272,41 @@ const Movie = () => {
             <div className="movieInfo">
               <img src={image_path + movie.poster_path} alt='movie'></img>
               <div className="buttons flex justify-evenly gap-1 mt-2">
-                <button className='w-full flex gap-3 p-3' onClick={() => {addToWantToWatchList()}} > <AiFillPlusCircle/>Watchlist</button>
-                <button className='w-full flex gap-3 p-3' onClick={() => {addToWatchedList()}} > <AiFillEye/> Watched</button>
-                {/* <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full'>Site</button> */}
+                <button disabled={disableWantToWatch} className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.wantToWatch || disableWantToWatch ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWantToWatchList(); setDisableWantToWatch(true)}} > <div className="my-auto"><AiFillPlusCircle/></div>Watchlist</button>
+                <button disabled={disableWatched} className={`w-full flex gap-3 p-3 ${userWatchlistRecord?.watched || disableWatched  ? 'bg-blue-600 opacity-50' : ''}`} onClick={() => {addToWatchedList(); setDisableWatched(true)}} > <div className="my-auto"><AiFillEye/></div> Watched</button>
               </div>
-              <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>
-
-              <p><b>Title</b> : {movie.title}</p>
-              <p><b>Genres</b> : </p>
-              <div className="genres">
-              {/* CREATE STANDARD REUSABLE BUTTONS, LINK W/ or W/ OUT borders etc. */}
-              {/* SANITIZE EVERYTHING */}
-              {movie.genres.map((genre)=>{
-                return <span key={genre.id}>{genre.name}</span>
-              })}
+              {movie.homepage && 
+                <button onClick={() => {window.open(movie.homepage ?? '', "_blank");}} className='w-full mt-1'>Watch Now</button>
+                }
+              <div className="flex gap-5">
+              <p><b>Title</b>:</p> 
+                <p>{movie.title}</p>
               </div>
-              <p><b>Status</b> : {movie.status}</p>
-              <p><b>Popularity</b> : {movie.popularity}</p>
-              <p><b>Budget</b> : {movie.budget}</p>
+              
+              <span><b>Genres</b> : </span>
+              <div className="genres mt-4">
+                {movie.genres.map((genre)=>{
+                  return <span key={genre.id}>{genre.name}</span>
+                })}
+              </div>
+              <div className="flex gap-5">
+                <p><b>Status</b> : </p> 
+                <p>{movie.status}</p>
+              </div>
+              <div className="flex gap-5">
+                <p><b>Budget</b> : </p> 
+                <p>{movie.budget}</p>
+              </div>
             </div>
             <div className="plain-card border-0 w-full sm:h-128 text-left overflow-hidden">
               {movieVideos && 
               <div className="trailer w-full h-full">
-                <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${movieVideos[0].key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${movieVideos[0].key}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
                 </iframe>
               </div>}
             </div>
           </div>
-          <div className="view-more-header">
+          <div className="view-more-header ml-6 md:m-auto lg:m-auto">
             <h2>View More</h2>
           </div>
           <div className="images-section">
@@ -302,38 +318,39 @@ const Movie = () => {
           <div className="production-section">
             {movie && productionCompanies}
           </div>
-          <div className="card p-4 comment-section w-full text-left">
+          <div className="card p-4 comment-section w-full text-left mt-36 mx-auto md:w-4/5 sm:w-full">
                     <h1>Comments</h1>
                     <div className="comments">
-                      {comments && comments.map((comment) => (
+                      {comments && comments.length > 0 ? comments.map((comment) => 
                         <div className="card border-default mb-2 p-3">
-                          <div className="flex justify-between">
+                          <div style={{background: '#1b8ad3'}} className="flex gap-6 border-none px-6 py-2 w-full justify-between md:w-fit md:justify-start rounded-md ">
                             <span>{comment.username}</span>
-                            <p>{comment.rating}</p>
+                            <p className="px-2 w-fit border-none rounded bg-white">{comment.rating} / 5</p>
                           </div>
-                          <p>{comment.comment}</p>
+                          <p className="leading-7">{comment.comment}</p>
                         </div>
-                      ))}
+                      ) : <div className="text-slate-500">No comments yet for this movie...</div>}
+
                     </div>
                     <div className="p-px"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, rgba(0,0,0,0))`} : {}}></div>
                     <div>
                       <div className="my-2">
-                          <p> Rate Movie : 
-                            <Rating  
-                            onClick={val=>setMovieRating(val)} 
+                          <div> 
+                            <span className="mr-2 text-lg md:text-sm">Rate Movie :</span>
+                            <Rating 
+                            className="text-xl md:text-sm" 
+                            initialRating={rating}
+                            onClick={(val)=>{setMovieRating(val)}} 
                             emptySymbol={<BiStar/>} 
                             fullSymbol={<FaStar/>}
                           />
-                          </p>
+                          </div>
                       </div>
                       <div className="controls flex my-2 gap-2 flex-col md:flex-row ">
-                          <input onChange={(e) => setText(e.target.value)} value={text} type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
-                          <button onClick={() => {onSubmit()}}  type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            
+                          <input onChange={(e) => {setText(e.target.value);}} value={text} type="text" id="comment" className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5" placeholder="Add your thoughts about the movie..." required></input>
+                          <button onClick={() => {onSubmit()}}  type="button" className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center">Send</button>            
                     </div>
                     </div>
-                    
-        
-          
           </div>
         </div>
         

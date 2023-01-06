@@ -94,7 +94,6 @@ export const getWatched = createAsyncThunk(
   "watchlist/watched",
   async (thunkAPI) => {
     try {
-      console.log('user:', user)
       user = JSON.parse(localStorage.getItem("user"));
       const token = user.token;
         return await watchlistService.getWatched(token);
@@ -134,6 +133,7 @@ export const getWantToWatch = createAsyncThunk(
 //Get want to watch record
 export const getWantToWatchRecord = async (watchlistData) => {
     try {
+        user = JSON.parse(localStorage.getItem("user"));
         const token = user.token;
         return await watchlistService.getWantToWatchRecord(watchlistData, token);
     } catch (error) {
@@ -158,7 +158,15 @@ export const watchlistSlice = createSlice({
       state.isError = false;
       state.isSuccess = false;
       state.message = "";
-    }
+    },
+    banishWatched: (state, action) => ({
+      ...state,
+      watched: state.watched.filter(item => item._id !== action.payload._id),
+    }),
+    banishWantToWatch: (state, action) => ({
+      ...state,
+      wantToWatch: state.wantToWatch.filter(item => item._id !== action.payload._id),
+    })
   },
   extraReducers: (builder) => {
     builder
@@ -239,5 +247,5 @@ export const watchlistSlice = createSlice({
   },
 });
 
-export const { reset } = watchlistSlice.actions;
+export const { reset, banishWatched, banishWantToWatch, getWatchedRecords, getWantToWatchRecords } = watchlistSlice.actions;
 export default watchlistSlice.reducer;

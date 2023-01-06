@@ -1,11 +1,10 @@
-import { React, useEffect, useState } from "react";
+import Spinner from '../components/Spinner';
 import {useNavigate} from 'react-router-dom'
+import { React, useEffect, useState } from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import ThreeJsFiberScreen from "../components/ThreeJsFiberScreen/ThreeJsFiberScreen";
 import { addMovies } from '../features/movies/movieSlice';
 import {GetPopularMovies, GetMoviesByTag} from "../providers/moviesProvider";
 import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
-import Spinner from '../components/Spinner';
 
 
 const Home = () => {
@@ -49,21 +48,13 @@ const Home = () => {
 
   return (
     <div className="home-page"> 
-    <div className="container">
-      {user && <div className="catalogue mt-52">
-        <ItemCatalogueList movies={movies} />
-      </div>}
-    </div>
-    <div className="recommendations">
-      <h2>Feeling Lucky?</h2>
-        <ThreeJsFiberScreen />
-    </div>
-    <div className="container">
-      {user && <div className="catalogue mt-52">
-        <ItemCatalogueList movies={movies} />
-      </div>}
-      <p className="pt-16">Search maybe for what you are looking for* Add Background lightning animation*</p>
-    </div>
+      <div className="container">
+        {user && <div className="catalogue mt-52">
+          <ItemCatalogueList movies={movies} />
+        </div>}
+        <p className="pt-16">Search maybe for what you are looking for* Add Background lightning animation*</p>
+
+      </div>
     </div>
   );
 };

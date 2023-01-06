@@ -1,10 +1,9 @@
-import { React, useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
-import { getWatched, getWantToWatch, updateWatchlistRecord } from "../features/watchlists/watchlistSlice";
-import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
 import Spinner from '../components/Spinner';
-
+import {useNavigate} from 'react-router-dom';
+import { React, useEffect, useState } from "react";
+import {useSelector, useDispatch} from 'react-redux';
+import { getWatched, getWantToWatch } from "../features/watchlists/watchlistSlice";
+import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
 
 const Watchlist = () => {
   const [listType, setListType] = useState('')
@@ -29,7 +28,7 @@ const Watchlist = () => {
     dispatch(getWatched())
     dispatch(getWantToWatch())
 
-  }, [ user, navigate, dispatch, isError, message])
+  }, [ user, listType, navigate, dispatch, isError, message])
   
   
   if(isLoading){
@@ -43,22 +42,20 @@ const Watchlist = () => {
           <p className={listType === 'watched' ? 'optionSelected' : ''} onClick={() => setListType('watched')}>Previously watched movies</p>
       </div>
       <div className='container'>
-        <div className='mt-20 '>
+        <div className='mt-20 mb-40'>
           {listType === 'wantToWatch' &&
           <div className='wantToWatch'>
-            <h1>Want to Watch</h1>
             {wantToWatch && (
               <div className='catalogue'>
-                <ItemCatalogueList deleteWantToWatch={true} deleteWatched={false} movies={wantToWatch} />
+                <ItemCatalogueList allowDeleteWantToWatch={true} allowDeleteWatched={false} movies={wantToWatch} />
               </div>
             )}
           </div>}
           {listType === 'watched' &&
           <div className='watched'>
-            <h1>Watched</h1>
             {watched && (
               <div className='catalogue'>
-                <ItemCatalogueList deleteWatched={true} deleteWantToWatch={false} movies={watched} />
+                <ItemCatalogueList allowDeleteWatched={true} allowDeleteWantToWatch={false} movies={watched} />
               </div>
             )}
           </div>}

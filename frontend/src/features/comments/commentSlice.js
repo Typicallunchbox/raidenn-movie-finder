@@ -50,7 +50,7 @@ export const deleteComment = createAsyncThunk(
   }
 );
 
-//Get Comments
+//Get Comments By Id
 export const getCommentsByMovieId = createAsyncThunk(
   "comments/getCommentsByMovieId",
   async (id, thunkAPI) => {
@@ -70,6 +70,7 @@ export const getCommentsByMovieId = createAsyncThunk(
   }
 );
 
+//Get Comments
 export const getComments = createAsyncThunk(
   "comments/getComments",
   async (thunkAPI) => {
@@ -102,11 +103,7 @@ export const commentsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-        // .addCase(createComment.pending, (state) => {
-        //     state.isLoading = true;
-        // })
         .addCase(createComment.fulfilled, (state, action) => {
-            // state.isLoading = false;
             state.isSuccess = true;
             state.comments.push(action.payload)
         })

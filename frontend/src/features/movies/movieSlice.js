@@ -1,13 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Get user from local storage
-// const user = JSON.parse(localStorage.getItem("user"));
-
 const initialState = {
   movies: [],
   tag: ''
 };
-
 
 export const movieSlice = createSlice({
   name: "movies",

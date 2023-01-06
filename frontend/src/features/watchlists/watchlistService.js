@@ -25,13 +25,13 @@ const getWantToWant = async (token) => {
 }
 
 //Get want to watch movie record
-const getWantToWatchRecord = async (watchListData, token) => {
-    const config = {
+const getWantToWatchRecord = async (watchlistData, token) => {
+       const config = {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }
-    const response = await axios.get(API_URL + 'wantToWatchRecord', watchListData, config)
+    const response = await axios.post(API_URL + 'wantToWatchRecord', watchlistData, config)
     return response.data
 }
 //Get watchlist for user

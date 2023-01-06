@@ -1,10 +1,13 @@
-import React from 'react'
 import './Register.scss'
-import { useState, useEffect } from "react";
-import {useNavigate} from 'react-router-dom'
+import React from 'react'
 import {toast} from 'react-toastify'
-import {useSelector, useDispatch} from 'react-redux'
-import {register, reset} from '../../features/auth/authSlice'
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {useNavigate} from 'react-router-dom';
+import {useSelector, useDispatch} from 'react-redux';
+import {register, reset} from '../../features/auth/authSlice';
+import { validUserName, validEmail, validPasswordStrength } from '../../static/regex'
+
 
 const Login = () => {
 
@@ -47,9 +50,17 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    if(password !== password2){
-      toast.error('Passwords do not match')
-    }else{
+    if(!validUserName.test(name.trim())){toast.error('Username should be between 4 - 25 Characters (No Special Characters)'); return;}
+    if(!validEmail.test(email.trim())) {toast.error('Enter in a valid email'); return;}
+
+
+    if(!validPasswordStrength.test(password.trim())){
+      toast.error('Please make a more complex password(Uppercase & Lowercase letters, minimum 7 characters, 1 Number & Special character)')
+    }else if(password.trim() !== password2.trim()){
+      toast.error('Passwords do not match')    }
+
+  
+    else{
       const userData = {
         name,
         email,
@@ -74,7 +85,9 @@ const Login = () => {
       </div>
         <button onClick={onSubmit} type='submit' className='btn-primary'>Register</button>
         <div>
-          <p className='my-12'></p>
+        <Link to='/register'>
+          <p className='bk-text-colour my-4 text-sm'>Already have an account? <a className='bk-text-colour underline' href='/register'>Sign In</a></p>
+        </Link>
         </div>
       </div> 
     </div>

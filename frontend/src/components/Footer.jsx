@@ -1,16 +1,8 @@
-import { useState } from "react";
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset } from "../features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
-import SearchDropDown from "./SearchDropDown/SearchDropDown";
 
 function Footer() {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.auth);
-    const [openSearchTab, setOpenSearchTab] = useState(false);
+  const { user } = useSelector((state) => state.auth);
  
   return (
     <>

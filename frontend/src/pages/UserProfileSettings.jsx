@@ -49,7 +49,7 @@ const UserProfileSettings = () => {
                         <p>Genre Preferences</p>
                         <div className="genres flex gap-5 ml-5">
                             {formData.genrePreferences.map((genre)=>(
-                                <p>{genre}</p>
+                                <p key={genre}>{genre}</p>
                             ))}
                         </div>
                     </>}

@@ -31,6 +31,7 @@ function App() {
             <Route path={`/settings`} element={<Settings />} />
           </Routes>
         </div>
+        {/* {user && <div className="h-screen"></div>} */}
         <Footer/>
       </Router>
       <ToastContainer />
