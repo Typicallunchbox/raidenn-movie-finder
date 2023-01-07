@@ -67,14 +67,11 @@ export const getMe = createAsyncThunk(
 );
 
 //Register User
-export const updatePassword = createAsyncThunk(
-  "auth/updatePassword",
-  async (data, thunkAPI) => {
+export const updatePassword = async (data) => {
     try {
-      console.log('data:', data)
-      user = JSON.parse(localStorage.getItem("user"));
-      const token = user.token;
-      return await authService.updatePassword(data, token);
+      let user = JSON.parse(localStorage.getItem("user"));
+      data.type = 'password';
+      return await authService.updatePassword(data, user.token);
     } catch (error) {
       const message =
         (error.response &&
@@ -82,10 +79,9 @@ export const updatePassword = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(message);
+      return message;
     }
-  }
-);
+  };
 
 export const authSlice = createSlice({
   name: "auth",
@@ -116,19 +112,19 @@ export const authSlice = createSlice({
         })
 
 
-        .addCase(updatePassword.pending, (state) => {
-          state.isLoading = true
-      })
-      .addCase(updatePassword.fulfilled, (state, action) => {
-          state.isLoading = false
-          state.isSuccess = true
-          state.user = null
-      })
-      .addCase(updatePassword.rejected, (state, action) =>{
-          state.isLoading = false
-          state.isError = true
-          state.message = action.payload
-      })
+      //   .addCase(updatePassword.pending, (state) => {
+      //     state.isLoading = true
+      // })
+      // .addCase(updatePassword.fulfilled, (state, action) => {
+      //     state.isLoading = false
+      //     state.isSuccess = true
+      //     state.user = null
+      // })
+      // .addCase(updatePassword.rejected, (state, action) =>{
+      //     state.isLoading = false
+      //     state.isError = true
+      //     state.message = action.payload
+      // })
 
 
 

@@ -38,11 +38,9 @@ const updatePassword = async (userData, token) => {
     }
 
     const response = await axios.put(API_URL + 'updatePassword', userData, config)
-    console.log('Response:', response.data)
-    // if(response.data){
-    //     localStorage.removeItem('user')
-    // }
-
+    if(response.data?.status === 'OK'){
+        localStorage.removeItem('user')
+    }
     return response.data
 }
 

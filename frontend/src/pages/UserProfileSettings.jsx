@@ -2,7 +2,9 @@ import { React, useEffect, useState } from "react";
 // import axios from "axios";
 import {useNavigate} from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux';
-import { updatePassword } from '../features/auth/authSlice'
+import { logout, reset, updatePassword } from '../features/auth/authSlice';
+import {reset as resetMovies} from "../features/movies/movieSlice"
+import {reset as resetWatchlist} from "../features/watchlists/watchlistSlice";
 
 
 const inputStyling = 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5'
@@ -14,6 +16,8 @@ const UserProfileSettings = () => {
     const [clickedResetPassword, setClickedResetPassword] = useState(false);
     const [confirmPassword, setconfirmPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
+
 
     
     const {user} = useSelector((state) => state.auth)
@@ -33,13 +37,25 @@ const UserProfileSettings = () => {
             [e.target.name]: e.target.value
         }))
     }
-    const changePassword = () => {
+    const changePassword = async() => {
         // regex validate password strength
         if(true){
-            console.log('confirmPassword:', confirmPassword);
-            console.log('newPassword:', newPassword);
+            let resp = await updatePassword({confirmPassword, password: newPassword});
+            console.log('resp:', resp)
+            
 
-            dispatch(updatePassword({confirmPassword, newPassword}))
+            if(resp?.status === 'OK'){
+                dispatch(logout())
+                dispatch(reset())
+                dispatch(resetWatchlist())
+                dispatch(resetMovies())
+            
+                window.scrollTo(0, 0);
+                navigate('/')
+            }else{
+                setErrorMsg(resp);
+            }
+            
         }
     }
 
@@ -55,7 +71,7 @@ const UserProfileSettings = () => {
 
                 <div className="Input mb-5">
                     <p>Fullname</p>
-                    <input onBlur={(e) => onBlur(e)} defaultValue={formData.name} type="text" name="name" id="name" className={inputStyling} placeholder="Fullname" required></input>
+                    <input disabled={clickedResetPassword} onBlur={(e) => onBlur(e)} defaultValue={formData.name} type="text" name="name" id="name" className={inputStyling} placeholder="Fullname" required></input>
                 </div>
                 <div className="Input mb-5">
                     <p>Email</p>
@@ -65,11 +81,11 @@ const UserProfileSettings = () => {
                     <p>{clickedResetPassword ? 'Confirm Current Password' : 'Password'} </p>
                     <div className="flex relative">
                         <input onChange={(e) => setconfirmPassword(e.target.value)} disabled={!clickedResetPassword} defaultValue={clickedResetPassword ? '' : '**********'} type="password" id="password" className={inputStyling} placeholder="Password" required></input>
-                        <p onClick={() => setClickedResetPassword(!clickedResetPassword)} disabled={clickedResetPassword} className="b-text-colour absolute right-2 top-2 hover:cursor-pointer">{clickedResetPassword ? 'Cancel' : 'Reset'}</p>
+                        <p onClick={() => {setClickedResetPassword(!clickedResetPassword); setErrorMsg('')}} disabled={clickedResetPassword} className="b-text-colour absolute right-2 top-2 hover:cursor-pointer">{clickedResetPassword ? 'Cancel' : 'Reset'}</p>
                     </div>
                 </div>
                 {clickedResetPassword && 
-                <div className="Input mb-5">
+                <div className="Input mb-5 ">
                     <p>New Password</p>
                     <div className="flex relative">
                         <input onChange={(e) => setNewPassword(e.target.value)} disabled={!clickedResetPassword} type="password" id="password" className={inputStyling} placeholder="Password" required></input>
@@ -87,7 +103,9 @@ const UserProfileSettings = () => {
                     multi-select dropdown
                     display div of all selected genres
                 </div> */}
-                <button onClick={() => {clickedResetPassword ? changePassword() : changeUserDetails()}} className="px-6">{clickedResetPassword ? 'Update Password' : 'Save Changes'}</button>
+                <button onClick={() => { changePassword()}} className="px-6">{clickedResetPassword ? 'Update Password' : 'Save Changes'}</button>
+                <p className="text-sm text-rose-500 pt-6 pl-2">{errorMsg}</p>
+
             </div>
         </div>
       </>

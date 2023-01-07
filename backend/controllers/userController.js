@@ -109,14 +109,14 @@ const updateProfile = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Authenticate a user
-//@route    POST /api/login
-//@access   Public
+// @desc    Update a password
+//@route    PUT /api/updatePassword
+//@access   Private
 const updatePassword = asyncHandler(async (req, res) => {
   const { email, _id } = req.user;
-  const {confirmPassword, newPassword} = req.body;
+  const {confirmPassword, password} = req.body;
 
-  if (!confirmPassword || !newPassword) {
+  if (!confirmPassword || !password) {
     res.status(400);
     throw new Error("Please include all fields");
   }
@@ -131,7 +131,7 @@ const updatePassword = asyncHandler(async (req, res) => {
 
     //Hash Password
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(newPassword, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
 
     const updateUserPassword = await User.findByIdAndUpdate(userExists._id, {password : hashedPassword})
