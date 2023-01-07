@@ -20,7 +20,6 @@ const validate = asyncHandler(async (req, res, next) => {
 
           next()
         }catch(error){
-            console.log(error)
             res.status(200).json({error : error.message})
         }
     }

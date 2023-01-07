@@ -60,7 +60,6 @@ const UserProfileSettings = () => {
         dispatch(resetMovies());
 
       } else {
-        console.log('resp:', resp)
         if(resp?.error){
             setErrorMsg(resp.error);
         }
