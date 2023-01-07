@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-// import axios from "axios";
+import Spinner from '../components/Spinner';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset, updatePassword } from "../features/auth/authSlice";
@@ -17,15 +17,23 @@ const UserProfileSettings = () => {
   const [confirmPassword, setconfirmPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [isLoading, setIsLoading]= useState(false)
 
   const { user } = useSelector((state) => state.auth);
 
  
 
   useEffect(() => {
-
+    const delay = ms => new Promise(res => setTimeout(res, ms));
     if (!user) {
-      navigate("/login");
+      const exit = async() => {
+        setIsLoading(true);
+        await delay(5000)
+      
+        navigate("/login");
+      }
+      exit();
+    
       return;
     }
     
@@ -45,7 +53,6 @@ const UserProfileSettings = () => {
   
   const changePassword = async () => {
     setErrorMsg('')
-    // regex validate password strength
     if (true) {
       let resp = await updatePassword({
         confirmPassword,
@@ -70,6 +77,12 @@ const UserProfileSettings = () => {
   const changeUserDetails = () => {
     //empty for now
   };
+
+
+  if(isLoading){
+    return <Spinner label="Redirecting back to login." />
+  }
+
   return (
     <>
       <div className='container'>
