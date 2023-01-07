@@ -12,7 +12,6 @@ const validate = asyncHandler(async (req, res, next) => {
         try{
             const { type, password, email } = req.body;
             if(type === 'password' && !validPasswordStrength.test(password)){
-                console.log('BACKEND HERE')
                 throw new Error('Please make a more complex password(Uppercase & Lowercase letters, minimum 7 characters, 1 Number & Special character')
             }
             if(type === 'email' && !validEmail.test(email)){
@@ -22,8 +21,7 @@ const validate = asyncHandler(async (req, res, next) => {
           next()
         }catch(error){
             console.log(error)
-            res.status(401)
-            throw new Error(error.message)
+            res.status(200).json({error : error.message})
         }
     }
 })
