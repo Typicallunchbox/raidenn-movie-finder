@@ -20,18 +20,21 @@ const UserProfileSettings = () => {
 
   const { user } = useSelector((state) => state.auth);
 
-  if (!user) {
-    navigate("/login");
-  }
+ 
 
-  // DO API CALL HERE AS IT SHOWS LOCALSTORAGE INSTEAD OF NEW NAME
   useEffect(() => {
+
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    
     setFormData({
-      name: user.name,
-      email: user.email,
+      name: user?.name,
+      email: user?.email,
       genrePreferences: ["action", "comedy"],
     });
-  }, [user]);
+  }, [user, navigate]);
 
   const onBlur = (e) => {
     setFormData((prevState) => ({
@@ -50,13 +53,12 @@ const UserProfileSettings = () => {
       });
 
       if (resp?.status === "OK") {
+
         dispatch(logout());
         dispatch(reset());
         dispatch(resetWatchlist());
         dispatch(resetMovies());
 
-        window.scrollTo(0, 0);
-        navigate("/");
       } else {
         console.log('resp:', resp)
         if(resp?.error){
@@ -105,7 +107,7 @@ const UserProfileSettings = () => {
           </div>
           <div className='Input mb-5'>
             <p>
-              {clickedResetPassword ? "Confirm Current Password" : "Password"}{" "}
+              {clickedResetPassword ? "Confirm Current Password" : "Password"}
             </p>
             <div className='flex relative'>
               <input
@@ -159,7 +161,7 @@ const UserProfileSettings = () => {
                 </div> */}
           <button
             onClick={() => {
-              changePassword();
+              clickedResetPassword ? changePassword() : changeUserDetails();
             }}
             className='px-6'
           >
