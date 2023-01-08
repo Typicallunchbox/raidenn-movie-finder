@@ -144,13 +144,19 @@ Finally in the Watchlist.js file under the pages folder we make a reference call
 This folder contains the logic that handles every api request that hits the backend api. This is a good practise to ensure that the user hitting the api endpoint is authorized to do so as an example. In this folder we have 3 files which we will breakdown: `authMiddleware`, `validateMiddleware` and `errorMiddleware`.
 
 1.authMiddleware
-  -  This file contains the logic to handle api endpoints we want to be protected, only allowing an authorized user to hit the protected endpoint. This file firstly checks to see if the request sent has a [Bearer Token](https://www.devopsschool.com/blog/what-is-bearer-token-and-how-it-works/), if it does not, it rejects the request and sends a `Not authorized, no token` response. If a token is attached in the request header then a check is done to validate if its a valid token with the `JWT_SECRET`. If it passes these checks then it hits the `next()` command which tells the program to hit the next command in the the function.
-
-<br />
-![authMiddlewareNext1](https://user-images.githubusercontent.com/41709116/211188195-101ff1a7-0d6f-4e7c-a17a-85b1212f3797.png)
-
+  -  This file contains the logic to handle api endpoints we want to be protected, only allowing an authorized user to hit the protected endpoint. This file firstly checks to see if the request sent has a [Bearer Token](https://www.devopsschool.com/blog/what-is-bearer-token-and-how-it-works/), if it does not, it rejects the request and sends a `Not authorized, no token` response. If a token is attached in the request header then a check is done to validate if its a valid token with the `JWT_SECRET`. 
+ 
+ <br />
 
 ![authMiddleware](https://user-images.githubusercontent.com/41709116/211188113-424e2775-e628-4938-b208-047fbd2c3b79.PNG)
+
+ 
+  -  If it passes these checks then it hits the `next()` command which tells the program to hit the next command in the the chain. In the below Image it shows it will go from the protect function that we just reviewed in the `authMiddleware` to the `getWatched` function which is the actual api function the user requested.
+
+<br />
+
+![authMiddlewareNext](https://user-images.githubusercontent.com/41709116/211188232-f1b887a9-ca83-4451-b157-a5923243284c.PNG)
+
 
 
 
