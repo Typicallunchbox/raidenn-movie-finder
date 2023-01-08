@@ -143,4 +143,7 @@ Finally in the Watchlist.js file under the pages folder we make a reference call
 ### Middleware Explained
 This folder contains the logic that handles every api request that hits the backend api. This is a good practise to ensure that the user hitting the api endpoint is authorized to do so as an example. In this folder we have 3 files which we will breakdown: `authMiddleware`, `validateMiddleware` and `errorMiddleware`.
 
-1.watchlistService
+1.authMiddleware
+  -  This file contains the logic to handle api endpoints we want to be protected, only allowing an authorized user to hit the protected endpoint. This file firstly checks to see if the request sent has a [Bearer Token](https://www.devopsschool.com/blog/what-is-bearer-token-and-how-it-works/), if it does not, it rejects the request and sends a `Not authorized, no token` response. If a token is attached in the request header then a check is done to validate if its a valid token with the `JWT_SECRET`. If it passes these checks then it hits the `next()` command which tells the program to hit the next command in the the function.
+
+
