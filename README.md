@@ -106,7 +106,7 @@ Watchlist consists of the 3 files all in specific folders. These files are `watc
    <br />
    
 3. watchlistRoutes
-   - The routes is the final piece that binds each CRUD function to a specific route. As below you can see getWatched function which is imported from the          controllers file is being binded with the route `/watched`. Additionally you can see that same line containts a `protect` function, which is imported        from an addidional folder called middelware. This protect function contains the logic to only allow an authorized user to hit our api endpoint, which        is done with a JWT token.
+   - The routes is the final piece that binds each CRUD function to a specific route. As below you can see getWatched function which is imported from the          controllers file is being binded with the route `/watched`. Additionally you can see that same line containts a `protect` function, which is imported        from an addidional folder called middleware. This protect function contains the logic to only allow an authorized user to hit our api endpoint, which        is done with a JWT token. Later in this breakdown we will review the middleware folder to show how it authorizes and validates requests.
    
    ![watchlistRoutes](https://user-images.githubusercontent.com/41709116/209451469-c79eb23e-0e88-4518-bb67-04aeb041cc96.PNG)
 
