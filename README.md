@@ -163,8 +163,12 @@ This folder contains the logic that handles every api request that hits the back
 1.validateMiddleware
   -  This file was created with the purpose of handling input validations a user makes on the site, fields such as passwords, email, username. This         validation ensures the user has entered in a valid input, meeting the requirements. For example making sure the user's new password has 1 Uppercase and symbol included. We don't just want input validation  to be done on the frontend as this can be avoided by a user if they choose to directly hit the API request themselves outside of the site environment. Do server side validation ensures the correct inputs are being accepted in the database. Below we can see we have our `validate` function. It holds 2 regex lines that define the validation which has to be met, one for a secure password and the other for a valid email.
  
+  - A check is then done to see if the input type say for example `password` matches its regex pattern. If it fails it will throw an error message back to the user on the frontend. If it passes, then it will hit the `next()` command and then continue to the actual api function in order to update the password or register a new user.
+ 
  <br />
 
+
+![validateMiddleware](https://user-images.githubusercontent.com/41709116/211191051-0c30727f-7041-4438-b3b6-cdbed04aa053.PNG)
 
 
 
