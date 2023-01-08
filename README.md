@@ -140,3 +140,7 @@ Finally in the Watchlist.js file under the pages folder we make a reference call
 ![watchlistReact](https://user-images.githubusercontent.com/41709116/209481840-e57ef0c6-88ca-4d5e-ab57-834a94869bfb.PNG)
 
 
+### Middleware Explained
+This folder contains the logic that handles every api request that hits the backend api. This is a good practise to ensure that the user hitting the api endpoint is authorized to do so as an example. In this folder we have 3 files which we will breakdown: `authMiddleware`, `validateMiddleware` and `errorMiddleware`.
+
+1.watchlistService
