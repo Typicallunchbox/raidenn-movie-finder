@@ -89,7 +89,6 @@ const Movie = () => {
           `https://api.themoviedb.org/3/movie/${id}?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
         )
         .then((resp) => {
-
           setMovie(resp.data);
         });
 
@@ -267,6 +266,14 @@ const Movie = () => {
     </div>
   )
 
+  // const genreSearch = (genre) => {
+  //   if(genre){
+  //       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&with_genres=${genre}&language=en-US&page=1`)
+  //     .then((resp) => {
+  //     });
+  //   }
+  // }
+
   return (
     <>
       <div className="p-0.5"  style={colours ? {background: `linear-gradient(90deg,rgba(0,0,0,0),${colours[0]}, ${colours[1]}, ${colours[2]}, ${colours[3]}, ${colours[4]}, rgba(0,0,0,0))`} : {}}></div>
@@ -295,12 +302,9 @@ const Movie = () => {
               </div>
               <div className="flex gap-5">
                 <p><b>Status</b> : </p> 
-                <p>{movie.status}</p>
+                <p>{movie.status} {movie.status === 'Released' ? `(${movie.release_date})` : ''}</p>
               </div>
-              <div className="flex gap-5">
-                <p><b>Budget</b> : </p> 
-                <p>{movie.budget}</p>
-              </div>
+            
             </div>
             <div className="plain-card border-0 w-full sm:h-128 text-left overflow-hidden">
               {movieVideos && 

@@ -57,21 +57,58 @@ const Login = () => {
   return (
     <div>
       <div className='login_container'>
-      <div className='inner-container'>
-        <div className='px-12 pt-6'>
-          <h1 className='bk-text-colour' style={{fontFamily: 'ThunderBoldLC', fontSize: '35px', letterSpacing:'3px'}} >Sign In</h1>
-          <input onChange={onChange} id='email' name='email' value={email} type="email" placeholder='Enter your email' />
-          <input onChange={onChange} id='password' name='password' value={password} type="password" placeholder='Password' />
+        <div className='inner-container'>
+          <div className='px-12 pt-6'>
+            <h1
+              className='bk-text-colour'
+              style={{
+                fontFamily: "ThunderBoldLC",
+                fontSize: "35px",
+                letterSpacing: "3px",
+              }}
+            >
+              Sign In
+            </h1>
+            <input
+              onKeyDown={(e) => {
+                if (e.code === 'Enter') {
+                  onSubmit(e)
+                }
+              }}
+              onChange={onChange}
+              id='email'
+              name='email'
+              value={email}
+              type='email'
+              placeholder='Enter your email'
+            />
+            <input
+              onKeyDown={(e) => {
+                if (e.code === "Enter") {
+                  onSubmit(e);
+                }
+              }}
+              onChange={onChange}
+              id='password'
+              name='password'
+              value={password}
+              type='password'
+              placeholder='Password'
+            />
+          </div>
+          <button onClick={onSubmit} type='submit' className='btn-primary'>
+            Sign In
+          </button>
+          <div>
+            <Link to='/register'>
+              <p className='bk-text-colour my-4 text-sm underline bk-text-colour'>
+                Create an Account
+              </p>
+            </Link>
+          </div>
         </div>
-        <button onClick={onSubmit} type='submit' className='btn-primary'>Sign In</button>
-        <div>
-        <Link to='/register'>
-          <p className='bk-text-colour my-4 text-sm underline'><a className='bk-text-colour' href='/register'>Create an Account</a></p>
-        </Link>
-        </div>
-      </div> 
+      </div>
     </div>
-    </div>
-  )
+  );
 }
 export default Login

@@ -128,7 +128,7 @@ const UserProfileSettings = () => {
                 type='password'
                 id='password'
                 className={inputStyling}
-                placeholder='*'
+                placeholder='*******'
                 required
               ></input>
               <p
