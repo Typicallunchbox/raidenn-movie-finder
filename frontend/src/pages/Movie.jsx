@@ -158,6 +158,10 @@ const Movie = () => {
     }
   }, [id, movie]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const setMovieRating = (val) => {
     setRating(val)
   }
@@ -318,7 +322,7 @@ const Movie = () => {
           <div className="production-section">
             {movie && productionCompanies}
           </div>
-          <div className="card p-4 comment-section w-full text-left mt-36 mx-auto md:w-4/5 sm:w-full">
+          <div className="card p-4 comment-section w-full text-left mt-36 mb-52 mx-auto md:w-4/5 sm:w-full ">
                     <h1>Comments</h1>
                     <div className="comments">
                       {comments && comments.length > 0 ? comments.map((comment) => 

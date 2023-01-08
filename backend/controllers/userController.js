@@ -109,6 +109,44 @@ const updateProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Update a password
+//@route    PUT /api/updatePassword
+//@access   Private
+const updatePassword = asyncHandler(async (req, res) => {
+  const { email, _id } = req.user;
+  const {confirmPassword, password} = req.body;
+
+  if (!confirmPassword || !password) {
+    res.status(400);
+    throw new Error("Please include all fields");
+  }
+
+  const userExists = await User.findOne({ user: _id, email: email });
+  if (!userExists) {
+    res.status(400);
+    throw new Error("User Does not exist");
+  }
+
+  if(userExists && (await bcrypt.compare(confirmPassword, userExists.password))){
+
+    //Hash Password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+
+    const updateUserPassword = await User.findByIdAndUpdate(userExists._id, {password : hashedPassword})
+    if (updateUserPassword) {
+      res.status(201).json({status: 'OK'});
+    } else {
+      res.status(400);
+      throw new Error("Invalid user data");
+    }
+  }else{
+    res.status(400);
+    throw new Error("Incorrect password");
+  }
+});
+
 // @desc    Get user data
 //@route    GET /api/users/me
 //@access   Private
@@ -128,4 +166,5 @@ module.exports = {
   loginUser,
   updateProfile,
   getMe,
+  updatePassword
 };

@@ -52,7 +52,7 @@ const Home = () => {
         {user && <div className="catalogue mt-52">
           <ItemCatalogueList movies={movies} />
         </div>}
-        <p className="pt-16">Search maybe for what you are looking for* Add Background lightning animation*</p>
+        <p className="pt-16 mb-52">Search maybe for what you are looking for* Add Background lightning animation*</p>
 
       </div>
     </div>
