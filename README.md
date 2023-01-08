@@ -146,4 +146,12 @@ This folder contains the logic that handles every api request that hits the back
 1.authMiddleware
   -  This file contains the logic to handle api endpoints we want to be protected, only allowing an authorized user to hit the protected endpoint. This file firstly checks to see if the request sent has a [Bearer Token](https://www.devopsschool.com/blog/what-is-bearer-token-and-how-it-works/), if it does not, it rejects the request and sends a `Not authorized, no token` response. If a token is attached in the request header then a check is done to validate if its a valid token with the `JWT_SECRET`. If it passes these checks then it hits the `next()` command which tells the program to hit the next command in the the function.
 
+<br />
+![authMiddlewareNext1](https://user-images.githubusercontent.com/41709116/211188195-101ff1a7-0d6f-4e7c-a17a-85b1212f3797.png)
+
+
+![authMiddleware](https://user-images.githubusercontent.com/41709116/211188113-424e2775-e628-4938-b208-047fbd2c3b79.PNG)
+
+
+
 
