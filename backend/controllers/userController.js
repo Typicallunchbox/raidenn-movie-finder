@@ -86,6 +86,65 @@ const setGenrePreferences = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Get user security questions
+//@route    GET /api/userQuestions
+//@access   Public
+const getSecurityQuestions = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  //check for user email
+  const user = await User.findOne({ email }).select('-password');
+
+  if(user){
+    const questions = user?.securityQuestions;
+    res.status(200).json(questions); 
+  }
+  res.status(400);
+  throw new Error("No Security Questions found");
+});
+
+// @desc    Set user security questions
+//@route    PUT /api/userQuestions
+//@access   Private
+const setSecurityQuestions = asyncHandler(async (req, res) => {
+  const { email, _id } = req.user;
+  const {securityQuestions} = req.body;
+
+  if (!securityQuestions) {
+    res.status(400);
+    throw new Error("Please include Add Secuirty Questions");
+  }
+
+  const userExists = await User.findOne({ user: _id, email: email });
+  if (!userExists) {
+    res.status(400);
+    throw new Error("User Does not exist");
+  }
+
+  if(userExists){
+
+    //Hash Answer
+    const salt = await bcrypt.genSalt(10);
+    for (let index = 0; index < securityQuestions.length; index++) {
+      const element = securityQuestions[index];
+      element.answer = await bcrypt.hash(element.answer, salt);
+    }
+
+    const updateSecurityQuestions = await User.findByIdAndUpdate(userExists._id, {securityQuestions : securityQuestions})
+    if (updateSecurityQuestions) {
+      res.status(201).json({status: 'OK'});
+    } else {
+      res.status(400);
+      throw new Error("error occured");
+    }
+  }else{
+    res.status(400);
+    throw new Error("Incorrect format");
+  }
+});
+
+
+
 // @desc    Authenticate a user
 //@route    POST /api/login
 //@access   Public
@@ -166,5 +225,7 @@ module.exports = {
   loginUser,
   updateProfile,
   getMe,
-  updatePassword
+  updatePassword,
+  getSecurityQuestions,
+  setSecurityQuestions
 };

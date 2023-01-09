@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema({
     },
     genrePreferences:{
         type: Array
+    },
+    securityQuestions:{
+        type: Array,
+        required: [true, 'Please complete security questions']
     }
 },{
     timestamps: true
