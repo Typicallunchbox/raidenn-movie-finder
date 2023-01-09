@@ -50,12 +50,33 @@ const getMe = async () => {
     return response.data
 }
 
+//Get Security Questions
+const getSecurityQuestions = async (data) => {
+    const response = await axios.post(API_URL + 'userQuestions', data)
+    return response.data
+}
+
+//Set Security Questions
+const setSecurityQuestions = async (userData) => {
+    const response = await axios.put(API_URL, userData)
+    return response.data
+}
+
+//Compare Security Questions Answers
+const compareSecurityAnswers = async (data) => {
+    const response = await axios.post(API_URL + 'userQuestions', data)
+    return response.data
+}
+
 const authService = {
     register,
     login,
     getMe,
     logout,
-    updatePassword
+    updatePassword,
+    getSecurityQuestions,
+    setSecurityQuestions,
+    compareSecurityAnswers
 }
 
 export default authService

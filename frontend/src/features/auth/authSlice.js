@@ -66,7 +66,7 @@ export const getMe = createAsyncThunk(
   }
 );
 
-//Register User
+//Update Password
 export const updatePassword = async (data) => {
     try {
       let user = JSON.parse(localStorage.getItem("user"));
@@ -82,6 +82,55 @@ export const updatePassword = async (data) => {
       return message;
     }
   };
+
+//Get User Security Questions 
+export const getSecurityQuestions = async (data) => {
+  try {
+    data.type = 'email';
+    console.log('authSlice:', data)
+    return await authService.getSecurityQuestions(data);
+  } catch (error) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return message;
+  }
+};
+
+//Get User Security Questions 
+export const setSecurityQuestions = async (data) => {
+  try {
+    let user = JSON.parse(localStorage.getItem("user"));
+    return await authService.setSecurityQuestions(data, user.token);
+  } catch (error) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return message;
+  }
+};
+
+//Get User Security Questions 
+export const compareSecurityAnswers = async (data) => {
+  try {
+    let user = JSON.parse(localStorage.getItem("user"));
+    return await authService.compareSecurityAnswers(data, user.token);
+  } catch (error) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return message;
+  }
+};
 
 export const authSlice = createSlice({
   name: "auth",

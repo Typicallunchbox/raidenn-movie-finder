@@ -87,20 +87,64 @@ const setGenrePreferences = asyncHandler(async (req, res) => {
 });
 
 // @desc    Get user security questions
-//@route    GET /api/userQuestions
+//@route    POST /api/userQuestions
 //@access   Public
 const getSecurityQuestions = asyncHandler(async (req, res) => {
   const { email } = req.body;
-
   //check for user email
   const user = await User.findOne({ email }).select('-password');
 
   if(user){
-    const questions = user?.securityQuestions;
+    let questions = [];
+    if(user?.securityQuestions.length > 0){
+      for (let index = 0; index < user.securityQuestions.length; index++) {
+        const element = user.securityQuestions[index];
+        questions.push(element.question);
+      }
+    }
     res.status(200).json(questions); 
+    return;
   }
   res.status(400);
-  throw new Error("No Security Questions found");
+  throw new Error("Error");
+});
+
+// @desc    Get user security questions
+//@route    POST /api/userQuestions
+//@access   Public
+const compareSecurityAnswers = asyncHandler(async (req, res) => {
+  const { email, response } = req.body;
+  //check for user email
+  const user = await User.findOne({ email }).select('-password');
+  if(user){
+    let count = 0;
+    if(user?.securityQuestions.length > 0){
+      // const salt = await bcrypt.genSalt(10);
+
+      for (let index = 0; index < response.length; index++) {
+        const r = response[index];
+
+        for (let index = 0; index < user?.securityQuestions.length; index++) {
+          const d = user?.securityQuestions[index];
+          if(r.question === d.question){
+            let userAnswer = null;
+            // userAnswer = await bcrypt.hash(r.answer, salt);
+
+            // let result = await bcrypt.compare(userAnswer, d.answer)
+            r.answer.toLowerCase() === d.answer ? count++ : null
+            break;
+          }
+        }
+      }
+      console.log('count:', count)
+      if(count === user?.securityQuestions.length){
+        res.status(200).json({status: 'OK'}); 
+        return;
+      }
+    }
+  }
+  res.status(400);
+  throw new Error("Incorrect Answers");
 });
 
 // @desc    Set user security questions
@@ -124,11 +168,11 @@ const setSecurityQuestions = asyncHandler(async (req, res) => {
   if(userExists){
 
     //Hash Answer
-    const salt = await bcrypt.genSalt(10);
-    for (let index = 0; index < securityQuestions.length; index++) {
-      const element = securityQuestions[index];
-      element.answer = await bcrypt.hash(element.answer, salt);
-    }
+    // const salt = await bcrypt.genSalt(10);
+    // for (let index = 0; index < securityQuestions.length; index++) {
+    //   const element = securityQuestions[index];
+    //   element.answer = await bcrypt.hash(element.answer, salt);
+    // }
 
     const updateSecurityQuestions = await User.findByIdAndUpdate(userExists._id, {securityQuestions : securityQuestions})
     if (updateSecurityQuestions) {
@@ -227,5 +271,6 @@ module.exports = {
   getMe,
   updatePassword,
   getSecurityQuestions,
-  setSecurityQuestions
+  setSecurityQuestions,
+  compareSecurityAnswers
 };
