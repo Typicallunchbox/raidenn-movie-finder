@@ -6,10 +6,11 @@ import { useState, useEffect } from "react";
 import {useNavigate} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {register, reset} from '../../features/auth/authSlice';
-import { validUserName, validEmail, validPasswordStrength } from '../../static/regex'
+import { validUserName, validEmail, validPasswordStrength } from '../../static/regex';
+import RegisterSecurityQuestions from '../../components/RegisterSecurityQuestions';
 
 
-const Login = () => {
+const Register = () => {
 
   const [formData, setFormData] = useState({
     name: "",
@@ -17,6 +18,7 @@ const Login = () => {
     password: "",
     password2: ""
   });
+  const [showMainRegister, setShowMainRegister] = useState(false);
 
   const { name, email, password, password2 } = formData;
 
@@ -32,9 +34,9 @@ const Login = () => {
       toast.error(message)
     }
 
-    if(isSuccess || user){
-      navigate('/')
-    }
+    // if(isSuccess || user){
+    //   navigate('/')
+    // }
 
     dispatch(reset())
 
@@ -68,7 +70,8 @@ const Login = () => {
         password2
       }
 
-      dispatch(register(userData))
+      dispatch(register(userData));
+      setShowMainRegister(false);
     }
   };
 
@@ -76,6 +79,7 @@ const Login = () => {
     <div>
       <div className='login_container'>
         <div className='inner-container'>
+          {showMainRegister ? (<div>
           <div className='px-12 pt-6'>
             <h1
               className='bk-text-colour'
@@ -151,9 +155,14 @@ const Login = () => {
               </p>
             </Link>
           </div>
+        </div>) 
+        : 
+        (<div>
+          <RegisterSecurityQuestions />
+        </div>)}
         </div>
       </div>
     </div>
   );
 }
-export default Login
+export default Register

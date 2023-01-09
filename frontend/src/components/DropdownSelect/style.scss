@@ -1,0 +1,48 @@
+.wrapper{
+    min-width: 100px;
+    width: 100px;
+    position: relative;
+}
+
+.button{
+    width: calc(100% - 10px);
+    border: solid 2px;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: #eeeeee;
+}
+
+.content{
+    background-color: #eeeeee;
+    margin-top: 5px;
+    width: 100%;
+    // visibility: hidden;
+    position: absolute;
+    border: solid 2px;
+    border-radius: 10px;
+    max-height: 150px;
+    // overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.content > * {
+    border-bottom: solid #dddddd 1px;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+.content > *:hover{
+    background-color: #757575;
+}
+
+.content :last-child{
+    border-bottom: none;
+}
+
+.content::-webkit-scrollbar{
+    display: none;
+}
