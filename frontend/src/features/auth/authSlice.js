@@ -87,7 +87,6 @@ export const updatePassword = async (data) => {
 export const getSecurityQuestions = async (data) => {
   try {
     data.type = 'email';
-    console.log('authSlice:', data)
     return await authService.getSecurityQuestions(data);
   } catch (error) {
     const message =

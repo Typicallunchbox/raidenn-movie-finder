@@ -136,7 +136,6 @@ const compareSecurityAnswers = asyncHandler(async (req, res) => {
           }
         }
       }
-      console.log('count:', count)
       if(count === user?.securityQuestions.length){
         res.status(200).json({status: 'OK'}); 
         return;
