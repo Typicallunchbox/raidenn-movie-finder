@@ -7,7 +7,7 @@
 .button{
     width: calc(100% - 10px);
     border: solid 2px;
-    border-radius: 10px;
+    border-radius: 2px;
     padding: 5px;
     cursor: pointer;
 }
@@ -31,12 +31,12 @@
 
 .content > * {
     border-bottom: solid #dddddd 1px;
-    padding: 5px 0;
+    padding: 5px 10px;
     cursor: pointer;
 }
 
 .content > *:hover{
-    background-color: #757575;
+    background-color: #d9d9d9;
 }
 
 .content :last-child{

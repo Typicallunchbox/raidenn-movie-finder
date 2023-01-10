@@ -1,9 +1,11 @@
 import './style.scss'
 import {useState} from 'react';
+import { FaArrowDown } from "react-icons/fa";
+
 
 export const DropdownSelect = (props) => {
-    const {array} = props;
-    const [value, setValue] = useState("Select One");
+    const {placeholder, array} = props;
+    const [value, setValue] = useState(placeholder);
     const [open, setOpen] = useState(false)
 
     const onOptionClicked = (string) => {
@@ -14,11 +16,17 @@ export const DropdownSelect = (props) => {
         setOpen((prevOpen) => !prevOpen);
     }
     return (
-        <div className='wrapper'>
-            <div className='button' onClick={() => {onButton()}}>{value}</div>
+        <div className='wrapper text-left'>
+            <div className='flex relative'  onClick={() => {onButton()}}>
+                <div className={`button ${value === placeholder ? 'text-gray-600': ''}`}>{value}</div>
+                <p className='b-text-colour absolute right-2 top-2 hover:cursor-pointer'>
+                            <FaArrowDown />
+                </p>
+            </div>
+
             {open &&<div className='content'>
                 {array && array.map((string) => (
-                   <div onClick={() => {onOptionClicked(string)}} key={string}>{string}</div> 
+                   <div onClick={() => {onOptionClicked(string); setOpen(false)}} key={string}>{string}</div>
                 ))}
             </div>}
         </div>
