@@ -57,14 +57,19 @@ const getSecurityQuestions = async (data) => {
 }
 
 //Set Security Questions
-const setSecurityQuestions = async (userData) => {
-    const response = await axios.put(API_URL, userData)
+const setSecurityQuestions = async (userData, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.put(API_URL + 'userQuestions', userData, config)
     return response.data
 }
 
 //Compare Security Questions Answers
 const compareSecurityAnswers = async (data) => {
-    const response = await axios.post(API_URL + 'userQuestions', data)
+    const response = await axios.post(API_URL + 'compareAnswers', data)
     return response.data
 }
 

@@ -100,20 +100,39 @@ export const getSecurityQuestions = async (data) => {
 };
 
 //Get User Security Questions 
-export const setSecurityQuestions = async (data) => {
-  try {
-    let user = JSON.parse(localStorage.getItem("user"));
-    return await authService.setSecurityQuestions(data, user.token);
-  } catch (error) {
-    const message =
-      (error.response &&
-        error.response.data &&
-        error.response.data.message) ||
-      error.message ||
-      error.toString();
-    return message;
+// export const setSecurityQuestions = async (data) => {
+//   try {
+//     let user = JSON.parse(localStorage.getItem("user"));
+//     return await authService.setSecurityQuestions(data, user.token);
+//   } catch (error) {
+//     const message =
+//       (error.response &&
+//         error.response.data &&
+//         error.response.data.message) ||
+//       error.message ||
+//       error.toString();
+//     return message;
+//   }
+// };
+
+//Register User
+export const setSecurityQuestions = createAsyncThunk(
+  "auth/setSecurityQuestions",
+  async (data, thunkAPI) => {
+    try {
+      let user = JSON.parse(localStorage.getItem("user"));
+      return await authService.setSecurityQuestions({securityQuestions : data}, user.token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
   }
-};
+);
 
 //Get User Security Questions 
 export const compareSecurityAnswers = async (data) => {
@@ -153,6 +172,21 @@ export const authSlice = createSlice({
             state.user = action.payload
         })
         .addCase(register.rejected, (state, action) =>{
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+            state.user = null
+        })
+
+        
+        .addCase(setSecurityQuestions.pending, (state) => {
+          state.isLoading = true
+        })
+        .addCase(setSecurityQuestions.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+        })
+        .addCase(setSecurityQuestions.rejected, (state, action) =>{
             state.isLoading = false
             state.isError = true
             state.message = action.payload

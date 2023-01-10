@@ -18,7 +18,7 @@ const Register = () => {
     password: "",
     password2: ""
   });
-  const [showMainRegister, setShowMainRegister] = useState(false);
+  const [showMainRegister, setShowMainRegister] = useState(true);
 
   const { name, email, password, password2 } = formData;
 

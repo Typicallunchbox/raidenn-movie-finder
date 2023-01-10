@@ -53,10 +53,14 @@ const RegisterSecurityQuestions = () => {
     }
     console.log('answers:', answers)
     if(answers){
-      // dispatch(setSecurityQuestions(answers));
+      dispatch(setSecurityQuestions(answers));
 
-    // if(isSuccess || user){
-    //   navigate('/')
+      console.log('isSuccess:', isSuccess)
+      console.log('message:', message)
+
+    //MAKE SURE SUCCS FIRST BEFORE NAVIGATING
+    // if(isSuccess){
+      navigate('/')
     // }
     }
   };
