@@ -105,8 +105,7 @@ const getSecurityQuestions = asyncHandler(async (req, res) => {
     res.status(200).json(questions); 
     return;
   }
-  res.status(400);
-  throw new Error("Error");
+  res.status(200).json([]);
 });
 
 // @desc    Get user security questions

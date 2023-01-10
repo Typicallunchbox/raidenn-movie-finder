@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 import {useNavigate} from 'react-router-dom'
 import { useState, useEffect } from "react";
 import {useSelector, useDispatch} from 'react-redux'
-import {login, reset} from '../../features/auth/authSlice'
+import {login, reset} from '../../features/auth/authSlice';
+import ForgotPassword from '../../components/ForgotPassword';
+
+
 
 const Login = () => {
 
@@ -13,6 +16,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [showMainLogin, setShowMainLogin] = useState(false);
+
 
   const { email, password } = formData;
 
@@ -58,6 +63,7 @@ const Login = () => {
     <div>
       <div className='login_container'>
         <div className='inner-container'>
+          {showMainLogin ? (<div>
           <div className='px-12 pt-6'>
             <h1
               className='bk-text-colour'
@@ -113,6 +119,11 @@ const Login = () => {
               </p>
             </Link>
           </div>
+          </div>)
+          : 
+        (<div>
+          <ForgotPassword />
+        </div>)}
         </div>
       </div>
     </div>
