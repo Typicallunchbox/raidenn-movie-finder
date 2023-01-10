@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react';
-import {toast} from 'react-toastify'
-import { Link } from "react-router-dom";
+import {toast} from 'react-toastify';
+import {useSelector, useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import {DropdownSelect} from '../components/DropdownSelect/index';
-import securityQuestions from '../static/securityQuestions.json'
+import securityQuestions from '../static/securityQuestions.json';
+import {setSecurityQuestions} from '../features/auth/authSlice';
+
 
 const RegisterSecurityQuestions = () => {
+  const {user, isError, isSuccess, message} = useSelector(
+    (state) => state.auth
+  )
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [questions, setQuestions] = useState([])
   const [answers, setAnswers] = useState([
     {
@@ -17,7 +25,6 @@ const RegisterSecurityQuestions = () => {
     }
   ])
 
-
   useEffect(() => {
     let temp = [];
     for (let index = 0; index < securityQuestions.length; index++) {
@@ -29,9 +36,29 @@ const RegisterSecurityQuestions = () => {
   
   const onBlur = (name, value, index) => {
     let tempAnswers = null;
-    tempAnswers = {...answers}
+    tempAnswers = [...answers]
     tempAnswers[index][name] = value.toLowerCase();
     setAnswers(tempAnswers);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    let valid = true;
+    // do empty validation
+    for (let index = 0; index < answers.length; index++) {
+      const element = answers[index];
+
+      if(element.question === '')valid  = false;
+      if(element.answer === '')valid  = false;
+    }
+    console.log('answers:', answers)
+    if(answers){
+      // dispatch(setSecurityQuestions(answers));
+
+    // if(isSuccess || user){
+    //   navigate('/')
+    // }
+    }
   };
 
   return (
@@ -73,7 +100,7 @@ const RegisterSecurityQuestions = () => {
               />
             </div>
           </div>
-          <button  type='submit' className='btn-primary'>
+          <button onClick={onSubmit}  type='submit' className='btn-primary'>
             Save
           </button>
           <div className='h-4'></div>
