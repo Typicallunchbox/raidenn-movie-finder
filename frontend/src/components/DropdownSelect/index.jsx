@@ -10,11 +10,13 @@ export const DropdownSelect = (props) => {
 
     const onOptionClicked = (string) => {
         setValue(string);
+        props.onSelectLanguage(string);            
     }
 
     const onButton = () => {
         setOpen((prevOpen) => !prevOpen);
     }
+
     return (
         <div className='wrapper text-left'>
             <div className='flex relative'  onClick={() => {onButton()}}>

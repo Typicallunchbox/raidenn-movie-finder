@@ -6,18 +6,17 @@ import securityQuestions from '../static/securityQuestions.json'
 
 const RegisterSecurityQuestions = () => {
   const [questions, setQuestions] = useState([])
-  const [userInputs, setUserInputs] = useState(
-    [
-      {
-        question:'',
-        answer:''
-      },
-      {
-        question:'',
-        answer:''
-      }
-    ]
-  );
+  const [answers, setAnswers] = useState([
+    {
+      question: '',
+      answer:''
+    },
+    {
+      question: '',
+      answer:''
+    }
+  ])
+
 
   useEffect(() => {
     let temp = [];
@@ -27,19 +26,14 @@ const RegisterSecurityQuestions = () => {
     }
     setQuestions(temp);
   }, [])
-
-  const onBlur = (e, index) => {
-    console.log('e:', e)
-    console.log('index:', index)
-
-    console.log('userInputs:', userInputs[index])
-
-    // setUserInputs((prevState) => ({
-    //   ...prevState[index].question = e.target.value
-    // }));
+  
+  const onBlur = (name, value, index) => {
+    let tempAnswers = null;
+    tempAnswers = {...answers}
+    tempAnswers[index][name] = value.toLowerCase();
+    setAnswers(tempAnswers);
   };
 
-  
   return (
         <div>
           <div className='px-12 pt-6'>
@@ -56,24 +50,24 @@ const RegisterSecurityQuestions = () => {
             
             <div className='flex flex-col text-left mb-8'>
               <p className='bk-text-colour pl-2'>Question 1</p>
-              <DropdownSelect placeholder="Choose a security question" array={questions} />
+              <DropdownSelect onSelectLanguage={value => onBlur('question',value,0)} placeholder="Choose a security question" array={questions} />
               <input
-                onBlur={(e) => onBlur(e,0)}
+                onBlur={(e) => onBlur(e.target.name, e.target.value , 0)}
                 className='mt-2'
-                id='question1'
-                name='question1'
+                id='answer'
+                name='answer'
                 type='text'
                 placeholder='Answer'
               />
             </div>
             <div className='flex flex-col text-left mb-12'>
               <p className='bk-text-colour pl-2'>Question 2</p>
-              <DropdownSelect  placeholder="Choose a security question" array={questions} />
+              <DropdownSelect onSelectLanguage={value => onBlur('question',value, 1)}  placeholder="Choose a security question" array={questions} />
               <input
-                onBlur={(e) => onBlur(e,1)}
+                onBlur={(e) => onBlur(e.target.name, e.target.value , 1)}
                 className='mt-2'
-                id='question2'
-                name='question2'
+                id='answer'
+                name='answer'
                 type='text'
                 placeholder='Answer'
               />
