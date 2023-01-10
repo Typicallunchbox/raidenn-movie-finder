@@ -18,7 +18,7 @@ export const DropdownSelect = (props) => {
     return (
         <div className='wrapper text-left'>
             <div className='flex relative'  onClick={() => {onButton()}}>
-                <div className={`button ${value === placeholder ? 'text-gray-600': ''}`}>{value}</div>
+                <div className={`button ${value === placeholder ? 'text-neutral-500': 'text-slate-50'}`}>{value}</div>
                 <p className='b-text-colour absolute right-2 top-2 hover:cursor-pointer'>
                             <FaArrowDown />
                 </p>

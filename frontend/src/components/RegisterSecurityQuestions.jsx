@@ -32,10 +32,24 @@ const RegisterSecurityQuestions = () => {
             <div className='flex flex-col text-left mb-8'>
               <p className='bk-text-colour pl-2'>Question 1</p>
               <DropdownSelect placeholder="Choose a security question" array={questions} />
+              <input
+                className='mt-2'
+                id='question1'
+                name='question1'
+                type='text'
+                placeholder='Answer'
+              />
             </div>
             <div className='flex flex-col text-left mb-12'>
               <p className='bk-text-colour pl-2'>Question 2</p>
               <DropdownSelect placeholder="Choose a security question" array={questions} />
+              <input
+                className='mt-2'
+                id='question2'
+                name='question2'
+                type='text'
+                placeholder='Answer'
+              />
             </div>
           </div>
           <button  type='submit' className='btn-primary'>
