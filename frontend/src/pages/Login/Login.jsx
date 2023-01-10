@@ -97,7 +97,7 @@ const Login = () => {
               type='password'
               placeholder='Password'
             />
-            <div className='w-full relative text-right'>
+            <div className='w-full relative text-right mb-6'>
               <Link to='/login' className='bk-text-colour text-xs underline bk-text-colour'>
                   Forgot Password?
               </Link>
