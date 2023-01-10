@@ -6,6 +6,19 @@ import securityQuestions from '../static/securityQuestions.json'
 
 const RegisterSecurityQuestions = () => {
   const [questions, setQuestions] = useState([])
+  const [userInputs, setUserInputs] = useState(
+    [
+      {
+        question:'',
+        answer:''
+      },
+      {
+        question:'',
+        answer:''
+      }
+    ]
+  );
+
   useEffect(() => {
     let temp = [];
     for (let index = 0; index < securityQuestions.length; index++) {
@@ -14,6 +27,18 @@ const RegisterSecurityQuestions = () => {
     }
     setQuestions(temp);
   }, [])
+
+  const onBlur = (e, index) => {
+    console.log('e:', e)
+    console.log('index:', index)
+
+    console.log('userInputs:', userInputs[index])
+
+    // setUserInputs((prevState) => ({
+    //   ...prevState[index].question = e.target.value
+    // }));
+  };
+
   
   return (
         <div>
@@ -33,6 +58,7 @@ const RegisterSecurityQuestions = () => {
               <p className='bk-text-colour pl-2'>Question 1</p>
               <DropdownSelect placeholder="Choose a security question" array={questions} />
               <input
+                onBlur={(e) => onBlur(e,0)}
                 className='mt-2'
                 id='question1'
                 name='question1'
@@ -42,8 +68,9 @@ const RegisterSecurityQuestions = () => {
             </div>
             <div className='flex flex-col text-left mb-12'>
               <p className='bk-text-colour pl-2'>Question 2</p>
-              <DropdownSelect placeholder="Choose a security question" array={questions} />
+              <DropdownSelect  placeholder="Choose a security question" array={questions} />
               <input
+                onBlur={(e) => onBlur(e,1)}
                 className='mt-2'
                 id='question2'
                 name='question2'
