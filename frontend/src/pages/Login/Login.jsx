@@ -81,6 +81,8 @@ const Login = () => {
               value={email}
               type='email'
               placeholder='Enter your email'
+              className='mb-2'
+
             />
             <input
               onKeyDown={(e) => {
@@ -95,6 +97,11 @@ const Login = () => {
               type='password'
               placeholder='Password'
             />
+            <div className='w-full relative text-right'>
+              <Link to='/login' className='bk-text-colour text-xs underline bk-text-colour'>
+                  Forgot Password?
+              </Link>
+            </div>
           </div>
           <button onClick={onSubmit} type='submit' className='btn-primary'>
             Sign In

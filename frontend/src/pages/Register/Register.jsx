@@ -103,6 +103,7 @@ const Register = () => {
               value={name}
               type='text'
               placeholder='Enter your username'
+              className='mb-2'
             />
             <input
               onKeyDown={(e) => {
@@ -116,6 +117,7 @@ const Register = () => {
               value={email}
               type='email'
               placeholder='Enter your email'
+              className='mb-2'
             />
             <input
               onKeyDown={(e) => {
@@ -129,6 +131,7 @@ const Register = () => {
               value={password}
               type='password'
               placeholder='Password'
+              className='mb-2'
             />
             <input
               onKeyDown={(e) => {
@@ -142,6 +145,7 @@ const Register = () => {
               value={password2}
               type='password'
               placeholder='Password Confirm'
+              className='mb-6'
             />
           </div>
           <button onClick={onSubmit} type='submit' className='btn-primary'>
