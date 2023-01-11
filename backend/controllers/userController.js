@@ -118,7 +118,7 @@ const compareSecurityAnswers = asyncHandler(async (req, res) => {
   if(user){
     let count = 0;
     if(user?.securityQuestions.length > 0){
-      // const salt = await bcrypt.genSalt(10);
+      const salt = await bcrypt.genSalt(10);
 
       for (let index = 0; index < response.length; index++) {
         const r = response[index];
@@ -126,11 +126,9 @@ const compareSecurityAnswers = asyncHandler(async (req, res) => {
         for (let index = 0; index < user?.securityQuestions.length; index++) {
           const d = user?.securityQuestions[index];
           if(r.question === d.question){
-            let userAnswer = null;
-            // userAnswer = await bcrypt.hash(r.answer, salt);
-
-            // let result = await bcrypt.compare(userAnswer, d.answer)
-            r.answer.toLowerCase() === d.answer ? count++ : null
+            let result = await bcrypt.compare(r.answer, d.answer)
+            console.log('result:', result)
+            // r.answer.toLowerCase() === d.answer ? count++ : null
             break;
           }
         }
@@ -183,11 +181,11 @@ const setSecurityQuestions = asyncHandler(async (req, res) => {
   if(userExists){
 
     //Hash Answer
-    // const salt = await bcrypt.genSalt(10);
-    // for (let index = 0; index < securityQuestions.length; index++) {
-    //   const element = securityQuestions[index];
-    //   element.answer = await bcrypt.hash(element.answer, salt);
-    // }
+    const salt = await bcrypt.genSalt(10);
+    for (let index = 0; index < securityQuestions.length; index++) {
+      const element = securityQuestions[index];
+      element.answer = await bcrypt.hash(element.answer, salt);
+    }
 
     const updateSecurityQuestions = await User.findByIdAndUpdate(userExists._id, {securityQuestions : securityQuestions})
     if (updateSecurityQuestions) {
