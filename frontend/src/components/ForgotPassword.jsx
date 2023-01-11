@@ -18,9 +18,7 @@ const ForgotPassword = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [userExists, setUserExists] = useState(false);
   const [validAnswers, setValidAnswers] = useState(false);
-
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [tempPassword, setTempPassword] = useState('');
 
   const [answers, setAnswers] = useState([
     {
@@ -86,21 +84,8 @@ const ForgotPassword = () => {
       let compareResult = await compareSecurityAnswers({response:answers, email});
       if(compareResult?.status === 'OK'){
         setValidAnswers(true);
+        setTempPassword(compareResult?.temp);
       }
-    }
-  };
-
-  const savePassword = async(e) => {
-    e.preventDefault();
-    setErrorMsg("")
-    if (!validPasswordStrength.test(password)) {
-      setErrorMsg("Password Guide : Uppercase & Lowercase letters, minimum 7 characters, 1 Number & Special character"); 
-      return;
-    }
-    if(password !== confirmPassword){setErrorMsg("Passwords don't match"); return;}
-    else{
-      //Update Password
-      console.log('hit')
     }
   };
 
@@ -193,45 +178,16 @@ const ForgotPassword = () => {
               letterSpacing: "3px",
             }}
           >
-            New Password
+            Important Notice
           </h1>
-          <h5 className="text-md text-slate-500 mb-6">Set a new secure password</h5>
-          <div className='flex flex-col text-left mb-4'>
-            <p className='bk-text-colour pl-2'>New Password</p>
-            <input
-              onBlur={(e) => setPassword(e.target.value)}
-              className='mt-2'
-              id='password'
-              name='password'
-              type='password'
-              placeholder='Enter your new password'
-              onKeyDown={(e) => {
-                if (e.code === "Enter") {
-                  savePassword(e);
-                }
-              }}
-            />
+          <h5 className="text-md text-slate-500 mb-6">We have generated a new temporary password for you (Keep it noted). Please login and go to your profile to set your own new Password.</h5>
+          <div className='flex flex-col text-center mb-4'>
+            <p className='bk-text-colour'>New Temporary Password:</p>
+            <p className='text-rose-500'>{tempPassword}</p>
           </div>
-          <div className='flex flex-col text-left mb-2'>
-            <p className='bk-text-colour pl-2'>Confirm New Password</p>
-            <input
-              onBlur={(e) => setConfirmPassword(e.target.value)}
-              className='mt-2'
-              id='confirmPassword'
-              name='confirmPassword'
-              type='password'
-              placeholder='Confirm new password'
-              onKeyDown={(e) => {
-                if (e.code === "Enter") {
-                  savePassword(e);
-                }
-              }}
-            />
-          </div>
-          <p className='text-sm text-rose-500 pt-2 pl-2'>{errorMsg}</p>
         </div>
-        <button onClick={savePassword} type='submit' className='btn-primary'>
-          Save
+        <button onClick={() => {window.location.reload(); }} type='submit' className='btn-primary'>
+          Return to Login
         </button>
         <div className='h-4'></div>
       </div>)}

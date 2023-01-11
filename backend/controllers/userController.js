@@ -136,8 +136,26 @@ const compareSecurityAnswers = asyncHandler(async (req, res) => {
         }
       }
       if(count === user?.securityQuestions.length){
-        res.status(200).json({status: 'OK'}); 
-        return;
+
+        // create new temp password
+        const getUser = await User.findOne({ email });
+        const symbols = ["@", "$", "!", "%", "*", "?", "&"];
+        const random = Math.floor(Math.random() * symbols.length);
+        let randomPassword = (Math.random().toString(36).slice(2, 12))
+        randomPassword = 'R'+randomPassword.charAt(0).toUpperCase() + randomPassword.slice(1) + symbols[random];
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(randomPassword, salt);
+
+        const updateUserPassword = await User.findByIdAndUpdate(getUser._id, {password : hashedPassword});
+        if (updateUserPassword) {
+          console.log('randomPassword:', randomPassword);
+          res.status(200).json({status: 'OK', temp: randomPassword}); 
+          return;
+        } else {
+          res.status(400);
+          throw new Error("Something went wrong.");
+        }
       }
     }
   }
