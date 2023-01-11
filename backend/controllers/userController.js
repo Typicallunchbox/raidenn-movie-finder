@@ -149,7 +149,6 @@ const compareSecurityAnswers = asyncHandler(async (req, res) => {
 
         const updateUserPassword = await User.findByIdAndUpdate(getUser._id, {password : hashedPassword});
         if (updateUserPassword) {
-          console.log('randomPassword:', randomPassword);
           res.status(200).json({status: 'OK', temp: randomPassword}); 
           return;
         } else {
