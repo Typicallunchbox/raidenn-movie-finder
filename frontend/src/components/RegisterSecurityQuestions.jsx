@@ -56,7 +56,7 @@ const RegisterSecurityQuestions = () => {
 
       console.log("isSuccess:", isSuccess);
       console.log("message:", message);
-
+      navigate("/")
       //MAKE SURE SUCCS FIRST BEFORE NAVIGATING
       // if(isSuccess){
       // navigate("/");

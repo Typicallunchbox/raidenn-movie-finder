@@ -127,14 +127,12 @@ const compareSecurityAnswers = asyncHandler(async (req, res) => {
           const d = user?.securityQuestions[index];
           if(r.question === d.question){
             let result = await bcrypt.compare(r.answer, d.answer)
-            console.log('result:', result)
-            // r.answer.toLowerCase() === d.answer ? count++ : null
+            result ? count++ : null;
             break;
           }
         }
       }
       if(count === user?.securityQuestions.length){
-
         // create new temp password
         const getUser = await User.findOne({ email });
         const symbols = ["@", "$", "!", "%", "*", "?", "&"];
