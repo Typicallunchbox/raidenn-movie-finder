@@ -16,11 +16,8 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [showMainLogin, setShowMainLogin] = useState(false);
-
-
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const { email, password } = formData;
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -63,10 +60,10 @@ const Login = () => {
     <div>
       <div className='login_container'>
         <div className='inner-container'>
-          {showMainLogin ? (<div>
+          {!showForgotPassword ? (<div>
           <div className='px-12 pt-6'>
             <h1
-              className='bk-text-colour'
+              className='bk-text-colour mb-6'
               style={{
                 fontFamily: "ThunderBoldLC",
                 fontSize: "35px",
@@ -104,7 +101,7 @@ const Login = () => {
               placeholder='Password'
             />
             <div className='w-full relative text-right mb-6'>
-              <Link to='/login' className='bk-text-colour text-xs underline bk-text-colour'>
+              <Link onClick={()=>{setShowForgotPassword(true)}} to='#' className='bk-text-colour text-xs underline bk-text-colour'>
                   Forgot Password?
               </Link>
             </div>

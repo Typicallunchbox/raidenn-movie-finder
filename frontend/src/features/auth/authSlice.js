@@ -137,8 +137,7 @@ export const setSecurityQuestions = createAsyncThunk(
 //Get User Security Questions 
 export const compareSecurityAnswers = async (data) => {
   try {
-    let user = JSON.parse(localStorage.getItem("user"));
-    return await authService.compareSecurityAnswers(data, user.token);
+    return await authService.compareSecurityAnswers(data);
   } catch (error) {
     const message =
       (error.response &&
