@@ -53,6 +53,11 @@ const Movie = () => {
   let colours = ColourPalette(movie ? image_path + movie?.poster_path : []);
 
   const onSubmit = (e) => {
+    setCommentErr('');
+    if (text === '') {
+      setCommentErr("Please add a message with your rating");
+      return;
+    }
     if (text.length > 600) {
       setCommentErr("Max character length is 600 characters.");
       return;
@@ -525,6 +530,8 @@ const Movie = () => {
                   Send
                 </button>
               </div>
+              <p className='text-sm text-rose-500 pt-1 pl-2'>{commentErr}</p>
+
             </div>
           </div>
         </div>
