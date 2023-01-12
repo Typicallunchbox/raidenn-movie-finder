@@ -855,10 +855,42 @@ background-color: var(--raidenn-blue)
 }
 .comment-section{
   animation: fadeInAnimation ease 3s;
-  background-color: #464646;
+  // background-color: var(--raidenn-white) !important;
   
-  p{
-    color: var(--raidenn-black);
+  // p{
+  //   color: var(--raidenn-black);
+  // }
+  .card{
+    background-color: var(--raidenn-black) !important;
+  }
+
+  h2{
+    font-family: MediumLC;
+    letter-spacing: 2px;
+    font-size: 30px;
+  }
+
+  span{
+    font-family: MediumLC;
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+
+  .rating span{
+    color: var(--raidenn-black) !important;
+  }
+
+  .controls{
+    button{
+      color: var(--raidenn-black);
+      border: solid 1px var(--raidenn-black);
+    }
+
+    button:hover{
+      color: var(--raidenn-white);
+      border: var(--raidenn-white);
+
+    }
   }
 
   .comments{
