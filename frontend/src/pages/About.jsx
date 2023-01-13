@@ -3,7 +3,7 @@ const About = () => {
 
 
   return (
-    <div className="about-page relative"> 
+    <div className="about-page w-full relative"> 
       {/* <h2 className="text-center">Under Construction...</h2> */}
       <div className="about-text w-96 absolute left-52 top-32">
           <h2 className="text-2xl">Raidenn</h2>
@@ -20,8 +20,8 @@ const About = () => {
           <p className="mt-10 text-sm text-slate-500">"Experience is a master teacher, even when it’s not our own"</p>
       </div>
       <div className="bgVideo"></div>
-      <div className="absolute right-0">
-        <h3>Contact Me</h3>
+      <div className="contact-me absolute top-20 right-0">
+        <h3 className="p-4">Contact Me</h3>
       </div>
     </div>
   );

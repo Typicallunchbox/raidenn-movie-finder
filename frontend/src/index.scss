@@ -918,11 +918,15 @@ background-color: var(--raidenn-blue)
     }
   }
 
-  
-  h3{
-    font-size: 120px;
-    font-family: ThunderBoldLC;
-    writing-mode: vertical-lr !important;
+  .contact-me{
+    h3{
+      font-size: 100px;
+      font-family: MediumLC;
+      font-weight: 100;
+      writing-mode: vertical-rl !important;
+      background: var(--raidenn-blue);
+      letter-spacing: 5px;
+    }
   }
 }
 
