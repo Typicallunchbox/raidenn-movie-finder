@@ -6,7 +6,7 @@ import { DropdownSelect } from "../components/DropdownSelect/index";
 import securityQuestions from "../static/securityQuestions.json";
 import { setSecurityQuestions } from "../features/auth/authSlice";
 
-const RegisterSecurityQuestions = () => {
+const RegisterSecurityQuestions = (props) => {
   const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
@@ -52,11 +52,11 @@ const RegisterSecurityQuestions = () => {
     }
     console.log("answers:", answers);
     if (answers) {
-      dispatch(setSecurityQuestions(answers));
+      props.registerUser(answers)
+      // dispatch(setSecurityQuestions(answers));
 
-      console.log("isSuccess:", isSuccess);
-      console.log("message:", message);
-      navigate("/")
+      // navigate("/")
+      
       //MAKE SURE SUCCS FIRST BEFORE NAVIGATING
       // if(isSuccess){
       // navigate("/");

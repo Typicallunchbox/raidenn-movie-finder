@@ -16,11 +16,12 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    password2: ""
+    password2: "",
+    securityQuestions: null
   });
   const [showMainRegister, setShowMainRegister] = useState(true);
 
-  const { name, email, password, password2 } = formData;
+  const { name, email, password, password2, securityQuestions } = formData;
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -34,9 +35,9 @@ const Register = () => {
       toast.error(message)
     }
 
-    // if(isSuccess || user){
-    //   navigate('/')
-    // }
+    if(isSuccess || user){
+      navigate('/')
+    }
 
     dispatch(reset())
 
@@ -49,7 +50,7 @@ const Register = () => {
     }))
   };
 
-  const onSubmit = (e) => {
+  const setUserData = (e) => {
     e.preventDefault()
 
     if(!validUserName.test(name.trim())){toast.error('Username should be between 4 - 25 Characters (No Special Characters)'); return;}
@@ -63,17 +64,23 @@ const Register = () => {
 
   
     else{
-      const userData = {
-        name,
-        email,
-        password,
-        password2
-      }
-
-      dispatch(register(userData));
       setShowMainRegister(false);
     }
   };
+
+  const registerUser = (data) => {
+    const userData = {
+        name,
+        email,
+        password,
+        password2,
+        securityQuestions : data
+      }
+      console.log('userData:', userData)
+    if(userData){
+        dispatch(register(userData));
+    }
+  }
 
   return (
     <div>
@@ -94,7 +101,7 @@ const Register = () => {
             <input
               onKeyDown={(e) => {
                 if (e.code === "Enter") {
-                  onSubmit(e);
+                  setUserData(e);
                 }
               }}
               onChange={onChange}
@@ -108,7 +115,7 @@ const Register = () => {
             <input
               onKeyDown={(e) => {
                 if (e.code === "Enter") {
-                  onSubmit(e);
+                  setUserData(e);
                 }
               }}
               onChange={onChange}
@@ -122,7 +129,7 @@ const Register = () => {
             <input
               onKeyDown={(e) => {
                 if (e.code === "Enter") {
-                  onSubmit(e);
+                  setUserData(e);
                 }
               }}
               onChange={onChange}
@@ -136,7 +143,7 @@ const Register = () => {
             <input
               onKeyDown={(e) => {
                 if (e.code === "Enter") {
-                  onSubmit(e);
+                  setUserData(e);
                 }
               }}
               onChange={onChange}
@@ -148,7 +155,7 @@ const Register = () => {
               className='mb-6'
             />
           </div>
-          <button onClick={onSubmit} type='submit' className='btn-primary'>
+          <button onClick={setUserData} type='submit' className='btn-primary'>
             Register
           </button>
           <div>
@@ -162,7 +169,7 @@ const Register = () => {
         </div>) 
         : 
         (<div>
-          <RegisterSecurityQuestions />
+          <RegisterSecurityQuestions registerUser={registerUser}/>
         </div>)}
         </div>
       </div>

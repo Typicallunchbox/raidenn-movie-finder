@@ -26,11 +26,16 @@ function App() {
             {user ? <><Route path="/" element={<Home />} /></> : <><Route path="/" element={<Landing />} /></>}
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/about" element={<About />} />
             <Route path="*" element={<ErrorPage />} />
-            <Route path={`/movie/:id`} element={<Movie />} />
-            <Route path={`/watchlist`} element={<Watchlist />} />
-            <Route path={`/settings`} element={<Settings />} />
+            {user &&
+            <>
+              <Route path="/about" element={<About />} />
+              <Route path={`/movie/:id`} element={<Movie />} />
+              <Route path={`/watchlist`} element={<Watchlist />} />
+              <Route path={`/settings`} element={<Settings />} />
+            </>
+            }
+
           </Routes>
         </div>
         {/* {user && <div className="h-screen"></div>} */}

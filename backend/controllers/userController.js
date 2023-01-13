@@ -7,12 +7,19 @@ const User = require("../models/userModel");
 //@route    POST /api/users
 //@access   Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, genrePreferences } = req.body;
-  if (!name || !email || !password) {
+  const { name, email, password, securityQuestions, genrePreferences } = req.body;
+  if (!name || !email || !password || !securityQuestions || securityQuestions.length === 0) {
     res.status(400);
     throw new Error("Please add all fields");
   }
 
+  for (let index = 0; index < securityQuestions.length; index++) {
+    const element = securityQuestions[index];
+
+    if (element.question === "") {res.status(400); throw new Error("Invalid secuirty questions");}
+    if (element.answer === "") {res.status(400); throw new Error("Invalid secuirty questions");}
+  }
+  
   //Check if user exists
   const userExists = await User.findOne({ email });
   if (userExists) {
@@ -24,12 +31,18 @@ const registerUser = asyncHandler(async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
+  for (let index = 0; index < securityQuestions.length; index++) {
+    const element = securityQuestions[index];
+    element.answer = await bcrypt.hash(element.answer, salt);
+  }
+
   // Create user
   const user = await User.create({
     name,
     email,
     password: hashedPassword,
-    genrePreferences
+    genrePreferences,
+    securityQuestions
   });
 
   if (user) {

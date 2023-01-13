@@ -9,7 +9,6 @@ import {useSelector, useDispatch} from 'react-redux'
 import {login, reset} from '../../features/auth/authSlice';
 import { getSecurityQuestions } from "../../features/auth/authSlice";
 import ForgotPassword from '../../components/ForgotPassword';
-import RegisterSecurityQuestions from '../../components/RegisterSecurityQuestions';
 
 
 
@@ -20,7 +19,6 @@ const Login = () => {
     password: "",
   });
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [emptyQuestions, setEmptyQuestions] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const { email, password } = formData;
@@ -37,17 +35,16 @@ const Login = () => {
     }
 
     if(isSuccess || user){
-        const secuirtyQuestionsExist = async() => {
-        let result = await getSecurityQuestions({email});
-        if(result.length === 0){
-          setEmptyQuestions(true);
-        }else{
-          navigate('/')
-        }
+
+      const redirect = async() => {
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        setIsLoading(true);
+        await delay(2000)
+        setIsLoading(false);
+        navigate('/')
+
       }
-      setIsLoading(true);
-      secuirtyQuestionsExist();
-      setIsLoading(false);
+      redirect();
     }
 
     dispatch(reset())
@@ -80,72 +77,67 @@ const Login = () => {
     <div>
       <div className='login_container'>
         <div className='inner-container'>
-        {!user && <div>
           {!showForgotPassword ? (<div>
-            <div className='px-12 pt-6'>
-              <h1
-                className='bk-text-colour mb-6'
-                style={{
-                  fontFamily: "ThunderBoldLC",
-                  fontSize: "35px",
-                  letterSpacing: "3px",
-                }}
-              >
-                Sign In
-              </h1>
-              <input
-                onKeyDown={(e) => {
-                  if (e.code === 'Enter') {
-                    onSubmit(e)
-                  }
-                }}
-                onChange={onChange}
-                id='email'
-                name='email'
-                value={email}
-                type='email'
-                placeholder='Enter your email'
-                className='mb-2'
-
-              />
-              <input
-                onKeyDown={(e) => {
-                  if (e.code === "Enter") {
-                    onSubmit(e);
-                  }
-                }}
-                onChange={onChange}
-                id='password'
-                name='password'
-                value={password}
-                type='password'
-                placeholder='Password'
-              />
-              <div className='w-full relative text-right mb-6'>
-                <Link onClick={()=>{setShowForgotPassword(true)}} to='#' className='bk-text-colour text-xs underline bk-text-colour'>
-                    Forgot Password?
-                </Link>
-              </div>
-            </div>
-            <button onClick={onSubmit} type='submit' className='btn-primary'>
+          <div className='px-12 pt-6'>
+            <h1
+              className='bk-text-colour mb-6'
+              style={{
+                fontFamily: "ThunderBoldLC",
+                fontSize: "35px",
+                letterSpacing: "3px",
+              }}
+            >
               Sign In
-            </button>
-            <div>
-              <Link to='/register'>
-                <p className='bk-text-colour my-4 text-sm underline bk-text-colour'>
-                  Create an Account
-                </p>
+            </h1>
+            <input
+              onKeyDown={(e) => {
+                if (e.code === 'Enter') {
+                  onSubmit(e)
+                }
+              }}
+              onChange={onChange}
+              id='email'
+              name='email'
+              value={email}
+              type='email'
+              placeholder='Enter your email'
+              className='mb-2'
+
+            />
+            <input
+              onKeyDown={(e) => {
+                if (e.code === "Enter") {
+                  onSubmit(e);
+                }
+              }}
+              onChange={onChange}
+              id='password'
+              name='password'
+              value={password}
+              type='password'
+              placeholder='Password'
+            />
+            <div className='w-full relative text-right mb-6'>
+              <Link onClick={()=>{setShowForgotPassword(true)}} to='#' className='bk-text-colour text-xs underline bk-text-colour'>
+                  Forgot Password?
               </Link>
             </div>
-            </div>)
-            : 
-          (<div>
-            <ForgotPassword />
-          </div>)}
-        </div>}
-        {user && emptyQuestions &&<div>
-          <RegisterSecurityQuestions />
-        </div>}
+          </div>
+          <button onClick={onSubmit} type='submit' className='btn-primary'>
+            Sign In
+          </button>
+          <div>
+            <Link to='/register'>
+              <p className='bk-text-colour my-4 text-sm underline bk-text-colour'>
+                Create an Account
+              </p>
+            </Link>
+          </div>
+          </div>)
+          : 
+        (<div>
+          <ForgotPassword />
+        </div>)}
         </div>
       </div>
     </div>
