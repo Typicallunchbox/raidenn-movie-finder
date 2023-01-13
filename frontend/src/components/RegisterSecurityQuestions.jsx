@@ -1,17 +1,9 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { DropdownSelect } from "../components/DropdownSelect/index";
 import securityQuestions from "../static/securityQuestions.json";
-import { setSecurityQuestions } from "../features/auth/authSlice";
 
 const RegisterSecurityQuestions = (props) => {
-  const { user, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
-  );
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState([
     {
@@ -43,24 +35,23 @@ const RegisterSecurityQuestions = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     let valid = true;
-    // do empty validation
     for (let index = 0; index < answers.length; index++) {
       const element = answers[index];
 
       if (element.question === "") valid = false;
       if (element.answer === "") valid = false;
+      toast.error(`Empty fields`)
+      return;
     }
-    console.log("answers:", answers);
-    if (answers) {
-      props.registerUser(answers)
-      // dispatch(setSecurityQuestions(answers));
 
-      // navigate("/")
-      
-      //MAKE SURE SUCCS FIRST BEFORE NAVIGATING
-      // if(isSuccess){
-      // navigate("/");
-      // }
+    if(answers[0].question === answers[1].question) {
+      valid = false; 
+      toast.error(`Can't have duplicate questions`)
+      return;
+    }
+
+    if (valid) {
+      props.registerUser(answers)
     }
   };
 

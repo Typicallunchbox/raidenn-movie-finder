@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import SearchDropDown from "./SearchDropDown/SearchDropDown";
 import {reset as resetMovies} from "../features/movies/movieSlice"
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaSignInAlt, FaUser } from "react-icons/fa";
 import {reset as resetWatchlist} from "../features/watchlists/watchlistSlice";
 import btnAnimation from '../static/animations/menuBtnAnimation.webm';
 

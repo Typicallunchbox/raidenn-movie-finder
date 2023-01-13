@@ -21,7 +21,7 @@ const Register = () => {
   });
   const [showMainRegister, setShowMainRegister] = useState(true);
 
-  const { name, email, password, password2, securityQuestions } = formData;
+  const { name, email, password, password2} = formData;
 
   const navigate = useNavigate()
   const dispatch = useDispatch()

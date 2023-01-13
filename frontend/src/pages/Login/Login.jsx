@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import Spinner from "../../components/Spinner";
 import {useSelector, useDispatch} from 'react-redux'
 import {login, reset} from '../../features/auth/authSlice';
-import { getSecurityQuestions } from "../../features/auth/authSlice";
 import ForgotPassword from '../../components/ForgotPassword';
 
 
