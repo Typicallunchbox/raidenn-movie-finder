@@ -10,19 +10,13 @@ function Footer() {
     <footer className='footer'>
         <div className="links">
             <h3>Links</h3>
-            <Link to='/'>
-                <a>Home</a>
-            </Link>
-            <Link to='/settings'>
-                <a>Profile Settings</a>
-            </Link>
-            <Link to='/watchlist'>
-                <a>My Watchlist</a>
-            </Link>
+                <a href="/">Home</a>
+                <a href="/settings">Profile Settings</a>
+                <a href="/watchlist">My Watchlist</a>
         </div>
         <div className="links">
             <h3>Creator</h3>
-            <a href="https://github.com/Typicallunchbox/Typicallunchbox" target="_blank">Github</a>
+            <a href="https://github.com/Typicallunchbox" target="_blank">Github</a>
         </div>
     </footer>}
     </>
