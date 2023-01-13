@@ -909,6 +909,11 @@ background-color: var(--raidenn-blue)
 /* ************ABOUT PAGE************ */
 .about-page{
   .about-text{
+    // position: absolute;
+    left: 25%;
+    top: 50%;
+    transform: translate(-25%, -50%);
+
     h2{
       font-size: 150px;
       font-family: ThunderBoldLC;
@@ -928,7 +933,10 @@ background-color: var(--raidenn-blue)
       writing-mode: vertical-rl !important;
       background: var(--raidenn-blue);
       letter-spacing: 5px;
-      padding: 40px 20px
+      padding: 40px 20px;
+      right: 0;
+      top: 45%;
+      transform: translate(0, -45%);
     }
   // }
 }

@@ -3,9 +3,9 @@ const About = () => {
 
 
   return (
-    <div className="about-page w-full relative"> 
+    <div className="about-page w-full"> 
       {/* <h2 className="text-center">Under Construction...</h2> */}
-      <div className="about-text w-96 relative mx-auto">
+      <div className="about-text w-96 absolute">
           <h2 className="text-2xl">Raidenn</h2>
           <p className="mt-12 leading-6 text-gray-400">
             Raidenn is a project which was created as a portfolio piece. It was also to be a challenge as
@@ -21,7 +21,7 @@ const About = () => {
       </div>
       <div className="bgVideo"></div>
       {/* <div className=""> */}
-        <h3 className="h-max p-4 contact-me absolute top-24 right-0">Contact Me</h3>
+        <h3 className="h-max p-4 contact-me absolute">Contact Me</h3>
       {/* </div> */}
     </div>
   );
