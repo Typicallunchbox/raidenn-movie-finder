@@ -10,7 +10,7 @@ export const DropdownSelect = (props) => {
 
     const onOptionClicked = (string) => {
         setValue(string);
-        props.onSelectLanguage(string);            
+        props.onSelect(string);            
     }
 
     const onButton = () => {

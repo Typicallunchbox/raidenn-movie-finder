@@ -72,7 +72,7 @@ const RegisterSecurityQuestions = (props) => {
         <div className='flex flex-col text-left mb-8'>
           <p className='bk-text-colour pl-2'>Question 1</p>
           <DropdownSelect
-            onSelectLanguage={(value) => onBlur("question", value, 0)}
+            onSelect={(value) => onBlur("question", value, 0)}
             placeholder='Choose a security question'
             array={questions}
           />
@@ -88,7 +88,7 @@ const RegisterSecurityQuestions = (props) => {
         <div className='flex flex-col text-left mb-12'>
           <p className='bk-text-colour pl-2'>Question 2</p>
           <DropdownSelect
-            onSelectLanguage={(value) => onBlur("question", value, 1)}
+            onSelect={(value) => onBlur("question", value, 1)}
             placeholder='Choose a security question'
             array={questions}
           />

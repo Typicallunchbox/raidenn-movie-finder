@@ -38,7 +38,7 @@ const Login = () => {
       const redirect = async() => {
         const delay = ms => new Promise(res => setTimeout(res, ms));
         setIsLoading(true);
-        await delay(2000)
+        await delay(1000)
         setIsLoading(false);
         navigate('/')
 
