@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div className="about-page w-full relative"> 
       {/* <h2 className="text-center">Under Construction...</h2> */}
-      <div className="about-text w-96 absolute left-52 top-32">
+      <div className="about-text w-96 relative mx-auto">
           <h2 className="text-2xl">Raidenn</h2>
           <p className="mt-12 leading-6 text-gray-400">
             Raidenn is a project which was created as a portfolio piece. It was also to be a challenge as
@@ -20,9 +20,9 @@ const About = () => {
           <p className="mt-10 text-sm text-slate-500">"Experience is a master teacher, even when it’s not our own"</p>
       </div>
       <div className="bgVideo"></div>
-      <div className="contact-me absolute top-20 right-0">
-        <h3 className="p-4">Contact Me</h3>
-      </div>
+      {/* <div className=""> */}
+        <h3 className="h-max p-4 contact-me absolute top-24 right-0">Contact Me</h3>
+      {/* </div> */}
     </div>
   );
 };

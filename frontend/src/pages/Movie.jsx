@@ -293,7 +293,7 @@ const Movie = () => {
                     />
                   </div>
                 )}
-                <p>{member.name}</p>
+                <p className="truncate" >{member.name}</p>
               </div>
             ))}
         </div>

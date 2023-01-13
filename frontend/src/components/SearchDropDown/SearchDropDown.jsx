@@ -2,10 +2,7 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import Textfield from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import { addTag, addMovies } from '../../features/movies/movieSlice';
 import axios from "axios";
 import './SearchDropDown.scss';
