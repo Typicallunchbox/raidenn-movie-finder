@@ -9,13 +9,12 @@
     // display: flex;
     // flex-direction: column;
 
-    h1{
-        padding-bottom: 20px;
-    }
+    // h1{
+    //     padding-bottom: 20px;
+    // }
     input{
         width: 100%;
         padding: .9rem;
-        margin-bottom: 12px;
         background: var(--raidenn-black);
         color: var(--raidenn-white);
     }
@@ -38,7 +37,6 @@
 
     div {
         width: 100%;
-        text-align: center;
     }
 }
 

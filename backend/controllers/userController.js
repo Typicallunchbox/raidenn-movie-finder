@@ -7,12 +7,19 @@ const User = require("../models/userModel");
 //@route    POST /api/users
 //@access   Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, genrePreferences } = req.body;
-  if (!name || !email || !password) {
+  const { name, email, password, securityQuestions, genrePreferences } = req.body;
+  if (!name || !email || !password || !securityQuestions || securityQuestions.length === 0) {
     res.status(400);
     throw new Error("Please add all fields");
   }
 
+  for (let index = 0; index < securityQuestions.length; index++) {
+    const element = securityQuestions[index];
+
+    if (element.question === "") {res.status(400); throw new Error("Invalid secuirty questions");}
+    if (element.answer === "") {res.status(400); throw new Error("Invalid secuirty questions");}
+  }
+  
   //Check if user exists
   const userExists = await User.findOne({ email });
   if (userExists) {
@@ -24,12 +31,18 @@ const registerUser = asyncHandler(async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
+  for (let index = 0; index < securityQuestions.length; index++) {
+    const element = securityQuestions[index];
+    element.answer = await bcrypt.hash(element.answer, salt);
+  }
+
   // Create user
   const user = await User.create({
     name,
     email,
     password: hashedPassword,
-    genrePreferences
+    genrePreferences,
+    securityQuestions
   });
 
   if (user) {
@@ -85,6 +98,120 @@ const setGenrePreferences = asyncHandler(async (req, res) => {
     throw new Error("Invalid Credentials");
   }
 });
+
+// @desc    Get user security questions
+//@route    POST /api/userQuestions
+//@access   Public
+const getSecurityQuestions = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  //check for user email
+  const user = await User.findOne({ email }).select('-password');
+
+  if(user){
+    let questions = [];
+    if(user?.securityQuestions.length > 0){
+      for (let index = 0; index < user.securityQuestions.length; index++) {
+        const element = user.securityQuestions[index];
+        questions.push(element.question);
+      }
+    }
+    res.status(200).json(questions); 
+    return;
+  }
+  res.status(200).json([]);
+});
+
+// @desc    Get user security questions
+//@route    POST /api/userQuestions
+//@access   Public
+const compareSecurityAnswers = asyncHandler(async (req, res) => {
+  const { email, response } = req.body;
+  //check for user email
+  const user = await User.findOne({ email }).select('-password');
+  if(user){
+    let count = 0;
+    if(user?.securityQuestions.length > 0){
+      const salt = await bcrypt.genSalt(10);
+
+      for (let index = 0; index < response.length; index++) {
+        const r = response[index];
+
+        for (let index = 0; index < user?.securityQuestions.length; index++) {
+          const d = user?.securityQuestions[index];
+          if(r.question === d.question){
+            let result = await bcrypt.compare(r.answer, d.answer)
+            result ? count++ : null;
+            break;
+          }
+        }
+      }
+      if(count === user?.securityQuestions.length){
+        // create new temp password
+        const getUser = await User.findOne({ email });
+        const symbols = ["@", "$", "!", "%", "*", "?", "&"];
+        const random = Math.floor(Math.random() * symbols.length);
+        let randomPassword = (Math.random().toString(36).slice(2, 12))
+        randomPassword = 'R'+randomPassword.charAt(0).toUpperCase() + randomPassword.slice(1) + symbols[random];
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(randomPassword, salt);
+
+        const updateUserPassword = await User.findByIdAndUpdate(getUser._id, {password : hashedPassword});
+        if (updateUserPassword) {
+          res.status(200).json({status: 'OK', temp: randomPassword}); 
+          return;
+        } else {
+          res.status(400);
+          throw new Error("Something went wrong.");
+        }
+      }
+    }
+  }
+  res.status(400);
+  throw new Error("Incorrect Answers");
+});
+
+// @desc    Set user security questions
+//@route    PUT /api/userQuestions
+//@access   Private
+const setSecurityQuestions = asyncHandler(async (req, res) => {
+  const { email, _id } = req.user;
+  const {securityQuestions} = req.body;
+
+  if (!securityQuestions) {
+    res.status(400);
+    throw new Error("Please include Add Secuirty Questions");
+  }
+
+  const userExists = await User.findOne({ user: _id, email: email });
+  if (!userExists) {
+    res.status(400);
+    throw new Error("User Does not exist");
+  }
+
+  if(userExists){
+
+    //Hash Answer
+    const salt = await bcrypt.genSalt(10);
+    for (let index = 0; index < securityQuestions.length; index++) {
+      const element = securityQuestions[index];
+      element.answer = await bcrypt.hash(element.answer, salt);
+    }
+
+    const updateSecurityQuestions = await User.findByIdAndUpdate(userExists._id, {securityQuestions : securityQuestions})
+    if (updateSecurityQuestions) {
+      res.status(201).json({status: 'OK'});
+    } else {
+      res.status(400);
+      throw new Error("error occured");
+    }
+  }else{
+    res.status(400);
+    throw new Error("Incorrect format");
+  }
+});
+
+
 
 // @desc    Authenticate a user
 //@route    POST /api/login
@@ -166,5 +293,8 @@ module.exports = {
   loginUser,
   updateProfile,
   getMe,
-  updatePassword
+  updatePassword,
+  getSecurityQuestions,
+  setSecurityQuestions,
+  compareSecurityAnswers
 };

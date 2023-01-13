@@ -9,7 +9,9 @@ import Select from '@mui/material/Select';
 import { addTag, addMovies } from '../../features/movies/movieSlice';
 import axios from "axios";
 import './SearchDropDown.scss';
-import { validYear } from '../../static/regex'
+import { validYear } from '../../static/regex';
+import { DropdownSelect } from "../../components/DropdownSelect/index";
+
 
 
 
@@ -19,6 +21,7 @@ const [releasedYear, setReleasedYear] = useState('');
 const [genre, setGenre] = useState('');
 const [searchText, setSearchText] = useState('');
 const [dropDownClass, setDropDownClass] = useState('');
+const genres = ['','Action','Comedy','Drama','Romance','Scifi','Thriller','Horror','Mystery','Fantasy','Documentary']
 const dispatch = useDispatch()
 
 const setTagState = (selectedTag) => {
@@ -126,7 +129,7 @@ const search = () => {
                     </FormControl>
                   </div>
                   <div className='genre'>
-                    <FormControl sx={{ m: 1, minWidth: 140 }}>
+                    {/* <FormControl sx={{ m: 1, minWidth: 140 }}>
                       <InputLabel>Genre</InputLabel>
                       <Select
                         value={genre}
@@ -149,13 +152,25 @@ const search = () => {
                         <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
                         <MenuItem value={"Documentary"}>Documentary</MenuItem>
                       </Select>
-                    </FormControl>
+                    </FormControl> */}
+                    <div className='w-20'>
+                      <DropdownSelect
+                        onSelect={(value) => setGenre(value)}
+                        placeholder='Genre'
+                        array={genres}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className='flex'>
                   <input
                     onBlur={(e) => {
                       setSearchText(e.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.code === "Enter") {
+                        search();
+                      }
                     }}
                     type='text'
                     id='comment'

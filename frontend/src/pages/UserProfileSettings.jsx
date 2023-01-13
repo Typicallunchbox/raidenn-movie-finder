@@ -16,6 +16,7 @@ const UserProfileSettings = () => {
   const [clickedResetPassword, setClickedResetPassword] = useState(false);
   const [confirmPassword, setconfirmPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [msg, setMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading]= useState(false)
 
@@ -27,6 +28,7 @@ const UserProfileSettings = () => {
     const delay = ms => new Promise(res => setTimeout(res, ms));
     if (!user) {
       const exit = async() => {
+        await delay(4000)
         setIsLoading(true);
         await delay(5000)
       
@@ -60,7 +62,7 @@ const UserProfileSettings = () => {
       });
 
       if (resp?.status === "OK") {
-
+        setMsg('You will be logged out shortly...')
         dispatch(logout());
         dispatch(reset());
         dispatch(resetWatchlist());
@@ -86,7 +88,7 @@ const UserProfileSettings = () => {
   return (
     <>
       <div className='container'>
-        <h1 className='mt-52'>Profile Settings</h1>
+        <h1 className='mt-52' style={{fontFamily: 'MediumLC', fontSize: '30px'}}>Profile Settings</h1>
 
         <div className='profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10'>
           <div className='Input mb-5'>
@@ -128,7 +130,7 @@ const UserProfileSettings = () => {
                 type='password'
                 id='password'
                 className={inputStyling}
-                placeholder='*'
+                placeholder='*******'
                 required
               ></input>
               <p
@@ -172,6 +174,7 @@ const UserProfileSettings = () => {
                     display div of all selected genres
                 </div> */}
           <button
+            disabled={msg}
             onClick={() => {
               clickedResetPassword ? changePassword() : changeUserDetails();
             }}
@@ -179,6 +182,7 @@ const UserProfileSettings = () => {
           >
             {clickedResetPassword ? "Update Password" : "Save Changes"}
           </button>
+          <p className='text-sm pt-6 pl-2'>{msg}</p>
           <p className='text-sm text-rose-500 pt-6 pl-2'>{errorMsg}</p>
         </div>
       </div>

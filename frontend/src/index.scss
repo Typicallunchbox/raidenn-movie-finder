@@ -205,7 +205,7 @@ h3 {
 
       video{
         transition: opacity 1s;
-        opacity: 1;
+        opacity: 0.25;
       }
 
       video.is-open{
@@ -855,10 +855,42 @@ background-color: var(--raidenn-blue)
 }
 .comment-section{
   animation: fadeInAnimation ease 3s;
-  background-color: #464646;
+  // background-color: var(--raidenn-white) !important;
   
-  p{
-    color: var(--raidenn-black);
+  // p{
+  //   color: var(--raidenn-black);
+  // }
+  .card{
+    background-color: var(--raidenn-black) !important;
+  }
+
+  h2{
+    font-family: MediumLC;
+    letter-spacing: 2px;
+    font-size: 30px;
+  }
+
+  span{
+    font-family: MediumLC;
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+
+  .rating span{
+    color: var(--raidenn-black) !important;
+  }
+
+  .controls{
+    button{
+      color: var(--raidenn-black);
+      border: solid 1px var(--raidenn-black);
+    }
+
+    button:hover{
+      color: var(--raidenn-white);
+      border: var(--raidenn-white);
+
+    }
   }
 
   .comments{
@@ -871,6 +903,30 @@ background-color: var(--raidenn-blue)
     color: #555;
   }
 }
+
+/* ************ABOUT PAGE************ */
+.about-page{
+  .about-text{
+    h2{
+      font-size: 150px;
+      font-family: ThunderBoldLC;
+    }
+
+    p{
+      font-size: 16px;
+      word-spacing: 3px;
+    }
+  }
+
+  
+  h3{
+    font-size: 120px;
+    font-family: ThunderBoldLC;
+    writing-mode: vertical-lr !important;
+  }
+}
+
+
 
 /* ************LANDING PAGE************ */
 #set-height {

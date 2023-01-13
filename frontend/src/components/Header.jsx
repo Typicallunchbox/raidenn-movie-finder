@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
 import SearchDropDown from "./SearchDropDown/SearchDropDown";
 import {reset as resetMovies} from "../features/movies/movieSlice"
-import { FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaSignInAlt, FaUser } from "react-icons/fa";
 import {reset as resetWatchlist} from "../features/watchlists/watchlistSlice";
 import btnAnimation from '../static/animations/menuBtnAnimation.webm';
 
@@ -13,6 +13,8 @@ import btnAnimation from '../static/animations/menuBtnAnimation.webm';
 function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {pathname} = useLocation();
+
   const { user } = useSelector((state) => state.auth);
   const [openSearchTab, setOpenSearchTab] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
@@ -42,26 +44,27 @@ function Header() {
     }
   }
 
-  useEffect(() => {
+  useEffect(()=>{
     setOpenSearchTab(false)
-  }, [])
-  
+    setOpenMenu(false);
+  },[pathname])
+    
 
   return (
     <>
 
     <header className={`header ${window.location.origin + "/" === window.location.href && !user ? 'bg-transparent' : 'primary-bg-colour'}`}>
       <div className='logo'>
-        <Link className="tertiary-text-colour" style={{fontFamily: 'ThunderBoldLC', fontSize: '35px'}}  to='/'>Raidenn</Link>
+        <a className="tertiary-text-colour" style={{fontFamily: 'ThunderBoldLC', fontSize: '35px'}}  href='/'>Raidenn</a>
       </div>
       {user && 
       <div className="flex gap-12 justify-center">
-              <Link to='/watchlist' className="tertiary-text-colour hidden md:block">
+              <Link to='/watchlist' className="tertiary-text-colour hidden md:block" onClick={() => {setOpenSearchTab(false)}}>
                 My Watchlist
               </Link>
-              <Link to={'#'} className="tertiary-text-colour hidden md:block" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
+              {window.location.origin + "/" === window.location.href && <Link to={'#'} className="tertiary-text-colour hidden md:block" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
                  Search
-              </Link>
+              </Link>}
             </div>}
       <ul>
         {user ? (
@@ -77,22 +80,22 @@ function Header() {
                 <source type="video/webm" src={btnAnimation}></source>
               </video>
               </div>
-              <div className={`options-menu flex relative h-80 md:h-52 ${openMenu ? 'is-open' : 'hidden'}`}>
+              <div className={`options-menu flex relative h-80 md:h-60 ${openMenu ? 'is-open' : 'hidden'}`}>
                 <div className="block md:hidden">
-                  <Link onClick={() => {setOpenMenu(false)}} className="bk-text-colour mb-2 p-1 shader" to='/watchlist'>
-                    My Watchlist 
-                  </Link>
                   <Link to={'#'} className="bk-text-colour mb-2 p-1 shader" onClick={() => {openSearchMobile()}}>
                     Search
                   </Link>
                 </div>
+                <Link onClick={() => {setOpenMenu(false); setOpenSearchTab(!openSearchTab);}} className="bk-text-colour mb-2 p-1 shader" to='/watchlist'>
+                    My Watchlist 
+                  </Link>
                 <Link onClick={() => {setOpenMenu(false)}} className="bk-text-colour mb-2 p-1 shader" to='/settings'>
                   Profile 
                 </Link>
                 <Link onClick={() => {setOpenMenu(false)}} className="bk-text-colour shader p-1" to='/about'>
                   About 
                 </Link>
-                <Link onClick={() => {onLogout(); setOpenMenu(false)}} className="bk-text-colour absolute bottom-5 right-5" to='/'>
+                <Link onClick={() => {onLogout(); setOpenMenu(false)}} className="text-red-500 absolute bottom-5 right-5 " to='/'>
                   Logout 
                 </Link>
               </div>
