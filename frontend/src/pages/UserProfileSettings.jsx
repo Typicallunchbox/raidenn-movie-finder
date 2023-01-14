@@ -88,7 +88,7 @@ const UserProfileSettings = () => {
   return (
     <>
       <div className='container'>
-        <h1 className='mt-52' style={{fontFamily: 'MediumLC', fontSize: '30px'}}>Profile Settings</h1>
+        <h1 className='mt-40' style={{fontFamily: 'MediumLC', fontSize: '30px'}}>Profile Settings</h1>
 
         <div className='profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10'>
           <div className='Input mb-5'>

@@ -10,8 +10,9 @@ function Footer() {
         <div className="links">
             <h3>Links</h3>
                 <a href="/">Home</a>
-                <a href="/settings">Profile Settings</a>
                 <a href="/watchlist">My Watchlist</a>
+                <a href="/settings">Profile Settings</a>
+                <a href="/about">About</a>
         </div>
         <div className="links">
             <h3>Creator</h3>

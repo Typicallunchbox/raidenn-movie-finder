@@ -1,7 +1,15 @@
-
+import { useState } from 'react';
+import blueLightning from '../static/animations/aboutUsLightning.webm';
 const About = () => {
+  const [hover, setHover] = useState(false);
 
-
+  const triggerAnimation = () => {
+      setHover(true);
+      let vid = document.getElementById("blueLightning");
+      vid.currentTime = 0;
+      vid.play();
+  }
+  
   return (
     <div className="about-page w-full"> 
       {/* <h2 className="text-center">Under Construction...</h2> */}
@@ -21,7 +29,10 @@ const About = () => {
       </div>
       <div className="bgVideo"></div>
       {/* <div className=""> */}
-        <h3 className="h-max p-4 contact-me absolute">Contact Me</h3>
+        <video muted id='blueLightning' className={`absolute right-0 ${hover ? 'is-open' : ''}`} tabindex="0" autobuffer="autobuffer" preload="preload">
+          <source type="video/webm" src={blueLightning}></source>
+        </video>
+        <h3 onClick={() =>  window.location = "mailto:keegan.launspach1@hotmail.com"} onMouseLeave={() => setHover(false)} onMouseOver={() => triggerAnimation()} className={`h-max p-4 contact-me absolute`}>Contact Me</h3>
       {/* </div> */}
     </div>
   );

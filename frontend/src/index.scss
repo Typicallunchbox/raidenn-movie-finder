@@ -927,6 +927,7 @@ background-color: var(--raidenn-blue)
     left: 25%;
     top: 50%;
     transform: translate(-25%, -50%);
+    z-index: 1;
 
     h2{
       font-size: 150px;
@@ -945,12 +946,28 @@ background-color: var(--raidenn-blue)
       font-family: MediumLC;
       font-weight: 100;
       writing-mode: vertical-rl !important;
-      background: var(--raidenn-blue);
+      background: #1775b4;
       letter-spacing: 5px;
       padding: 40px 20px;
       right: 0;
       top: 45%;
       transform: translate(0, -45%);
+      cursor: pointer;
+    }
+
+    h3:hover{
+      background: var(--raidenn-blue);
+    }
+
+    video{
+      width: 1400px;
+      max-width: 1400px;
+      transition: opacity 1s;
+      opacity: 0;
+    }
+
+    video.is-open{
+      opacity: 1;
     }
   // }
 }
