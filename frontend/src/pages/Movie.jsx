@@ -254,7 +254,7 @@ const Movie = () => {
         <div className='movie-content'>
           {movieCast &&
             movieCast.map((member) => (
-              <div className='castMember'>
+              <div className='castMember mb-10'>
                 {member.profile_path ? (
                   <img
                     onClick={() =>
