@@ -41,7 +41,7 @@ const Watchlist = () => {
   return (
     <div className='watchlist-page'>
       <h2 className='mt-12'>My Watchlist</h2>
-      <div className="selectWatchlistOptions flex gap-14">
+      <div className="selectWatchlistOptions flex gap-4 p-4 w-full pl-10 text-md md:gap-14 md:w-7/12 md:text-xl md:pl-32 xl:w-5/12">
           <p className={listType === 'wantToWatch' ? 'optionSelected' : ''} onClick={() => setListType('wantToWatch')}>Want to watch movies</p>
           <p className={listType === 'watched' ? 'optionSelected' : ''} onClick={() => setListType('watched')}>Watched movies</p>
       </div>

@@ -345,18 +345,14 @@ footer {
   }
   
   .selectWatchlistOptions{
-    width: 40%;
     height: fit-content;
-    padding: 16px;
     background: linear-gradient(90deg,#434343,#434343, rgba(0,0,0,0));
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    padding-left: 120px;
   
     p{
       color: var(--raidenn-white);
-      font-size: 20px;
       padding: 8px;
       transition: color 0.5s ease;
     }
@@ -523,7 +519,7 @@ footer {
   width: 100%;
   padding: 10px;
   border: 1px solid #e6e6e6;
-  border-radius: 5px;
+  border-radius: 2px;
   margin-bottom: 10px;
   font-family: inherit;
 }
