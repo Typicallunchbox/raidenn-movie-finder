@@ -1,8 +1,6 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
-import Textfield from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
 import { addTag, addMovies } from '../../features/movies/movieSlice';
 import axios from "axios";
 import './SearchDropDown.scss';
@@ -18,7 +16,7 @@ const [releasedYear, setReleasedYear] = useState('');
 const [genre, setGenre] = useState('');
 const [searchText, setSearchText] = useState('');
 const [dropDownClass, setDropDownClass] = useState('');
-const genres = ['','Action','Comedy','Drama','Romance','Scifi','Thriller','Horror','Mystery','Fantasy','Documentary']
+const genres = ['Action','Comedy','Drama','Romance','Scifi','Thriller','Horror','Mystery','Fantasy','Documentary']
 const dispatch = useDispatch()
 
 const setTagState = (selectedTag) => {
@@ -144,6 +142,11 @@ const search = () => {
                     required
                   ></input>
                   <button
+                    onKeyDown={(e) => {
+                      if (e.code === 'Enter') {
+                        search();
+                      }
+                    }}
                     onClick={() => {search()}}
                     type='button'
                     className='bg-green-500 hover:bg-slate-800 ml-1 px-4 mt-2'>

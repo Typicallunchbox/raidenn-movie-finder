@@ -26,9 +26,12 @@ export const DropdownSelect = (props) => {
                 </p>
             </div>
 
-            {open &&<div className='content'>
+            {open &&<div className='content' onMouseLeave={() => setOpen(false)}>
                 {array && array.map((string) => (
-                   <div onClick={() => {onOptionClicked(string); setOpen(false)}} key={string}>{string}</div>
+                   <div
+                    onClick={() => {onOptionClicked(string); setOpen(false)}} 
+                    key={string}>{string}
+                   </div>
                 ))}
             </div>}
         </div>
