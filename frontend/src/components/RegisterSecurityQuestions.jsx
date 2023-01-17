@@ -35,7 +35,6 @@ const RegisterSecurityQuestions = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     let valid = true;
-    console.log('answers:', answers)
     for (let index = 0; index < answers.length; index++) {
       const element = answers[index];
 
