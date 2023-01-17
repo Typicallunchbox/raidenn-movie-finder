@@ -173,15 +173,17 @@ const UserProfileSettings = () => {
                     multi-select dropdown
                     display div of all selected genres
                 </div> */}
-          <button
-            disabled={msg}
-            onClick={() => {
-              clickedResetPassword ? changePassword() : changeUserDetails();
-            }}
-            className='px-6'
-          >
-            {clickedResetPassword ? "Update Password" : "Save Changes"}
-          </button>
+          <div className="w-full text-right">
+            <button
+              disabled={msg}
+              onClick={() => {
+                clickedResetPassword ? changePassword() : changeUserDetails();
+              }}
+              className='px-6'
+            >
+              {clickedResetPassword ? "Update Password" : "Save Changes"}
+            </button>
+          </div>
           <p className='text-sm pt-6 pl-2'>{msg}</p>
           <p className='text-sm text-rose-500 pt-6 pl-2'>{errorMsg}</p>
         </div>
