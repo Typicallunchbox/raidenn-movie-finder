@@ -7,7 +7,7 @@ import { reset as resetMovies } from "../features/movies/movieSlice";
 import { reset as resetWatchlist } from "../features/watchlists/watchlistSlice";
 
 const inputStyling =
-  "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5";
+  "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full px-2.5 py-3";
 const UserProfileSettings = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -87,11 +87,11 @@ const UserProfileSettings = () => {
 
   return (
     <>
-      <div className='container'>
-        <h1 className='mt-40' style={{fontFamily: 'MediumLC', fontSize: '30px'}}>Profile Settings</h1>
+      <div className='container absolute top-2/4 -translate-y-2/4'>
+        <h1 className='mt-0' style={{fontFamily: 'MediumLC', fontSize: '30px'}}>Profile Settings</h1>
 
         <div className='profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10'>
-          <div className='Input mb-5'>
+          <div className='mb-5'>
             <p>Fullname</p>
             <input
               disabled={clickedResetPassword}
@@ -105,7 +105,7 @@ const UserProfileSettings = () => {
               required
             ></input>
           </div>
-          <div className='Input mb-5'>
+          <div className='mb-5'>
             <p>Email</p>
             <input
               disabled
@@ -119,7 +119,7 @@ const UserProfileSettings = () => {
               required
             ></input>
           </div>
-          <div className='Input mb-5'>
+          <div className='mb-5'>
             <p>
               {clickedResetPassword ? "Confirm Current Password" : "Password"}
             </p>
@@ -146,7 +146,7 @@ const UserProfileSettings = () => {
             </div>
           </div>
           {clickedResetPassword && (
-            <div className='Input mb-5 '>
+            <div className='mb-5 '>
               <p>New Password</p>
               <div className='flex relative'>
                 <input
@@ -161,7 +161,7 @@ const UserProfileSettings = () => {
               </div>
             </div>
           )}
-          {/* <div className="Input mb-5">
+          {/* <div className="mb-5">
                     {formData.genrePreferences && <>
                         <p>Genre Preferences</p>
                         <div className="genres flex gap-5 ml-5">
@@ -173,15 +173,17 @@ const UserProfileSettings = () => {
                     multi-select dropdown
                     display div of all selected genres
                 </div> */}
-          <button
-            disabled={msg}
-            onClick={() => {
-              clickedResetPassword ? changePassword() : changeUserDetails();
-            }}
-            className='px-6'
-          >
-            {clickedResetPassword ? "Update Password" : "Save Changes"}
-          </button>
+          <div className="w-full text-right">
+            <button
+              disabled={msg}
+              onClick={() => {
+                clickedResetPassword ? changePassword() : changeUserDetails();
+              }}
+              className='px-6'
+            >
+              {clickedResetPassword ? "Update Password" : "Save Changes"}
+            </button>
+          </div>
           <p className='text-sm pt-6 pl-2'>{msg}</p>
           <p className='text-sm text-rose-500 pt-6 pl-2'>{errorMsg}</p>
         </div>

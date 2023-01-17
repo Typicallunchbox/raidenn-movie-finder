@@ -1,8 +1,6 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
-import Textfield from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
 import { addTag, addMovies } from '../../features/movies/movieSlice';
 import axios from "axios";
 import './SearchDropDown.scss';
@@ -18,7 +16,7 @@ const [releasedYear, setReleasedYear] = useState('');
 const [genre, setGenre] = useState('');
 const [searchText, setSearchText] = useState('');
 const [dropDownClass, setDropDownClass] = useState('');
-const genres = ['','Action','Comedy','Drama','Romance','Scifi','Thriller','Horror','Mystery','Fantasy','Documentary']
+const genres = ['Action','Comedy','Drama','Romance','Scifi','Thriller','Horror','Mystery','Fantasy','Documentary']
 const dispatch = useDispatch()
 
 const setTagState = (selectedTag) => {
@@ -79,7 +77,7 @@ const search = () => {
       {showFilters && window.location.origin + "/" === window.location.href && (
         <div className={dropDownClass}>
           {showFilters && (
-            <div className='container'>
+            <div className='px-10 py-4'>
               <div className='filters'>
                 <div className='general-tags'>
                   <button
@@ -107,59 +105,27 @@ const search = () => {
                     Best Rating
                   </button>
                 </div>
-                <div className='flex'>
-                  <div className='date-range'>
-                    <FormControl sx={{ m: 1, minWidth: 190 }}>
-                      <Textfield
-                        defaultValue='2022'
+                <div className='flex gap-2 mb-2'>
+                  <div className='date-range w-full'>
+                      <input
                         value={releasedYear}
                         onChange={(e) => {
                           setReleasedYear(e.target.value);
                         }}
+                        placeholder="Year"
                         id='outlined-basic'
                         label='Released Year'
-                        variant='outlined'
-                        inputProps={{
-                          style: { color: 'white' },
-                        }}
                       />
-                    </FormControl>
                   </div>
-                  <div className='genre'>
-                    {/* <FormControl sx={{ m: 1, minWidth: 140 }}>
-                      <InputLabel>Genre</InputLabel>
-                      <Select
-                        value={genre}
-                        label='Genre'
-                        onChange={(e) => {
-                          setGenre(e.target.value);
-                        }}
-                      >
-                        <MenuItem value=''>
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={"Action"}>Action</MenuItem>
-                        <MenuItem value={"Comedy"}>Comedy</MenuItem>
-                        <MenuItem value={"Drama"}>Drama</MenuItem>
-                        <MenuItem value={"Romance"}>Romance</MenuItem>
-                        <MenuItem value={"Scifi"}>Scifi</MenuItem>
-                        <MenuItem value={"Thriller"}>Thriller</MenuItem>
-                        <MenuItem value={"Horror"}>Horror</MenuItem>
-                        <MenuItem value={"Mystery"}>Mystery</MenuItem>
-                        <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
-                        <MenuItem value={"Documentary"}>Documentary</MenuItem>
-                      </Select>
-                    </FormControl> */}
-                    <div className='w-20'>
+                  <div className='genre w-full'>
                       <DropdownSelect
                         onSelect={(value) => setGenre(value)}
                         placeholder='Genre'
                         array={genres}
                       />
-                    </div>
                   </div>
                 </div>
-                <div className='flex'>
+                <div className='text-right'>
                   <input
                     onBlur={(e) => {
                       setSearchText(e.target.value);
@@ -171,17 +137,19 @@ const search = () => {
                     }}
                     type='text'
                     id='comment'
-                    className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5'
+                    className='py-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5'
                     placeholder='Search for a movie...'
                     required
                   ></input>
                   <button
-                    onClick={() => {
-                      search();
+                    onKeyDown={(e) => {
+                      if (e.code === 'Enter') {
+                        search();
+                      }
                     }}
+                    onClick={() => {search()}}
                     type='button'
-                    className='button bg-green-400 hover:bg-slate-500'
-                  >
+                    className='bg-green-500 hover:bg-slate-800 ml-1 px-4 mt-2'>
                     Search
                   </button>
                 </div>

@@ -12,7 +12,6 @@ const About = () => {
   
   return (
     <div className='about-page w-full'>
-      {/* <h2 className="text-center">Under Construction...</h2> */}
       <div className='about-text w-96 absolute'>
         <h2 className='text-2xl'>Raidenn</h2>
         <p className='mt-12 leading-6 text-gray-400'>
@@ -32,7 +31,6 @@ const About = () => {
         </p>
       </div>
       <div className='bgVideo'></div>
-      {/* <div className=""> */}
       <video
         muted
         id='blueLightning'
@@ -53,7 +51,6 @@ const About = () => {
       >
         Contact Me
       </h3>
-      {/* </div> */}
     </div>
   );
 };

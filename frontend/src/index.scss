@@ -421,6 +421,15 @@ footer {
       }
     }
   }
+
+  .date-range{
+    input{
+      width: 100%;
+      padding: .9rem;
+      background: var(--raidenn-black);
+      color: var(--raidenn-white);
+  }
+  }
 }
 
 // .search-dropdown-full{
@@ -473,6 +482,15 @@ footer {
         // background-color: white;
       }
     }
+  }
+
+  .date-range{
+    input{
+      width: 100%;
+      padding: .9rem;
+      background: var(--raidenn-black);
+      color: var(--raidenn-white);
+  }
   }
 }
 
@@ -862,17 +880,10 @@ background-color: var(--raidenn-blue)
     transition: all 400ms ease;
   }
 
-  // img:hover{
-  //     filter: sepia(100%) saturate(95%) brightness(90%) hue-rotate(10deg);
-  // }
 }
 .comment-section{
   animation: fadeInAnimation ease 3s;
-  // background-color: var(--raidenn-white) !important;
-  
-  // p{
-  //   color: var(--raidenn-black);
-  // }
+
   .card{
     background-color: var(--raidenn-black) !important;
   }

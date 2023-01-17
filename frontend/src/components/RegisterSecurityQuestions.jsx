@@ -83,6 +83,11 @@ const RegisterSecurityQuestions = (props) => {
             name='answer'
             type='text'
             placeholder='Answer'
+            onKeyDown={(e) => {
+              if (e.code === 'Enter') {
+                onSubmit(e);
+              }
+            }}
           />
         </div>
         <div className='flex flex-col text-left mb-12'>
@@ -99,6 +104,11 @@ const RegisterSecurityQuestions = (props) => {
             name='answer'
             type='text'
             placeholder='Answer'
+            onKeyDown={(e) => {
+              if (e.code === 'Enter') {
+                onSubmit(e);
+              }
+            }}
           />
         </div>
       </div>
