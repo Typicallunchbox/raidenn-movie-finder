@@ -79,7 +79,7 @@ const search = () => {
       {showFilters && window.location.origin + "/" === window.location.href && (
         <div className={dropDownClass}>
           {showFilters && (
-            <div className='container'>
+            <div className='px-10 py-4'>
               <div className='filters'>
                 <div className='general-tags'>
                   <button
@@ -107,35 +107,27 @@ const search = () => {
                     Best Rating
                   </button>
                 </div>
-                <div className='flex'>
-                  <div className='date-range'>
-                    <FormControl sx={{ m: 1, minWidth: 190 }}>
-                      <Textfield
-                        defaultValue='2022'
+                <div className='flex gap-2 mb-2'>
+                  <div className='date-range w-full'>
+                      <input
                         value={releasedYear}
                         onChange={(e) => {
                           setReleasedYear(e.target.value);
                         }}
+                        placeholder="Year"
                         id='outlined-basic'
                         label='Released Year'
-                        variant='outlined'
-                        inputProps={{
-                          style: { color: 'white' },
-                        }}
                       />
-                    </FormControl>
                   </div>
-                  <div className='genre'>
-                    <div className='w-20'>
+                  <div className='genre w-full'>
                       <DropdownSelect
                         onSelect={(value) => setGenre(value)}
                         placeholder='Genre'
                         array={genres}
                       />
-                    </div>
                   </div>
                 </div>
-                <div className='flex'>
+                <div className='text-right'>
                   <input
                     onBlur={(e) => {
                       setSearchText(e.target.value);
@@ -147,17 +139,14 @@ const search = () => {
                     }}
                     type='text'
                     id='comment'
-                    className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5'
+                    className='py-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full p-2.5'
                     placeholder='Search for a movie...'
                     required
                   ></input>
                   <button
-                    onClick={() => {
-                      search();
-                    }}
+                    onClick={() => {search()}}
                     type='button'
-                    className='button bg-green-400 hover:bg-slate-500'
-                  >
+                    className='bg-green-500 hover:bg-slate-800 ml-1 px-4 mt-2'>
                     Search
                   </button>
                 </div>

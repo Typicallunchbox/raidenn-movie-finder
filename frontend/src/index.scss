@@ -421,6 +421,15 @@ footer {
       }
     }
   }
+
+  .date-range{
+    input{
+      width: 100%;
+      padding: .9rem;
+      background: var(--raidenn-black);
+      color: var(--raidenn-white);
+  }
+  }
 }
 
 // .search-dropdown-full{
@@ -473,6 +482,15 @@ footer {
         // background-color: white;
       }
     }
+  }
+
+  .date-range{
+    input{
+      width: 100%;
+      padding: .9rem;
+      background: var(--raidenn-black);
+      color: var(--raidenn-white);
+  }
   }
 }
 
