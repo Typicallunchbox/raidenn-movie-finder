@@ -47,7 +47,7 @@ const Landing = () => {
           <div className="relative">
           <Link to='/register'>
           <button type="button" className={`prim-button w-max absolute bottom-16 left-24 animate__animated animate__fadeInUp animate__delay-2s`}>Get Started</button>
-        </Link>
+          </Link>
           </div>
         </div>
       </div>

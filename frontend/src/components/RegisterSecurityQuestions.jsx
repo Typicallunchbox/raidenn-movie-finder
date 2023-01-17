@@ -35,13 +35,13 @@ const RegisterSecurityQuestions = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     let valid = true;
+    console.log('answers:', answers)
     for (let index = 0; index < answers.length; index++) {
       const element = answers[index];
 
       if (element.question === "") valid = false;
       if (element.answer === "") valid = false;
-      toast.error(`Empty fields`)
-      return;
+      !valid && toast.error(`Empty fields`)
     }
 
     if(answers[0].question === answers[1].question) {
@@ -83,6 +83,11 @@ const RegisterSecurityQuestions = (props) => {
             name='answer'
             type='text'
             placeholder='Answer'
+            onKeyDown={(e) => {
+              if (e.code === 'Enter') {
+                onSubmit(e);
+              }
+            }}
           />
         </div>
         <div className='flex flex-col text-left mb-12'>
@@ -99,6 +104,11 @@ const RegisterSecurityQuestions = (props) => {
             name='answer'
             type='text'
             placeholder='Answer'
+            onKeyDown={(e) => {
+              if (e.code === 'Enter') {
+                onSubmit(e);
+              }
+            }}
           />
         </div>
       </div>

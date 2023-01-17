@@ -21,7 +21,7 @@ function App() {
     <>
       <Router>
       <Header />
-        <div className="header-gap">
+        <div className="main">
           <Routes>
             {user ? <><Route path="/" element={<Home />} /></> : <><Route path="/" element={<Landing />} /></>}
             <Route path="/register" element={<Register />} />

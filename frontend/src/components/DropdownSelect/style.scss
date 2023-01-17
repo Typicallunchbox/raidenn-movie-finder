@@ -1,10 +1,10 @@
 .wrapper{
     min-width: 100px;
-    width: 100px;
+    width: 100%;
     position: relative;
 }
 
-.button{
+.select{
     width: calc(100% - 10px);
     border: none;
     border-radius: 2px;
@@ -13,14 +13,15 @@
     background-color: var(--raidenn-black);
 }
 
-.button:hover{
+.select:hover{
     background-color: rgb(60, 60, 60);
 }
 
 .content{
     background-color: rgb(60, 60, 60);
     margin-top: 5px;
-    width: 100%;
+    width: 100% !important;
+    min-width: 100px;
     z-index: 10;
     position: absolute;
     // border: solid 2px;

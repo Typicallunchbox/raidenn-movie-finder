@@ -59,9 +59,9 @@ function Header() {
       </div>
       {user && 
       <div className="flex gap-12 justify-center">
-              <Link to='/watchlist' className="tertiary-text-colour hidden md:block" onClick={() => {setOpenSearchTab(false)}}>
+              {window.location.origin + "/watchlist" !== window.location.href && <Link to='/watchlist' className="tertiary-text-colour hidden md:block" onClick={() => {setOpenSearchTab(false)}}>
                 My Watchlist
-              </Link>
+              </Link>}
               {window.location.origin + "/" === window.location.href && <Link to={'#'} className="tertiary-text-colour hidden md:block" onClick={() => {setOpenSearchTab(!openSearchTab)}}>
                  Search
               </Link>}
