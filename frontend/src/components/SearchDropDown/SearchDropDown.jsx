@@ -126,30 +126,6 @@ const search = () => {
                     </FormControl>
                   </div>
                   <div className='genre'>
-                    {/* <FormControl sx={{ m: 1, minWidth: 140 }}>
-                      <InputLabel>Genre</InputLabel>
-                      <Select
-                        value={genre}
-                        label='Genre'
-                        onChange={(e) => {
-                          setGenre(e.target.value);
-                        }}
-                      >
-                        <MenuItem value=''>
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={"Action"}>Action</MenuItem>
-                        <MenuItem value={"Comedy"}>Comedy</MenuItem>
-                        <MenuItem value={"Drama"}>Drama</MenuItem>
-                        <MenuItem value={"Romance"}>Romance</MenuItem>
-                        <MenuItem value={"Scifi"}>Scifi</MenuItem>
-                        <MenuItem value={"Thriller"}>Thriller</MenuItem>
-                        <MenuItem value={"Horror"}>Horror</MenuItem>
-                        <MenuItem value={"Mystery"}>Mystery</MenuItem>
-                        <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
-                        <MenuItem value={"Documentary"}>Documentary</MenuItem>
-                      </Select>
-                    </FormControl> */}
                     <div className='w-20'>
                       <DropdownSelect
                         onSelect={(value) => setGenre(value)}
