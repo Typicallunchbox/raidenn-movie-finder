@@ -88,7 +88,7 @@ const UserProfileSettings = () => {
   return (
     <>
       <div className='container absolute top-2/4 -translate-y-2/4'>
-        <h1 className='mt-0' style={{fontFamily: 'MediumLC', fontSize: '30px'}}>Profile Settings</h1>
+        <h1 className='mt-0 text-[30px] font-mediumLC tracking-[3px]'>Profile Settings</h1>
 
         <div className='profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10'>
           <div className='mb-5'>

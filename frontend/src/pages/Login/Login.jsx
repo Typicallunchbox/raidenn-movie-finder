@@ -79,12 +79,7 @@ const Login = () => {
           {!showForgotPassword ? (<div>
           <div className='px-12 pt-6'>
             <h1
-              className='bk-text-colour mb-6'
-              style={{
-                fontFamily: "ThunderBoldLC",
-                fontSize: "35px",
-                letterSpacing: "3px",
-              }}
+              className='bk-text-colour mb-6 text-[35px] font-thunderBoldLC tracking-[3px]'
             >
               Sign In
             </h1>

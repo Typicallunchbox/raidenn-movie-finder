@@ -67,12 +67,7 @@ const ForgotPassword = () => {
       {!userExists && (<div>
         <div className='px-12 pt-6'>
           <h1
-            className='bk-text-colour'
-            style={{
-              fontFamily: "ThunderBoldLC",
-              fontSize: "35px",
-              letterSpacing: "3px",
-            }}
+            className='bk-text-colour leading-12 text-[35px] font-thunderBoldLC tracking-[3px]'
           >
             Forgot Password
           </h1>
@@ -104,12 +99,7 @@ const ForgotPassword = () => {
       {userExists && !validAnswers && (<div>
         <div className='px-12 pt-6'>
           <h1
-            className='bk-text-colour mb-0'
-            style={{
-              fontFamily: "ThunderBoldLC",
-              fontSize: "35px",
-              letterSpacing: "3px",
-            }}
+            className='bk-text-colour mb-0 text-[35px]  font-thunderBoldLC tracking-[3px]'
           >
             Forgot Password
           </h1>
@@ -146,12 +136,7 @@ const ForgotPassword = () => {
       {userExists && validAnswers &&(<div>
         <div className='px-12 pt-6'>
           <h1
-            className='bk-text-colour mb-0'
-            style={{
-              fontFamily: "ThunderBoldLC",
-              fontSize: "35px",
-              letterSpacing: "3px",
-            }}
+            className='bk-text-colour mb-0 text-[35px]  font-thunderBoldLC tracking-[3px]'
           >
             Important Notice
           </h1>

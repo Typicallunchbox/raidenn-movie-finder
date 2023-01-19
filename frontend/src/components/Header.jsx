@@ -55,7 +55,7 @@ function Header() {
 
     <header className={`header ${window.location.origin + "/" === window.location.href && !user ? 'bg-transparent' : 'primary-bg-colour'}`}>
       <div className='logo'>
-        <a className="tertiary-text-colour" style={{fontFamily: 'ThunderBoldLC', fontSize: '35px'}}  href='/'>Raidenn</a>
+        <a className="tertiary-text-colour  text-[35px] font-thunderBoldLC" href='/'>Raidenn</a>
       </div>
       {user && 
       <div className="flex gap-12 justify-center">

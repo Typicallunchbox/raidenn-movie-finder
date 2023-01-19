@@ -50,7 +50,6 @@ const Home = () => {
     <div className="home-page"> 
       <div className="container">
         {user && <div className="catalogue mt-20 md:mt-52">
-          {/* BLURHASH NPM */}
           <ItemCatalogueList movies={movies} />
         </div>}
         <p className="pt-16 mb-52">Search maybe for what you are looking for* Add Background lightning animation*</p>
