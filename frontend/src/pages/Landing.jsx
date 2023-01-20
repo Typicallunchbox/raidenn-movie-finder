@@ -45,9 +45,7 @@ const Landing = () => {
           </video> 
           </div>
           <div className="relative">
-          <Link to='/register'>
-          <button type="button" className={`prim-button w-max absolute bottom-16 left-24 animate__animated animate__fadeInUp animate__delay-2s`}>Get Started</button>
-          </Link>
+          <a href="#instructions" type="button" className={`prim-button w-max absolute bottom-16 left-24 animate__animated animate__fadeInUp animate__delay-2s`}>Get Started</a>
           </div>
         </div>
       </div>
@@ -56,7 +54,7 @@ const Landing = () => {
           <img onScr src={placeholder} alt='placeholder'></img>
         </div>
         <div className={`setup-content`}>
-          <h3 className="text-left ml-14 mb-14">Steps to get started:</h3>
+          <h3 id='instructions' className="text-left ml-14 mb-14">Steps to get started:</h3>
           <div className={`flex mb-5 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-1s' : ''}`}>
             <span>1</span>
             <p className="ml-8 my-auto">Create your Raidenn profile</p>
