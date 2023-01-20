@@ -21,6 +21,7 @@ const Landing = () => {
   }, [])
 
   useEffect(() => {
+
     const observer = new IntersectionObserver((entries, observer) => {
     const entry = entries[0];
     updateMyElementIsVisible(entry.isIntersecting);
@@ -37,11 +38,11 @@ const Landing = () => {
       <source type="video/webm" src={landingAnimation}></source>
     </video>
     <div className="container">
-      <div className="landing-page">
-        <div className="inner-container flex">
+      <div className="overflow-x-hidden h-screen">
+        <div className="inner-container relative top-24 left-0 md:flex  md:left-24 md:top-[30%] md:-translate-y-[30%]">
           <div>
-          <video width="920" autoplay="autoplay" muted>
-            <source src={process.env.PUBLIC_URL + "animations/landingAnimation.webm"} type="video/webm" />
+          <video  width={window.innerWidth < 600 ? '100%' : '920'} autoplay="autoplay" muted>
+            <source src={process.env.PUBLIC_URL + window.innerWidth < 600 ? "animations/mobileLandingAnimation.webm" : "animations/landingAnimation.webm"} type="video/webm" />
           </video> 
           </div>
           <div className="relative">
@@ -49,12 +50,12 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <div ref={myRef}  className={`instructions`}>
+      <div ref={myRef}  className={`instructions h-[80vh] md:flex md:w-5/6 md:mx-auto md:mt-[20rem]`}>
         <div className="animation-container">
           <img onScr src={placeholder} alt='placeholder'></img>
         </div>
         <div className={`setup-content`}>
-          <h3 id='instructions' className="text-left ml-14 mb-14">Steps to get started:</h3>
+          <h3 id='instructions' className="text-left mt-10 md:mt-0 ml-10 md:ml-14 mb-14">Steps to get started:</h3>
           <div className={`flex mb-5 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-1s' : ''}`}>
             <span>1</span>
             <p className="ml-8 my-auto">Create your Raidenn profile</p>
@@ -68,7 +69,7 @@ const Landing = () => {
             <p className="ml-8 my-auto">Well...that's pretty much it</p>
           </div>
           <Link to='/register'>
-            <button className={`prim-button mt-14 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-3s' : ''}`}>
+            <button className={`prim-button my-14 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-3s' : ''}`}>
               Lets Goooooo!
             </button>
           </Link>

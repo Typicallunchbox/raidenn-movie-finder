@@ -615,7 +615,7 @@ button{
 
 .prim-button {
   background-color: var(--raidenn-blue);
-  padding: 10px 50px;
+  padding: 10px 60px;
   border-radius: 4px;
   border: none;
   transition: background-color 0.5s ease;
@@ -994,29 +994,9 @@ background-color: var(--raidenn-blue)
   z-index: -10;
 }
 
-.landing-page{
-  height: 100vh;
-  overflow-x: hidden;
-
-  .inner-container{
-    position: relative;
-    top: 30%;
-    -webkit-transform: translateY(-30%);
-    -ms-transform: translateY(-30%);
-    transform: translateY(-30%);
-    left: 100px;
-  }
-}
-
 
 
 .instructions{
-  display: flex;
-  width: 80%;
-  margin: 0 auto;
-  height: 80vh;
-  margin-top: 20rem;
-
   .animation-container{
     min-width: 300px;
     max-width: 400px;
@@ -1156,6 +1136,25 @@ background-color: var(--raidenn-blue)
 }
 
 @media (max-width: 600px) {
+
+  .instructions{
+    .setup-content{
+      padding: 0 20px !important;
+
+      span{
+        font-size: 17px;
+      }
+
+      h3{
+        font-size: 35px;
+      }
+
+      p{
+        font-size: 17px;
+        text-align: left;
+      }
+    }
+  }
 
   .header {
     .options-block{
