@@ -865,19 +865,18 @@ background-color: var(--raidenn-blue)
 
   .movie-content {
     margin-bottom: 150px !important;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2%;
     width: 70%;
+    margin: 0 auto;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 
   }
   img {
-    transform: scale(0.15, 0.15);
-    -ms-transform: scale(0.15, 0.15);
-    -webkit-transform: scale(0.15, 0.15);
-    margin-bottom: 20px;
-    transition: all 400ms ease;
+    height: auto;
+    margin: auto;
+    max-height: 200px;
   }
 
 }

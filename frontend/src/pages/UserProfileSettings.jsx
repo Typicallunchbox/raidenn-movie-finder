@@ -92,9 +92,9 @@ const UserProfileSettings = () => {
 
         <div className='profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10'>
           <div className='mb-5'>
-            <p>Fullname</p>
+            <p>Username</p>
             <input
-              disabled={clickedResetPassword}
+              disabled
               onBlur={(e) => onBlur(e)}
               defaultValue={formData.name}
               type='text'
@@ -176,6 +176,7 @@ const UserProfileSettings = () => {
           <div className="w-full text-right">
             <button
               disabled={msg}
+              hidden={!clickedResetPassword}
               onClick={() => {
                 clickedResetPassword ? changePassword() : changeUserDetails();
               }}

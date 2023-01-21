@@ -11,7 +11,5 @@ router.route('/userQuestions').post(validate, getSecurityQuestions).put(protect,
 router.post('/login', loginUser)
 router.route('/me').get(protect, getMe).put(protect, updateProfile)
 router.route('/updatePassword').put(protect, validate, updatePassword)
-router.route('/updatePassword').put(protect, validate, updatePassword)
-
 
 module.exports = router

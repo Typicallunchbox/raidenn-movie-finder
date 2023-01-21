@@ -37,6 +37,7 @@ const Movie = () => {
   );
   const [commentErr, setCommentErr] = useState("");
   const [movie, setMovie] = useState(null);
+  const [movieAddedPrompt, setMovieAddedPrompt] = useState('');
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
@@ -185,7 +186,8 @@ const Movie = () => {
     return <Spinner />;
   }
 
-  const addToWantToWatchList = (val) => {
+  const addToWantToWatchList = async(val) => {
+    const delay = ms => new Promise(res => setTimeout(res, ms));
     if (movie) {
       let genres = [];
       for (let index = 0; index < movie.genres.length; index++) {
@@ -203,10 +205,15 @@ const Movie = () => {
           },
         })
       );
+      setMovieAddedPrompt('Added to Watchlist.')
+      await delay(2000);
+      setMovieAddedPrompt('')
+
     }
   };
 
-  const addToWatchedList = (val) => {
+  const addToWatchedList = async(val) => {
+    const delay = ms => new Promise(res => setTimeout(res, ms));
     if (movie) {
       let genres = [];
       for (let index = 0; index < movie.genres.length; index++) {
@@ -224,6 +231,9 @@ const Movie = () => {
           },
         })
       );
+      setMovieAddedPrompt('Added to Watched')
+      await delay(2000);
+      setMovieAddedPrompt('')
     }
   };
 
@@ -352,6 +362,7 @@ const Movie = () => {
           <div className='movie-container mb-20 mt-5'>
             <div className='movieInfo'>
               <img src={image_path + movie.poster_path} alt='movie'></img>
+              <p className="text-sm">{movieAddedPrompt}</p>
               <div className='buttons flex justify-evenly gap-1 mt-2'>
                 <button
                   disabled={disableWantToWatch}
