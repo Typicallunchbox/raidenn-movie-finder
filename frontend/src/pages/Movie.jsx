@@ -205,8 +205,8 @@ const Movie = () => {
           },
         })
       );
-      setMovieAddedPrompt('Added to Watchlist.')
-      await delay(2000);
+      setMovieAddedPrompt('Added to Watchlist')
+      await delay(3000);
       setMovieAddedPrompt('')
 
     }
@@ -232,7 +232,7 @@ const Movie = () => {
         })
       );
       setMovieAddedPrompt('Added to Watched')
-      await delay(2000);
+      await delay(3000);
       setMovieAddedPrompt('')
     }
   };
@@ -360,9 +360,8 @@ const Movie = () => {
       {movie && (
         <div className='container'>
           <div className='movie-container mb-20 mt-5'>
-            <div className='movieInfo'>
+            <div className='movieInfo relative'>
               <img src={image_path + movie.poster_path} alt='movie'></img>
-              <p className="text-sm">{movieAddedPrompt}</p>
               <div className='buttons flex justify-evenly gap-1 mt-2'>
                 <button
                   disabled={disableWantToWatch}
@@ -401,6 +400,8 @@ const Movie = () => {
                   Watched
                 </button>
               </div>
+              <p className="text-sm text-center text-[#1b8ad3d6]">{movieAddedPrompt}</p>
+
               {movie.homepage && (
                 <button
                   onClick={() => {
