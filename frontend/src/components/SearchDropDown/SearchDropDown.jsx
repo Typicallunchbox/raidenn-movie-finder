@@ -12,6 +12,7 @@ import { DropdownSelect } from "../../components/DropdownSelect/index";
 
 const SearchDropDown = (props) => {
 const [showFilters, setshowFilters] = useState(false);
+const [tagOption, setTagOption] = useState('');
 const [releasedYear, setReleasedYear] = useState('');
 const [genre, setGenre] = useState('');
 const [searchText, setSearchText] = useState('');
@@ -20,8 +21,10 @@ const genres = ['Action','Comedy','Drama','Romance','Scifi','Thriller','Horror',
 const dispatch = useDispatch()
 
 const setTagState = (selectedTag) => {
+  setTagOption(selectedTag);
   dispatch(addTag(selectedTag))
 }
+
 useEffect(() => {
   let scrollLocation = null;
 
@@ -54,24 +57,33 @@ useEffect(() => {
 
 
 const search = () => {
+  console.log('values:', searchText, releasedYear, genre)
 
-  if((searchText || releasedYear || genre) === ''){return}
+  if(searchText === '' && releasedYear === '' && genre === ''){return}
+  console.log('hit1')
 
   if(releasedYear !== ''){
     let date =  new Date().getFullYear();
 
     if(!(validYear.test(releasedYear) && parseInt(releasedYear) <= parseInt(date))){
       //Return error msg
+      console.log('hit2')
       return;
     }
   }
 
-  // if(searchText.trim() !== ''){
-    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&${searchText !== '' && `query=${searchText}`}&primary_release_year=${releasedYear}&with_genres=${genre}&language=en-US&page=1`)
+  if(searchText === ''){
+    axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${releasedYear !== '' ? `&primary_release_year=${releasedYear}`:''}${genre !== '' ? `&with_genres=${genre}`:''}&language=en-US&page=1&include_adult=false`)
     .then((resp) => {
       dispatch(addMovies(resp.data.results))
     });
-  // }
+    return;
+  }
+
+    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${searchText !== '' ?`&query=${searchText}`:`&query=''`}${releasedYear !== '' ? `&primary_release_year=${releasedYear}`:''}${genre !== '' ? `&with_genres=${genre}`:''}&language=en-US&page=1&include_adult=false`)
+    .then((resp) => {
+      dispatch(addMovies(resp.data.results))
+    });
 }
 
   return (
@@ -83,7 +95,7 @@ const search = () => {
               <div className='filters'>
                 <div className='general-tags'>
                   <button
-                    className='secondary-bg-colour'
+                    className={`secondary-bg-colour ${tagOption === 'popular' && 'outline-none ring ring-slate-300'}`}
                     onClick={() => {
                       setTagState("popular");
                     }}
@@ -91,7 +103,7 @@ const search = () => {
                     Most Popular
                   </button>
                   <button
-                    className='secondary-bg-colour'
+                    className={`secondary-bg-colour ${tagOption === 'upcoming' && 'outline-none ring ring-slate-300'}`}
                     onClick={() => {
                       setTagState("upcoming");
                     }}
@@ -99,7 +111,7 @@ const search = () => {
                     Upcoming
                   </button>
                   <button
-                    className='secondary-bg-colour'
+                    className={`secondary-bg-colour ${tagOption === 'top_rated' && 'outline-none ring ring-slate-300'}`}
                     onClick={() => {
                       setTagState("top_rated");
                     }}
