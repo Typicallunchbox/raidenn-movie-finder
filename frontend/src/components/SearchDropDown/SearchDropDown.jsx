@@ -72,6 +72,8 @@ const search = () => {
     }
   }
 
+  props.trigger(false);
+
   if(searchText === ''){
     axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${releasedYear !== '' ? `&primary_release_year=${releasedYear}`:''}${genre !== '' ? `&with_genres=${genre}`:''}&language=en-US&page=1&include_adult=false`)
     .then((resp) => {
@@ -98,6 +100,7 @@ const search = () => {
                     className={`secondary-bg-colour ${tagOption === 'popular' && 'outline-none ring ring-slate-300'}`}
                     onClick={() => {
                       setTagState("popular");
+                      props.trigger(false);
                     }}
                   >
                     Most Popular
@@ -106,6 +109,7 @@ const search = () => {
                     className={`secondary-bg-colour ${tagOption === 'upcoming' && 'outline-none ring ring-slate-300'}`}
                     onClick={() => {
                       setTagState("upcoming");
+                      props.trigger(false);
                     }}
                   >
                     Upcoming
@@ -114,6 +118,7 @@ const search = () => {
                     className={`secondary-bg-colour ${tagOption === 'top_rated' && 'outline-none ring ring-slate-300'}`}
                     onClick={() => {
                       setTagState("top_rated");
+                      props.trigger(false);
                     }}
                   >
                     Best Rating

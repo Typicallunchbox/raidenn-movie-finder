@@ -27,11 +27,11 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<ErrorPage />} />
+            <Route path="/about" element={<About />} />
             <Route path={`/settings`} element={<Settings />} />
 
             {user &&
             <>
-              <Route path="/about" element={<About />} />
               <Route path={`/movie/:id`} element={<Movie />} />
               <Route path={`/watchlist`} element={<Watchlist />} />
             </>

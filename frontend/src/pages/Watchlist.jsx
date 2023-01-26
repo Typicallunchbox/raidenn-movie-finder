@@ -11,7 +11,8 @@ const Watchlist = () => {
   const dispatch = useDispatch()
 
   const {user} = useSelector((state) => state.auth)
-  const {watched, wantToWatch, isLoading, isError, message} = useSelector((state) => state.watchlist) 
+  const [isLoading, setIsLoading] = useState(false);
+  const {watched, wantToWatch, isError, message} = useSelector((state) => state.watchlist) 
 
   useEffect(() => {
     if(!isError){
@@ -21,12 +22,20 @@ const Watchlist = () => {
     if(!user){
       navigate('/login')
     }
-    
+
     if(listType === ''){
+      setIsLoading(true);
       setListType('wantToWatch')
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000); 
     }
+
     dispatch(getWatched())
     dispatch(getWantToWatch())
+    
+
+    
 
   }, [ user, listType, navigate, dispatch, isError, message])
   

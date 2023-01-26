@@ -1,5 +1,7 @@
 import { React, useEffect, useState, useRef } from "react";
 import placeholder from '../static/images/wire.png';
+import { FaInfoCircle } from "react-icons/fa";
+
 import 'animate.css';
 import { Link } from "react-router-dom";
 import landingAnimation from '../static/animations/webRgb.webm';
@@ -38,6 +40,10 @@ const Landing = () => {
       <source type="video/webm" src={landingAnimation}></source>
     </video>
     <div className="container">
+      <Link to='/about' className="fixed right-10 bottom-10 hover:w-20 flex gap-2 items-center ">
+         <FaInfoCircle className="h-6 w-6 mt-1" /> 
+         About
+      </Link>
       <div className="overflow-x-hidden h-screen">
         <div className="inner-container relative top-24 left-0 md:flex  md:left-24 md:top-[30%] md:-translate-y-[30%]">
           <div>
