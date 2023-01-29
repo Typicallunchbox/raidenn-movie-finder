@@ -135,7 +135,7 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
         if(!movie.watched && !movie.wantToWatch){
             //Make sure the logged in user matches the goal user
 
-
+            console.log('HIT HERE!')
             if(watchListRecord.user.toString() !== req.user.id){
                 res.status(401)
                 throw new Error('User not authorized')

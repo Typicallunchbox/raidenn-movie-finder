@@ -100,6 +100,13 @@ const Movie = () => {
     };
   }, [id, user, navigate, dispatch, isError, message]);
 
+
+  const getRecord = async () => {
+    const record = await getWantToWatchRecord({ movie_id: id });
+    setUserWatchlistRecord(record);
+  };
+
+
   useEffect(() => {
     if (!movie) {
       axios
@@ -201,14 +208,15 @@ const Movie = () => {
             movie_id: id,
             movie_genre: genres,
             movie_image: image_path + movie.poster_path,
-            wantToWatch: true,
+            wantToWatch: !userWatchlistRecord?.wantToWatch,
+            watched: userWatchlistRecord?.watched
           },
         })
       );
-      setMovieAddedPrompt('Added to Watchlist')
+      setMovieAddedPrompt(userWatchlistRecord?.wantToWatch ?'Removed from Watchlist':'Added to Watchlist')
       await delay(3000);
       setMovieAddedPrompt('')
-
+      getRecord();
     }
   };
 
@@ -227,13 +235,15 @@ const Movie = () => {
             movie_id: id,
             movie_genre: genres,
             movie_image: image_path + movie.poster_path,
-            watched: true,
+            watched: !userWatchlistRecord?.watched,
+            wantToWatch: userWatchlistRecord?.wantToWatch
           },
         })
       );
-      setMovieAddedPrompt('Added to Watched')
+      setMovieAddedPrompt(userWatchlistRecord?.watched ?'Removed from Watchlist':'Added to Watchlist')
       await delay(3000);
       setMovieAddedPrompt('')
+      getRecord();
     }
   };
 
@@ -362,17 +372,19 @@ const Movie = () => {
           <div className='movie-container mb-20 mt-5'>
             <div className='movieInfo relative'>
               <img src={image_path + movie.poster_path} alt='movie'></img>
-              <div className='buttons flex justify-evenly gap-1 mt-2'>
+              <div className='buttons flex justify-evenly gap-1 mt-2 relative'>
+                {movieAddedPrompt && <div className="w-full p-1 bg-slate-100 absolute bottom-14 opacity-80">
+                  <p className="text-sm text-center text-[#1b8ad3d6]">{movieAddedPrompt}</p>
+                </div>}
                 <button
                   disabled={disableWantToWatch}
                   className={`w-full flex gap-3 p-3 ${
-                    userWatchlistRecord?.wantToWatch || disableWantToWatch
+                    userWatchlistRecord?.wantToWatch
                       ? "bg-blue-600 opacity-50"
                       : ""
                   }`}
                   onClick={() => {
                     addToWantToWatchList();
-                    setDisableWantToWatch(true);
                   }}
                 >
                   {" "}
@@ -384,13 +396,12 @@ const Movie = () => {
                 <button
                   disabled={disableWatched}
                   className={`w-full flex gap-3 p-3 ${
-                    userWatchlistRecord?.watched || disableWatched
+                    userWatchlistRecord?.watched
                       ? "bg-blue-600 opacity-50"
                       : ""
                   }`}
                   onClick={() => {
                     addToWatchedList();
-                    setDisableWatched(true);
                   }}
                 >
                   {" "}
@@ -400,8 +411,6 @@ const Movie = () => {
                   Watched
                 </button>
               </div>
-              <p className="text-sm text-center text-[#1b8ad3d6]">{movieAddedPrompt}</p>
-
               {movie.homepage && (
                 <button
                   onClick={() => {
