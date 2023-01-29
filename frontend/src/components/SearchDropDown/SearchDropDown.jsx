@@ -74,17 +74,31 @@ const search = () => {
 
   props.trigger(false);
 
-  if(searchText === ''){
-    axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${releasedYear !== '' ? `&primary_release_year=${releasedYear}`:''}${genre !== '' ? `&with_genres=${genre}`:''}&language=en-US&page=1&include_adult=false`)
-    .then((resp) => {
-      dispatch(addMovies(resp.data.results))
-    });
+  if (searchText === "") {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
+          releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""
+        }${
+          genre !== "" ? `&with_genres=${genre}` : ""
+        }&language=en-US&page=1&include_adult=false`
+      )
+      .then((resp) => {
+        dispatch(addMovies(resp.data.results));
+      });
     return;
   }
 
-    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${searchText !== '' ?`&query=${searchText}`:`&query=''`}${releasedYear !== '' ? `&primary_release_year=${releasedYear}`:''}${genre !== '' ? `&with_genres=${genre}`:''}&language=en-US&page=1&include_adult=false`)
+  axios
+    .get(
+      `https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
+        searchText !== "" ? `&query=${searchText}` : `&query=''`
+      }${releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""}${
+        genre !== "" ? `&with_genres=${genre}` : ""
+      }&language=en-US&page=1&include_adult=false`
+    )
     .then((resp) => {
-      dispatch(addMovies(resp.data.results))
+      dispatch(addMovies(resp.data.results));
     });
 }
 

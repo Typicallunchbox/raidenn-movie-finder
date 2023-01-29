@@ -438,7 +438,7 @@ const Movie = () => {
               </div>
             </div>
             <div className='plain-card border-0 w-full sm:h-128 text-left overflow-hidden'>
-              {movieVideos && (
+              {movieVideos && movieVideos.length > 0 && (
                 <div className='trailer w-full h-full'>
                   <iframe
                     className='w-full h-full'
