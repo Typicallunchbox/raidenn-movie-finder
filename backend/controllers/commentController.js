@@ -1,8 +1,5 @@
 const asyncHandler = require('express-async-handler')
-const Goal = require('../models/goalModel')
 const Comment = require('../models/commentModel')
-const User = require('../models/userModel')
-
 
 // @desc    Get comments
 //@route    GET /api/comments
