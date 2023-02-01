@@ -17,14 +17,36 @@ const [releasedYear, setReleasedYear] = useState('');
 const [genre, setGenre] = useState('');
 const [searchText, setSearchText] = useState('');
 const [dropDownClass, setDropDownClass] = useState('');
-const genres = ['Action','Comedy','Drama','Romance','Scifi','Thriller','Horror','Mystery','Fantasy','Documentary']
+const [genres, setGenres] = useState([]);
+
+// const genres = ['Action','Comedy','Drama','Romance','Scifi','Thriller','Horror','Mystery','Fantasy','Documentary']
 const dispatch = useDispatch()
 
 const setTagState = (selectedTag) => {
   setTagOption(selectedTag);
   dispatch(addTag(selectedTag))
 }
+useEffect(() => {
+  console.log("HEY!");
 
+  axios
+  .get(`https://api.themoviedb.org/3/genre/movie/list?api_key=120fe4d587d5f86c44f0a6e599f01734`)
+  .then((resp) => {
+    const result = resp.data.genres;
+    console.log('resp:', resp)
+    if(result.length > 0){
+      let tempArray = [];
+      for (let index = 0; index < result.length; index++) {
+        const genre = result[index];
+        tempArray.push(genre.id)
+      }
+      //NEED THE IDS TO SEND WHEN REFERENCING BY GENRE
+      //MAKE SURE SORT BY GENRE IS NOT BUGGED
+      console.log('tempArray:', tempArray)
+      setGenres(tempArray);
+    }
+  });
+}, [])
 useEffect(() => {
   let scrollLocation = null;
 
@@ -53,6 +75,7 @@ useEffect(() => {
   }
 
 }, [props.openSearch, dropDownClass, showFilters, props])
+
 
 
 
@@ -88,6 +111,8 @@ const search = () => {
       });
     return;
   }
+  console.log('hit2')
+  console.log('genre:', genre)
 
   axios
     .get(
