@@ -1,7 +1,7 @@
-const express = require('express')
 const router = express.Router()
-const { getWatched, getWantToWatchRecord, getWantToWatch, getWatchlistByUserId, createWatchlistRecord, updateWatchlistRecord, deleteWatchlistRecord } = require('../controllers/watchlistController')
+const express = require('express')
 const {protect} = require('../middleware/authMiddleware')
+const { getWatched, getWantToWatchRecord, getWantToWatch, getWatchlistByUserId, createWatchlistRecord, updateWatchlistRecord, deleteWatchlistRecord } = require('../controllers/watchlistController')
 
 router.route('/watched').get(protect, getWatched)
 router.route('/wantToWatch').get(protect, getWantToWatch)

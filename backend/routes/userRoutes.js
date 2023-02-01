@@ -1,9 +1,8 @@
-const express = require('express')
 const router = express.Router()
-const { registerUser, loginUser , getMe, updateProfile, updatePassword, getSecurityQuestions ,setSecurityQuestions, compareSecurityAnswers} = require('../controllers/userController')
+const express = require('express')
 const {protect} = require('../middleware/authMiddleware')
 const {validate} = require('../middleware/validateMiddleware')
-
+const { registerUser, loginUser , getMe, updateProfile, updatePassword, getSecurityQuestions ,setSecurityQuestions, compareSecurityAnswers} = require('../controllers/userController')
 
 router.post('/', registerUser)
 router.route('/compareAnswers').post(validate, compareSecurityAnswers)

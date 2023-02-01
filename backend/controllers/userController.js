@@ -80,9 +80,9 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Authenticate a user
-//@route    POST /api/login
-//@access   Public
+// @desc    Set a user's genre preferences
+//@route    POST /api/setGenrePreferences
+//@access   Private
 const setGenrePreferences = asyncHandler(async (req, res) => {
   const { email, _id } = req.user;
 
@@ -211,10 +211,8 @@ const setSecurityQuestions = asyncHandler(async (req, res) => {
   }
 });
 
-
-
-// @desc    Authenticate a user
-//@route    POST /api/login
+// @desc    Update user profile info
+//@route    PUT /api/me
 //@access   Public
 const updateProfile = asyncHandler(async (req, res) => {
   const { email, _id } = req.user;

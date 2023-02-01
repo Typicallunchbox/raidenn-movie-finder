@@ -1,7 +1,7 @@
-const express = require('express')
 const router = express.Router()
-const { getComments, getCommentsByMovieId, setComment, updateComment, deleteComment } = require('../controllers/commentController')
+const express = require('express')
 const {protect} = require('../middleware/authMiddleware')
+const { getComments, getCommentsByMovieId, setComment, updateComment, deleteComment } = require('../controllers/commentController')
 
 router.route('/').get(protect,getComments).post(protect, setComment)
 router.route('/movieId/:id').get(protect,getCommentsByMovieId)
