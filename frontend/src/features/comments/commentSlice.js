@@ -36,6 +36,7 @@ export const deleteComment = createAsyncThunk(
   "comments/delete",
   async (id, thunkAPI) => {
     try {
+      console.log('id:', id)
       const token = thunkAPI.getState().auth.user.token;
       return await commentService.deleteComment(id, token);
     } catch (error) {
@@ -100,6 +101,10 @@ export const commentsSlice = createSlice({
       state.isSuccess = false;
       state.message = "";
     },
+    banishComment: (state, action) => ({
+      ...state,
+      watched: state.comments.filter(item => item._id !== action.payload._id),
+    }),
   },
   extraReducers: (builder) => {
     builder
@@ -157,5 +162,5 @@ export const commentsSlice = createSlice({
   },
 });
 
-export const { reset } = commentsSlice.actions;
+export const { reset, banishComment } = commentsSlice.actions;
 export default commentsSlice.reducer;

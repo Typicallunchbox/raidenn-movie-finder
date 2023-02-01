@@ -15,7 +15,6 @@ app.use(express.json())
 app.use(express.urlencoded({extended : false}))
 app.use('/api/watchlist', require('./routes/watchlistRoutes'))
 app.use('/api/comments', require('./routes/commentRoutes'))
-app.use('/api/goals', require('./routes/goalRoutes'))
 app.use('/api/users', require('./routes/userRoutes'))
 
 // Serve frontend

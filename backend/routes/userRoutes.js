@@ -1,5 +1,5 @@
-const router = express.Router()
 const express = require('express')
+const router = express.Router()
 const {protect} = require('../middleware/authMiddleware')
 const {validate} = require('../middleware/validateMiddleware')
 const { registerUser, loginUser , getMe, updateProfile, updatePassword, getSecurityQuestions ,setSecurityQuestions, compareSecurityAnswers} = require('../controllers/userController')

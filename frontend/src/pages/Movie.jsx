@@ -9,8 +9,11 @@ import { AiFillEye, AiFillPlusCircle } from "react-icons/ai";
 import Rating from "react-rating";
 import {
   createComment,
+  deleteComment,
   getCommentsByMovieId,
 } from "../features/comments/commentSlice";
+import { banishComment } from "../features/comments/commentSlice";
+
 import {
   getWantToWatchRecord,
   updateWatchlistRecord,
@@ -77,6 +80,14 @@ const Movie = () => {
       setRating("");
     }
   };
+
+  const removeComment = (comment) => {
+    console.log('comment:', comment._id)
+
+    dispatch(deleteComment({id:comment._id}));
+    banishComment(comment);
+
+  }
 
   useEffect(() => {
     if (!isError) {
@@ -474,7 +485,7 @@ const Movie = () => {
             <div className='comments'>
               {comments && comments.length > 0 ? (
                 comments.map((comment) => (
-                  <div className='card border-default mb-2 p-3'>
+                  <div className='card border-default mb-2 p-3' onClick={() => removeComment(comment)}>
                     <div className='flex flex-col border-none px-6 py-2 w-full justify-between md:w-fit md:justify-start rounded-md '>
                       <span className='leading-4'>{comment.username}</span>
                       <div className='flex flex-row'>

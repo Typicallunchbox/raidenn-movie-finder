@@ -1,5 +1,5 @@
-const router = express.Router()
 const express = require('express')
+const router = express.Router()
 const {protect} = require('../middleware/authMiddleware')
 const { getWatched, getWantToWatchRecord, getWantToWatch, getWatchlistByUserId, createWatchlistRecord, updateWatchlistRecord, deleteWatchlistRecord } = require('../controllers/watchlistController')
 

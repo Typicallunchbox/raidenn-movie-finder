@@ -1,5 +1,5 @@
-const router = express.Router()
 const express = require('express')
+const router = express.Router()
 const {protect} = require('../middleware/authMiddleware')
 const { getComments, getCommentsByMovieId, setComment, updateComment, deleteComment } = require('../controllers/commentController')
 
