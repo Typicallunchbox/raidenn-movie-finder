@@ -30,7 +30,7 @@ const Movie = () => {
   const [rating, setRating] = useState("");
   const [commentErr, setCommentErr] = useState("");
   const [movie, setMovie] = useState(null);
-  const [movieAddedPrompt, setMovieAddedPrompt] = useState('Removed from Watchlist');
+  const [movieAddedPrompt, setMovieAddedPrompt] = useState('');
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
@@ -466,7 +466,8 @@ const Movie = () => {
             <div className='comments'>
               {comments && comments.length > 0 ? (
                 comments.map((comment) => (
-                  <div className='card border-default mb-2 p-3' onClick={() => removeComment(comment)}>
+                  <div className='card border-default mb-2 p-3' >
+                    {comment.user === user._id && <p onClick={() => removeComment(comment)}>x</p>}
                     <div className='flex flex-col border-none px-6 py-2 w-full justify-between md:w-fit md:justify-start rounded-md '>
                       <span className='leading-4'>{comment.username}</span>
                       <div className='flex flex-row'>
