@@ -33,10 +33,9 @@ export const createComment = createAsyncThunk(
 
 //Delete Comment
 export const deleteComment = createAsyncThunk(
-  "comments/delete",
+  "comments/deleteComment",
   async (id, thunkAPI) => {
     try {
-      console.log('id:', id)
       const token = thunkAPI.getState().auth.user.token;
       return await commentService.deleteComment(id, token);
     } catch (error) {
@@ -103,7 +102,7 @@ export const commentsSlice = createSlice({
     },
     banishComment: (state, action) => ({
       ...state,
-      watched: state.comments.filter(item => item._id !== action.payload._id),
+      comments: state.comments.filter(item => item._id !== action.payload._id),
     }),
   },
   extraReducers: (builder) => {
@@ -144,10 +143,6 @@ export const commentsSlice = createSlice({
           state.isLoading = false;
           state.isError = true;
           state.message = action.payload
-      })
-
-        .addCase(deleteComment.pending, (state) => {
-          state.isLoading = true;
       })
       .addCase(deleteComment.fulfilled, (state, action) => {
           state.isLoading = false;

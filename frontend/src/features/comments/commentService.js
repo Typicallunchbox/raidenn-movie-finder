@@ -43,7 +43,6 @@ const updateComment = async (userData) => {
 
 //Delete Comment
 const deleteComment = async (commentId, token) => {
-    console.log('commentId:', commentId)
     const config = {
         headers: {
             Authorization: `Bearer ${token}`

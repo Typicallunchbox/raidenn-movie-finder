@@ -40,7 +40,7 @@ const Movie = () => {
   );
   const [commentErr, setCommentErr] = useState("");
   const [movie, setMovie] = useState(null);
-  const [movieAddedPrompt, setMovieAddedPrompt] = useState('');
+  const [movieAddedPrompt, setMovieAddedPrompt] = useState('Removed from Watchlist');
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
@@ -82,11 +82,8 @@ const Movie = () => {
   };
 
   const removeComment = (comment) => {
-    console.log('comment:', comment._id)
-
-    dispatch(deleteComment({id:comment._id}));
-    banishComment(comment);
-
+    dispatch(banishComment(comment));
+    dispatch(deleteComment({id: comment._id}));
   }
 
   useEffect(() => {
@@ -384,8 +381,8 @@ const Movie = () => {
             <div className='movieInfo relative'>
               <img src={image_path + movie.poster_path} alt='movie'></img>
               <div className='buttons flex justify-evenly gap-1 mt-2 relative'>
-                {movieAddedPrompt && <div className="w-full p-1 bg-slate-100 absolute bottom-14 opacity-80">
-                  <p className="text-sm text-center text-[#1b8ad3d6]">{movieAddedPrompt}</p>
+                {movieAddedPrompt && <div className="w-full p-1 bg-slate-100 absolute bottom-14">
+                  <p className="text-lg text-center text-[#1b8ad3d6] font-mediumLC tracking-wider">{movieAddedPrompt}</p>
                 </div>}
                 <button
                   disabled={disableWantToWatch}
@@ -475,11 +472,9 @@ const Movie = () => {
           <div className='view-more-header ml-6 md:m-auto lg:m-auto'>
             <h2>View More</h2>
           </div>
-          <div className='images-section'>{movieImages && imagesSection}</div>
           <div className='cast-section'>{movieCast && castSection}</div>
-          <div className='production-section'>
-            {movie && productionCompanies}
-          </div>
+          <div className='images-section'>{movieImages && imagesSection}</div>
+          <div className='production-section'>{movie && productionCompanies}</div>
           <div className='card p-4 comment-section w-full text-left mt-36 mb-52 mx-auto md:w-4/5 sm:w-full '>
             <h2 className='bk-text-colour'>Comments</h2>
             <div className='comments'>
