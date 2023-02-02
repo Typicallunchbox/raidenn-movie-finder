@@ -25,7 +25,7 @@ const Movie = () => {
   const { comments, isLoading, isError, message } = useSelector(
     (state) => state.comments
   );
-  
+
   const [text, setText] = useState("");
   const [rating, setRating] = useState("");
   const [commentErr, setCommentErr] = useState("");
@@ -34,8 +34,6 @@ const Movie = () => {
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
-  const [disableWantToWatch, setDisableWantToWatch] = useState(false);
-  const [disableWatched, setDisableWatched] = useState(false);
   const [userWatchlistRecord, setUserWatchlistRecord] = useState(null);
 
   //display variables
@@ -375,7 +373,6 @@ const Movie = () => {
                   <p className="text-lg text-center text-[#1b8ad3d6] font-mediumLC tracking-wider">{movieAddedPrompt}</p>
                 </div>}
                 <button
-                  disabled={disableWantToWatch}
                   className={`w-full flex gap-3 p-3 ${
                     userWatchlistRecord?.wantToWatch
                       ? "bg-blue-600 opacity-50"
@@ -392,7 +389,6 @@ const Movie = () => {
                   Watchlist
                 </button>
                 <button
-                  disabled={disableWatched}
                   className={`w-full flex gap-3 p-3 ${
                     userWatchlistRecord?.watched
                       ? "bg-blue-600 opacity-50"
