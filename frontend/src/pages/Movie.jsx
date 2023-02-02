@@ -7,30 +7,17 @@ import { FaStar } from "react-icons/fa";
 import { BiStar } from "react-icons/bi";
 import { AiFillEye, AiFillPlusCircle } from "react-icons/ai";
 import Rating from "react-rating";
-import {
-  createComment,
-  deleteComment,
-  getCommentsByMovieId,
-} from "../features/comments/commentSlice";
+import {createComment, deleteComment, getCommentsByMovieId,} from "../features/comments/commentSlice";
 import { banishComment } from "../features/comments/commentSlice";
-
-import {
-  getWantToWatchRecord,
-  updateWatchlistRecord,
-} from "../features/watchlists/watchlistSlice";
+import { getWantToWatchRecord, updateWatchlistRecord,} from "../features/watchlists/watchlistSlice";
 import { reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
 import noCastImg from "../static/svgs/user.svg";
 import starImg from "../static/svgs/star.svg";
-
 import Filter from "bad-words";
 
 const Movie = () => {
-  const [text, setText] = useState("");
-  const [rating, setRating] = useState("");
-
-  // let rating = "";
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -38,6 +25,9 @@ const Movie = () => {
   const { comments, isLoading, isError, message } = useSelector(
     (state) => state.comments
   );
+  
+  const [text, setText] = useState("");
+  const [rating, setRating] = useState("");
   const [commentErr, setCommentErr] = useState("");
   const [movie, setMovie] = useState(null);
   const [movieAddedPrompt, setMovieAddedPrompt] = useState('Removed from Watchlist');
