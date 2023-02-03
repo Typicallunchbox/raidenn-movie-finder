@@ -89,7 +89,6 @@ const updateComment = asyncHandler(async (req, res) => {
 //@route    DELETE /api/comments/:id
 //@access   Private
 const deleteComment = asyncHandler(async (req, res) => {
-    console.log('req.params:', req.params)
     const comment = await Comment.findById(req.params.id)
 
     if(!comment){

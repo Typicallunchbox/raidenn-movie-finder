@@ -463,11 +463,11 @@ const Movie = () => {
           <div className='production-section'>{movie && productionCompanies}</div>
           <div className='card p-4 comment-section w-full text-left mt-36 mb-52 mx-auto md:w-4/5 sm:w-full '>
             <h2 className='bk-text-colour'>Comments</h2>
-            <div className='comments'>
+            <div className='comments md:p-4'>
               {comments && comments.length > 0 ? (
                 comments.map((comment) => (
                   <div className='card border-default mb-2 p-3 relative' >
-                    {comment.user === user._id && <p className='text-red-500 flex items-center absolute right-6 gap-1 cursor-pointer hover:text-red-700' onClick={() => removeComment(comment)}><AiOutlineCloseCircle /> Remove</p>}
+                    {comment.user === user._id && <p className='text-xs text-red-500 flex items-center absolute right-6 gap-1 cursor-pointer hover:text-red-700' onClick={() => removeComment(comment)}><AiOutlineCloseCircle /> Remove</p>}
                     <div className='flex flex-col border-none px-6 py-2 w-full justify-between md:w-fit md:justify-start rounded-md '>
                       <span className='leading-4'>{comment.username}</span>
                       <div className='flex flex-row'>
@@ -491,7 +491,7 @@ const Movie = () => {
               )}
             </div>
             <div
-              className='p-px'
+              className='p-px mt-4 md:mt-0'
               style={
                 colours
                   ? {
@@ -502,7 +502,7 @@ const Movie = () => {
             ></div>
             <div>
               <div className='my-2'>
-                <div className='rating'>
+                <div className='rating mt-10 md:mt-0'>
                   <span className='bk-text-colour mr-2 text-lg md:text-sm'>
                     Rate Movie :
                   </span>
