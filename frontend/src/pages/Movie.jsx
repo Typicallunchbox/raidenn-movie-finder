@@ -5,7 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { BiStar } from "react-icons/bi";
-import { AiFillEye, AiFillPlusCircle } from "react-icons/ai";
+import { AiFillEye, AiFillPlusCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import Rating from "react-rating";
 import {createComment, deleteComment, getCommentsByMovieId,} from "../features/comments/commentSlice";
 import { banishComment } from "../features/comments/commentSlice";
@@ -466,8 +466,8 @@ const Movie = () => {
             <div className='comments'>
               {comments && comments.length > 0 ? (
                 comments.map((comment) => (
-                  <div className='card border-default mb-2 p-3' >
-                    {comment.user === user._id && <p onClick={() => removeComment(comment)}>x</p>}
+                  <div className='card border-default mb-2 p-3 relative' >
+                    {comment.user === user._id && <p className='text-red-500 flex items-center absolute right-6 gap-1 cursor-pointer hover:text-red-700' onClick={() => removeComment(comment)}><AiOutlineCloseCircle /> Remove</p>}
                     <div className='flex flex-col border-none px-6 py-2 w-full justify-between md:w-fit md:justify-start rounded-md '>
                       <span className='leading-4'>{comment.username}</span>
                       <div className='flex flex-row'>
