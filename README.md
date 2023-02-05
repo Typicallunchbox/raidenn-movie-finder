@@ -5,6 +5,11 @@
 
 ![Landing Page ReadMe](https://user-images.githubusercontent.com/41709116/209307840-67e7f118-ce5a-4ac4-8641-9a8f56bd7a0f.png)
 
+
+![createdInFigma](https://user-images.githubusercontent.com/41709116/216812326-68c3a296-f1ac-4d74-b874-3ecc2d8ed7b7.gif)
+![codedInVsCode](https://user-images.githubusercontent.com/41709116/216812658-00f05f64-5b9d-4d25-9122-e6a7f8558717.gif)
+
+
 <br />
 <br />
 
