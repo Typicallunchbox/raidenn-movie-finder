@@ -217,16 +217,27 @@ const setSecurityQuestions = asyncHandler(async (req, res) => {
 const updateProfile = asyncHandler(async (req, res) => {
   const { email, _id } = req.user;
   const {profile} = req.body;
+  let tempObj = {};
   
-  if(profile.name === '' || profile.name === undefined){
+  if(profile.name && profile.name === ''){
     res.status(400);
-    throw new Error("Profile name is required");
+    throw new Error("Profile name is empty");
   }
+
+  if(profile.genresPref && profile.genresPref === [] || profile.genresPref === ''){
+    res.status(400);
+    throw new Error("Genre Preferences are empty");
+  }
+
+  profile?.name ? tempObj["name"] = profile.name: null;
+  profile?.genresPref ? tempObj["genrePreferences"] = profile.genresPref : null;
 
   const user = await User.findOne({ email: email });
   if(user){
-    const updateGenrePreferences = await User.findByIdAndUpdate(user._id, {name: profile.name })
-    res.status(200).json({status: 'OK'}) 
+    const updatedProfile = await User.findByIdAndUpdate(user._id, tempObj)
+    if(updatedProfile){
+      res.status(200).json({status: 'OK'}) 
+    }
   }
   else {
     res.status(400);
@@ -290,6 +301,7 @@ module.exports = {
   registerUser,
   loginUser,
   updateProfile,
+  setGenrePreferences,
   getMe,
   updatePassword,
   getSecurityQuestions,

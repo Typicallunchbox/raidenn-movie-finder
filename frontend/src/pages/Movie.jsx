@@ -110,6 +110,7 @@ const Movie = () => {
           `https://api.themoviedb.org/3/movie/${id}?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
         )
         .then((resp) => {
+          console.log('resp:',resp.data);
           setMovie(resp.data);
         });
 
@@ -416,28 +417,31 @@ const Movie = () => {
                 </button>
               )}
               <div className='flex gap-5'>
-                <p>
-                  <b>Title</b>:
-                </p>
+                <p>Title :</p>
                 <p>{movie.title}</p>
               </div>
-
-              <span>
-                <b>Genres</b> :{" "}
-              </span>
-              <div className='genres mt-4'>
-                {movie.genres.map((genre) => {
-                  return <span key={genre.id}>{genre.name}</span>;
-                })}
-              </div>
               <div className='flex gap-5'>
-                <p>
-                  <b>Status</b> :{" "}
-                </p>
+                <p>Runtime :</p>
+                <p>{movie.runtime} mins</p>
+              </div>
+
+              
+              <div className='flex gap-5'>
+                <p>Status :</p>
                 <p>
                   {movie.status}{" "}
                   {movie.status === "Released" ? `(${movie.release_date})` : ""}
                 </p>
+              </div>
+              <div className="mt-2">
+                <span>
+                  Genres :
+                </span>
+                <div className='genres mt-4'>
+                  {movie.genres.map((genre) => {
+                    return <span key={genre.id}>{genre.name}</span>;
+                  })}
+                </div>
               </div>
             </div>
             <div className='plain-card border-0 w-full sm:h-128 text-left overflow-hidden'>
