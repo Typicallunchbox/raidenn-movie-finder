@@ -1,5 +1,4 @@
 const asyncHandler = require('express-async-handler')
-const User = require('../models/userModel')
 const Watchlist = require('../models/watchlistModel')
 
 // @desc    Get watched
@@ -31,8 +30,8 @@ const getWatchlistByUserId = asyncHandler(async (req, res) => {
     res.status(200).json(watchlist) 
 })
 
-// @desc    Update goal
-//@route    PUT /api/watchlist
+// @desc    Get movie record watchlist record
+//@route    POST /api/wantToWatchRecord
 //@access   Private
 const getWantToWatchRecord = asyncHandler(async (req, res) => {
 
@@ -107,7 +106,6 @@ const createWatchlistRecord = asyncHandler(async (req, res) => {
     res.status(200).json(comment) 
 })
 
-
 // @desc    Update goal
 //@route    PUT /api/watchlist
 //@access   Private
@@ -135,7 +133,7 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
         if(!movie.watched && !movie.wantToWatch){
             //Make sure the logged in user matches the goal user
 
-
+            console.log('HIT HERE!')
             if(watchListRecord.user.toString() !== req.user.id){
                 res.status(401)
                 throw new Error('User not authorized')
@@ -166,7 +164,6 @@ const updateWatchlistRecord = asyncHandler(async (req, res) => {
     })
     res.status(200).json(record) 
 })
-
 
 // @desc    Delete goal
 //@route    DELETE /api/watchlist

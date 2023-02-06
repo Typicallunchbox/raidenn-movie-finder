@@ -615,7 +615,7 @@ button{
 
 .prim-button {
   background-color: var(--raidenn-blue);
-  padding: 10px 50px;
+  padding: 10px 60px;
   border-radius: 4px;
   border: none;
   transition: background-color 0.5s ease;
@@ -740,7 +740,6 @@ background-color: var(--raidenn-blue)
 }
 
 .images-section{
-    margin-top: 50px !important;
     animation: fadeInAnimation ease 3s;
 
 
@@ -780,6 +779,7 @@ background-color: var(--raidenn-blue)
     }
   }
 .cast-section{
+  margin-top: 50px !important;
   animation: fadeInAnimation ease 3s;
 
 
@@ -865,19 +865,18 @@ background-color: var(--raidenn-blue)
 
   .movie-content {
     margin-bottom: 150px !important;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2%;
     width: 70%;
+    margin: 0 auto;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
 
   }
   img {
-    transform: scale(0.15, 0.15);
-    -ms-transform: scale(0.15, 0.15);
-    -webkit-transform: scale(0.15, 0.15);
-    margin-bottom: 20px;
-    transition: all 400ms ease;
+    height: auto;
+    margin: auto;
+    max-height: 200px;
   }
 
 }
@@ -922,7 +921,6 @@ background-color: var(--raidenn-blue)
     min-height: 120px;
     height: 100%;    
     overflow-y: scroll;
-    padding: 1rem;
     font-size: 14px;
     color: #555;
   }
@@ -994,29 +992,9 @@ background-color: var(--raidenn-blue)
   z-index: -10;
 }
 
-.landing-page{
-  height: 100vh;
-  overflow-x: hidden;
-
-  .inner-container{
-    position: relative;
-    top: 30%;
-    -webkit-transform: translateY(-30%);
-    -ms-transform: translateY(-30%);
-    transform: translateY(-30%);
-    left: 100px;
-  }
-}
-
 
 
 .instructions{
-  display: flex;
-  width: 80%;
-  margin: 0 auto;
-  height: 80vh;
-  margin-top: 150px;
-
   .animation-container{
     min-width: 300px;
     max-width: 400px;
@@ -1156,6 +1134,25 @@ background-color: var(--raidenn-blue)
 }
 
 @media (max-width: 600px) {
+
+  .instructions{
+    .setup-content{
+      padding: 0 20px !important;
+
+      span{
+        font-size: 17px;
+      }
+
+      h3{
+        font-size: 35px;
+      }
+
+      p{
+        font-size: 17px;
+        text-align: left;
+      }
+    }
+  }
 
   .header {
     .options-block{

@@ -44,18 +44,21 @@ function Header() {
     }
   }
 
+  const openSearch = (bool) => {
+    setOpenSearchTab(bool)
+  }
+
   useEffect(()=>{
     setOpenSearchTab(false)
     setOpenMenu(false);
   },[pathname])
     
-
   return (
     <>
 
     <header className={`header ${window.location.origin + "/" === window.location.href && !user ? 'bg-transparent' : 'primary-bg-colour'}`}>
       <div className='logo'>
-        <a className="tertiary-text-colour" style={{fontFamily: 'ThunderBoldLC', fontSize: '35px'}}  href='/'>Raidenn</a>
+        <a className="tertiary-text-colour  text-[35px] font-thunderBoldLC" href='/'>Raidenn</a>
       </div>
       {user && 
       <div className="flex gap-12 justify-center">
@@ -80,7 +83,10 @@ function Header() {
                 <source type="video/webm" src={btnAnimation}></source>
               </video>
               </div>
-              <div className={`options-menu flex relative h-80 md:h-60 ${openMenu ? 'is-open' : 'hidden'}`}>
+              <div className={`options-menu flex relative h-80 md:h-64 ${openMenu ? 'is-open' : 'hidden'}`}>
+                <Link onClick={() => {setOpenMenu(false); setOpenSearchTab(false);}} className="bk-text-colour mb-2 p-1 shader" to='/'>
+                    Home 
+                </Link>
                 <div className="block md:hidden">
                   <Link to={'#'} className="bk-text-colour mb-2 p-1 shader" onClick={() => {openSearchMobile()}}>
                     Search
@@ -118,7 +124,7 @@ function Header() {
       </ul>
     </header>
     {user &&
-    <SearchDropDown openSearch={openSearchTab} />}
+    <SearchDropDown openSearch={openSearchTab} trigger={openSearch}/>}
     </>
   );
 }

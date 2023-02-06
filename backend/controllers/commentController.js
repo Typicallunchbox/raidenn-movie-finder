@@ -1,8 +1,5 @@
 const asyncHandler = require('express-async-handler')
-const Goal = require('../models/goalModel')
 const Comment = require('../models/commentModel')
-const User = require('../models/userModel')
-
 
 // @desc    Get comments
 //@route    GET /api/comments
@@ -43,6 +40,13 @@ const setComment = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Please provide movie_id field')
     }
+
+    const commentExists = await Comment.findOne({user : req.user.id, movie_id : req.body.movie_id });
+    if(commentExists){
+        res.status(400)
+        throw new Error('Already commented on this movie.')
+    }
+
 
     const comment = await Comment.create({
         user: req.user.id,

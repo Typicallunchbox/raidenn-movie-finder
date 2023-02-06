@@ -48,7 +48,7 @@ const deleteComment = async (commentId, token) => {
             Authorization: `Bearer ${token}`
         }
     }
-    const response = await axios.delete(API_URL + commentId, config)
+    const response = await axios.delete(API_URL + `${commentId.id}`, config)
     return response.data
 }
 

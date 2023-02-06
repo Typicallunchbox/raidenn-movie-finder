@@ -35,7 +35,6 @@ const RegisterSecurityQuestions = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     let valid = true;
-    console.log('answers:', answers)
     for (let index = 0; index < answers.length; index++) {
       const element = answers[index];
 
@@ -59,12 +58,7 @@ const RegisterSecurityQuestions = (props) => {
     <div>
       <div className='px-12 pt-6'>
         <h1
-          className='bk-text-colour'
-          style={{
-            fontFamily: "ThunderBoldLC",
-            fontSize: "35px",
-            letterSpacing: "3px",
-          }}
+          className='bk-text-colour text-[35px] font-thunderBoldLC tracking-[3px]'
         >
           Security Questions
         </h1>

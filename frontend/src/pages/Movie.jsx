@@ -5,29 +5,19 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { BiStar } from "react-icons/bi";
-import { AiFillEye, AiFillPlusCircle } from "react-icons/ai";
+import { AiFillEye, AiFillPlusCircle, AiOutlineCloseCircle } from "react-icons/ai";
 import Rating from "react-rating";
-import {
-  createComment,
-  getCommentsByMovieId,
-} from "../features/comments/commentSlice";
-import {
-  getWantToWatchRecord,
-  updateWatchlistRecord,
-} from "../features/watchlists/watchlistSlice";
+import {createComment, deleteComment, getCommentsByMovieId,} from "../features/comments/commentSlice";
+import { banishComment } from "../features/comments/commentSlice";
+import { getWantToWatchRecord, updateWatchlistRecord,} from "../features/watchlists/watchlistSlice";
 import { reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 import { ColourPalette } from "../components/ColourPalette/ColourPalette";
 import noCastImg from "../static/svgs/user.svg";
 import starImg from "../static/svgs/star.svg";
-
 import Filter from "bad-words";
 
 const Movie = () => {
-  const [text, setText] = useState("");
-  const [rating, setRating] = useState("");
-
-  // let rating = "";
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -35,13 +25,15 @@ const Movie = () => {
   const { comments, isLoading, isError, message } = useSelector(
     (state) => state.comments
   );
+
+  const [text, setText] = useState("");
+  const [rating, setRating] = useState("");
   const [commentErr, setCommentErr] = useState("");
   const [movie, setMovie] = useState(null);
+  const [movieAddedPrompt, setMovieAddedPrompt] = useState('');
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
-  const [disableWantToWatch, setDisableWantToWatch] = useState(false);
-  const [disableWatched, setDisableWatched] = useState(false);
   const [userWatchlistRecord, setUserWatchlistRecord] = useState(null);
 
   //display variables
@@ -77,6 +69,11 @@ const Movie = () => {
     }
   };
 
+  const removeComment = (comment) => {
+    dispatch(banishComment(comment));
+    dispatch(deleteComment({id: comment._id}));
+  }
+
   useEffect(() => {
     if (!isError) {
       console.log(message);
@@ -98,6 +95,13 @@ const Movie = () => {
       dispatch(reset());
     };
   }, [id, user, navigate, dispatch, isError, message]);
+
+
+  const getRecord = async () => {
+    const record = await getWantToWatchRecord({ movie_id: id });
+    setUserWatchlistRecord(record);
+  };
+
 
   useEffect(() => {
     if (!movie) {
@@ -185,7 +189,8 @@ const Movie = () => {
     return <Spinner />;
   }
 
-  const addToWantToWatchList = (val) => {
+  const addToWantToWatchList = async(val) => {
+    const delay = ms => new Promise(res => setTimeout(res, ms));
     if (movie) {
       let genres = [];
       for (let index = 0; index < movie.genres.length; index++) {
@@ -199,14 +204,20 @@ const Movie = () => {
             movie_id: id,
             movie_genre: genres,
             movie_image: image_path + movie.poster_path,
-            wantToWatch: true,
+            wantToWatch: !userWatchlistRecord?.wantToWatch,
+            watched: userWatchlistRecord?.watched
           },
         })
       );
+      setMovieAddedPrompt(userWatchlistRecord?.wantToWatch ?'Removed from Watchlist':'Added to Watchlist')
+      await delay(3000);
+      setMovieAddedPrompt('')
+      getRecord();
     }
   };
 
-  const addToWatchedList = (val) => {
+  const addToWatchedList = async(val) => {
+    const delay = ms => new Promise(res => setTimeout(res, ms));
     if (movie) {
       let genres = [];
       for (let index = 0; index < movie.genres.length; index++) {
@@ -220,10 +231,15 @@ const Movie = () => {
             movie_id: id,
             movie_genre: genres,
             movie_image: image_path + movie.poster_path,
-            watched: true,
+            watched: !userWatchlistRecord?.watched,
+            wantToWatch: userWatchlistRecord?.wantToWatch
           },
         })
       );
+      setMovieAddedPrompt(userWatchlistRecord?.watched ?'Removed from Watchlist':'Added to Watchlist')
+      await delay(3000);
+      setMovieAddedPrompt('')
+      getRecord();
     }
   };
 
@@ -350,19 +366,20 @@ const Movie = () => {
       {movie && (
         <div className='container'>
           <div className='movie-container mb-20 mt-5'>
-            <div className='movieInfo'>
+            <div className='movieInfo relative'>
               <img src={image_path + movie.poster_path} alt='movie'></img>
-              <div className='buttons flex justify-evenly gap-1 mt-2'>
+              <div className='buttons flex justify-evenly gap-1 mt-2 relative'>
+                {movieAddedPrompt && <div className="w-full p-1 bg-slate-100 absolute bottom-14">
+                  <p className="text-lg text-center text-[#1b8ad3d6] font-mediumLC tracking-wider">{movieAddedPrompt}</p>
+                </div>}
                 <button
-                  disabled={disableWantToWatch}
                   className={`w-full flex gap-3 p-3 ${
-                    userWatchlistRecord?.wantToWatch || disableWantToWatch
+                    userWatchlistRecord?.wantToWatch
                       ? "bg-blue-600 opacity-50"
                       : ""
                   }`}
                   onClick={() => {
                     addToWantToWatchList();
-                    setDisableWantToWatch(true);
                   }}
                 >
                   {" "}
@@ -372,15 +389,13 @@ const Movie = () => {
                   Watchlist
                 </button>
                 <button
-                  disabled={disableWatched}
                   className={`w-full flex gap-3 p-3 ${
-                    userWatchlistRecord?.watched || disableWatched
+                    userWatchlistRecord?.watched
                       ? "bg-blue-600 opacity-50"
                       : ""
                   }`}
                   onClick={() => {
                     addToWatchedList();
-                    setDisableWatched(true);
                   }}
                 >
                   {" "}
@@ -426,7 +441,7 @@ const Movie = () => {
               </div>
             </div>
             <div className='plain-card border-0 w-full sm:h-128 text-left overflow-hidden'>
-              {movieVideos && (
+              {movieVideos && movieVideos.length > 0 && (
                 <div className='trailer w-full h-full'>
                   <iframe
                     className='w-full h-full'
@@ -443,17 +458,16 @@ const Movie = () => {
           <div className='view-more-header ml-6 md:m-auto lg:m-auto'>
             <h2>View More</h2>
           </div>
-          <div className='images-section'>{movieImages && imagesSection}</div>
           <div className='cast-section'>{movieCast && castSection}</div>
-          <div className='production-section'>
-            {movie && productionCompanies}
-          </div>
+          <div className='images-section'>{movieImages && imagesSection}</div>
+          <div className='production-section'>{movie && productionCompanies}</div>
           <div className='card p-4 comment-section w-full text-left mt-36 mb-52 mx-auto md:w-4/5 sm:w-full '>
             <h2 className='bk-text-colour'>Comments</h2>
-            <div className='comments'>
+            <div className='comments md:p-4'>
               {comments && comments.length > 0 ? (
                 comments.map((comment) => (
-                  <div className='card border-default mb-2 p-3'>
+                  <div className='card border-default mb-2 p-3 relative' >
+                    {comment.user === user._id && <p className='text-xs text-red-500 flex items-center absolute right-6 gap-1 cursor-pointer hover:text-red-700' onClick={() => removeComment(comment)}><AiOutlineCloseCircle /> Remove</p>}
                     <div className='flex flex-col border-none px-6 py-2 w-full justify-between md:w-fit md:justify-start rounded-md '>
                       <span className='leading-4'>{comment.username}</span>
                       <div className='flex flex-row'>
@@ -477,7 +491,7 @@ const Movie = () => {
               )}
             </div>
             <div
-              className='p-px'
+              className='p-px mt-4 md:mt-0'
               style={
                 colours
                   ? {
@@ -488,7 +502,7 @@ const Movie = () => {
             ></div>
             <div>
               <div className='my-2'>
-                <div className='rating'>
+                <div className='rating mt-10 md:mt-0'>
                   <span className='bk-text-colour mr-2 text-lg md:text-sm'>
                     Rate Movie :
                   </span>

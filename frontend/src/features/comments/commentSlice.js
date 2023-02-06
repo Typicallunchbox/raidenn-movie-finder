@@ -33,7 +33,7 @@ export const createComment = createAsyncThunk(
 
 //Delete Comment
 export const deleteComment = createAsyncThunk(
-  "comments/delete",
+  "comments/deleteComment",
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
@@ -100,6 +100,10 @@ export const commentsSlice = createSlice({
       state.isSuccess = false;
       state.message = "";
     },
+    banishComment: (state, action) => ({
+      ...state,
+      comments: state.comments.filter(item => item._id !== action.payload._id),
+    }),
   },
   extraReducers: (builder) => {
     builder
@@ -140,10 +144,6 @@ export const commentsSlice = createSlice({
           state.isError = true;
           state.message = action.payload
       })
-
-        .addCase(deleteComment.pending, (state) => {
-          state.isLoading = true;
-      })
       .addCase(deleteComment.fulfilled, (state, action) => {
           state.isLoading = false;
           state.isSuccess = true;
@@ -157,5 +157,5 @@ export const commentsSlice = createSlice({
   },
 });
 
-export const { reset } = commentsSlice.actions;
+export const { reset, banishComment } = commentsSlice.actions;
 export default commentsSlice.reducer;

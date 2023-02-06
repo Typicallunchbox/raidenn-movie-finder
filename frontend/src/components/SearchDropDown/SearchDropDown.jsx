@@ -12,16 +12,41 @@ import { DropdownSelect } from "../../components/DropdownSelect/index";
 
 const SearchDropDown = (props) => {
 const [showFilters, setshowFilters] = useState(false);
+const [tagOption, setTagOption] = useState('');
 const [releasedYear, setReleasedYear] = useState('');
 const [genre, setGenre] = useState('');
 const [searchText, setSearchText] = useState('');
 const [dropDownClass, setDropDownClass] = useState('');
-const genres = ['Action','Comedy','Drama','Romance','Scifi','Thriller','Horror','Mystery','Fantasy','Documentary']
+const [genres, setGenres] = useState([]);
+
+// const genres = ['Action','Comedy','Drama','Romance','Scifi','Thriller','Horror','Mystery','Fantasy','Documentary']
 const dispatch = useDispatch()
 
 const setTagState = (selectedTag) => {
+  setTagOption(selectedTag);
   dispatch(addTag(selectedTag))
 }
+useEffect(() => {
+  console.log("HEY!");
+
+  axios
+  .get(`https://api.themoviedb.org/3/genre/movie/list?api_key=120fe4d587d5f86c44f0a6e599f01734`)
+  .then((resp) => {
+    const result = resp.data.genres;
+    console.log('resp:', resp)
+    if(result.length > 0){
+      let tempArray = [];
+      for (let index = 0; index < result.length; index++) {
+        const genre = result[index];
+        tempArray.push(genre.id)
+      }
+      //NEED THE IDS TO SEND WHEN REFERENCING BY GENRE
+      //MAKE SURE SORT BY GENRE IS NOT BUGGED
+      console.log('tempArray:', tempArray)
+      setGenres(tempArray);
+    }
+  });
+}, [])
 useEffect(() => {
   let scrollLocation = null;
 
@@ -53,23 +78,53 @@ useEffect(() => {
 
 
 
+
 const search = () => {
+  console.log('values:', searchText, releasedYear, genre)
+
+  if(searchText === '' && releasedYear === '' && genre === ''){return}
+  console.log('hit1')
 
   if(releasedYear !== ''){
     let date =  new Date().getFullYear();
 
     if(!(validYear.test(releasedYear) && parseInt(releasedYear) <= parseInt(date))){
       //Return error msg
+      console.log('hit2')
       return;
     }
   }
 
-  if(searchText.trim() !== ''){
-    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&query=${searchText}&primary_release_year=${releasedYear}&with_genres=${genre}&language=en-US&page=1`)
-    .then((resp) => {
-      dispatch(addMovies(resp.data.results))
-    });
+  props.trigger(false);
+
+  if (searchText === "") {
+    axios
+      .get(
+        `https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
+          releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""
+        }${
+          genre !== "" ? `&with_genres=${genre}` : ""
+        }&language=en-US&page=1&include_adult=false`
+      )
+      .then((resp) => {
+        dispatch(addMovies(resp.data.results));
+      });
+    return;
   }
+  console.log('hit2')
+  console.log('genre:', genre)
+
+  axios
+    .get(
+      `https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
+        searchText !== "" ? `&query=${searchText}` : `&query=''`
+      }${releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""}${
+        genre !== "" ? `&with_genres=${genre}` : ""
+      }&language=en-US&page=1&include_adult=false`
+    )
+    .then((resp) => {
+      dispatch(addMovies(resp.data.results));
+    });
 }
 
   return (
@@ -81,25 +136,28 @@ const search = () => {
               <div className='filters'>
                 <div className='general-tags'>
                   <button
-                    className='secondary-bg-colour'
+                    className={`secondary-bg-colour ${tagOption === 'popular' && 'outline-none ring ring-slate-300'}`}
                     onClick={() => {
                       setTagState("popular");
+                      props.trigger(false);
                     }}
                   >
                     Most Popular
                   </button>
                   <button
-                    className='secondary-bg-colour'
+                    className={`secondary-bg-colour ${tagOption === 'upcoming' && 'outline-none ring ring-slate-300'}`}
                     onClick={() => {
                       setTagState("upcoming");
+                      props.trigger(false);
                     }}
                   >
                     Upcoming
                   </button>
                   <button
-                    className='secondary-bg-colour'
+                    className={`secondary-bg-colour ${tagOption === 'top_rated' && 'outline-none ring ring-slate-300'}`}
                     onClick={() => {
                       setTagState("top_rated");
+                      props.trigger(false);
                     }}
                   >
                     Best Rating
@@ -108,6 +166,11 @@ const search = () => {
                 <div className='flex gap-2 mb-2'>
                   <div className='date-range w-full'>
                       <input
+                        onKeyDown={(e) => {
+                          if (e.code === "Enter") {
+                            search();
+                          }
+                        }}
                         value={releasedYear}
                         onChange={(e) => {
                           setReleasedYear(e.target.value);
@@ -119,6 +182,7 @@ const search = () => {
                   </div>
                   <div className='genre w-full'>
                       <DropdownSelect
+                        // clearValue(ADD TRIGGER)
                         onSelect={(value) => setGenre(value)}
                         placeholder='Genre'
                         array={genres}
@@ -127,7 +191,7 @@ const search = () => {
                 </div>
                 <div className='text-right'>
                   <input
-                    onBlur={(e) => {
+                    onChange={(e) => {
                       setSearchText(e.target.value);
                     }}
                     onKeyDown={(e) => {
@@ -141,6 +205,17 @@ const search = () => {
                     placeholder='Search for a movie...'
                     required
                   ></input>
+                  <div className='flex flex-row justify-between'>
+                  <p
+                    onClick={() => {
+                      setSearchText(''); 
+                      setReleasedYear(''); 
+                      setGenre(['']);
+                    }}
+                    className='text-sm ml-1 text-gray-200 hover:text-gray-500 cursor-pointer px-4 mt-2'
+                  >
+                    Clear Filters
+                  </p>
                   <button
                     onKeyDown={(e) => {
                       if (e.code === 'Enter') {
@@ -149,9 +224,11 @@ const search = () => {
                     }}
                     onClick={() => {search()}}
                     type='button'
-                    className='bg-green-500 hover:bg-slate-800 ml-1 px-4 mt-2'>
+                    className='bg-green-500 hover:bg-green-800 ml-1 px-4 mt-2'>
                     Search
                   </button>
+                  </div>
+                  
                 </div>
               </div>
             </div>
