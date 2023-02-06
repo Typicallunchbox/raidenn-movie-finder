@@ -88,7 +88,9 @@ const UserProfileSettings = () => {
   return (
     <>
       <div className='container absolute top-2/4 -translate-y-2/4'>
-        <h1 className='mt-0 text-[30px] font-mediumLC tracking-[3px]'>Profile Settings</h1>
+        <h1 className='mt-0 text-[30px] font-mediumLC tracking-[3px]'>
+          Profile Settings
+        </h1>
 
         <div className='profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10'>
           <div className='mb-5'>
@@ -161,19 +163,21 @@ const UserProfileSettings = () => {
               </div>
             </div>
           )}
-          {/* <div className="mb-5">
-                    {formData.genrePreferences && <>
-                        <p>Genre Preferences</p>
-                        <div className="genres flex gap-5 ml-5">
-                            {formData.genrePreferences.map((genre)=>(
-                                <p key={genre}>{genre}</p>
-                            ))}
-                        </div>
-                    </>}
-                    multi-select dropdown
-                    display div of all selected genres
-                </div> */}
-          <div className="w-full text-right">
+          <div className='mb-5'>
+            {formData.genrePreferences && (
+              <>
+                <p>Genre Preferences</p>
+                <div className='genres flex gap-5 ml-5 mt-2'>
+                  {formData.genrePreferences.map((genre) => (
+                    <p className="py-2 px-4 bg-zinc-400 rounded-lg" key={genre}>{genre}</p>
+                  ))}
+                  <p className="py-2 px-4 text-blue-400">+ Add</p>
+                </div>
+              </>
+            )}
+            {/* multi-select dropdown display div of all selected genres */}
+          </div>
+          <div className='w-full text-right'>
             <button
               disabled={msg}
               hidden={!clickedResetPassword}

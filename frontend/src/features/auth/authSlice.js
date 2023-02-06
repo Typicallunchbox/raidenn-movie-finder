@@ -66,6 +66,24 @@ export const getMe = createAsyncThunk(
   }
 );
 
+export const updateProfile = createAsyncThunk(
+  "auth/updateProfile",
+  async (data, thunkAPI) => {
+    try {
+      let user = JSON.parse(localStorage.getItem("user"));
+      return await authService.updateProfile(data, user);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 //Update Password
 export const updatePassword = async (data) => {
     try {

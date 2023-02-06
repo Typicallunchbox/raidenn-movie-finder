@@ -50,6 +50,12 @@ const getMe = async () => {
     return response.data
 }
 
+//getMe User
+const updateProfile = async (data) => {
+    const response = await axios.put(API_URL + 'me', data)
+    return response.data
+}
+
 //Get Security Questions
 const getSecurityQuestions = async (data) => {
     const response = await axios.post(API_URL + 'userQuestions', data)
@@ -77,6 +83,7 @@ const authService = {
     register,
     login,
     getMe,
+    updateProfile,
     logout,
     updatePassword,
     getSecurityQuestions,
