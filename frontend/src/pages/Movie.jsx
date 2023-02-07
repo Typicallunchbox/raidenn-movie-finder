@@ -376,34 +376,34 @@ const Movie = () => {
                 <button
                   className={`w-full flex gap-3 p-3 ${
                     userWatchlistRecord?.wantToWatch
-                      ? "bg-blue-600 opacity-50"
-                      : ""
+                      ? "border-none bg-blue-400 opacity-75"
+                      : "bg-gray-300"
                   }`}
                   onClick={() => {
                     addToWantToWatchList();
                   }}
                 >
                   {" "}
-                  <div className='my-auto'>
+                  <div className={`my-auto ${userWatchlistRecord?.wantToWatch ? '' : 'text-gray-900'}`}>
                     <AiFillPlusCircle />
                   </div>
-                  Watchlist
+                  <span className={`${userWatchlistRecord?.wantToWatch ? '' : 'text-gray-900'}`}>Watchlist</span>
                 </button>
                 <button
                   className={`w-full flex gap-3 p-3 ${
                     userWatchlistRecord?.watched
-                      ? "bg-blue-600 opacity-50"
-                      : ""
+                      ? "border-none bg-blue-400 opacity-75"
+                      : "bg-gray-300"
                   }`}
                   onClick={() => {
                     addToWatchedList();
                   }}
                 >
                   {" "}
-                  <div className='my-auto'>
+                  <div className={`my-auto  ${userWatchlistRecord?.watched ? '' : 'text-gray-900'}`}>
                     <AiFillEye />
                   </div>{" "}
-                  Watched
+                  <span className={`${userWatchlistRecord?.watched ? '' : 'text-gray-900'}`}>Watched</span>
                 </button>
               </div>
               {movie.homepage && (
