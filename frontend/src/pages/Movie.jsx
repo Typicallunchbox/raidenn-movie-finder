@@ -444,9 +444,9 @@ const Movie = () => {
                 </div>
               </div>
             </div>
-            <div className='plain-card border-0 w-full sm:h-128 text-left overflow-hidden'>
+            <div className='w-full'>
               {movieVideos && movieVideos.length > 0 && (
-                <div className='trailer w-full h-full'>
+                <div className='trailer h-[80vh]'>
                   <iframe
                     className='w-full h-full'
                     src={`https://www.youtube.com/embed/${movieVideos[0].key}`}

@@ -166,9 +166,9 @@ const UserProfileSettings = () => {
                 <p>Genre Preferences</p>
                 <div className='genres flex gap-5 ml-5 mt-2'>
                   {formData.genrePreferences.map((genre) => (
-                    <p className="py-2 px-4 border-blue-400 text-blue-400 border-2 bg-transparent rounded-lg" key={genre}>{genre}</p>
+                    <p className="py-2 px-4 border-white text-white border-2 bg-transparent rounded-lg" key={genre}>{genre}</p>
                   ))}
-                  <p className="cursor-pointer text-sm py-2 px-4 hover:text-blue-400">+ Add Genre</p>
+                  <p className="cursor-pointer text-blue-400 text-sm py-2 px-4 hover:text-white">+ Add Genre</p>
                 </div>
               </>
             )}
