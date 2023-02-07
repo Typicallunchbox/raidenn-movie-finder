@@ -19,11 +19,9 @@ const UserProfileSettings = () => {
   const [msg, setMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading]= useState(false)
-
   const { user } = useSelector((state) => state.auth);
 
  
-
   useEffect(() => {
     const delay = ms => new Promise(res => setTimeout(res, ms));
     if (!user) {
@@ -67,8 +65,9 @@ const UserProfileSettings = () => {
         dispatch(reset());
         dispatch(resetWatchlist());
         dispatch(resetMovies());
-
-      } else {
+      } 
+      else 
+      {
         if(resp?.error){
             setErrorMsg(resp.error);
         }
@@ -79,7 +78,6 @@ const UserProfileSettings = () => {
   const changeUserDetails = () => {
     //empty for now
   };
-
 
   if(isLoading){
     return <Spinner label="Redirecting back to login." />
@@ -95,8 +93,7 @@ const UserProfileSettings = () => {
         <div className='profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10'>
           <div className='mb-5'>
             <p>Username</p>
-            <input
-              disabled
+            <input disabled
               onBlur={(e) => onBlur(e)}
               defaultValue={formData.name}
               type='text'
@@ -169,9 +166,9 @@ const UserProfileSettings = () => {
                 <p>Genre Preferences</p>
                 <div className='genres flex gap-5 ml-5 mt-2'>
                   {formData.genrePreferences.map((genre) => (
-                    <p className="py-2 px-4 bg-zinc-400 rounded-lg" key={genre}>{genre}</p>
+                    <p className="py-2 px-4 border-blue-400 text-blue-400 border-2 bg-transparent rounded-lg" key={genre}>{genre}</p>
                   ))}
-                  <p className="py-2 px-4 text-blue-400">+ Add</p>
+                  <p className="cursor-pointer text-sm py-2 px-4 hover:text-blue-400">+ Add Genre</p>
                 </div>
               </>
             )}
