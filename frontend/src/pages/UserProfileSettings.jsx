@@ -204,10 +204,10 @@ const UserProfileSettings = () => {
                 <div className='genres flex gap-5 mt-2 w-full px-5'>
                   {savedGenres.map((item,i) => {
                     if(item.isSelected){
-                      return <p onClick={()=>updateGenreOptions(i)} className="py-2 px-4 border-white text-white border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
+                      return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-white text-white border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
                     }
                     else{
-                      return <p onClick={()=>updateGenreOptions(i)} className="py-2 px-4 border-gray-500 text-gray-500 border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
+                      return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-gray-500 text-gray-500 border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
                     }
                     })}
                   {/* <p onClick={()=>{showGenreOptions()}} className="cursor-pointer text-blue-400 text-sm py-2 px-4 hover:text-white">+ Add Genre</p> */}
