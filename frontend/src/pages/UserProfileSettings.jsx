@@ -20,6 +20,14 @@ const UserProfileSettings = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading]= useState(false)
   const { user } = useSelector((state) => state.auth);
+  const [viewGenres, setViewGenres] = useState(false);
+
+  const [savedGenres, setSavedGenres] = useState([
+    {genre:'action',isSelected:false},
+    {genre:'adventure',isSelected:false},
+    {genre:'drama',isSelected:false},
+    {genre:'comedy',isSelected:false},
+  ])
 
  
   useEffect(() => {
@@ -42,7 +50,25 @@ const UserProfileSettings = () => {
       email: user?.email,
       genrePreferences: ["action", "comedy"],
     });
+
+    let tempGenrePreferences=["action", "comedy"];
+    if (tempGenrePreferences.length > 0) {
+      let temp = [...savedGenres]
+      for (let i = 0; i < tempGenrePreferences.length; i++) {
+        let genre = tempGenrePreferences[i].toLowerCase();
+        temp.find((item, i) => {
+          if (item.genre === genre) {
+            temp[i]["isSelected"] = true;
+            return true;
+          }
+          return false;
+        });
+      }
+      setSavedGenres(temp);
+      console.log('savedGenres:', savedGenres)
+    }
   }, [user, navigate]);
+  
 
   const onBlur = (e) => {
     setFormData((prevState) => ({
@@ -78,6 +104,17 @@ const UserProfileSettings = () => {
   const changeUserDetails = () => {
     //empty for now
   };
+
+  const updateGenreOptions = (index) => {
+    let tempGenres = null;
+    tempGenres = [...savedGenres];
+    if(tempGenres[index]["isSelected"]){
+      tempGenres[index]["isSelected"] = false;
+    }else{
+      tempGenres[index]["isSelected"] = true;
+    }
+    setSavedGenres(tempGenres);
+  }
 
   if(isLoading){
     return <Spinner label="Redirecting back to login." />
@@ -161,14 +198,20 @@ const UserProfileSettings = () => {
             </div>
           )}
           <div className='mb-5'>
-            {formData.genrePreferences && (
+            {savedGenres && (
               <>
                 <p>Genre Preferences</p>
-                <div className='genres flex gap-5 ml-5 mt-2'>
-                  {formData.genrePreferences.map((genre) => (
-                    <p className="py-2 px-4 border-white text-white border-2 bg-transparent rounded-lg" key={genre}>{genre}</p>
-                  ))}
-                  <p className="cursor-pointer text-blue-400 text-sm py-2 px-4 hover:text-white">+ Add Genre</p>
+                <div className='genres flex gap-5 mt-2 bg-slate-400 w-full px-5'>
+                  {savedGenres.map((item,i) => {
+                    console.log('item:', item)
+                    if(item.isSelected){
+                      return <p onClick={()=>updateGenreOptions(i)} className="py-2 px-4 border-white text-white border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
+                    }
+                    else{
+                      return <p onClick={()=>updateGenreOptions(i)} className="py-2 px-4 border-gray-500 text-gray-500 border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
+                    }
+                    })}
+                  {/* <p onClick={()=>{showGenreOptions()}} className="cursor-pointer text-blue-400 text-sm py-2 px-4 hover:text-white">+ Add Genre</p> */}
                 </div>
               </>
             )}
