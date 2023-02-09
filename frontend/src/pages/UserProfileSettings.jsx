@@ -197,13 +197,12 @@ const UserProfileSettings = () => {
               </div>
             </div>
           )}
-          <div className='mb-5'>
+          <div className='mb-20'>
             {savedGenres && (
               <>
                 <p>Genre Preferences</p>
-                <div className='genres flex gap-5 mt-2 bg-slate-400 w-full px-5'>
+                <div className='genres flex gap-5 mt-2 w-full px-5'>
                   {savedGenres.map((item,i) => {
-                    console.log('item:', item)
                     if(item.isSelected){
                       return <p onClick={()=>updateGenreOptions(i)} className="py-2 px-4 border-white text-white border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
                     }
@@ -220,7 +219,7 @@ const UserProfileSettings = () => {
           <div className='w-full text-right'>
             <button
               disabled={msg}
-              hidden={!clickedResetPassword}
+              // hidden={!clickedResetPassword}
               onClick={() => {
                 clickedResetPassword ? changePassword() : changeUserDetails();
               }}
