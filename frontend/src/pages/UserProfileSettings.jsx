@@ -27,6 +27,10 @@ const UserProfileSettings = () => {
     {genre:'adventure',isSelected:false},
     {genre:'drama',isSelected:false},
     {genre:'comedy',isSelected:false},
+    {genre:'documentation',isSelected:false},
+    {genre:'romance',isSelected:false},
+    {genre:'thriller',isSelected:false},
+    {genre:'horror',isSelected:false},
   ])
 
  
@@ -102,7 +106,7 @@ const UserProfileSettings = () => {
   };
 
   const changeUserDetails = () => {
-    //empty for now
+    console.log('hit!')
   };
 
   const updateGenreOptions = (index) => {
@@ -201,16 +205,18 @@ const UserProfileSettings = () => {
             {savedGenres && (
               <>
                 <p>Genre Preferences</p>
-                <div className='genres flex gap-5 mt-2 w-full px-5'>
+                <div className={`genres flex flex-wrap gap-5 mt-2 w-full px-5 ${clickedResetPassword ? 'opacity-10':''}`}>
                   {savedGenres.map((item,i) => {
                     if(item.isSelected){
                       return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-white text-white border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
                     }
                     else{
-                      return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-gray-500 text-gray-500 border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
+                      if(viewGenres){
+                        return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-gray-500 text-gray-500 border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
+                      }
                     }
                     })}
-                  {/* <p onClick={()=>{showGenreOptions()}} className="cursor-pointer text-blue-400 text-sm py-2 px-4 hover:text-white">+ Add Genre</p> */}
+                  <p onClick={()=>{setViewGenres(!viewGenres)}} className={`cursor-pointer rounded-lg text-sm py-2 px-4 hover:text-white ${viewGenres ? 'bg-blue-400 text-white':'text-blue-400'}`}>{viewGenres ? 'Confirm' : '+ Add Genre'}</p>
                 </div>
               </>
             )}
@@ -218,12 +224,12 @@ const UserProfileSettings = () => {
           </div>
           <div className='w-full text-right'>
             <button
-              disabled={msg}
+              disabled={msg || viewGenres}
               // hidden={!clickedResetPassword}
               onClick={() => {
                 clickedResetPassword ? changePassword() : changeUserDetails();
               }}
-              className='px-6'
+              className={`px-6 ${viewGenres ? 'opacity-25' : ''}`}
             >
               {clickedResetPassword ? "Update Password" : "Save Changes"}
             </button>
