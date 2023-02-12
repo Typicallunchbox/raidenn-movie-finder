@@ -2,9 +2,10 @@ import { React, useEffect, useState } from "react";
 import Spinner from '../components/Spinner';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset, updatePassword } from "../features/auth/authSlice";
+import { logout, reset, updatePassword, getMe, updateProfile } from "../features/auth/authSlice";
 import { reset as resetMovies } from "../features/movies/movieSlice";
 import { reset as resetWatchlist } from "../features/watchlists/watchlistSlice";
+
 
 const inputStyling =
   "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full px-2.5 py-3";
@@ -69,8 +70,7 @@ const UserProfileSettings = () => {
         });
       }
       setSavedGenres(temp);
-      console.log('savedGenres:', savedGenres)
-    }
+     }
   }, [user, navigate]);
   
 
@@ -106,7 +106,26 @@ const UserProfileSettings = () => {
   };
 
   const changeUserDetails = () => {
-    console.log('hit!')
+    let payload = {}
+
+    if(formData.name !== ''){
+      payload.name = formData.name
+    }
+
+    if (savedGenres.length > 0) {
+      let genresSelected = []
+      for (let i = 0; i < savedGenres.length; i++) {
+       let item = savedGenres[i]
+
+       if(item?.isSelected){
+        genresSelected.push(item.genre)
+       }
+      }
+      payload.genresPref = genresSelected;
+    }   
+    dispatch(updateProfile({
+      profile: payload
+    }));
   };
 
   const updateGenreOptions = (index) => {
@@ -134,7 +153,7 @@ const UserProfileSettings = () => {
         <div className='profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10'>
           <div className='mb-5'>
             <p>Username</p>
-            <input disabled
+            <input 
               onBlur={(e) => onBlur(e)}
               defaultValue={formData.name}
               type='text'
@@ -201,7 +220,7 @@ const UserProfileSettings = () => {
               </div>
             </div>
           )}
-          <div className='mb-20'>
+          {!clickedResetPassword && <div className='mb-20'>
             {savedGenres && (
               <>
                 <p>Genre Preferences</p>
@@ -215,13 +234,14 @@ const UserProfileSettings = () => {
                         return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-gray-500 text-gray-500 border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
                       }
                     }
+                    return true;
                     })}
                   <p onClick={()=>{setViewGenres(!viewGenres)}} className={`cursor-pointer rounded-lg text-sm py-2 px-4 hover:text-white ${viewGenres ? 'bg-blue-400 text-white':'text-blue-400'}`}>{viewGenres ? 'Confirm' : '+ Add Genre'}</p>
                 </div>
               </>
             )}
             {/* multi-select dropdown display div of all selected genres */}
-          </div>
+          </div>}
           <div className='w-full text-right'>
             <button
               disabled={msg || viewGenres}

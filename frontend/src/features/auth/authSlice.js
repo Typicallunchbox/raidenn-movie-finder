@@ -71,7 +71,8 @@ export const updateProfile = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       let user = JSON.parse(localStorage.getItem("user"));
-      return await authService.updateProfile(data, user);
+      console.log('user:', user);
+      return await authService.updateProfile(data, user.token);
     } catch (error) {
       const message =
         (error.response &&

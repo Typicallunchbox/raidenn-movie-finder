@@ -51,8 +51,13 @@ const getMe = async () => {
 }
 
 //getMe User
-const updateProfile = async (data) => {
-    const response = await axios.put(API_URL + 'me', data)
+const updateProfile = async (data, token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.put(API_URL + 'me', data, config)
     return response.data
 }
 
