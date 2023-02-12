@@ -45,8 +45,13 @@ const updatePassword = async (userData, token) => {
 }
 
 //getMe User
-const getMe = async () => {
-    const response = await axios.get(API_URL + 'me')
+const getMe = async (token) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    const response = await axios.get(API_URL + 'me', config)
     return response.data
 }
 

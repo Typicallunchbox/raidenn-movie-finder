@@ -49,22 +49,22 @@ export const login = createAsyncThunk(
   );
 
   //getMe info
-export const getMe = createAsyncThunk(
-  "auth/getMe",
-  async (user, thunkAPI) => {
-    try {
-      return await authService.getMe(user);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
+export const getMe = async (data) => {
+  try {
+    let user = JSON.parse(localStorage.getItem("user"));
+    let resp = await authService.getMe( user.token);
+    return resp;
+    console.log('INNER RE{S:',resp)
+  } catch (error) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return message;
   }
-);
+};
 
 export const updateProfile = createAsyncThunk(
   "auth/updateProfile",
@@ -225,7 +225,6 @@ export const authSlice = createSlice({
       //     state.isError = true
       //     state.message = action.payload
       // })
-
 
 
         .addCase(login.pending, (state) => {

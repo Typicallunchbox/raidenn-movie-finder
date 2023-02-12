@@ -49,18 +49,24 @@ const UserProfileSettings = () => {
     
       return;
     }
-    
-    setFormData({
-      name: user?.name,
-      email: user?.email,
-      genrePreferences: ["action", "comedy"],
-    });
+    let response = null;
+    const getUserProfile = async() => {
+       response = await getMe();
+       console.log('response:', response);
 
-    let tempGenrePreferences=["action", "comedy"];
-    if (tempGenrePreferences.length > 0) {
+       setFormData({
+        name: response.name,
+        email: user?.email,
+        genrePreferences: response.genrePreferences,
+      });
+    }
+    getUserProfile();
+    
+  
+    if (formData.genrePreferences.length > 0) {
       let temp = [...savedGenres]
-      for (let i = 0; i < tempGenrePreferences.length; i++) {
-        let genre = tempGenrePreferences[i].toLowerCase();
+      for (let i = 0; i < formData.genrePreferences.length; i++) {
+        let genre = formData.genrePreferences[i].toLowerCase();
         temp.find((item, i) => {
           if (item.genre === genre) {
             temp[i]["isSelected"] = true;

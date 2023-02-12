@@ -287,7 +287,16 @@ const updatePassword = asyncHandler(async (req, res) => {
 //@route    GET /api/users/me
 //@access   Private
 const getMe = asyncHandler(async (req, res) => {
-  res.status(200).json(req.user);
+  let user = req.user;
+  user._id = undefined;
+  // req.user.createdAt = undefined;
+  // req.user.updatedAt = undefined;
+  // req.user.securityQuestions = undefined;
+  res.status(200).json({
+    name : req.user.name,
+    email: req.user.email,
+    genrePreferences : req.user.genrePreferences
+  });
 });
 
 //Generate JWT
