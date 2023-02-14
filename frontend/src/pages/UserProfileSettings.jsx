@@ -20,7 +20,7 @@ const UserProfileSettings = () => {
   const [msg, setMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading]= useState(false)
-  const { user } = useSelector((state) => state.auth);
+  const { user, message } = useSelector((state) => state.auth);
   const [viewGenres, setViewGenres] = useState(false);
 
   const [savedGenres, setSavedGenres] = useState([
@@ -59,24 +59,26 @@ const UserProfileSettings = () => {
         email: user?.email,
         genrePreferences: response.genrePreferences,
       });
+
+      if (response.genrePreferences.length > 0) {
+        let temp = [...savedGenres]
+        for (let i = 0; i < response.genrePreferences.length; i++) {
+          let genre = response.genrePreferences[i].toLowerCase();
+          temp.find((item, i) => {
+            if (item.genre === genre) {
+              temp[i]["isSelected"] = true;
+              return true;
+            }
+            return false;
+          });
+        }
+        setSavedGenres(temp);
+       }
     }
     getUserProfile();
     
   
-    if (formData.genrePreferences.length > 0) {
-      let temp = [...savedGenres]
-      for (let i = 0; i < formData.genrePreferences.length; i++) {
-        let genre = formData.genrePreferences[i].toLowerCase();
-        temp.find((item, i) => {
-          if (item.genre === genre) {
-            temp[i]["isSelected"] = true;
-            return true;
-          }
-          return false;
-        });
-      }
-      setSavedGenres(temp);
-     }
+   
   }, [user, navigate]);
   
 
@@ -132,6 +134,12 @@ const UserProfileSettings = () => {
     dispatch(updateProfile({
       profile: payload
     }));
+
+    if(message?.status === 'OK'){
+      setMsg('Updated Profile!')
+      setTimeout(()=> {setMsg('')},5000)
+    }
+    console.log('response:', message);
   };
 
   const updateGenreOptions = (index) => {
@@ -255,13 +263,13 @@ const UserProfileSettings = () => {
               onClick={() => {
                 clickedResetPassword ? changePassword() : changeUserDetails();
               }}
-              className={`px-6 ${viewGenres ? 'opacity-25' : ''}`}
+              className={`px-6 bg-blue-400 ${viewGenres ? 'opacity-25' : ''}`}
             >
               {clickedResetPassword ? "Update Password" : "Save Changes"}
             </button>
+            <p className='text-sm pt-6 pl-2'>{msg}</p>
+            <p className='text-sm text-rose-500 pt-6 pl-2'>{errorMsg}</p>
           </div>
-          <p className='text-sm pt-6 pl-2'>{msg}</p>
-          <p className='text-sm text-rose-500 pt-6 pl-2'>{errorMsg}</p>
         </div>
       </div>
     </>
