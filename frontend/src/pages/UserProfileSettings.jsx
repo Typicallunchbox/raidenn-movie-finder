@@ -52,7 +52,6 @@ const UserProfileSettings = () => {
     let response = null;
     const getUserProfile = async() => {
        response = await getMe();
-       console.log('response:', response);
 
        setFormData({
         name: response.name,
@@ -76,9 +75,6 @@ const UserProfileSettings = () => {
        }
     }
     getUserProfile();
-    
-  
-   
   }, [user, navigate]);
   
 
@@ -139,17 +135,12 @@ const UserProfileSettings = () => {
       setMsg('Updated Profile!')
       setTimeout(()=> {setMsg('')},5000)
     }
-    console.log('response:', message);
   };
 
   const updateGenreOptions = (index) => {
     let tempGenres = null;
     tempGenres = [...savedGenres];
-    if(tempGenres[index]["isSelected"]){
-      tempGenres[index]["isSelected"] = false;
-    }else{
-      tempGenres[index]["isSelected"] = true;
-    }
+    tempGenres[index]["isSelected"] = !tempGenres[index]["isSelected"]
     setSavedGenres(tempGenres);
   }
 
@@ -209,6 +200,7 @@ const UserProfileSettings = () => {
               <p
                 onClick={() => {
                   setClickedResetPassword(!clickedResetPassword);
+                  setViewGenres(false);
                   setErrorMsg("");
                 }}
                 disabled={clickedResetPassword}
