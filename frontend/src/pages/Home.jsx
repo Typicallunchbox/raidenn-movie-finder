@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { addMovies } from '../features/movies/movieSlice';
 import {GetPopularMovies, GetMoviesByTag} from "../providers/moviesProvider";
 import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
+import GenrePreferencesBar from '../components/GenrePreferencesBar/GenrePreferencesBar';
 
 
 const Home = () => {
@@ -47,7 +48,8 @@ const Home = () => {
   }
 
   return (
-    <div className="home-page"> 
+    <div className="home-page">
+      <GenrePreferencesBar movies={movies} /> 
       <div className="container">
         {user && <div className="catalogue mt-20 md:mt-52">
           <ItemCatalogueList movies={movies} />
