@@ -111,8 +111,6 @@ const search = () => {
       });
     return;
   }
-  console.log('hit2')
-  console.log('genre:', genre)
 
   axios
     .get(

@@ -1,17 +1,16 @@
 .genre-preferences-section {
     .inner-container {
-      display: flex;
-      background-color: gray;
-      overflow-y: scroll;
-      gap: 2%;
-      cursor: grab;
-      overflow: auto;
+      // display: flex;
+      // background-color: gray;
+      // gap: 2px;
+      // cursor: grab;
+      // overflow: auto;
     }
     img {
-      width: 200px;
-      margin-bottom: 20px;
-      transition: all 400ms ease;
-      max-width: fit-content;
+      // width: 200px;
+      // margin-bottom: 20px;
+      // transition: all 400ms ease;
+      // max-width: fit-content;
     }
 
     img:hover{
@@ -19,14 +18,14 @@
     }
   }
   
-  @media (max-width: 600px) {
-    .item-catalogue-list-container{
-      .inner-container {
-        gap: 6% !important;
-      }
-      img {
-        width: 150px !important;
-      }
-    }
-  }
+  // @media (max-width: 600px) {
+  //   .item-catalogue-list-container{
+  //     .inner-container {
+  //       gap: 6% !important;
+  //     }
+  //     img {
+  //       width: 150px !important;
+  //     }
+  //   }
+  // }
   
