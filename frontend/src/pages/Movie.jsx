@@ -9,6 +9,7 @@ import { AiFillEye, AiFillPlusCircle, AiOutlineCloseCircle } from "react-icons/a
 import Rating from "react-rating";
 import {createComment, deleteComment, getCommentsByMovieId,} from "../features/comments/commentSlice";
 import { banishComment } from "../features/comments/commentSlice";
+import { GetMovieById, GetMovieVideosById, GetMovieImagesById, GetMovieCreditsById } from "../providers/moviesProvider";
 import { getWantToWatchRecord, updateWatchlistRecord,} from "../features/watchlists/watchlistSlice";
 import { reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
@@ -105,76 +106,63 @@ const Movie = () => {
 
   useEffect(() => {
     if (!movie) {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
-        )
-        .then((resp) => {
-          console.log('resp:',resp.data);
-          setMovie(resp.data);
-        });
+      const getMovieInfo = async() => {
+        const movieData =  await GetMovieById(id);
+        const imagesData =  await GetMovieImagesById(id);
+        const videoData =  await GetMovieVideosById(id);
+        const creditsData =  await GetMovieCreditsById(id);
 
-      axios
-        .get(
-          `https://api.themoviedb.org/3/movie/${id}/videos?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
-        )
-        .then((resp) => {
-          let res = resp.data.results;
-          let temp = [];
 
-          if (res.length > 0) {
-            for (let index = 0; index < res.length; index++) {
-              const element = res[index];
+        //IMAGES
+        let images = imagesData.backdrops;
+        let imagesArray = [];
 
-              if (element.type === "Trailer") {
-                temp.push(element);
-              }
+        if (images.length > 0) {
+          for (let index = 0; index < images.length; index++) {
+            const element = images[index];
+
+            if (imagesArray.length === 6) {
+              break;
             }
-            setMovieVideos(temp);
+            imagesArray.push(element);
           }
-        });
+        }
 
-      axios
-        .get(
-          `https://api.themoviedb.org/3/movie/${id}/images?api_key=120fe4d587d5f86c44f0a6e599f01734`
-        )
-        .then((resp) => {
-          let res = resp.data;
-          let temp = [];
-
-          if (res.backdrops.length > 0) {
-            for (let index = 0; index < res.backdrops.length; index++) {
-              const element = res.backdrops[index];
-
-              if (temp.length === 6) {
-                break;
-              }
-              temp.push(element);
+        //VIDEOS
+        let videos = videoData;
+        let videosArray = [];
+        if (videos.length > 0) {
+          for (let index = 0; index < videos.length; index++) {
+            const element = videos[index];
+            if (element.type === "Trailer") {
+              videosArray.push(element);
             }
-            setMovieImages(temp);
           }
-        });
+        }
 
-      axios
-        .get(
-          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=120fe4d587d5f86c44f0a6e599f01734`
-        )
-        .then((resp) => {
-          let res = resp.data;
-          let temp = [];
+        //CAST
+        let cast = creditsData.cast;
+        let castArray = [];
 
-          if (res.cast.length > 0) {
-            for (let index = 0; index < res.cast.length; index++) {
-              const element = res.cast[index];
+        if (cast.length > 0) {
+          for (let index = 0; index < cast.length; index++) {
+            const element = cast[index];
 
-              if (temp.length === 6) {
-                break;
-              }
-              temp.push(element);
+            if (castArray.length === 6) {
+              break;
             }
-            setMovieCast(temp);
+            castArray.push(element);
           }
-        });
+        }
+
+        //Set Data
+        setMovie(movieData);
+        setMovieVideos(videosArray);
+        setMovieImages(imagesArray);
+        setMovieCast(castArray);
+      }
+
+      getMovieInfo();
     }
   }, [id, movie]);
 

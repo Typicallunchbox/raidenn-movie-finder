@@ -117,7 +117,6 @@ const ForgotPassword = () => {
               placeholder='Answer'
               onKeyDown={(e) => {
                 if (e.code === "Enter") {
-                  console.log('name:', e.target.name, e.target.value, index)
                   onBlur(e.target.name, e.target.value, index)
                   onSubmitAnswers(e);
                 }

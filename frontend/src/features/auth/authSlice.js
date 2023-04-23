@@ -54,7 +54,6 @@ export const getMe = async (data) => {
     let user = JSON.parse(localStorage.getItem("user"));
     let resp = await authService.getMe( user.token);
     return resp;
-    console.log('INNER RE{S:',resp)
   } catch (error) {
     const message =
       (error.response &&
@@ -71,7 +70,6 @@ export const updateProfile = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       let user = JSON.parse(localStorage.getItem("user"));
-      console.log('user:', user);
       return await authService.updateProfile(data, user.token);
     } catch (error) {
       const message =

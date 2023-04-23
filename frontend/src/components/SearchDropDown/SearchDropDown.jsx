@@ -33,7 +33,6 @@ useEffect(() => {
   .get(`https://api.themoviedb.org/3/genre/movie/list?api_key=120fe4d587d5f86c44f0a6e599f01734`)
   .then((resp) => {
     const result = resp.data.genres;
-    console.log('resp:', resp)
     if(result.length > 0){
       let tempArray = [];
       for (let index = 0; index < result.length; index++) {
@@ -80,10 +79,7 @@ useEffect(() => {
 
 
 const search = () => {
-  console.log('values:', searchText, releasedYear, genre)
-
   if(searchText === '' && releasedYear === '' && genre === ''){return}
-  console.log('hit1')
 
   if(releasedYear !== ''){
     let date =  new Date().getFullYear();
