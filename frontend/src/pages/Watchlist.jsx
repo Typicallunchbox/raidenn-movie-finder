@@ -61,7 +61,7 @@ const Watchlist = () => {
           <div className='wantToWatch'>
             {wantToWatch && (
               <div className='catalogue'>
-                <ItemCatalogueList allowDeleteWantToWatch={true} allowDeleteWatched={false} movies={wantToWatch} />
+                <ItemCatalogueList deleteOption allowDeleteWantToWatch={true} allowDeleteWatched={false} movies={wantToWatch} />
               </div>
             )}
           </div>}
@@ -69,7 +69,7 @@ const Watchlist = () => {
           <div className='watched'>
             {watched && (
               <div className='catalogue'>
-                <ItemCatalogueList allowDeleteWatched={true} allowDeleteWantToWatch={false} movies={watched} />
+                <ItemCatalogueList deleteOption allowDeleteWatched={true} allowDeleteWantToWatch={false} movies={watched} />
               </div>
             )}
           </div>}

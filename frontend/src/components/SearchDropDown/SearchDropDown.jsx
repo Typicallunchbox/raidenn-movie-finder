@@ -6,6 +6,8 @@ import axios from "axios";
 import './SearchDropDown.scss';
 import { validYear } from '../../static/regex';
 import { DropdownSelect } from "../../components/DropdownSelect/index";
+import { GetGenreOptions } from '../../providers/moviesProvider';
+import { searchMovies } from '../../providers/moviesProvider';
 
 
 
@@ -27,24 +29,13 @@ const setTagState = (selectedTag) => {
   dispatch(addTag(selectedTag))
 }
 useEffect(() => {
-  console.log("HEY!");
-
-  axios
-  .get(`https://api.themoviedb.org/3/genre/movie/list?api_key=120fe4d587d5f86c44f0a6e599f01734`)
-  .then((resp) => {
-    const result = resp.data.genres;
-    if(result.length > 0){
-      let tempArray = [];
-      for (let index = 0; index < result.length; index++) {
-        const genre = result[index];
-        tempArray.push(genre.id)
-      }
-      //NEED THE IDS TO SEND WHEN REFERENCING BY GENRE
-      //MAKE SURE SORT BY GENRE IS NOT BUGGED
-      console.log('tempArray:', tempArray)
-      setGenres(tempArray);
+  const getGenres = async() => {
+    const genresData =  await GetGenreOptions();
+    if(genresData.length > 0){
+      setGenres(genresData);
     }
-  });
+  }
+  getGenres();
 }, [])
 useEffect(() => {
   let scrollLocation = null;
@@ -78,7 +69,7 @@ useEffect(() => {
 
 
 
-const search = () => {
+const search = async() => {
   if(searchText === '' && releasedYear === '' && genre === ''){return}
 
   if(releasedYear !== ''){
@@ -91,34 +82,38 @@ const search = () => {
     }
   }
 
-  props.trigger(false);
+  // props.trigger(false);
+  console.log('Genre!!!:', genre)
+  const searchResp = await searchMovies(searchText, releasedYear, genre);
+  console.log('searchResp:', searchResp)
+  
+  dispatch(addMovies(searchResp))
+  // if (searchText === "") {
+  //   axios
+  //     .get(
+  //       `https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
+  //         releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""
+  //       }${
+  //         genre !== "" ? `&with_genres=${genre}` : ""
+  //       }&language=en-US&page=1&include_adult=true`
+  //     )
+  //     .then((resp) => {
+  //       dispatch(addMovies(resp.data.results));
+  //     });
+  //   return;
+  // }
 
-  if (searchText === "") {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
-          releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""
-        }${
-          genre !== "" ? `&with_genres=${genre}` : ""
-        }&language=en-US&page=1&include_adult=false`
-      )
-      .then((resp) => {
-        dispatch(addMovies(resp.data.results));
-      });
-    return;
-  }
-
-  axios
-    .get(
-      `https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
-        searchText !== "" ? `&query=${searchText}` : `&query=''`
-      }${releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""}${
-        genre !== "" ? `&with_genres=${genre}` : ""
-      }&language=en-US&page=1&include_adult=false`
-    )
-    .then((resp) => {
-      dispatch(addMovies(resp.data.results));
-    });
+  // axios
+  //   .get(
+  //     `https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
+  //       searchText !== "" ? `&query=${searchText}` : `&query=''`
+  //     }${releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""}${
+  //       genre !== "" ? `&with_genres=${genre}` : ""
+  //     }&language=en-US&page=1&include_adult=true`
+  //   )
+  //   .then((resp) => {
+  //     dispatch(addMovies(resp.data.results));
+  //   });
 }
 
   return (
@@ -175,9 +170,11 @@ const search = () => {
                       />
                   </div>
                   <div className='genre w-full'>
+                    {/* //CONFIRM CHANGES MADE TO DROPDOWN DOES NOT EFFECT WHERE ELSE ITS IMPLEMENTED */}
                       <DropdownSelect
                         // clearValue(ADD TRIGGER)
-                        onSelect={(value) => setGenre(value)}
+                        value={genre}
+                        onSelect={(item) => setGenre(item.name)}
                         placeholder='Genre'
                         array={genres}
                       />
@@ -188,6 +185,7 @@ const search = () => {
                     onChange={(e) => {
                       setSearchText(e.target.value);
                     }}
+                    value={searchText}
                     onKeyDown={(e) => {
                       if (e.code === "Enter") {
                         search();
@@ -204,7 +202,7 @@ const search = () => {
                     onClick={() => {
                       setSearchText(''); 
                       setReleasedYear(''); 
-                      setGenre(['']);
+                      setGenre('');
                     }}
                     className='text-sm ml-1 text-gray-200 hover:text-gray-500 cursor-pointer px-4 mt-2'
                   >

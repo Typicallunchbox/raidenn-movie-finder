@@ -5,12 +5,12 @@ import { FaArrowDown } from "react-icons/fa";
 
 export const DropdownSelect = (props) => {
     const {placeholder, array} = props;
-    const [value, setValue] = useState(placeholder);
+    const [value, setValue] = useState(props.value || placeholder);
     const [open, setOpen] = useState(false)
 
-    const onOptionClicked = (string) => {
-        setValue(string);
-        props.onSelect(string);            
+    const onOptionClicked = (item) => {
+        setValue(item.name ? item.name : item);
+        props.onSelect(item);            
     }
 
     const onButton = () => {
@@ -27,10 +27,10 @@ export const DropdownSelect = (props) => {
             </div>
 
             {open &&<div className='content' onMouseLeave={() => setOpen(false)}>
-                {array && array.map((string) => (
+                {array && array.map((item) => (
                    <div
-                    onClick={() => {onOptionClicked(string); setOpen(false)}} 
-                    key={string}>{string}
+                    onClick={() => {onOptionClicked(item); setOpen(false)}} 
+                    key={item.id ? item.id : item }>{item.name ? item.name : item}
                    </div>
                 ))}
             </div>}

@@ -129,7 +129,7 @@ export const GetMoviesByPhrase = async(phrase) => {
  export const GetMovieImagesById = async(id) => {
     return await axios.get(`https://api.themoviedb.org/3/movie/${id}/images?api_key=120fe4d587d5f86c44f0a6e599f01734`)
     .then((resp) => {
-        return resp.data  ? resp.data : null;
+        return resp.data  ? resp.data : [];
     });
 }
 
@@ -141,7 +141,7 @@ export const GetMoviesByPhrase = async(phrase) => {
  export const GetMovieVideosById = async(id) => {
     return await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`)
     .then((resp) => {
-        return resp.data.results.length > 0 ? resp.data.results : null;
+        return resp.data.results.length > 0 ? resp.data.results : [];
     });
 }
 
@@ -153,6 +153,56 @@ export const GetMoviesByPhrase = async(phrase) => {
 export const GetMovieCreditsById = async(id) => {
     return await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=120fe4d587d5f86c44f0a6e599f01734`)
     .then((resp) => {
-        return resp.data ? resp.data : null;
+        return resp.data ? resp.data : [];
     });
+}
+
+/**
+ * Get Popular Movies
+ * @param {string} phrase
+ * @returns {Promise<object>}
+ */
+export const GetGenreOptions = async(id) => {
+    return await axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=120fe4d587d5f86c44f0a6e599f01734`)
+    .then((resp) => {
+        console.log('genres:', resp)
+        return resp.data && resp.data.genres ? resp.data.genres : [];
+    });
+}
+
+/**
+ * Get Searched Movies
+ * @param {string} searchText
+ * @param {string} releasedYear
+ * @param {string} genre
+ * @returns {Promise<object>}
+ */
+export const searchMovies = async(searchText = "", releasedYear, genre) => {
+    if (searchText === "") {
+        return axios
+          .get(
+            `https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
+              releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""
+            }${
+              genre !== "" ? `&with_genres=${genre}` : ""
+            }&language=en-US&page=1&include_adult=false`
+          )
+          .then((resp) => {
+            const results = resp.data.results;
+            return results.length > 0 ? results.filter(movie => movie.backdrop_path) : [];
+          });
+      }
+    
+      return axios
+        .get(
+          `https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
+            searchText !== "" ? `&query=${searchText}` : `&query=''`
+          }${releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""}${
+            genre !== "" ? `&with_genres=${genre}` : ""
+          }&language=en-US&page=1&include_adult=false`
+        )
+        .then((resp) => {
+            const results = resp.data.results;
+            return results.length > 0 ? results.filter(movie => movie.backdrop_path) : [];
+        });
 }
