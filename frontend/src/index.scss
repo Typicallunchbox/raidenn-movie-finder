@@ -174,11 +174,12 @@ h3 {
 
     .options-container-btn{
       overflow: hidden;
-      width: 100px;
+      width: 80px;
       height: 35px;
       padding: 5px;
       background-color: var(--raidenn-white);
       margin: 0 0 0 auto;
+      transition: width 1s;
       position: relative;
   
       .inner-container{
@@ -187,23 +188,23 @@ h3 {
         border-radius: 2px;
         background: transparent;
         margin: 0 0 0 auto;
-        // transition: width 1s;
+        transition: width 1s;
         overflow: hidden;
         text-align: center;
   
         p{
-          opacity: .85;
+          opacity: .8;
           color: var(--raidenn-black);
           transition: opacity 0.4s ease-in;
         }
       }
 
-      // .inner-container.is-open{
-      //   width: 100%;
-      //   p{
-      //     opacity: 1;
-      //   }
-      // }
+      .inner-container.is-open{
+        width: 100%;
+        // p{
+        //   opacity: 1;
+        // }
+      }
 
       video{
         transition: opacity 1s;
@@ -252,6 +253,7 @@ h3 {
   .options-block:hover{
     .options-container-btn{
       cursor: pointer;
+      width: 100px;
 
       .inner-container{
         width: 100%;
