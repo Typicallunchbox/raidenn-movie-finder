@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { BiStar } from "react-icons/bi";
@@ -331,14 +330,6 @@ const Movie = () => {
       )}
     </div>
   );
-
-  // const genreSearch = (genre) => {
-  //   if(genre){
-  //       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&with_genres=${genre}&language=en-US&page=1`)
-  //     .then((resp) => {
-  //     });
-  //   }
-  // }
 
   return (
     <>
