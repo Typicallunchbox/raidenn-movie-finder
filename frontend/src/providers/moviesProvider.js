@@ -178,14 +178,16 @@ export const GetGenreOptions = async(id) => {
  * @returns {Promise<object>}
  */
 export const searchMovies = async(searchText = "", releasedYear, genre) => {
+    console.log("search props:", searchText, releasedYear, genre);
     if (searchText === "") {
+        let url = `https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734`;
+        url += releasedYear !== "" ?`&primary_release_year=${releasedYear}` : "";
+        url += genre !== "" ? `&with_genres=${genre}` : "";
+        url += '&language=en-US&page=1&include_adult=false'
+        console.log('URL:', url);
         return axios
           .get(
-            `https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
-              releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""
-            }${
-              genre !== "" ? `&with_genres=${genre}` : ""
-            }&language=en-US&page=1&include_adult=false`
+            url
           )
           .then((resp) => {
             const results = resp.data.results;

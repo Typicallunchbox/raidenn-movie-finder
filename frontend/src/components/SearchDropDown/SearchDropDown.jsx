@@ -82,7 +82,7 @@ const search = async() => {
   }
 
   // props.trigger(false);
-  const searchResp = await searchMovies(searchText, releasedYear, genre);
+  const searchResp = await searchMovies(searchText, releasedYear, genre?.id);
   dispatch(addMovies(searchResp))
 }
 
@@ -143,8 +143,8 @@ const search = async() => {
                     {/* //CONFIRM CHANGES MADE TO DROPDOWN DOES NOT EFFECT WHERE ELSE ITS IMPLEMENTED */}
                       <DropdownSelect
                         // clearValue(ADD TRIGGER)
-                        value={genre}
-                        onSelect={(item) => setGenre(item.name)}
+                        value={genre?.name || ""}
+                        onSelect={(item) => setGenre(item)}
                         placeholder='Genre'
                         array={genres}
                       />

@@ -1,11 +1,11 @@
 import './style.scss'
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { FaArrowDown } from "react-icons/fa";
 
 
 export const DropdownSelect = (props) => {
     const {placeholder, array} = props;
-    const [value, setValue] = useState(props.value || placeholder);
+    const [value, setValue] = useState(props.value);
     const [open, setOpen] = useState(false)
 
     const onOptionClicked = (item) => {
@@ -17,16 +17,21 @@ export const DropdownSelect = (props) => {
         setOpen((prevOpen) => !prevOpen);
     }
 
+    useEffect(() => {
+        setValue(props.value);
+    }, [props.value])
+    
+
     return (
         <div className='wrapper text-left'>
             <div className='flex relative'  onClick={() => {onButton()}}>
-                <div className={`select ${value === placeholder ? 'text-neutral-400': 'text-slate-50'}`}>{value}</div>
+                <div className={`select ${value === "" ? 'text-neutral-400': 'text-slate-50'}`}>{value || placeholder}</div>
                 <p className='b-text-colour absolute right-4 top-2/4 -translate-y-2/4 hover:cursor-pointer '>
                             <FaArrowDown />
                 </p>
             </div>
 
-            {open &&<div className='content' onMouseLeave={() => setOpen(false)}>
+            {open && <div className='content' onMouseLeave={() => setOpen(false)}>
                 {array && array.map((item) => (
                    <div
                     onClick={() => {onOptionClicked(item); setOpen(false)}} 
