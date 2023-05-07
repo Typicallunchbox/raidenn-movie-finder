@@ -23,15 +23,15 @@ const Home = () => {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 5
+      items: 6
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3
+      items: 6
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2
+      items: 3
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -82,12 +82,12 @@ const Home = () => {
       {/* <GenrePreferencesBar movies={movies} />  */}
       <div className="genre-preferences-section">
         <div className="inner-container">
+          <h3 className='pl-32 text-lg'>Your Recommended</h3>
         <Carousel 
         responsive={responsive}
         infinite={true}
         autoPlay={true}
-        autoPlaySpeed={4000}
-        keyBoardControl={true}
+        autoPlaySpeed={8000}
         >
           {movies && movies.map((movie) => (
               <div key={movie.id ? movie.id : movie.movie_id} className="relative">
@@ -96,7 +96,7 @@ const Home = () => {
                 </Link>
               </div>
           ))}
-        </Carousel>;
+        </Carousel>
         </div>
       </div>
       <div className="container">

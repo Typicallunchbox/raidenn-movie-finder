@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout, reset, updatePassword, getMe, updateProfile } from "../features/auth/authSlice";
 import { reset as resetMovies } from "../features/movies/movieSlice";
 import { reset as resetWatchlist } from "../features/watchlists/watchlistSlice";
+import { GetGenreOptions } from "../providers/moviesProvider";
 
 
 const inputStyling =
@@ -22,18 +23,8 @@ const UserProfileSettings = () => {
   const [isLoading, setIsLoading]= useState(false)
   const { user, message } = useSelector((state) => state.auth);
   const [viewGenres, setViewGenres] = useState(false);
-
-  const [savedGenres, setSavedGenres] = useState([
-    {genre:'action',isSelected:false},
-    {genre:'adventure',isSelected:false},
-    {genre:'drama',isSelected:false},
-    {genre:'comedy',isSelected:false},
-    {genre:'documentation',isSelected:false},
-    {genre:'romance',isSelected:false},
-    {genre:'thriller',isSelected:false},
-    {genre:'horror',isSelected:false},
-  ])
-
+  const [savedGenres, setSavedGenres] = useState([]);
+  const [genreOptions, setGenreOptions] = useState([]);
  
   useEffect(() => {
     const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -59,19 +50,24 @@ const UserProfileSettings = () => {
         genrePreferences: response.genrePreferences,
       });
 
+      const genreOptions =  await GetGenreOptions();
+      if(genreOptions.length > 0){
+         let temp = genreOptions.map(obj => ({ ...obj, isSelected: false }))
+         setGenreOptions(temp);
+      }
+
       if (response.genrePreferences.length > 0) {
-        let temp = [...savedGenres]
+        let temp = [...genreOptions]
         for (let i = 0; i < response.genrePreferences.length; i++) {
-          let genre = response.genrePreferences[i].toLowerCase();
-          temp.find((item, i) => {
-            if (item.genre === genre) {
-              temp[i]["isSelected"] = true;
-              return true;
-            }
-            return false;
-          });
+          let genre = response.genrePreferences[i];
+
+          for (let index = 0; index < temp.length; index++) {
+            const item = temp[index];
+            if(item.name === genre.name){temp[i]["isSelected"] = true; break;}
+            else{temp[i]["isSelected"] = false;}
+          }
         }
-        setSavedGenres(temp);
+        setGenreOptions(temp);
        }
     }
     getUserProfile();
@@ -118,12 +114,11 @@ const UserProfileSettings = () => {
 
     if (savedGenres.length > 0) {
       let genresSelected = []
-      for (let i = 0; i < savedGenres.length; i++) {
-       let item = savedGenres[i]
-
-       if(item?.isSelected){
-        genresSelected.push(item.genre)
-       }
+     
+      genresSelected = savedGenres.filter(genre => genre.isSelected === true);
+      for (let index = 0; index < genresSelected.length; index++) {
+        const genre = genresSelected[index];
+        delete genre.isSelected;
       }
       payload.genresPref = genresSelected;
     }   
@@ -139,7 +134,7 @@ const UserProfileSettings = () => {
 
   const updateGenreOptions = (index) => {
     let tempGenres = null;
-    tempGenres = [...savedGenres];
+    tempGenres = [...genreOptions];
     tempGenres[index]["isSelected"] = !tempGenres[index]["isSelected"]
     setSavedGenres(tempGenres);
   }
@@ -227,17 +222,17 @@ const UserProfileSettings = () => {
             </div>
           )}
           {!clickedResetPassword && <div className='mb-20'>
-            {savedGenres && (
+            {genreOptions && (
               <>
                 <p>Genre Preferences</p>
                 <div className={`genres flex flex-wrap gap-5 mt-2 w-full px-5 ${clickedResetPassword ? 'opacity-10':''}`}>
-                  {savedGenres.map((item,i) => {
+                  {genreOptions.map((item,i) => {
                     if(item.isSelected){
-                      return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-white text-white border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
+                      return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-white text-white border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.id}>{item.name}</p>
                     }
                     else{
                       if(viewGenres){
-                        return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-gray-500 text-gray-500 border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.genre}>{item.genre}</p>
+                        return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-gray-500 text-gray-500 border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.id}>{item.name}</p>
                       }
                     }
                     return true;
