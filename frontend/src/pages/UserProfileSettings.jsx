@@ -114,20 +114,19 @@ const UserProfileSettings = () => {
 
     if (savedGenres.length > 0) {
       let genresSelected = []
-     
-      genresSelected = savedGenres.filter(genre => genre.isSelected === true);
-      for (let index = 0; index < genresSelected.length; index++) {
-        const genre = genresSelected[index];
-        delete genre.isSelected;
-      }
+      genresSelected = [...savedGenres.filter(genre => genre.isSelected === true)];
       payload.genresPref = genresSelected;
     }   
+
     dispatch(updateProfile({
       profile: payload
     }));
 
     if(message?.status === 'OK'){
       setMsg('Updated Profile!')
+      setTimeout(()=> {setMsg('')},5000)
+    }else{
+      setMsg('Something went wrong :(')
       setTimeout(()=> {setMsg('')},5000)
     }
   };
