@@ -125,7 +125,9 @@ const UserProfileSettings = () => {
     if(message?.status === 'OK'){
       setMsg('Updated Profile!')
       setTimeout(()=> {setMsg('')},5000)
-    }else{
+    }
+    //*BUG: Hits else even though update was success
+    else{
       setMsg('Something went wrong :(')
       setTimeout(()=> {setMsg('')},5000)
     }

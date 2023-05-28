@@ -8,7 +8,7 @@ import { AiFillEye, AiFillPlusCircle, AiOutlineCloseCircle } from "react-icons/a
 import Rating from "react-rating";
 import {createComment, deleteComment, getCommentsByMovieId,} from "../features/comments/commentSlice";
 import { banishComment } from "../features/comments/commentSlice";
-import { GetMovieById, GetMovieVideosById, GetMovieImagesById, GetMovieCreditsById } from "../providers/moviesProvider";
+import { GetMovieById, GetMovieVideosById, GetMovieImagesById, GetMovieCreditsById, GetMoviesByGenre } from "../providers/moviesProvider";
 import { getWantToWatchRecord, updateWatchlistRecord,} from "../features/watchlists/watchlistSlice";
 import { reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
@@ -31,6 +31,7 @@ const Movie = () => {
   const [commentErr, setCommentErr] = useState("");
   const [movie, setMovie] = useState(null);
   const [movieAddedPrompt, setMovieAddedPrompt] = useState('');
+  const [movieDescription, setMovieDescription] = useState('');
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
@@ -111,6 +112,7 @@ const Movie = () => {
         const videoData =  await GetMovieVideosById(id);
         const creditsData =  await GetMovieCreditsById(id);
 
+        setMovieDescription(movieData?.overview || '');
 
         //IMAGES
         let images = imagesData.backdrops;
@@ -436,6 +438,12 @@ const Movie = () => {
                   ></iframe>
                 </div>
               )}
+          {movieDescription && 
+          <div className="text-left mt-4 px-4 flex items-baseline">
+            <h2 className="text-lg b-text-colour p-4">Overview:</h2>
+            <p>{movieDescription}</p>
+          </div>
+          }
             </div>
           </div>
           <div className='view-more-header ml-6 md:m-auto lg:m-auto'>

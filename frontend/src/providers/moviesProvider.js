@@ -158,6 +158,18 @@ export const GetMovieCreditsById = async(id) => {
 }
 
 /**
+ * Get Movies By Genre
+ * @param {string} phrase
+ * @returns {Promise}
+ */
+export const GetMoviesByGenre = async(id) => {
+    return await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&with_genres=${id}`)
+    .then((resp) => {
+        return resp.data ? resp.data : [];
+    });
+}
+
+/**
  * Get Popular Movies
  * @param {string} phrase
  * @returns {Promise<object>}

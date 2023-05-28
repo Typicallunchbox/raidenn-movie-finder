@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import { React, useEffect, useState } from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import { addMovies } from '../features/movies/movieSlice';
-import {GetPopularMovies, GetMoviesByTag} from "../providers/moviesProvider";
+import {GetPopularMovies, GetMoviesByTag, GetMoviesByGenre} from "../providers/moviesProvider";
 import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
 import GenrePreferencesBar from '../components/GenrePreferencesBar/GenrePreferencesBar';
 import {Link} from 'react-router-dom';
@@ -16,6 +16,7 @@ const Home = () => {
   const dispatch = useDispatch()
   const {user} = useSelector((state) => state.auth)
   const {tag, movies} = useSelector((state) => state.movies) 
+  const [recommendedMovies, setRecommendedMovies] = useState([]) 
   const [isLoading, setIsLoading] = useState(false);
   const image_path = "https://image.tmdb.org/t/p/original";
 
@@ -49,6 +50,8 @@ const Home = () => {
     if(!user){
       navigate('/login')
     }
+    setRecommendedMovies([]);
+
   }, [user, navigate, dispatch])
 
   useEffect(() => {
@@ -59,6 +62,12 @@ const Home = () => {
       setTimeout(() => {
         setIsLoading(false);
       }, 500); 
+      
+      if(user && user?.genrePreferences.length > 0 && recommendedMovies.length == 0){  
+        const genre =  user.genrePreferences[Math.floor(Math.random() *  user.genrePreferences.length)];
+        const recommended =  await GetMoviesByGenre(genre.id);
+        setRecommendedMovies(recommended.results);
+      }
     }
 
     async function setMoviesByTag(){
@@ -89,7 +98,7 @@ const Home = () => {
         autoPlay={true}
         autoPlaySpeed={8000}
         >
-          {movies && movies.map((movie) => (
+          {recommendedMovies && recommendedMovies.map((movie) => (
               <div key={movie.id ? movie.id : movie.movie_id} className="relative">
                 <Link to={`/movie/${movie.id ? movie.id : movie.movie_id}`}>
                   <img className="hover:cursor-pointer" onClick={() => viewMovie(movie.id ? movie.id : movie.movie_id)} src={movie.poster_path ? image_path + movie.poster_path : image_path + movie.movie_image} alt='movie-list'></img>
