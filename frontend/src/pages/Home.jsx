@@ -17,6 +17,7 @@ const Home = () => {
   const {user} = useSelector((state) => state.auth)
   const {tag, movies} = useSelector((state) => state.movies) 
   const [recommendedMovies, setRecommendedMovies] = useState([]) 
+  const [genreRecommened, setGenreRecommened] = useState('') 
   const [isLoading, setIsLoading] = useState(false);
   const image_path = "https://image.tmdb.org/t/p/original";
 
@@ -66,6 +67,7 @@ const Home = () => {
       if(user && user?.genrePreferences.length > 0 && recommendedMovies.length == 0){  
         const genre =  user.genrePreferences[Math.floor(Math.random() *  user.genrePreferences.length)];
         const recommended =  await GetMoviesByGenre(genre.id);
+        setGenreRecommened(genre.name);
         setRecommendedMovies(recommended.results);
       }
     }
@@ -90,15 +92,18 @@ const Home = () => {
     <div className="home-page">
       {/* <GenrePreferencesBar movies={movies} />  */}
       <div className="genre-preferences-section">
-        <div className="inner-container">
-          <h3 className='pl-32 text-lg'>Your Recommended</h3>
+        {recommendedMovies && <div className="inner-container">
+          <div className='flex items-baseline gap-4'>
+            <h3 className='pl-32 text-lg b-text-colour'>Recommended:</h3>
+            <p>{genreRecommened} Movies</p>
+          </div>
         <Carousel 
         responsive={responsive}
         infinite={true}
         autoPlay={true}
         autoPlaySpeed={8000}
         >
-          {recommendedMovies && recommendedMovies.map((movie) => (
+          {recommendedMovies.map((movie) => (
               <div key={movie.id ? movie.id : movie.movie_id} className="relative">
                 <Link to={`/movie/${movie.id ? movie.id : movie.movie_id}`}>
                   <img className="hover:cursor-pointer" onClick={() => viewMovie(movie.id ? movie.id : movie.movie_id)} src={movie.poster_path ? image_path + movie.poster_path : image_path + movie.movie_image} alt='movie-list'></img>
@@ -106,10 +111,11 @@ const Home = () => {
               </div>
           ))}
         </Carousel>
-        </div>
+        </div>}
       </div>
       <div className="container">
         {user && <div className="catalogue mt-20 md:mt-52">
+        <p className='pl-32 text-lg text-left mb-10'>Movie Results :</p>
           <ItemCatalogueList movies={movies} />
         </div>}
         <p className="pt-16 mb-52">Search maybe for what you are looking for* Add Background lightning animation*</p>
