@@ -1,0 +1,31 @@
+.genre-preferences-section {
+    .inner-container {
+      // display: flex;
+      // background-color: gray;
+      // gap: 2px;
+      // cursor: grab;
+      // overflow: auto;
+    }
+    img {
+      // width: 200px;
+      // margin-bottom: 20px;
+      // transition: all 400ms ease;
+      // max-width: fit-content;
+    }
+
+    img:hover{
+        filter: sepia(0%) saturate(0%) brightness(70%) hue-rotate(50deg);
+    }
+  }
+  
+  // @media (max-width: 600px) {
+  //   .item-catalogue-list-container{
+  //     .inner-container {
+  //       gap: 6% !important;
+  //     }
+  //     img {
+  //       width: 150px !important;
+  //     }
+  //   }
+  // }
+  

@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { BiStar } from "react-icons/bi";
@@ -9,6 +8,7 @@ import { AiFillEye, AiFillPlusCircle, AiOutlineCloseCircle } from "react-icons/a
 import Rating from "react-rating";
 import {createComment, deleteComment, getCommentsByMovieId,} from "../features/comments/commentSlice";
 import { banishComment } from "../features/comments/commentSlice";
+import { GetMovieById, GetMovieVideosById, GetMovieImagesById, GetMovieCreditsById, GetMoviesByGenre } from "../providers/moviesProvider";
 import { getWantToWatchRecord, updateWatchlistRecord,} from "../features/watchlists/watchlistSlice";
 import { reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
@@ -31,6 +31,7 @@ const Movie = () => {
   const [commentErr, setCommentErr] = useState("");
   const [movie, setMovie] = useState(null);
   const [movieAddedPrompt, setMovieAddedPrompt] = useState('');
+  const [movieDescription, setMovieDescription] = useState('');
   const [movieVideos, setMovieVideos] = useState(null);
   const [movieImages, setMovieImages] = useState(null);
   const [movieCast, setMovieCast] = useState(null);
@@ -105,75 +106,64 @@ const Movie = () => {
 
   useEffect(() => {
     if (!movie) {
-      axios
-        .get(
-          `https://api.themoviedb.org/3/movie/${id}?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
-        )
-        .then((resp) => {
-          setMovie(resp.data);
-        });
+      const getMovieInfo = async() => {
+        const movieData =  await GetMovieById(id);
+        const imagesData =  await GetMovieImagesById(id);
+        const videoData =  await GetMovieVideosById(id);
+        const creditsData =  await GetMovieCreditsById(id);
 
-      axios
-        .get(
-          `https://api.themoviedb.org/3/movie/${id}/videos?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`
-        )
-        .then((resp) => {
-          let res = resp.data.results;
-          let temp = [];
+        setMovieDescription(movieData?.overview || '');
 
-          if (res.length > 0) {
-            for (let index = 0; index < res.length; index++) {
-              const element = res[index];
+        //IMAGES
+        let images = imagesData.backdrops;
+        let imagesArray = [];
 
-              if (element.type === "Trailer") {
-                temp.push(element);
-              }
+        if (images.length > 0) {
+          for (let index = 0; index < images.length; index++) {
+            const element = images[index];
+
+            if (imagesArray.length === 6) {
+              break;
             }
-            setMovieVideos(temp);
+            imagesArray.push(element);
           }
-        });
+        }
 
-      axios
-        .get(
-          `https://api.themoviedb.org/3/movie/${id}/images?api_key=120fe4d587d5f86c44f0a6e599f01734`
-        )
-        .then((resp) => {
-          let res = resp.data;
-          let temp = [];
-
-          if (res.backdrops.length > 0) {
-            for (let index = 0; index < res.backdrops.length; index++) {
-              const element = res.backdrops[index];
-
-              if (temp.length === 6) {
-                break;
-              }
-              temp.push(element);
+        //VIDEOS
+        let videos = videoData;
+        let videosArray = [];
+        if (videos.length > 0) {
+          for (let index = 0; index < videos.length; index++) {
+            const element = videos[index];
+            if (element.type === "Trailer") {
+              videosArray.push(element);
             }
-            setMovieImages(temp);
           }
-        });
+        }
 
-      axios
-        .get(
-          `https://api.themoviedb.org/3/movie/${id}/credits?api_key=120fe4d587d5f86c44f0a6e599f01734`
-        )
-        .then((resp) => {
-          let res = resp.data;
-          let temp = [];
+        //CAST
+        let cast = creditsData.cast;
+        let castArray = [];
 
-          if (res.cast.length > 0) {
-            for (let index = 0; index < res.cast.length; index++) {
-              const element = res.cast[index];
+        if (cast.length > 0) {
+          for (let index = 0; index < cast.length; index++) {
+            const element = cast[index];
 
-              if (temp.length === 6) {
-                break;
-              }
-              temp.push(element);
+            if (castArray.length === 6) {
+              break;
             }
-            setMovieCast(temp);
+            castArray.push(element);
           }
-        });
+        }
+
+        //Set Data
+        setMovie(movieData);
+        setMovieVideos(videosArray);
+        setMovieImages(imagesArray);
+        setMovieCast(castArray);
+      }
+
+      getMovieInfo();
     }
   }, [id, movie]);
 
@@ -343,14 +333,6 @@ const Movie = () => {
     </div>
   );
 
-  // const genreSearch = (genre) => {
-  //   if(genre){
-  //       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&with_genres=${genre}&language=en-US&page=1`)
-  //     .then((resp) => {
-  //     });
-  //   }
-  // }
-
   return (
     <>
       <div
@@ -375,34 +357,34 @@ const Movie = () => {
                 <button
                   className={`w-full flex gap-3 p-3 ${
                     userWatchlistRecord?.wantToWatch
-                      ? "bg-blue-600 opacity-50"
-                      : ""
+                      ? "border-none bg-blue-400 opacity-75"
+                      : "bg-gray-300"
                   }`}
                   onClick={() => {
                     addToWantToWatchList();
                   }}
                 >
                   {" "}
-                  <div className='my-auto'>
+                  <div className={`my-auto ${userWatchlistRecord?.wantToWatch ? '' : 'text-gray-900'}`}>
                     <AiFillPlusCircle />
                   </div>
-                  Watchlist
+                  <span className={`${userWatchlistRecord?.wantToWatch ? '' : 'text-gray-900'}`}>Watchlist</span>
                 </button>
                 <button
                   className={`w-full flex gap-3 p-3 ${
                     userWatchlistRecord?.watched
-                      ? "bg-blue-600 opacity-50"
-                      : ""
+                      ? "border-none bg-blue-400 opacity-75"
+                      : "bg-gray-300"
                   }`}
                   onClick={() => {
                     addToWatchedList();
                   }}
                 >
                   {" "}
-                  <div className='my-auto'>
+                  <div className={`my-auto  ${userWatchlistRecord?.watched ? '' : 'text-gray-900'}`}>
                     <AiFillEye />
                   </div>{" "}
-                  Watched
+                  <span className={`${userWatchlistRecord?.watched ? '' : 'text-gray-900'}`}>Watched</span>
                 </button>
               </div>
               {movie.homepage && (
@@ -416,33 +398,36 @@ const Movie = () => {
                 </button>
               )}
               <div className='flex gap-5'>
-                <p>
-                  <b>Title</b>:
-                </p>
+                <p>Title :</p>
                 <p>{movie.title}</p>
               </div>
-
-              <span>
-                <b>Genres</b> :{" "}
-              </span>
-              <div className='genres mt-4'>
-                {movie.genres.map((genre) => {
-                  return <span key={genre.id}>{genre.name}</span>;
-                })}
-              </div>
               <div className='flex gap-5'>
-                <p>
-                  <b>Status</b> :{" "}
-                </p>
+                <p>Runtime :</p>
+                <p>{movie.runtime} mins</p>
+              </div>
+
+              
+              <div className='flex gap-5'>
+                <p>Status :</p>
                 <p>
                   {movie.status}{" "}
                   {movie.status === "Released" ? `(${movie.release_date})` : ""}
                 </p>
               </div>
+              <div className="mt-2">
+                <span>
+                  Genres :
+                </span>
+                <div className='genres mt-4'>
+                  {movie.genres.map((genre) => {
+                    return <span key={genre.id}>{genre.name}</span>;
+                  })}
+                </div>
+              </div>
             </div>
-            <div className='plain-card border-0 w-full sm:h-128 text-left overflow-hidden'>
+            <div className='w-full'>
               {movieVideos && movieVideos.length > 0 && (
-                <div className='trailer w-full h-full'>
+                <div className='trailer h-[80vh]'>
                   <iframe
                     className='w-full h-full'
                     src={`https://www.youtube.com/embed/${movieVideos[0].key}`}
@@ -453,6 +438,12 @@ const Movie = () => {
                   ></iframe>
                 </div>
               )}
+          {movieDescription && 
+          <div className="text-left mt-4 px-4 flex items-baseline">
+            <h2 className="text-lg b-text-colour p-4">Overview:</h2>
+            <p>{movieDescription}</p>
+          </div>
+          }
             </div>
           </div>
           <div className='view-more-header ml-6 md:m-auto lg:m-auto'>

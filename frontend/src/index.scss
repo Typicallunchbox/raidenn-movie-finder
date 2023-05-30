@@ -174,39 +174,41 @@ h3 {
 
     .options-container-btn{
       overflow: hidden;
-      width: 100px;
+      width: 80px;
       height: 35px;
       padding: 5px;
       background-color: var(--raidenn-white);
       margin: 0 0 0 auto;
+      transition: width 1s;
       position: relative;
   
       .inner-container{
         height: 100%;
-        width: 10px;
+        width: 100%;
         border-radius: 2px;
-        background: var(--raidenn-black);
+        background: transparent;
         margin: 0 0 0 auto;
         transition: width 1s;
         overflow: hidden;
         text-align: center;
   
         p{
-          opacity: 0;
-          transition: opacity 1s ease-in;
+          opacity: .8;
+          color: var(--raidenn-black);
+          transition: opacity 0.4s ease-in;
         }
       }
 
       .inner-container.is-open{
         width: 100%;
-        p{
-          opacity: 1;
-        }
+        // p{
+        //   opacity: 1;
+        // }
       }
 
       video{
         transition: opacity 1s;
-        opacity: 0.25;
+        opacity: 0.35;
       }
 
       video.is-open{
@@ -251,6 +253,7 @@ h3 {
   .options-block:hover{
     .options-container-btn{
       cursor: pointer;
+      width: 100px;
 
       .inner-container{
         width: 100%;
@@ -688,7 +691,7 @@ background-color: var(--raidenn-blue)
 /* ************MOVIE PAGE************ */
 .movie-container {
   display: flex;
-  gap: 20px;
+  gap: 60px;
   animation: fadeInAnimation ease 3s;
 
 

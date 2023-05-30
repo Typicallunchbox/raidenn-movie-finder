@@ -2,9 +2,11 @@ import { React, useEffect, useState } from "react";
 import Spinner from '../components/Spinner';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset, updatePassword } from "../features/auth/authSlice";
+import { logout, reset, updatePassword, getMe, updateProfile } from "../features/auth/authSlice";
 import { reset as resetMovies } from "../features/movies/movieSlice";
 import { reset as resetWatchlist } from "../features/watchlists/watchlistSlice";
+import { GetGenreOptions } from "../providers/moviesProvider";
+
 
 const inputStyling =
   "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full px-2.5 py-3";
@@ -19,11 +21,11 @@ const UserProfileSettings = () => {
   const [msg, setMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading]= useState(false)
-
-  const { user } = useSelector((state) => state.auth);
-
+  const { user, message } = useSelector((state) => state.auth);
+  const [viewGenres, setViewGenres] = useState(false);
+  const [savedGenres, setSavedGenres] = useState([]);
+  const [genreOptions, setGenreOptions] = useState([]);
  
-
   useEffect(() => {
     const delay = ms => new Promise(res => setTimeout(res, ms));
     if (!user) {
@@ -38,13 +40,39 @@ const UserProfileSettings = () => {
     
       return;
     }
-    
-    setFormData({
-      name: user?.name,
-      email: user?.email,
-      genrePreferences: ["action", "comedy"],
-    });
+    let response = null;
+    const getUserProfile = async() => {
+       response = await getMe();
+
+       setFormData({
+        name: response.name,
+        email: user?.email,
+        genrePreferences: response.genrePreferences,
+      });
+
+      const genreOptions =  await GetGenreOptions();
+      if(genreOptions.length > 0){
+         let temp = genreOptions.map(obj => ({ ...obj, isSelected: false }))
+         setGenreOptions(temp);
+      }
+
+      if (response.genrePreferences.length > 0) {
+        let temp = [...genreOptions]
+        for (let i = 0; i < response.genrePreferences.length; i++) {
+          let genre = response.genrePreferences[i];
+
+          for (let index = 0; index < temp.length; index++) {
+            const item = temp[index];
+            if(item.name === genre.name){temp[i]["isSelected"] = true; break;}
+            else{temp[i]["isSelected"] = false;}
+          }
+        }
+        setGenreOptions(temp);
+       }
+    }
+    getUserProfile();
   }, [user, navigate]);
+  
 
   const onBlur = (e) => {
     setFormData((prevState) => ({
@@ -67,8 +95,9 @@ const UserProfileSettings = () => {
         dispatch(reset());
         dispatch(resetWatchlist());
         dispatch(resetMovies());
-
-      } else {
+      } 
+      else 
+      {
         if(resp?.error){
             setErrorMsg(resp.error);
         }
@@ -77,9 +106,39 @@ const UserProfileSettings = () => {
   };
 
   const changeUserDetails = () => {
-    //empty for now
+    let payload = {}
+
+    if(formData.name !== ''){
+      payload.name = formData.name
+    }
+
+    if (savedGenres.length > 0) {
+      let genresSelected = []
+      genresSelected = [...savedGenres.filter(genre => genre.isSelected === true)];
+      payload.genresPref = genresSelected;
+    }   
+
+    dispatch(updateProfile({
+      profile: payload
+    }));
+
+    if(message?.status === 'OK'){
+      setMsg('Updated Profile!')
+      setTimeout(()=> {setMsg('')},5000)
+    }
+    //*BUG: Hits else even though update was success
+    else{
+      setMsg('Something went wrong :(')
+      setTimeout(()=> {setMsg('')},5000)
+    }
   };
 
+  const updateGenreOptions = (index) => {
+    let tempGenres = null;
+    tempGenres = [...genreOptions];
+    tempGenres[index]["isSelected"] = !tempGenres[index]["isSelected"]
+    setSavedGenres(tempGenres);
+  }
 
   if(isLoading){
     return <Spinner label="Redirecting back to login." />
@@ -88,13 +147,14 @@ const UserProfileSettings = () => {
   return (
     <>
       <div className='container absolute top-2/4 -translate-y-2/4'>
-        <h1 className='mt-0 text-[30px] font-mediumLC tracking-[3px]'>Profile Settings</h1>
+        <h1 className='mt-0 text-[30px] font-mediumLC tracking-[3px]'>
+          Profile Settings
+        </h1>
 
         <div className='profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10'>
           <div className='mb-5'>
             <p>Username</p>
-            <input
-              disabled
+            <input 
               onBlur={(e) => onBlur(e)}
               defaultValue={formData.name}
               type='text'
@@ -136,6 +196,7 @@ const UserProfileSettings = () => {
               <p
                 onClick={() => {
                   setClickedResetPassword(!clickedResetPassword);
+                  setViewGenres(false);
                   setErrorMsg("");
                 }}
                 disabled={clickedResetPassword}
@@ -161,32 +222,42 @@ const UserProfileSettings = () => {
               </div>
             </div>
           )}
-          {/* <div className="mb-5">
-                    {formData.genrePreferences && <>
-                        <p>Genre Preferences</p>
-                        <div className="genres flex gap-5 ml-5">
-                            {formData.genrePreferences.map((genre)=>(
-                                <p key={genre}>{genre}</p>
-                            ))}
-                        </div>
-                    </>}
-                    multi-select dropdown
-                    display div of all selected genres
-                </div> */}
-          <div className="w-full text-right">
+          {!clickedResetPassword && <div className='mb-20'>
+            {genreOptions && (
+              <>
+                <p>Genre Preferences</p>
+                <div className={`genres flex flex-wrap gap-5 mt-2 w-full px-5 ${clickedResetPassword ? 'opacity-10':''}`}>
+                  {genreOptions.map((item,i) => {
+                    if(item.isSelected){
+                      return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-white text-white border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.id}>{item.name}</p>
+                    }
+                    else{
+                      if(viewGenres){
+                        return <p onClick={()=>updateGenreOptions(i)} className="text-sm py-2 px-4 border-gray-500 text-gray-500 border-2 bg-transparent rounded-lg cursor-pointer select-none" key={item.id}>{item.name}</p>
+                      }
+                    }
+                    return true;
+                    })}
+                  <p onClick={()=>{setViewGenres(!viewGenres)}} className={`cursor-pointer rounded-lg text-sm py-2 px-4 hover:text-white ${viewGenres ? 'bg-blue-400 text-white':'text-blue-400'}`}>{viewGenres ? 'Confirm' : '+ Add Genre'}</p>
+                </div>
+              </>
+            )}
+            {/* multi-select dropdown display div of all selected genres */}
+          </div>}
+          <div className='w-full text-right'>
             <button
-              disabled={msg}
-              hidden={!clickedResetPassword}
+              disabled={msg || viewGenres}
+              // hidden={!clickedResetPassword}
               onClick={() => {
                 clickedResetPassword ? changePassword() : changeUserDetails();
               }}
-              className='px-6'
+              className={`px-6 bg-blue-400 ${viewGenres ? 'opacity-25' : ''}`}
             >
               {clickedResetPassword ? "Update Password" : "Save Changes"}
             </button>
+            <p className='text-sm pt-6 pl-2'>{msg}</p>
+            <p className='text-sm text-rose-500 pt-6 pl-2'>{errorMsg}</p>
           </div>
-          <p className='text-sm pt-6 pl-2'>{msg}</p>
-          <p className='text-sm text-rose-500 pt-6 pl-2'>{errorMsg}</p>
         </div>
       </div>
     </>

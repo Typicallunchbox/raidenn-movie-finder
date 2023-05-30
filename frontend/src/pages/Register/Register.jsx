@@ -76,7 +76,6 @@ const Register = () => {
         password2,
         securityQuestions : data
       }
-      console.log('userData:', userData)
     if(userData){
         dispatch(register(userData));
     }

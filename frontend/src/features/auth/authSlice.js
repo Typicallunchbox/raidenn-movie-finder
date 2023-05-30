@@ -49,11 +49,28 @@ export const login = createAsyncThunk(
   );
 
   //getMe info
-export const getMe = createAsyncThunk(
-  "auth/getMe",
-  async (user, thunkAPI) => {
+export const getMe = async (data) => {
+  try {
+    let user = JSON.parse(localStorage.getItem("user"));
+    let resp = await authService.getMe( user.token);
+    return resp;
+  } catch (error) {
+    const message =
+      (error.response &&
+        error.response.data &&
+        error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return message;
+  }
+};
+
+export const updateProfile = createAsyncThunk(
+  "auth/updateProfile",
+  async (data, thunkAPI) => {
     try {
-      return await authService.getMe(user);
+      let user = JSON.parse(localStorage.getItem("user"));
+      return await authService.updateProfile(data, user.token);
     } catch (error) {
       const message =
         (error.response &&
@@ -177,6 +194,21 @@ export const authSlice = createSlice({
             state.user = null
         })
 
+      .addCase(updateProfile.pending, (state) => {
+          state.isLoading = true
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+          state.isLoading = false
+          state.isSuccess = true
+          state.message = action.payload
+      })
+      .addCase(updateProfile.rejected, (state, action) =>{
+          state.isLoading = false
+          state.isError = true
+          state.message = action.payload
+          state.user = null
+      })
+
         
         .addCase(setSecurityQuestions.pending, (state) => {
           state.isLoading = true
@@ -206,7 +238,6 @@ export const authSlice = createSlice({
       //     state.isError = true
       //     state.message = action.payload
       // })
-
 
 
         .addCase(login.pending, (state) => {
