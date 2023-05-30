@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import landingAnimation from '../static/animations/webRgb.webm';
 
 const Landing = () => {
-  const myRef = useRef();
   const [myElementIsVisible, updateMyElementIsVisible] = useState(false);
 
   useEffect(() => {
@@ -20,16 +19,6 @@ const Landing = () => {
       window.requestAnimationFrame(scrollPlay);
     }
     window.requestAnimationFrame(scrollPlay);
-  }, [])
-
-  useEffect(() => {
-
-    const observer = new IntersectionObserver((entries, observer) => {
-    const entry = entries[0];
-    updateMyElementIsVisible(entry.isIntersecting);
-
-  });
-    observer.observe(myRef.current);
   }, [])
   
   return (
@@ -52,30 +41,30 @@ const Landing = () => {
           </video> 
           </div>
           <div className="relative">
-          <a href="#instructions" type="button" className={`prim-button w-max absolute bottom-16 left-24 animate__animated animate__fadeInUp animate__delay-2s`}>Get Started</a>
+          <a data-aos="fade-right" data-aos-delay="500" data-aos-duration="1000" href="#instructions" type="button" className={`prim-button w-max absolute bottom-16 left-24 animate__animated animate__fadeInUp animate__delay-2s`}>Get Started</a>
           </div>
         </div>
       </div>
-      <div ref={myRef}  className={`instructions h-[80vh] md:flex md:w-5/6 md:mx-auto md:mt-[20rem]`}>
+      <div className={`instructions h-[80vh] md:flex md:w-5/6 md:mx-auto md:mt-[20rem]`}>
         <div className="animation-container">
           <img onScr src={placeholder} alt='placeholder'></img>
         </div>
         <div className={`setup-content`}>
           <h3 id='instructions' className="text-left mt-10 md:mt-0 ml-10 md:ml-14 mb-14">Steps to get started:</h3>
-          <div className={`flex mb-5 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-1s' : ''}`}>
+          <div data-aos="fade-up" data-aos-delay="500" data-aos-duration="500" className={`flex mb-5 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-1s' : ''}`}>
             <span>1</span>
             <p className="ml-8 my-auto">Create your Raidenn profile</p>
           </div>
-          <div className={`flex mb-5 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-2s' : ''}`}>
+          <div data-aos="fade-up" data-aos-delay="700" data-aos-duration="500" className={`flex mb-5 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-2s' : ''}`}>
             <span>2</span>
             <p className="ml-8 my-auto">Start finding and watchlisting movies</p>
           </div>
-          <div className={`flex mb-5 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-3s' : ''}`}>
+          <div data-aos="fade-up" data-aos-delay="900" data-aos-duration="500" className={`flex mb-5 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-3s' : ''}`}>
             <span>3</span>
             <p className="ml-8 my-auto">Well...that's pretty much it</p>
           </div>
           <Link to='/register'>
-            <button className={`prim-button my-14 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-3s' : ''}`}>
+            <button data-aos="fade-up" data-aos-delay="500" data-aos-duration="1500" className={`prim-button my-14 ${myElementIsVisible ? 'animate__animated animate__fadeInUp animate__delay-3s' : ''}`}>
               Lets Goooooo!
             </button>
           </Link>

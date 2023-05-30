@@ -8,7 +8,7 @@ import { AiFillEye, AiFillPlusCircle, AiOutlineCloseCircle } from "react-icons/a
 import Rating from "react-rating";
 import {createComment, deleteComment, getCommentsByMovieId,} from "../features/comments/commentSlice";
 import { banishComment } from "../features/comments/commentSlice";
-import { GetMovieById, GetMovieVideosById, GetMovieImagesById, GetMovieCreditsById, GetMoviesByGenre } from "../providers/moviesProvider";
+import { GetMovieById, GetMovieVideosById, GetMovieImagesById, GetMovieCreditsById } from "../providers/moviesProvider";
 import { getWantToWatchRecord, updateWatchlistRecord,} from "../features/watchlists/watchlistSlice";
 import { reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";

@@ -5,7 +5,6 @@ import {useSelector, useDispatch} from 'react-redux';
 import { addMovies } from '../features/movies/movieSlice';
 import {GetPopularMovies, GetMoviesByTag, GetMoviesByGenre} from "../providers/moviesProvider";
 import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
-import GenrePreferencesBar from '../components/GenrePreferencesBar/GenrePreferencesBar';
 import {Link} from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -64,7 +63,7 @@ const Home = () => {
         setIsLoading(false);
       }, 500); 
       
-      if(user && user?.genrePreferences.length > 0 && recommendedMovies.length == 0){  
+      if(user && user?.genrePreferences.length > 0 && recommendedMovies.length === 0){  
         const genre =  user.genrePreferences[Math.floor(Math.random() *  user.genrePreferences.length)];
         const recommended =  await GetMoviesByGenre(genre.id);
         setGenreRecommened(genre.name);
@@ -82,7 +81,7 @@ const Home = () => {
     }
 
     tag === '' ? setPopularMovies() : setMoviesByTag();
-  }, [tag, dispatch]);
+  }, [tag, dispatch, user, recommendedMovies]);
 
   if(isLoading){
     return <Spinner/>
@@ -90,7 +89,6 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      {/* <GenrePreferencesBar movies={movies} />  */}
       <div className="genre-preferences-section">
         {recommendedMovies && <div className="inner-container">
           <div className='flex items-baseline gap-4'>
