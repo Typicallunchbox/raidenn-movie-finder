@@ -397,24 +397,24 @@ const Movie = () => {
                   Watch Now
                 </button>
               )}
-              <div className='flex gap-5'>
+              <div data-aos="fade-right" data-aos-delay="100" className='flex gap-5'>
                 <p>Title :</p>
                 <p>{movie.title}</p>
               </div>
-              <div className='flex gap-5'>
+              <div data-aos="fade-right" data-aos-delay="300" className='flex gap-5'>
                 <p>Runtime :</p>
                 <p>{movie.runtime} mins</p>
               </div>
 
               
-              <div className='flex gap-5'>
+              <div data-aos="fade-right" data-aos-delay="500" className='flex gap-5'>
                 <p>Status :</p>
                 <p>
                   {movie.status}{" "}
                   {movie.status === "Released" ? `(${movie.release_date})` : ""}
                 </p>
               </div>
-              <div className="mt-2">
+              <div data-aos="fade-up" data-aos-delay="1000" className="mt-2">
                 <span>
                   Genres :
                 </span>
@@ -425,7 +425,7 @@ const Movie = () => {
                 </div>
               </div>
             </div>
-            <div className='w-full'>
+            <div data-aos="fade-right" data-aos-delay="500" data-aos-duration="1000"  className='w-full'>
               {movieVideos && movieVideos.length > 0 && (
                 <div className='trailer h-[80vh]'>
                   <iframe
