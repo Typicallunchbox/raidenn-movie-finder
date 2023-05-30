@@ -13,9 +13,19 @@ import Movie from "./pages/Movie";
 import Watchlist from "./pages/Watchlist";
 import Settings from "./pages/UserProfileSettings";
 import Landing from "./pages/Landing";
+import AOS from 'aos';
+import { useEffect } from "react";
 
 function App() {
   const {user} = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      startEvent: 'load',
+      delay: 0
+    });
+  }, []);
 
   return (
     <>

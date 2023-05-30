@@ -449,10 +449,10 @@ const Movie = () => {
           <div className='view-more-header ml-6 md:m-auto lg:m-auto'>
             <h2>View More</h2>
           </div>
-          <div className='cast-section'>{movieCast && castSection}</div>
-          <div className='images-section'>{movieImages && imagesSection}</div>
-          <div className='production-section'>{movie && productionCompanies}</div>
-          <div className='card p-4 comment-section w-full text-left mt-36 mb-52 mx-auto md:w-4/5 sm:w-full '>
+          <div data-aos="fade-left" className='cast-section'>{movieCast && castSection}</div>
+          <div data-aos="fade-left" className='images-section'>{movieImages && imagesSection}</div>
+          <div data-aos="fade-left" className='production-section'>{movie && productionCompanies}</div>
+          <div data-aos="fade-up" className='card p-4 comment-section w-full text-left mt-36 mb-52 mx-auto md:w-4/5 sm:w-full '>
             <h2 className='bk-text-colour'>Comments</h2>
             <div className='comments md:p-4'>
               {comments && comments.length > 0 ? (

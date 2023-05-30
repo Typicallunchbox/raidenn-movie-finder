@@ -2,7 +2,7 @@ import { React, useEffect, useState, useRef } from "react";
 import placeholder from '../static/images/wire.png';
 import { FaInfoCircle } from "react-icons/fa";
 
-import 'animate.css';
+// import 'animate.css';
 import { Link } from "react-router-dom";
 import landingAnimation from '../static/animations/webRgb.webm';
 
