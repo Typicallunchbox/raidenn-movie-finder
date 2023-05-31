@@ -74,10 +74,10 @@ const Login = () => {
 
   return (
     <div>
-      <div className='login_container'>
+      <div data-aos="fade-up" data-aos-duration="800" className='login_container'>
         <div className='inner-container'>
           {!showForgotPassword ? (<div>
-          <div className='px-12 pt-6'>
+          <div  className='px-12 pt-6'>
             <h1
               className='bk-text-colour mb-6 text-[35px] font-thunderBoldLC tracking-[3px]'
             >

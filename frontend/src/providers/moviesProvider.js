@@ -7,9 +7,8 @@ import axios from "axios";
 export const GetPopularMovies = async() => {
     let movies = [];
     const count = 10;
-    console.log('ENV:', process.env.REACT_APP_MOVIEDB_API_KEY)
     for (let i = 1; i < count; i++) {
-        await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=${i}`)
+        await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_MOVIE_DB_KEY}&page=${i}`)
         .then((resp) => {
             if(resp.data.results.length > 0){
                 movies.push(...resp.data.results); 
@@ -28,7 +27,7 @@ export const GetMoviesByTag = async(tag) => {
     let movies = [];
     const count = 10;
     for (let i = 1; i < count; i++) {
-        await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=${i}`)
+        await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=${process.env.REACT_APP_MOVIE_DB_KEY}&page=${i}`)
         .then((resp) => {
             if(resp.data.results.length > 0){
                 movies.push(...resp.data.results); 
@@ -47,7 +46,7 @@ export const GetMoviesByPhrase = async(phrase) => {
     let movies = [];
     const count = 5;
     for (let i = 1; i < count; i++) {
-        await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&query=${phrase}&language=en-US&page=${1}`)
+        await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_MOVIE_DB_KEY}&query=${phrase}&language=en-US&page=${1}`)
         .then((resp) => {
             if(resp.data.results.length > 0){
                 movies.push(...resp.data.results); 
@@ -62,7 +61,7 @@ export const GetMoviesByPhrase = async(phrase) => {
  * @returns {Promise<object>}
  */
  export const GetMovieById = async(id) => {
-    return await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`)
+    return await axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_MOVIE_DB_KEY}&language=en-US`)
     .then((resp) => {
         return resp.data ? resp.data : null;
     });
@@ -74,7 +73,7 @@ export const GetMoviesByPhrase = async(phrase) => {
  * @returns {array}
  */
  export const GetMovieImagesById = async(id) => {
-    return await axios.get(`https://api.themoviedb.org/3/movie/${id}/images?api_key=120fe4d587d5f86c44f0a6e599f01734`)
+    return await axios.get(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_MOVIE_DB_KEY}`)
     .then((resp) => {
         return resp.data  ? resp.data : [];
     });
@@ -86,7 +85,7 @@ export const GetMoviesByPhrase = async(phrase) => {
  * @returns {array}
  */
  export const GetMovieVideosById = async(id) => {
-    return await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=120fe4d587d5f86c44f0a6e599f01734&language=en-US`)
+    return await axios.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.REACT_APP_MOVIE_DB_KEY}&language=en-US`)
     .then((resp) => {
         return resp.data.results.length > 0 ? resp.data.results : [];
     });
@@ -98,7 +97,7 @@ export const GetMoviesByPhrase = async(phrase) => {
  * @returns {array}
  */
 export const GetMovieCreditsById = async(id) => {
-    return await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=120fe4d587d5f86c44f0a6e599f01734`)
+    return await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_MOVIE_DB_KEY}`)
     .then((resp) => {
         return resp.data ? resp.data : [];
     });
@@ -110,7 +109,7 @@ export const GetMovieCreditsById = async(id) => {
  * @returns {Promise}
  */
 export const GetMoviesByGenre = async(id) => {
-    return await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&with_genres=${id}`)
+    return await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_MOVIE_DB_KEY}&with_genres=${id}`)
     .then((resp) => {
         return resp.data ? resp.data : [];
     });
@@ -122,7 +121,7 @@ export const GetMoviesByGenre = async(id) => {
  * @returns {Promise<object>}
  */
 export const GetGenreOptions = async(id) => {
-    return await axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=120fe4d587d5f86c44f0a6e599f01734`)
+    return await axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_MOVIE_DB_KEY}`)
     .then((resp) => {
         return resp.data && resp.data.genres ? resp.data.genres : [];
     });
@@ -137,7 +136,7 @@ export const GetGenreOptions = async(id) => {
  */
 export const searchMovies = async(searchText = "", releasedYear, genre) => {
     if (searchText === "") {
-        let url = `https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734`;
+        let url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_MOVIE_DB_KEY}`;
         url += releasedYear !== "" ?`&primary_release_year=${releasedYear}` : "";
         url += genre !== "" ? `&with_genres=${genre}` : "";
         url += '&language=en-US&page=1&include_adult=false'
@@ -153,7 +152,7 @@ export const searchMovies = async(searchText = "", releasedYear, genre) => {
     
       return axios
         .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734${
+          `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_MOVIE_DB_KEY}${
             searchText !== "" ? `&query=${searchText}` : `&query=''`
           }${releasedYear !== "" ? `&primary_release_year=${releasedYear}` : ""}${
             genre !== "" ? `&with_genres=${genre}` : ""

@@ -83,11 +83,6 @@
   box-sizing: border-box;
 }
 
-// body {
-//   font-family: 'SKModernist', sans-serif;
-//   // height: 100vh;
-// }
-
 html{
   scroll-behavior: smooth
 }
@@ -142,7 +137,6 @@ h3 {
 }
 
 .main{
-  // margin-top: 100px !important;
   padding-top: 100px;
   min-height: 100vh;
 }
@@ -164,8 +158,6 @@ h3 {
   width: 100%;
   top: 0;
   z-index: 20;
-  // background-color: var(--raidenn-black)
-
 
   .options-block{
     position: absolute;
@@ -201,9 +193,6 @@ h3 {
 
       .inner-container.is-open{
         width: 100%;
-        // p{
-        //   opacity: 1;
-        // }
       }
 
       video{
@@ -248,8 +237,6 @@ h3 {
     }
   }
  
-
-
   .options-block:hover{
     .options-container-btn{
       cursor: pointer;
@@ -311,12 +298,10 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  // position: relative;
   height: 200px;
   width: 100%;
   z-index: 18;
   background: #1D1D1D;
-  // margin-top: 120px;
   bottom: 0;
 
   .links{
@@ -360,8 +345,6 @@ footer {
       transition: color 0.5s ease;
     }
   
-   
-  
     p:hover{
       color: var(--raidenn-blue);
       cursor: default;
@@ -377,13 +360,11 @@ footer {
   }
 }
 
-
 // SearchDropDown
 .search-dropdown{
   padding: 1rem;
   width: 500px;
   height: fit-content;
-  // animation: fadeIn 1s;
   background: linear-gradient(0deg,#434343,#434343, rgba(0,0,0,0));
   position: fixed;
   left: 50%;
@@ -420,7 +401,6 @@ footer {
         border-radius: 10px;
         border-color: var(--raidenn-blue);
         color: var(--raidenn-white);
-        // background-color: white;
       }
     }
   }
@@ -435,18 +415,12 @@ footer {
   }
 }
 
-// .search-dropdown-full{
-//   background: linear-gradient(0deg,#434343,#434343, #434343) !important;
-//   animation: fadeIn 5s;
-// }
-
 .search-dropdown-full{
   padding: 1rem;
   width: 500px;
   height: fit-content;
   background: linear-gradient(0deg,#434343,#434343, #434343) !important;
   opacity: 98%;
-  // animation: fadeIn 5s;
   position: fixed;
   left: 50%;
   z-index: 20;
@@ -482,7 +456,6 @@ footer {
         border-radius: 10px;
         border-color: var(--raidenn-blue);
         color: var(--raidenn-white);
-        // background-color: white;
       }
     }
   }
@@ -591,7 +564,6 @@ footer {
   right: 0;
   bottom: 0;
   left: 0;
-  // background-color: rgba(0, 0, 0, 0.5);
   z-index: 500;
   display: flex;
   justify-content: center;
@@ -644,7 +616,6 @@ background-color: var(--raidenn-blue)
 .card {
   border-color: rgb(226, 226, 226);
   border-style: solid;
-  // border-width: 1px;
   border-radius: 10px;
   box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
   -webkit-box-shadow: -5px 5px 7px -5px rgba(0,0,0,0.75);
@@ -658,10 +629,6 @@ background-color: var(--raidenn-blue)
   &.clear{
     background-color: transparent;
   }
-
-  // &.white{
-  //   background-color: rgb(241, 241, 241)
-  // }
 
   &.align-l{
     text-align: left;
@@ -684,8 +651,6 @@ background-color: var(--raidenn-blue)
   animation-delay: 100ms;
   animation: fadeInAnimation ease 3s;
   overflow: hidden;
-  // animation-iteration-count: 1;
-  // animation-fill-mode: forwards;
 }
 
 /* ************MOVIE PAGE************ */
@@ -743,9 +708,6 @@ background-color: var(--raidenn-blue)
 }
 
 .images-section{
-    // animation: fadeInAnimation ease 3s;
-
-
     .section-title{
         width: 50%;
         margin: 0 auto;
@@ -757,8 +719,6 @@ background-color: var(--raidenn-blue)
         margin-bottom: 20px;
       }
     }
-
-    
 
     .movie-content {
       margin-bottom: 150px !important;
@@ -772,7 +732,6 @@ background-color: var(--raidenn-blue)
     }
     img {
       max-width: 350px;
-      // flex: 0 0 1%;
       margin-bottom: 20px;
       transition: all 400ms ease;
     }
@@ -783,8 +742,6 @@ background-color: var(--raidenn-blue)
   }
 .cast-section{
   margin-top: 50px !important;
-  // animation: fadeInAnimation ease 3s;
-
 
   .section-title{
     width: 50%;
@@ -842,7 +799,6 @@ background-color: var(--raidenn-blue)
   }
   img {
     max-width: 150px;
-    // flex: 0 0 2%;
     transition: all 400ms ease;
   }
 
@@ -852,8 +808,6 @@ background-color: var(--raidenn-blue)
   }
 }
 .production-section{
-  // animation: fadeInAnimation ease 3s;
-
   .section-title{
     width: 50%;
     margin: 0 auto;
@@ -884,8 +838,6 @@ background-color: var(--raidenn-blue)
 
 }
 .comment-section{
-  // animation: fadeInAnimation ease 3s;
-
   .card{
     background-color: var(--raidenn-black) !important;
   }
@@ -949,7 +901,6 @@ background-color: var(--raidenn-blue)
     }
   }
 
-  // .contact-me{
     h3{
       font-size: 80px;
       font-family: MediumLC;
@@ -978,7 +929,6 @@ background-color: var(--raidenn-blue)
     video.is-open{
       opacity: 1;
     }
-  // }
 }
 
 
