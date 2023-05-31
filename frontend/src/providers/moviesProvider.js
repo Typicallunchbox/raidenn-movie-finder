@@ -6,112 +6,59 @@ import axios from "axios";
  */
 export const GetPopularMovies = async() => {
     let movies = [];
-    await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=1`)
-    .then((resp) => {
-        if(resp.data.results.length > 0){
-            movies.push(...resp.data.results); 
-        }
-    });
-
-    await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=2`)
-    .then((resp) => {
-        if(resp.data.results.length > 0){
-            movies.push(...resp.data.results); 
-        }
-    });
-
-    await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=3`)
-    .then((resp) => {
-        if(resp.data.results.length > 0){
-            movies.push(...resp.data.results); 
-        }
-    });
-
-    await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=4`)
-    .then((resp) => {
-        if(resp.data.results.length > 0){
-            movies.push(...resp.data.results); 
-        }
-    });
-
-
-    await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=5`)
-    .then((resp) => {
-        if(resp.data.results.length > 0){
-            movies.push(...resp.data.results); 
-        }
-    });
-
+    const count = 10;
+    console.log('ENV:', process.env.REACT_APP_MOVIEDB_API_KEY)
+    for (let i = 1; i < count; i++) {
+        await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=${i}`)
+        .then((resp) => {
+            if(resp.data.results.length > 0){
+                movies.push(...resp.data.results); 
+            }
+        });
+    }
     return movies.length > 0 ? movies : []
 }
 
 /**
-/*  Get Popular Movies
+/*  Get Movies by tag
  *  @param {string} tag
  *  @returns {array}
  */
 export const GetMoviesByTag = async(tag) => {
     let movies = [];
-
-    await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=1`)
-    .then((resp) => {
-        if(resp.data.results.length > 0){
-            movies.push(...resp.data.results); 
-        }
-    });
-
-    await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=2`)
-    .then((resp) => {
-        if(resp.data.results.length > 0){
-            movies.push(...resp.data.results); 
-        }
-    });
-
-    await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=3`)
-    .then((resp) => {
-        if(resp.data.results.length > 0){
-            movies.push(...resp.data.results); 
-        }
-    });
-
-    await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=4`)
-    .then((resp) => {
-        if(resp.data.results.length > 0){
-            movies.push(...resp.data.results); 
-        }
-    });
-
-    await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=5`)
-    .then((resp) => {
-        if(resp.data.results.length > 0){
-            movies.push(...resp.data.results); 
-        }
-    });
+    const count = 10;
+    for (let i = 1; i < count; i++) {
+        await axios.get(`https://api.themoviedb.org/3/movie/${tag}?api_key=120fe4d587d5f86c44f0a6e599f01734&page=${i}`)
+        .then((resp) => {
+            if(resp.data.results.length > 0){
+                movies.push(...resp.data.results); 
+            }
+        });
+    }
     return movies.length > 0 ? movies : []
-
-    // await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=120fe4d587d5f86c44f0a6e599f01734&page=1`)
-    // .then((resp) => {
-    //     if(resp.data.results.length > 0){
-    //         movies.push(...resp.data.results); 
-    //     }
-    // });
 }
 
 /**
- * Get Popular Movies
+ * Get Movies by phrase
  * @param {string} phrase
  * @returns {array}
  */
 export const GetMoviesByPhrase = async(phrase) => {
-    return await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&query=${phrase}&language=en-US&page=1`)
-    .then((resp) => {
-        return resp.data.results.length > 0 ? resp.data.results : []
-    });
+    let movies = [];
+    const count = 5;
+    for (let i = 1; i < count; i++) {
+        await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=120fe4d587d5f86c44f0a6e599f01734&query=${phrase}&language=en-US&page=${1}`)
+        .then((resp) => {
+            if(resp.data.results.length > 0){
+                movies.push(...resp.data.results); 
+            }
+        });
+    }
 }
 
 /**
- * Get Popular Movies
- * @param {string} phrase
+ * Get Movies by movie id
+ * @param {string} id
  * @returns {Promise<object>}
  */
  export const GetMovieById = async(id) => {
@@ -122,8 +69,8 @@ export const GetMoviesByPhrase = async(phrase) => {
 }
 
 /**
- * Get Popular Movies
- * @param {string} phrase
+ * Get Movies Images by movie id
+ * @param {string} id
  * @returns {array}
  */
  export const GetMovieImagesById = async(id) => {
@@ -134,7 +81,7 @@ export const GetMoviesByPhrase = async(phrase) => {
 }
 
 /**
- * Get Popular Movies
+ * Get Movies Videos by movie id
  * @param {string} phrase
  * @returns {array}
  */
@@ -146,7 +93,7 @@ export const GetMoviesByPhrase = async(phrase) => {
 }
 
 /**
- * Get Popular Movies
+ * Get Movies Credits by movie id
  * @param {string} phrase
  * @returns {array}
  */
@@ -170,14 +117,13 @@ export const GetMoviesByGenre = async(id) => {
 }
 
 /**
- * Get Popular Movies
+ * Get Movies Genre Options
  * @param {string} phrase
  * @returns {Promise<object>}
  */
 export const GetGenreOptions = async(id) => {
     return await axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=120fe4d587d5f86c44f0a6e599f01734`)
     .then((resp) => {
-        console.log('genres:', resp)
         return resp.data && resp.data.genres ? resp.data.genres : [];
     });
 }
@@ -190,13 +136,11 @@ export const GetGenreOptions = async(id) => {
  * @returns {Promise<object>}
  */
 export const searchMovies = async(searchText = "", releasedYear, genre) => {
-    console.log("search props:", searchText, releasedYear, genre);
     if (searchText === "") {
         let url = `https://api.themoviedb.org/3/discover/movie?api_key=120fe4d587d5f86c44f0a6e599f01734`;
         url += releasedYear !== "" ?`&primary_release_year=${releasedYear}` : "";
         url += genre !== "" ? `&with_genres=${genre}` : "";
         url += '&language=en-US&page=1&include_adult=false'
-        console.log('URL:', url);
         return axios
           .get(
             url
