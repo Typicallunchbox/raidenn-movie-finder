@@ -83,7 +83,7 @@ const Register = () => {
 
   return (
     <div>
-      <div className={`login_container ${!showMainRegister ? 'w-10/12 md:w-4/12':''}`}>
+      <div data-aos="fade-up" data-aos-duration="800" className={`login_container  ${!showMainRegister ? 'w-10/12 md:w-4/12':''}`}>
         <div className='inner-container'>
           {showMainRegister ? (<div>
           <div className='px-12 pt-6'>
