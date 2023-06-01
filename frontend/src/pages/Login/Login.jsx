@@ -10,8 +10,6 @@ import {login, reset} from '../../features/auth/authSlice';
 import ForgotPassword from '../../components/ForgotPassword';
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
-
-
 const Login = (props) => {
   const {title} = props;
   const [showForgotPassword, setShowForgotPassword] = useState(false);
@@ -63,10 +61,10 @@ const Login = (props) => {
     <div>
       <HelmetProvider>
           <Helmet>
-            <title>{title ? title : "Raidenn"}</title>
+            <title>{`Raidenn ${'- '+ title || ''}`}</title>
           </Helmet>
       </HelmetProvider>
-      <div data-aos="fade-up" data-aos-duration="800" className='login_container'>
+      <div className='login_container'>
         <div className='inner-container'>
           {!showForgotPassword ? (<div>
           <div  className='px-12 pt-6'>

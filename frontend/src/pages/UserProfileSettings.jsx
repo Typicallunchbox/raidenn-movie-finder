@@ -6,11 +6,13 @@ import { logout, reset, updatePassword, getMe, updateProfile } from "../features
 import { reset as resetMovies } from "../features/movies/movieSlice";
 import { reset as resetWatchlist } from "../features/watchlists/watchlistSlice";
 import { GetGenreOptions } from "../providers/moviesProvider";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 
 const inputStyling =
   "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full px-2.5 py-3";
-const UserProfileSettings = () => {
+const UserProfileSettings = (props) => {
+  const {title} = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -146,7 +148,12 @@ const UserProfileSettings = () => {
 
   return (
     <>
-      <div className='container absolute top-2/4 -translate-y-2/4'>
+      <HelmetProvider>
+          <Helmet>
+            <title>{`Raidenn ${'- '+ title || ''}`}</title>
+          </Helmet>
+      </HelmetProvider>
+      <div className='container absolute top-2/4 -translate-y-[40%]'>
         <h1 className='mt-0 text-[30px] font-mediumLC tracking-[3px]'>
           Profile Settings
         </h1>
