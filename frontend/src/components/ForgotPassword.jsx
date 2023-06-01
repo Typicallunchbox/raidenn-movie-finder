@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getSecurityQuestions, compareSecurityAnswers } from "../features/auth/authSlice";
 import { validEmail } from '../static/regex';
-import { FaCopy } from "react-icons/fa";
+import { FaRegCopy } from "react-icons/fa";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -149,7 +149,7 @@ const ForgotPassword = () => {
             <p className='bk-text-colour'>New Temporary Password:</p>
             <div className="flex items-baseline justify-center gap-4 mt-4">
               <p className='text-rose-500'>{tempPassword}</p>
-              <FaCopy className="text-blue-800 cursor-pointer" onClick={() => copyTempPassword()} />
+              <FaRegCopy className="text-blue-800 cursor-pointer" onClick={() => copyTempPassword()} />
             </div>
           </div>
         </div>
