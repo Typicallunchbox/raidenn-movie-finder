@@ -8,46 +8,38 @@ import Spinner from "../../components/Spinner";
 import {useSelector, useDispatch} from 'react-redux'
 import {login, reset} from '../../features/auth/authSlice';
 import ForgotPassword from '../../components/ForgotPassword';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 
 
-const Login = () => {
-
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+const Login = (props) => {
+  const {title} = props;
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  
+  const {user, isError, isSuccess, message} = useSelector((state) => state.auth);
+  const [formData, setFormData] = useState({email: "", password: ""});
   const { email, password } = formData;
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  const {user, isError, isSuccess, message} = useSelector(
-    (state) => state.auth
-  )
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if(isError){
-      toast.error(message)
+      toast.error(message);
     }
 
     if(isSuccess || user){
-
       const redirect = async() => {
         const delay = ms => new Promise(res => setTimeout(res, ms));
         setIsLoading(true);
-        await delay(1000)
+        await delay(1000);
         setIsLoading(false);
         navigate('/')
-
       }
       redirect();
     }
 
     dispatch(reset())
-
   },[user, isError, isSuccess, message, navigate, dispatch])
 
   const onChange = (e) => {
@@ -58,13 +50,8 @@ const Login = () => {
   };
 
   const onSubmit = (e) => {
-    e.preventDefault()
-
-    const userData = {
-      email,
-      password
-    }
-
+    e.preventDefault();
+    const userData = { email, password}
     dispatch(login(userData))
   };
 
@@ -74,6 +61,11 @@ const Login = () => {
 
   return (
     <div>
+      <HelmetProvider>
+          <Helmet>
+            <title>{title ? title : "Raidenn"}</title>
+          </Helmet>
+      </HelmetProvider>
       <div className='login_container'>
         <div className='inner-container'>
           {!showForgotPassword ? (<div>

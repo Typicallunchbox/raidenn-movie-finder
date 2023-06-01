@@ -34,16 +34,16 @@ function App() {
         <div className="main">
           <Routes>
             {user ? <><Route path="/" element={<Home />} /></> : <><Route path="/" element={<Landing />} /></>}
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="*" element={<ErrorPage />} />
-            <Route path="/about" element={<About />} />
-            <Route path={`/settings`} element={<Settings />} />
+            <Route path="/register" element={<Register title="Register"/>} />
+            <Route path="/login" element={<Login title="Login"/>} />
+            <Route path="*" element={<ErrorPage title="Error"/>} />
+            <Route path="/about" element={<About title="About"/>} />
+            <Route path={`/settings`} element={<Settings title="Settings"/>} />
 
             {user &&
             <>
               <Route path={`/movie/:id`} element={<Movie />} />
-              <Route path={`/watchlist`} element={<Watchlist />} />
+              <Route path={`/watchlist`} element={<Watchlist title="Watchlist"/>} />
             </>
             }
 
