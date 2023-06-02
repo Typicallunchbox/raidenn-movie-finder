@@ -148,7 +148,7 @@ const UserProfileSettings = (props) => {
             <title>{`Raidenn ${'- '+ title || ''}`}</title>
           </Helmet>
       </HelmetProvider>
-      <div className='container absolute top-2/4 -translate-y-[40%]'>
+      <div className='container'>
         <h1 className='mt-0 text-[30px] font-mediumLC tracking-[3px]'>
           Profile Settings
         </h1>
@@ -190,7 +190,7 @@ const UserProfileSettings = (props) => {
                 onBlur={(e) => setconfirmPassword(e.target.value)}
                 disabled={!clickedResetPassword}
                 type='password'
-                id='password'
+                id='currentPassword'
                 className={inputStyling}
                 placeholder='*******'
                 required
