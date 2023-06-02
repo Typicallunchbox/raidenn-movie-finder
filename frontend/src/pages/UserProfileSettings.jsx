@@ -27,21 +27,13 @@ const UserProfileSettings = (props) => {
   const [viewGenres, setViewGenres] = useState(false);
   const [savedGenres, setSavedGenres] = useState([]);
   const [genreOptions, setGenreOptions] = useState([]);
+  const delay = ms => new Promise(res => setTimeout(res, ms));
  
   useEffect(() => {
-    const delay = ms => new Promise(res => setTimeout(res, ms));
     if (!user) {
-      const exit = async() => {
-        await delay(4000)
-        setIsLoading(true);
-        await delay(5000)
-      
         navigate("/login");
-      }
-      exit();
-    
-      return;
     }
+    
     let response = null;
     const getUserProfile = async() => {
        response = await getMe();
@@ -85,24 +77,27 @@ const UserProfileSettings = (props) => {
   
   const changePassword = async () => {
     setErrorMsg('')
-    if (true) {
+    if (confirmPassword !== '' && newPassword !== '') {
       let resp = await updatePassword({
         confirmPassword,
         password: newPassword,
       });
 
       if (resp?.status === "OK") {
-        setMsg('You will be logged out shortly...')
+        setMsg('You will be logged out shortly...');
+        await delay(4000)
+        setIsLoading(true);
+        await delay(5000)
+
+
+        // dispatch(reset());
+        // dispatch(resetWatchlist());
+        // dispatch(resetMovies());
         dispatch(logout());
-        dispatch(reset());
-        dispatch(resetWatchlist());
-        dispatch(resetMovies());
+        navigate("/login");
       } 
-      else 
-      {
-        if(resp?.error){
-            setErrorMsg(resp.error);
-        }
+      else {
+        setMsg(resp);
       }
     }
   };

@@ -38,12 +38,12 @@ function App() {
             <Route path="/login" element={<Login title="Login"/>} />
             <Route path="*" element={<ErrorPage title="Error"/>} />
             <Route path="/about" element={<About title="About"/>} />
-            <Route path={`/settings`} element={<Settings title="Settings"/>} />
 
             {user &&
             <>
               <Route path={`/movie/:id`} element={<Movie />} />
               <Route path={`/watchlist`} element={<Watchlist title="Watchlist"/>} />
+              <Route path={`/settings`} element={<Settings title="Settings"/>} />
             </>
             }
 
