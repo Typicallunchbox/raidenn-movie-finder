@@ -89,7 +89,7 @@ const Home = () => {
   return (
     <div className="home-page">
       <div className="genre-preferences-section">
-        {recommendedMovies && <div className="inner-container">
+        {recommendedMovies && recommendedMovies.length > 0 && <div className="inner-container">
           <div className='flex items-baseline gap-4'>
             <h3 className='pl-32 text-lg b-text-colour'>Recommended:</h3>
             <p>{genreRecommened} Movies</p>
