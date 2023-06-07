@@ -5,13 +5,11 @@ import {useSelector, useDispatch} from 'react-redux';
 import { addMovies } from '../features/movies/movieSlice';
 import {GetPopularMovies, GetMoviesByTag, GetMoviesByGenre} from "../providers/moviesProvider";
 import ItemCatalogueList from "../components/ItemCatalogueList/ItemCatalogueList";
-import GenrePreferencesBar from '../components/GenrePreferencesBar/GenrePreferencesBar';
 import {Link} from 'react-router-dom';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 
 const Home = () => {
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const {user} = useSelector((state) => state.auth)
@@ -64,7 +62,7 @@ const Home = () => {
         setIsLoading(false);
       }, 500); 
       
-      if(user && user?.genrePreferences.length > 0 && recommendedMovies.length == 0){  
+      if(user && user?.genrePreferences.length > 0 && recommendedMovies.length === 0){  
         const genre =  user.genrePreferences[Math.floor(Math.random() *  user.genrePreferences.length)];
         const recommended =  await GetMoviesByGenre(genre.id);
         setGenreRecommened(genre.name);
@@ -82,7 +80,7 @@ const Home = () => {
     }
 
     tag === '' ? setPopularMovies() : setMoviesByTag();
-  }, [tag, dispatch]);
+  }, [tag, dispatch, user, recommendedMovies]);
 
   if(isLoading){
     return <Spinner/>
@@ -90,9 +88,8 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      {/* <GenrePreferencesBar movies={movies} />  */}
       <div className="genre-preferences-section">
-        {recommendedMovies && <div className="inner-container">
+        {recommendedMovies && recommendedMovies.length > 0 && <div className="inner-container">
           <div className='flex items-baseline gap-4'>
             <h3 className='pl-32 text-lg b-text-colour'>Recommended:</h3>
             <p>{genreRecommened} Movies</p>
@@ -115,7 +112,7 @@ const Home = () => {
       </div>
       <div className="container">
         {user && <div className="catalogue mt-20 md:mt-52">
-        <p className='pl-32 text-lg text-left mb-10'>Movie Results :</p>
+        <p className='pl-10 text-lg text-left mb-10'>Movie Results :</p>
           <ItemCatalogueList movies={movies} />
         </div>}
         <p className="pt-16 mb-52">Search maybe for what you are looking for* Add Background lightning animation*</p>

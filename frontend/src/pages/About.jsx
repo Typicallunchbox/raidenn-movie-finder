@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import blueLightning from '../static/animations/aboutUsLightning.webm';
-const About = () => {
+import { Helmet, HelmetProvider } from "react-helmet-async";
+
+const About = (props) => {
+  const {title} = props;
   const [hover, setHover] = useState(false);
 
   const triggerAnimation = () => {
@@ -12,6 +15,11 @@ const About = () => {
   
   return (
     <div className='about-page w-full'>
+      <HelmetProvider>
+          <Helmet>
+            <title>{`Raidenn ${'- '+ title || ''}`}</title>
+          </Helmet>
+      </HelmetProvider>
       <div className='about-text w-96 absolute'>
         <h2 className='text-2xl'>Raidenn</h2>
         <p className='mt-12 leading-6 text-gray-400'>

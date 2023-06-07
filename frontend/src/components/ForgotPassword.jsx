@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getSecurityQuestions, compareSecurityAnswers } from "../features/auth/authSlice";
-import { validEmail } from '../static/regex'
+import { validEmail } from '../static/regex';
+import { FaRegCopy } from "react-icons/fa";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -61,6 +62,10 @@ const ForgotPassword = () => {
       }
     }
   };
+
+  const copyTempPassword = () => {
+      navigator.clipboard.writeText(tempPassword);
+  }
 
   return (
     <div>
@@ -142,7 +147,10 @@ const ForgotPassword = () => {
           <h5 className="text-md text-slate-500 mb-6">We have generated a new temporary password for you (Keep it noted). Please login and go to your profile to set your own new Password.</h5>
           <div className='flex flex-col text-center mb-4'>
             <p className='bk-text-colour'>New Temporary Password:</p>
-            <p className='text-rose-500'>{tempPassword}</p>
+            <div className="flex items-baseline justify-center gap-4 mt-4">
+              <p className='text-rose-500'>{tempPassword}</p>
+              <FaRegCopy className="text-blue-800 cursor-pointer" onClick={() => copyTempPassword()} />
+            </div>
           </div>
         </div>
         <button onClick={() => {window.location.reload(); }} type='submit' className='btn-primary'>

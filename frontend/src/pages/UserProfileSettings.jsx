@@ -2,15 +2,15 @@ import { React, useEffect, useState } from "react";
 import Spinner from '../components/Spinner';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset, updatePassword, getMe, updateProfile } from "../features/auth/authSlice";
-import { reset as resetMovies } from "../features/movies/movieSlice";
-import { reset as resetWatchlist } from "../features/watchlists/watchlistSlice";
+import { logout, updatePassword, getMe, updateProfile } from "../features/auth/authSlice";
 import { GetGenreOptions } from "../providers/moviesProvider";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 
 const inputStyling =
   "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-200 focus:border-blue-100 block w-full px-2.5 py-3";
-const UserProfileSettings = () => {
+const UserProfileSettings = (props) => {
+  const {title} = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -25,21 +25,13 @@ const UserProfileSettings = () => {
   const [viewGenres, setViewGenres] = useState(false);
   const [savedGenres, setSavedGenres] = useState([]);
   const [genreOptions, setGenreOptions] = useState([]);
+  const delay = ms => new Promise(res => setTimeout(res, ms));
  
   useEffect(() => {
-    const delay = ms => new Promise(res => setTimeout(res, ms));
     if (!user) {
-      const exit = async() => {
-        await delay(4000)
-        setIsLoading(true);
-        await delay(5000)
-      
         navigate("/login");
-      }
-      exit();
-    
-      return;
     }
+    
     let response = null;
     const getUserProfile = async() => {
        response = await getMe();
@@ -83,29 +75,32 @@ const UserProfileSettings = () => {
   
   const changePassword = async () => {
     setErrorMsg('')
-    if (true) {
+    if (confirmPassword !== '' && newPassword !== '') {
       let resp = await updatePassword({
         confirmPassword,
         password: newPassword,
       });
 
       if (resp?.status === "OK") {
-        setMsg('You will be logged out shortly...')
+        setMsg('You will be logged out shortly...');
+        await delay(4000)
+        setIsLoading(true);
+        await delay(5000)
+
+
+        // dispatch(reset());
+        // dispatch(resetWatchlist());
+        // dispatch(resetMovies());
         dispatch(logout());
-        dispatch(reset());
-        dispatch(resetWatchlist());
-        dispatch(resetMovies());
+        navigate("/login");
       } 
-      else 
-      {
-        if(resp?.error){
-            setErrorMsg(resp.error);
-        }
+      else {
+        setMsg(resp);
       }
     }
   };
 
-  const changeUserDetails = () => {
+  const changeUserDetails = async() => {
     let payload = {}
 
     if(formData.name !== ''){
@@ -146,12 +141,17 @@ const UserProfileSettings = () => {
 
   return (
     <>
+      <HelmetProvider>
+          <Helmet>
+            <title>{`Raidenn ${'- '+ title || ''}`}</title>
+          </Helmet>
+      </HelmetProvider>
       <div className='container absolute top-2/4 -translate-y-2/4'>
         <h1 className='mt-0 text-[30px] font-mediumLC tracking-[3px]'>
           Profile Settings
         </h1>
 
-        <div className='profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10'>
+        <div className='profile-settings w-5/6 md:w-4/6 lg:w-2/6 text-left mx-auto mt-10'>
           <div className='mb-5'>
             <p>Username</p>
             <input 
@@ -188,7 +188,7 @@ const UserProfileSettings = () => {
                 onBlur={(e) => setconfirmPassword(e.target.value)}
                 disabled={!clickedResetPassword}
                 type='password'
-                id='password'
+                id='currentPassword'
                 className={inputStyling}
                 placeholder='*******'
                 required

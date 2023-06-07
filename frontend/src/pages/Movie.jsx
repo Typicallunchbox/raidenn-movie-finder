@@ -8,7 +8,7 @@ import { AiFillEye, AiFillPlusCircle, AiOutlineCloseCircle } from "react-icons/a
 import Rating from "react-rating";
 import {createComment, deleteComment, getCommentsByMovieId,} from "../features/comments/commentSlice";
 import { banishComment } from "../features/comments/commentSlice";
-import { GetMovieById, GetMovieVideosById, GetMovieImagesById, GetMovieCreditsById, GetMoviesByGenre } from "../providers/moviesProvider";
+import { GetMovieById, GetMovieVideosById, GetMovieImagesById, GetMovieCreditsById } from "../providers/moviesProvider";
 import { getWantToWatchRecord, updateWatchlistRecord,} from "../features/watchlists/watchlistSlice";
 import { reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
@@ -397,24 +397,24 @@ const Movie = () => {
                   Watch Now
                 </button>
               )}
-              <div className='flex gap-5'>
+              <div data-aos="fade-right" data-aos-delay="100" className='flex gap-5'>
                 <p>Title :</p>
                 <p>{movie.title}</p>
               </div>
-              <div className='flex gap-5'>
+              <div data-aos="fade-right" data-aos-delay="300" className='flex gap-5'>
                 <p>Runtime :</p>
                 <p>{movie.runtime} mins</p>
               </div>
 
               
-              <div className='flex gap-5'>
+              <div data-aos="fade-right" data-aos-delay="500" className='flex gap-5'>
                 <p>Status :</p>
                 <p>
                   {movie.status}{" "}
                   {movie.status === "Released" ? `(${movie.release_date})` : ""}
                 </p>
               </div>
-              <div className="mt-2">
+              <div data-aos="fade-up" data-aos-delay="1000" className="mt-2">
                 <span>
                   Genres :
                 </span>
@@ -425,7 +425,7 @@ const Movie = () => {
                 </div>
               </div>
             </div>
-            <div className='w-full'>
+            <div data-aos="fade-right" data-aos-delay="500" data-aos-duration="1000"  className='w-full'>
               {movieVideos && movieVideos.length > 0 && (
                 <div className='trailer h-[80vh]'>
                   <iframe
@@ -449,10 +449,10 @@ const Movie = () => {
           <div className='view-more-header ml-6 md:m-auto lg:m-auto'>
             <h2>View More</h2>
           </div>
-          <div className='cast-section'>{movieCast && castSection}</div>
-          <div className='images-section'>{movieImages && imagesSection}</div>
-          <div className='production-section'>{movie && productionCompanies}</div>
-          <div className='card p-4 comment-section w-full text-left mt-36 mb-52 mx-auto md:w-4/5 sm:w-full '>
+          <div data-aos="fade-left" className='cast-section'>{movieCast && castSection}</div>
+          <div data-aos="fade-left" className='images-section'>{movieImages && imagesSection}</div>
+          <div data-aos="fade-left" className='production-section'>{movie && productionCompanies}</div>
+          <div data-aos="fade-up" className='card p-4 comment-section w-full text-left mt-36 mb-52 mx-auto md:w-4/5 sm:w-full '>
             <h2 className='bk-text-colour'>Comments</h2>
             <div className='comments md:p-4'>
               {comments && comments.length > 0 ? (

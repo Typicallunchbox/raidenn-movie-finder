@@ -8,10 +8,10 @@ import {useSelector, useDispatch} from 'react-redux';
 import {register, reset} from '../../features/auth/authSlice';
 import { validUserName, validEmail, validPasswordStrength } from '../../static/regex';
 import RegisterSecurityQuestions from '../../components/RegisterSecurityQuestions';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
-
-const Register = () => {
-
+const Register = (props) => {
+  const {title} = props;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -83,7 +83,12 @@ const Register = () => {
 
   return (
     <div>
-      <div className={`login_container ${!showMainRegister ? 'w-10/12 md:w-4/12':''}`}>
+      <HelmetProvider>
+          <Helmet>
+            <title>{`Raidenn ${'- '+ title || ''}`}</title>
+          </Helmet>
+      </HelmetProvider>
+      <div className={`login_container  ${!showMainRegister ? 'w-10/12 md:w-4/12':''}`}>
         <div className='inner-container'>
           {showMainRegister ? (<div>
           <div className='px-12 pt-6'>
