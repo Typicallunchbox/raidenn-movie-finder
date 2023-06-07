@@ -2,9 +2,7 @@ import { React, useEffect, useState } from "react";
 import Spinner from '../components/Spinner';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset, updatePassword, getMe, updateProfile } from "../features/auth/authSlice";
-import { reset as resetMovies } from "../features/movies/movieSlice";
-import { reset as resetWatchlist } from "../features/watchlists/watchlistSlice";
+import { logout, updatePassword, getMe, updateProfile } from "../features/auth/authSlice";
 import { GetGenreOptions } from "../providers/moviesProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
@@ -102,7 +100,7 @@ const UserProfileSettings = (props) => {
     }
   };
 
-  const changeUserDetails = () => {
+  const changeUserDetails = async() => {
     let payload = {}
 
     if(formData.name !== ''){
@@ -148,12 +146,12 @@ const UserProfileSettings = (props) => {
             <title>{`Raidenn ${'- '+ title || ''}`}</title>
           </Helmet>
       </HelmetProvider>
-      <div className='container'>
+      <div className='container absolute top-2/4 -translate-y-2/4'>
         <h1 className='mt-0 text-[30px] font-mediumLC tracking-[3px]'>
           Profile Settings
         </h1>
 
-        <div className='profile-settings w-5/6 md:w-2/6 text-left mx-auto mt-10'>
+        <div className='profile-settings w-5/6 md:w-4/6 lg:w-2/6 text-left mx-auto mt-10'>
           <div className='mb-5'>
             <p>Username</p>
             <input 

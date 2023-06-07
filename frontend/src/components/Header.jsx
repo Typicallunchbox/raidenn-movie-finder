@@ -55,7 +55,7 @@ function Header() {
     
   return (
     <>
-
+    {openMenu && <div onClick={() => {setOpenMenu(false);}} className="background w-full h-full absolute bg-transparent z-20"></div>}
     <header className={`header ${window.location.origin + "/" === window.location.href && !user ? 'bg-transparent' : 'primary-bg-colour'}`}>
       <div className='logo'>
         <a className="tertiary-text-colour  text-[35px] font-thunderBoldLC" href='/'>Raidenn</a>
@@ -75,7 +75,6 @@ function Header() {
             <div className="w-24"></div>
             <div className={`options-block ${openMenu ? 'is-open' : ''}`}>
               <div onClick={clickedMenu} className="options-container-btn">
-             
                 <div className={`inner-container ${openMenu ? 'is-open' : ''}`}>
                   <p>Menu</p>
                 </div>
