@@ -21,7 +21,7 @@ const UserProfileSettings = (props) => {
   const [msg, setMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [isLoading, setIsLoading]= useState(false)
-  const { user, message } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const [viewGenres, setViewGenres] = useState(false);
   const [savedGenres, setSavedGenres] = useState([]);
   const [genreOptions, setGenreOptions] = useState([]);
@@ -87,10 +87,6 @@ const UserProfileSettings = (props) => {
         setIsLoading(true);
         await delay(5000)
 
-
-        // dispatch(reset());
-        // dispatch(resetWatchlist());
-        // dispatch(resetMovies());
         dispatch(logout());
         navigate("/login");
       } 
@@ -112,16 +108,12 @@ const UserProfileSettings = (props) => {
       genresSelected = [...savedGenres.filter(genre => genre.isSelected === true)];
       payload.genresPref = genresSelected;
     }   
+    let response = await updateProfile({profile: payload});
 
-    dispatch(updateProfile({
-      profile: payload
-    }));
-
-    if(message?.status === 'OK'){
+    if(response?.status === 'OK'){
       setMsg('Updated Profile!')
       setTimeout(()=> {setMsg('')},5000)
     }
-    //*BUG: Hits else even though update was success
     else{
       setMsg('Something went wrong :(')
       setTimeout(()=> {setMsg('')},5000)

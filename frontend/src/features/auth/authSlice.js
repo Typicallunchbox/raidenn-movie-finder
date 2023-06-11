@@ -65,9 +65,7 @@ export const getMe = async (data) => {
   }
 };
 
-export const updateProfile = createAsyncThunk(
-  "auth/updateProfile",
-  async (data, thunkAPI) => {
+export const updateProfile = async (data) => {
     try {
       let user = JSON.parse(localStorage.getItem("user"));
       return await authService.updateProfile(data, user.token);
@@ -78,10 +76,9 @@ export const updateProfile = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
-      return thunkAPI.rejectWithValue(message);
+      return message;
     }
-  }
-);
+  };
 
 //Update Password
 export const updatePassword = async (data) => {
@@ -194,20 +191,6 @@ export const authSlice = createSlice({
             state.user = null
         })
 
-      .addCase(updateProfile.pending, (state) => {
-          state.isLoading = true
-      })
-      .addCase(updateProfile.fulfilled, (state, action) => {
-          state.isLoading = false
-          state.isSuccess = true
-          state.message = action.payload
-      })
-      .addCase(updateProfile.rejected, (state, action) =>{
-          state.isLoading = false
-          state.isError = true
-          state.message = action.payload
-          state.user = null
-      })
 
         
         .addCase(setSecurityQuestions.pending, (state) => {
