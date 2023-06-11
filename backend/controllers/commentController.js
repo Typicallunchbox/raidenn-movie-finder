@@ -23,7 +23,7 @@ const getCommentsByMovieId = asyncHandler(async (req, res) => {
     res.status(200).json(comments) 
 })
 
-// @desc    Set goal
+// @desc    Set new comment
 //@route    POST /api/comments
 //@access   Private
 const setComment = asyncHandler(async (req, res) => {
@@ -58,7 +58,7 @@ const setComment = asyncHandler(async (req, res) => {
     res.status(200).json(comment) 
 })
 
-// @desc    Update goal
+// @desc    Update coment
 //@route    PUT /api/comments/:id
 //@access   Private
 const updateComment = asyncHandler(async (req, res) => {
@@ -75,7 +75,7 @@ const updateComment = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
 
-    //Make sure the logged in user matches the goal user
+    //Make sure the logged in user matches the comment user
     if(comment.user.toString() !== req.user.id){
         res.status(401)
         throw new Error('User not authorized')
@@ -85,7 +85,7 @@ const updateComment = asyncHandler(async (req, res) => {
     res.status(200).json(updatedComment) 
 })
 
-// @desc    Delete goal
+// @desc    Delete comment
 //@route    DELETE /api/comments/:id
 //@access   Private
 const deleteComment = asyncHandler(async (req, res) => {
@@ -102,7 +102,7 @@ const deleteComment = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
 
-    //Make sure the logged in user matches the goal user
+    //Make sure the logged in user matches the comment user
     if(comment.user.toString() !== req.user.id){
         res.status(401)
         throw new Error('User not authorized')

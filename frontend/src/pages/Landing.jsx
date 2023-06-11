@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { FaInfoCircle } from "react-icons/fa";
 import placeholder from '../static/images/wire.png';
 import landingAnimation from '../static/animations/webRgb.webm';
+import InfoAnimation from '../static/animations/landingInfoAnimation.webm';
+
 
 const Landing = () => {
   useEffect(() => {
@@ -42,8 +44,10 @@ const Landing = () => {
           </div>
         </div>
         <div className={`instructions h-[80vh] md:flex md:w-5/6 md:mx-auto md:mt-[20rem]`}>
-          <div className="animation-container">
-            <img onScr src={placeholder} alt='placeholder'></img>
+          <div className="animation-container mx-auto">
+            <video style={{opacity: '90%'}} tabindex="0" autoPlay loop autobuffer="autobuffer" preload="preload">
+              <source type="video/webm" src={InfoAnimation}></source>
+            </video>
           </div>
           <div className={`setup-content`}>
             <h3 id='instructions' className="text-left mt-10 md:mt-0 ml-10 md:ml-14 mb-14">Steps to get started:</h3>

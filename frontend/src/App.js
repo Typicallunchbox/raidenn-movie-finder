@@ -49,7 +49,6 @@ function App() {
 
           </Routes>
         </div>
-        {/* {user && <div className="h-screen"></div>} */}
         <Footer/>
       </Router>
       <ToastContainer />
