@@ -1,6 +1,11 @@
 # Raidenn : Movie Finder
  A fully functional movie finder written in React with a Node JS Express backend connecting to MongoDB
 ##### Note: Application is hosted on heroku, please give the application a few extra seconds to spin up from non-activity mode.
+## Demo Credentials:
+* Email: demo@demo.com
+* Password: Password1!
+
+
 #### View Raidenn Site : https://raidennapp.herokuapp.com/
 #### View Figma Design : https://www.figma.com/file/rIZCKESgMboi0SjV4Jq9BG/Raidenn2?type=design&node-id=36%3A505&t=BZtUIsY37LYOPal2-1
 
