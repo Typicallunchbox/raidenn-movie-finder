@@ -23,7 +23,7 @@ const Landing = () => {
     <> 
       <div id="set-height"></div>
       <p id="time"></p>
-      <video style={{opacity: '5%'}} id="v0" tabindex="0" autobuffer="autobuffer" preload="preload">
+      <video disableremoteplayback="true" style={{opacity: '5%'}} id="v0" tabindex="0" autobuffer="autobuffer" preload="preload">
         <source type="video/webm" src={landingAnimation}></source>
       </video>
       <div className="container">
@@ -34,7 +34,7 @@ const Landing = () => {
         <div className="overflow-x-hidden h-screen">
           <div className="inner-container relative top-24 left-0 md:flex  md:left-24 md:top-[30%] md:-translate-y-[30%]">
             <div>
-            <video  width={window.innerWidth < 600 ? '100%' : '920'} autoplay="autoplay" muted>
+            <video disableremoteplayback="true"  width={window.innerWidth < 600 ? '100%' : '920'} autoplay="autoplay" muted>
               <source src={process.env.PUBLIC_URL + window.innerWidth < 600 ? "animations/mobileLandingAnimation.webm" : "animations/landingAnimation.webm"} type="video/webm" />
             </video> 
             </div>
@@ -45,7 +45,7 @@ const Landing = () => {
         </div>
         <div className={`instructions h-[80vh] md:flex md:w-5/6 md:mx-auto md:mt-[20rem]`}>
           <div className="animation-container mx-auto">
-            <video style={{opacity: '90%'}} tabindex="0" autoPlay loop autobuffer="autobuffer" preload="preload">
+            <video muted disableremoteplayback="true" style={{opacity: '90%'}} tabindex="0" autoPlay loop autobuffer="autobuffer" preload="preload">
               <source type="video/webm" src={InfoAnimation}></source>
             </video>
           </div>
