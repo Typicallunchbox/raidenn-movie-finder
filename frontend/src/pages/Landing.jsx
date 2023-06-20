@@ -39,7 +39,7 @@ const Landing = () => {
             </video> 
             </div>
             <div className="relative">
-            <a data-aos="fade-right" data-aos-delay="500" data-aos-duration="1000" href="#instructions" type="button" className={`prim-button w-max absolute bottom-16 left-24 animate__animated animate__fadeInUp animate__delay-2s`}>Get Started</a>
+            <a data-aos="fade-right" data-aos-delay="500" data-aos-duration="1000" href="#instructions" type="button" className={`prim-button w-max absolute bottom-16`}>Get Started</a>
             </div>
           </div>
         </div>
