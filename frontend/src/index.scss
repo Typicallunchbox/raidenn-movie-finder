@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: 'ThunderBlackLC';
   src: url(../public/fonts/Thunder-BlackLC.otf);
@@ -41,9 +45,17 @@
   src: var(--raidenn-white);
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Component SCSS */
+@import './pages/Register/Register.scss';
+@import './pages/Login/Login.scss';
+@import './components/DropdownSelect/style.scss';
+@import './components/ItemCatalogueList/ItemCatalogueList.scss';
+@import './components/SearchDropDown/SearchDropDown.scss';
+
+/* Third-party CSS */
+@import 'react-multi-carousel/lib/styles.css';
+@import 'react-toastify/dist/ReactToastify.css';
+
 
 :root {
   /*Colours */

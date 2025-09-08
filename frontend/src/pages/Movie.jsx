@@ -15,7 +15,7 @@ import Spinner from "../components/Spinner";
 // import { ColourPalette } from "../components/ColourPalette/ColourPalette";
 import noCastImg from "../static/svgs/user.svg";
 import starImg from "../static/svgs/star.svg";
-import Filter from "bad-words";
+import {Filter} from "bad-words";
 
 const Movie = () => {
   const navigate = useNavigate();

@@ -2,8 +2,6 @@ import { React, useEffect, useState} from "react";
 import {useDispatch} from 'react-redux'
 import {Link, useNavigate} from 'react-router-dom';
 import { AiFillDelete } from "react-icons/ai";
-
-import "../ItemCatalogueList/ItemCatalogueList.scss";
 import { updateWatchlistRecord, banishWatched, banishWantToWatch } from "../../features/watchlists/watchlistSlice";
 
 const ItemCatalogueList = (props) => {

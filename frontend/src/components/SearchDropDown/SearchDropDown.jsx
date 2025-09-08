@@ -2,7 +2,6 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import {useDispatch} from 'react-redux'
 import { addTag, addMovies } from '../../features/movies/movieSlice';
-import './SearchDropDown.scss';
 import { validYear } from '../../static/regex';
 import { DropdownSelect } from "../../components/DropdownSelect/index";
 import { GetGenreOptions } from '../../providers/moviesProvider';
