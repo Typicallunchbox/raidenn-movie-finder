@@ -12,7 +12,7 @@ import { GetMovieById, GetMovieVideosById, GetMovieImagesById, GetMovieCreditsBy
 import { getWantToWatchRecord, updateWatchlistRecord,} from "../features/watchlists/watchlistSlice";
 import { reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
-import { ColourPalette } from "../components/ColourPalette/ColourPalette";
+// import { ColourPalette } from "../components/ColourPalette/ColourPalette";
 import noCastImg from "../static/svgs/user.svg";
 import starImg from "../static/svgs/star.svg";
 import Filter from "bad-words";
@@ -43,7 +43,8 @@ const Movie = () => {
   const [showCompanies, setShowCompanies] = useState(false);
 
   let image_path = "https://image.tmdb.org/t/p/original";
-  let colours = ColourPalette(movie ? image_path + movie?.poster_path : []);
+  // let colours = ColourPalette(movie ? image_path + movie?.poster_path : []);
+  let colours = [];
 
   const onSubmit = (e) => {
     setCommentErr('');

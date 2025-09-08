@@ -8,7 +8,7 @@ import Spinner from "../../components/Spinner";
 import {useSelector, useDispatch} from 'react-redux'
 import {login, reset} from '../../features/auth/authSlice';
 import ForgotPassword from '../../components/ForgotPassword';
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import Meta from "../../components/MetaTag/MetaTag";
 
 const Login = (props) => {
   const {title} = props;
@@ -59,11 +59,7 @@ const Login = (props) => {
 
   return (
     <div>
-      <HelmetProvider>
-          <Helmet>
-            <title>{`Raidenn ${'- '+ title || ''}`}</title>
-          </Helmet>
-      </HelmetProvider>
+      <Meta title={`Raidenn ${'- '+ title || ''}`} />
       <div className='login_container'>
         <div className='inner-container'>
           {!showForgotPassword ? (<div>

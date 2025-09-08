@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, updatePassword, getMe, updateProfile } from "../features/auth/authSlice";
 import { GetGenreOptions } from "../providers/moviesProvider";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import Meta from "../components/MetaTag/MetaTag";
 
 
 const inputStyling =
@@ -133,11 +133,7 @@ const UserProfileSettings = (props) => {
 
   return (
     <>
-      <HelmetProvider>
-          <Helmet>
-            <title>{`Raidenn ${'- '+ title || ''}`}</title>
-          </Helmet>
-      </HelmetProvider>
+      <Meta title={`Raidenn ${'- '+ title || ''}`} />
       <div className='container absolute top-2/4 -translate-y-2/4'>
         <h1 className='mt-0 text-[30px] font-mediumLC tracking-[3px]'>
           Profile Settings

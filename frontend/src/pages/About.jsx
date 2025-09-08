@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import blueLightning from '../static/animations/aboutUsLightning.webm';
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import Meta from "../components/MetaTag/MetaTag";
+
 
 const About = (props) => {
   const {title} = props;
@@ -15,11 +16,8 @@ const About = (props) => {
   
   return (
     <div className='about-page w-full'>
-      <HelmetProvider>
-          <Helmet>
-            <title>{`Raidenn ${'- '+ title || ''}`}</title>
-          </Helmet>
-      </HelmetProvider>
+      <Meta title={`Raidenn ${'- '+ title || ''}`} />
+      
       <div className='about-text w-96 absolute'>
         <h2 className='text-2xl'>Raidenn</h2>
         <p className='mt-12 leading-6 text-gray-400'>

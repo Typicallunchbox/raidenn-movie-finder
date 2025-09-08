@@ -8,7 +8,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {register, reset} from '../../features/auth/authSlice';
 import { validUserName, validEmail, validPasswordStrength } from '../../static/regex';
 import RegisterSecurityQuestions from '../../components/RegisterSecurityQuestions';
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import Meta from "../../components/MetaTag/MetaTag";
+
 
 const Register = (props) => {
   const {title} = props;
@@ -83,11 +84,7 @@ const Register = (props) => {
 
   return (
     <div>
-      <HelmetProvider>
-          <Helmet>
-            <title>{`Raidenn ${'- '+ title || ''}`}</title>
-          </Helmet>
-      </HelmetProvider>
+      <Meta title={`Raidenn ${'- '+ title || ''}`} />
       <div className={`login_container  ${!showMainRegister ? 'w-10/12 md:w-4/12':''}`}>
         <div className='inner-container'>
           {showMainRegister ? (<div>
